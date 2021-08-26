@@ -2,9 +2,6 @@
 
 
 <body>
-<?php
 
-
-?>
 </body>
 </html>
