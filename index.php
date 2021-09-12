@@ -1,7 +1,7 @@
 <?php
 ?>
 <!-- START DATE 8/28/2021 -->
-<!-- UPDATE DATE 8/31/2021 -->
+<!-- UPDATE DATE 9/12/2021 -->
 <html>
   <head>
     <script type ="text/javascript" src="js/script.js"></script>
@@ -10,11 +10,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ChatBot -->
     <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
@@ -23,22 +21,16 @@
     <script type="text/javascript" src="js/custom.js"></script>
   </head>
 <body>
-  <!-- SIDEBAR -->
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">HOME</a>
-    <a href="#">JOURNALS</a>
-    <a href="#">ANALYTICS</a>
-    <a href="#">PLAGIARISM CHECKER</a>
-  </div>
-
   <!-- NAVBAR -->
   <div class="navbar">
-    <a onclick="openNav()"><i onclick="openNav()" style="font-size: 28px" class="fa fa-bars" id="mySidebar"></i></a>
     <a href="#"><img style="height: 25px;" src="images/libraryLogo.png"></a>
+    <a style="margin-top: 5px;" href="#">HOME</a>
+    <a style="margin-top: 5px;" href="#">JOURNALS</a>
+    <a style="margin-top: 5px;" href="#">ANALYTICS</a>
+    <a style="margin-top: 5px;" href="#">PLAGIARISM CHECKER</a>
     <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="#"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
+    <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
 
   <!-- HEADER IMAGE -->
@@ -49,13 +41,13 @@
     <div class="row height d-flex justify-content-center align-items-center">
         <div>
             <div class="form"> 
-            <select style="font-size:13px" class="topic" name="cars" id="cars">
+            <select class="topic" name="topic" id="topic">
               <option value="" selected disabled hidden>Topic</option>
-              <option style="font-size:17px" value="volvo">Education</option>
-              <option style="font-size:17px" value="saab">Technology</option>
-              <option style="font-size:17px" value="opel">Research</option>
-              <option style="font-size:17px" value="audi">Analysis</option>
-              <option style="font-size:17px" value="audi">Database</option>
+              <option style="font-size:17px" value="Education">Education</option>
+              <option style="font-size:17px" value="Technology">Technology</option>
+              <option style="font-size:17px" value="Research">Research</option>
+              <option style="font-size:17px" value="Analysis">Analysis</option>
+              <option style="font-size:17px" value="Database">Database</option>
             </select>
             <input type="text" id="speechToText" class="form-control form-input" placeholder="Enter your search here"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button">Search</button>
           </div>
@@ -64,13 +56,12 @@
    </div>
 
   <!-- INTRODUCTION -->
-    <h2 style="margin-left: 320px;">Whats's New?</h2>
+    <h2 class="new" >Whats's New?</h2>
     <p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam maximus sagittis sapien eget porttitor. 
     Curabitur nec lorem luctus, ultrices libero et, fringilla dui. Nam porttitor sapien eget sollicitudin tincidunt. 
     Etiam tortor risus, lobortis vitae turpis a, imperdiet congue libero. Etiam et nulla sed magna viverra pretium id at nisi. 
     Phasellus sit amet dolor elementum, varius mauris in, commodo mauris. In eu nunc justo.
     </p>
-
   <!-- IMAGES -->
   <div class="images">
     <img class="book" src="images/book.JPG">

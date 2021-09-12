@@ -1,4 +1,5 @@
-   /* START DATE 8/28/2021*/
+  /*  START DATE 8/28/2021*/
+  /*  UPDATE DATE 9/12/202*/
     body {
       margin:0;
       background-color: #F7F5F7;
@@ -249,4 +250,191 @@
 	display: none !important;
 }
 
+.new{
+  margin-left: 320px;
+}
+
+
+
+  /*
+  
+  ======================== 
+  MEDIA SCREEN/PHONE CSS
+  ========================
+
+  */
+
+
+@media (max-width: 500px) {
+
+  .form-control::-webkit-input-placeholder { /* WebKit browsers */
+    color: transparent;
+    }
+
+  .bg{
+    width: 100%;
+  }
+  /*SEARCH BAR INPUT */
+
+    #speechToText{
+      width: 180px;
+      height: 51px;
+      left: 50px;
+      position: relative;
+      bottom: 51.5px;
+    }
+    .form {
+        position: relative;
+        bottom: 122px;
+        text-align: center;
+    }
+    /* MIC ICON*/
+    .form span {
+        position: absolute;
+        right: 500px;
+        top: 14px;
+        padding: 5px;
+        border-left: 1px solid #d1d5db
+    }
+    /* SEARCH FORM*/
+
     
+    .form-input {
+        height: 55px;
+        text-indent: 33px;
+    }
+    
+    .form-input:focus {
+        box-shadow: none;
+        border: none
+    }
+    /* SEARCH BUTTON*/
+    .button {
+        background-color: #751518;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 12px;
+        cursor: pointer;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        left: 193px;
+        position: relative;
+        bottom: 102px;
+
+      }
+    /* DROPDOWN CATEGORY */
+      .topic {
+        background-color: white;
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+        margin-right: 149px;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
+        width: 68px;
+        height: 51px;
+      }
+      /* MENU NAVBAR */
+      .navbar {
+        overflow: hidden;
+        background-color: #751518;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+      .navbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 14px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+
+      .navbar a:hover {
+        background: #ddd;
+        color: black;
+      }
+
+      /* Intro NEW*/
+      .new{
+        margin-left: 45px;
+      }
+      .intro{
+        margin-left: 20px;
+      }
+      .book{
+        margin-left: 40px;
+        bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .chip{
+        margin-left: 40px;
+        bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .business{
+        margin-left: 40px;
+        bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .images .btn {
+        position: absolute;
+        top: 120%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #751518;
+        color: white;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        text-align: center;
+        border: 2px solid white;
+        height: 37px;
+        width: 136px;
+      }
+
+      .images .btn2 {
+        position: absolute;
+        top: 156%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #751518;
+        color: white;
+        height: 37px;
+        width: 136px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        text-align: center;
+        border: 2px solid white;
+  
+      }
+      .images .btn3 {
+        position: absolute;
+        top: 191%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #751518;
+        color: white;
+        font-size: 16px;
+        height: 37px;
+        width: 136px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        text-align: center;
+        border: 2px solid white;
+      }
+      .container{
+        width: 230px;
+      }
+}
