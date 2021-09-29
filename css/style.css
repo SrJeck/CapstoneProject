@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
   /*  START DATE 8/28/2021*/
   /*  UPDATE DATE 9/12/202*/
     body {
@@ -437,4 +438,445 @@
       .container{
         width: 230px;
       }
+=======
+  /*  START DATE 8/28/2021*/
+  /*  UPDATE DATE 9/12/202*/
+    body {
+      margin:0;
+      background-color: #F7F5F7;
+    }
+    /* MENU NAVBAR */
+    .navbar {
+      overflow: hidden;
+      background-color: #751518;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+    .navbar a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 14px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .navbar a:hover {
+      background: #ddd;
+      color: black;
+    }
+
+    /* IMAGE HEADER BACKGROUND */
+    .bg{
+    width: 100%;
+    height: 45%;
+    }
+    /*SEARCH BAR INPUT */
+    input[type=text] {
+    width: 600px;
+    }
+    .form {
+        position: relative;
+        bottom: 122px;
+        text-align: center;
+    }
+    /* MIC ICON*/
+    .form span {
+        position: absolute;
+        right: 500px;
+        top: 14px;
+        padding: 5px;
+        border-left: 1px solid #d1d5db
+    }
+    /* SEARCH FORM*/
+    .left-pan {
+        padding-left: 7px
+    }
+    
+    .left-pan i {
+        padding-left: 10px
+    }
+    
+    .form-input {
+        height: 55px;
+        text-indent: 33px;
+    }
+    
+    .form-input:focus {
+        box-shadow: none;
+        border: none
+    }
+    /* SEARCH BUTTON*/
+    .button {
+        background-color: #751518;
+        border: none;
+        color: white;
+        padding: 18px 32px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: -10px;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+    /* DROPDOWN CATEGORY */
+      .topic {
+        background-color: white;
+        color: black;
+        padding: 18px 22px;
+        text-decoration: none;
+        cursor: pointer;
+        margin-right: -4.2px;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
+      }
+    /* INTRODUCTION */
+     .intro{
+      text-indent: 50px; 
+      max-width: 800px;
+      margin-left: 400px;
+     }
+    /* 3 IMAGES BOTTOM */
+     .book{
+      width: 284px;
+      height: 204px;
+      margin-left: 320px;
+      border-radius: 6px;
+      box-shadow: 12px 12px #BAB8BA;
+      border: 2px solid black;
+
+     }
+     .chip{
+      width: 284px;
+      height: 204px;
+      margin-left: 40px;
+      border-radius: 6px;
+      box-shadow: 12px 12px #BAB8BA;
+      border: 2px solid black;
+    }
+    .business{
+      width: 284px;
+      height: 204px;
+      margin-left: 40px;
+      border-radius: 6px;
+      box-shadow: 12px 12px #BAB8BA;
+      border: 2px solid black;
+    }
+    /* BUTTON INSIDE THE 3 IMAGES */
+    .images .btn {
+      position: absolute;
+      top: 94%;
+      left: 29%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      background-color: #751518;
+      color: white;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+      border: 2px solid white;
+      height: 37px;
+      width: 136px;
+    }
+    .images .btn2 {
+      position: absolute;
+      top: 94%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      background-color: #751518;
+      color: white;
+      height: 37px;
+      width: 136px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+      border: 2px solid white;
+
+    }
+    .images .btn3 {
+      position: absolute;
+      top: 94%;
+      left: 71%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      background-color: #751518;
+      color: white;
+      font-size: 16px;
+      height: 37px;
+      width: 136px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-align: center;
+      border: 2px solid white;
+    }
+    /*SIDEBAR*/
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+    
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+    
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+    
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    /*chatbot*/
+    /*ChatBot*/
+.chat_icon{
+	position: fixed;
+	bottom: 0;
+	right: 30px;
+	z-index: 1000;
+	padding: 0;
+	font-size: 80px;
+	color: #fff;
+	cursor: pointer;
+}
+.chat_box{
+	width: 400px;
+	height: 80vh;
+	position: fixed;
+	bottom: 100px;
+	right: 30px;
+	background:#dedede;
+	z-index: 1000;
+	transition: all 0.3s ease-out;
+	transform: scaleY(0);
+}
+.chat_box.active{
+	transform: scaleY(1);
+}
+#messages{
+	padding: 20px;
+}
+.my-conv-form-wrapper textarea{
+	height: 30px;
+	overflow: hidden;
+	resize: none;
+}
+.hidden{
+	display: none !important;
+}
+
+.new{
+  margin-left: 320px;
+}
+
+
+
+  /*
+  
+  ======================== 
+  MEDIA SCREEN/PHONE CSS
+  ========================
+
+  */
+
+
+@media (max-width: 500px) {
+
+  .form-control::-webkit-input-placeholder { /* WebKit browsers */
+    color: transparent;
+    }
+
+  .bg{
+    width: 100%;
+  }
+  /*SEARCH BAR INPUT */
+
+    #speechToText{
+      width: 180px;
+      height: 51px;
+      left: 50px;
+      position: relative;
+      bottom: 51.5px;
+    }
+    .form {
+        position: relative;
+        bottom: 122px;
+        text-align: center;
+    }
+    /* MIC ICON*/
+    .form span {
+        position: absolute;
+        right: 500px;
+        top: 14px;
+        padding: 5px;
+        border-left: 1px solid #d1d5db
+    }
+    /* SEARCH FORM*/
+
+    
+    .form-input {
+        height: 55px;
+        text-indent: 33px;
+    }
+    
+    .form-input:focus {
+        box-shadow: none;
+        border: none
+    }
+    /* SEARCH BUTTON*/
+    .button {
+        background-color: #751518;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 12px;
+        cursor: pointer;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        left: 193px;
+        position: relative;
+        bottom: 102px;
+
+      }
+    /* DROPDOWN CATEGORY */
+      .topic {
+        background-color: white;
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+        margin-right: 149px;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
+        width: 68px;
+        height: 51px;
+      }
+      /* MENU NAVBAR */
+      .navbar {
+        overflow: hidden;
+        background-color: #751518;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+      .navbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 14px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+
+      .navbar a:hover {
+        background: #ddd;
+        color: black;
+      }
+
+      /* Intro NEW*/
+      .new{
+        margin-left: 45px;
+      }
+      .intro{
+        margin-left: 20px;
+      }
+      .book{
+        margin-left: 40px;
+        bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .chip{
+        margin-left: 40px;
+        bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .business{
+        margin-left: 40px;
+        bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .images .btn {
+        position: absolute;
+        top: 120%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #751518;
+        color: white;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        text-align: center;
+        border: 2px solid white;
+        height: 37px;
+        width: 136px;
+      }
+
+      .images .btn2 {
+        position: absolute;
+        top: 156%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #751518;
+        color: white;
+        height: 37px;
+        width: 136px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        text-align: center;
+        border: 2px solid white;
+  
+      }
+      .images .btn3 {
+        position: absolute;
+        top: 191%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #751518;
+        color: white;
+        font-size: 16px;
+        height: 37px;
+        width: 136px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        text-align: center;
+        border: 2px solid white;
+      }
+      .container{
+        width: 230px;
+      }
+>>>>>>> Stashed changes
 }
