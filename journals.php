@@ -9,11 +9,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/loginstyle.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- ChatBot -->
     <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
@@ -33,26 +33,30 @@
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
 
+  <!-- HEADER IMAGE -->
+  <img class="bg" src="images/bookreadbackground.JPG">
 
-  <div class="side">
-  <a href="editprofile.php" ><i class="fa fa-pencil"> <b>Edit Profile  </b>     &#xf105;</i></a>
-  <a href="security.php"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
-  </div>
-
-  <img class="profilepencil" src="images/profile.png">
-
+  <!-- SEARCH BAR CONTAINER -->
   <div class="container">
-  <form action="/action_page.php">
-    <label for="fname">Email or Username:</label>
-    <input type="text" id="fname" name="firstname" placeholder="Email or Username">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div>
+            <div class="form"> 
+            <select class="topic" name="topic" id="topic">
+              <option value="" selected disabled hidden>Topic</option>
+              <option style="font-size:17px" value="Education">Education</option>
+              <option style="font-size:17px" value="Technology">Technology</option>
+              <option style="font-size:17px" value="Research">Research</option>
+              <option style="font-size:17px" value="Analysis">Analysis</option>
+              <option style="font-size:17px" value="Database">Database</option>
+            </select>
+            <input type="text" id="speechToText" class="form-control form-input" placeholder="Enter your search here"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button">Search</button>
+          </div>
+        </div>
+    </div>
+   </div>
 
-    <label for="lname">Password:</label>
-    <input type="text" id="lname" name="lastname" placeholder="Password">
+  
 
-    <button class="submit" type="submit" value="Submit"> Submit</button>
-    <button class="signup" type="signup"  value="Signup"> Signup</button>
-  </form>
-</div>
 <!-- ChatBot -->
 <div class="chat_icon">
   <img style="height: 80px;" src="images/chatboticon.png">
@@ -82,7 +86,7 @@
 
       <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
 
-      <select data-conv-question="Please Confirm">
+      <select data-conv-question="Please Conform">
         <option value="Yes">Conform</option>
       </select>
 

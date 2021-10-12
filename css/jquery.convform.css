@@ -86,6 +86,7 @@ form.convFormDynamic {
     padding: 0 !important;
     position: relative;
     box-shadow: 0 0 5px 5px rgba(222, 222, 222, 0.4);
+    
 }
 
 form.convFormDynamic textarea.userInputDynamic {
@@ -124,6 +125,7 @@ div.conv-form-wrapper:after {
     clear: both;
     width: 100%;
     height: 1px;
+    
 }
 div.conv-form-wrapper div#messages {
     max-height: 71vh;
@@ -135,6 +137,7 @@ div.conv-form-wrapper div#messages {
 div.conv-form-wrapper * {
     scrollbar-width: none;
     -ms-overflow-style: none;
+    
 }
 div.conv-form-wrapper div#messages:after {
     content: '';
@@ -143,6 +146,7 @@ div.conv-form-wrapper div#messages:after {
 }
 div.conv-form-wrapper {
     position: relative;
+
 }
 div.conv-form-wrapper div.wrapper-messages {
     position: relative;
@@ -262,6 +266,7 @@ div.conv-form-wrapper div#messages div.message.from {
     background: #06b79a;
     color: #fff;
     border-top-right-radius: 0;
+    margin-right: 25px;
 }
 .message.to+.message.from, .message.from+.message.to {
     margin-top: 15px;
@@ -309,7 +314,6 @@ form.convFormDynamic button.submit {
     background: #fff;
     outline: none !important;
 }
-
 
 form.convFormDynamic button.submit:hover {
     background: #06b79a;

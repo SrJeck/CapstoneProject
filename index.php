@@ -1,7 +1,7 @@
 <?php
 ?>
 <!-- START DATE 8/28/2021 -->
-<!-- UPDATE DATE 9/12/2021 -->
+<!-- UPDATE DATE 10/05/2021 -->
 <html>
   <head>
     <script type ="text/javascript" src="js/script.js"></script>
@@ -25,13 +25,21 @@
   <div class="navbar">
     <a href="#"><img style="height: 25px;" src="images/libraryLogo.png"></a>
     <a style="margin-top: 5px;" href="#">HOME</a>
-    <a style="margin-top: 5px;" href="#">JOURNALS</a>
+    <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 5px;" href="#">ANALYTICS</a>
     <a style="margin-top: 5px;" href="#">PLAGIARISM CHECKER</a>
     <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-    <a style="float: right;" href="#"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
+  <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">HOME</a>
+  <a href="journals.php">JOURNALS</a>
+  <a href="#">ANALYTICS</a>
+  <a href="#">PLAGIARISM CHECKER</a>
+</div>
+<span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span>
 
   <!-- HEADER IMAGE -->
   <img class="bg" src="images/bookreadbackground.JPG">
@@ -101,8 +109,8 @@
 
       <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
 
-      <select data-conv-question="Please Conform">
-        <option value="Yes">Conform</option>
+      <select data-conv-question="Please Confirm">
+        <option value="Yes">Confirm</option>
       </select>
 
   	</form>
@@ -125,5 +133,14 @@
 
         }
     </script>
+    <script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
 </html>
 

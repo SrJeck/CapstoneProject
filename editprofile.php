@@ -12,7 +12,7 @@
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/loginstyle.css">
+    <link rel="stylesheet" type="text/css" href="css/profilestyle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- ChatBot -->
     <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
@@ -35,22 +35,31 @@
 
 
   <div class="side">
-  <a href="editprofile.php" ><i class="fa fa-pencil"> <b>Edit Profile  </b>     &#xf105;</i></a>
+  <a href="#" ><i class="fa fa-pencil"> <b>Edit Profile  </b>     &#xf105;</i></a>
   <a href="security.php"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
   </div>
 
-  <img class="profilepencil" src="images/profile.png">
+  <img class="profilepencil" src="images/profilepencil.png">
 
-  <div class="container">
-  <form action="/action_page.php">
-    <label for="fname">Email or Username:</label>
-    <input type="text" id="fname" name="firstname" placeholder="Email or Username">
+  <div class="editform">
+  <form action="/action_page.php" id="editform">
+    
+    <label for="fname">First Name: </label>
+    <input class="text" type="text" id="fname" name="firstname" placeholder="Your name..">
 
-    <label for="lname">Password:</label>
-    <input type="text" id="lname" name="lastname" placeholder="Password">
+    <label class="lname" for="lname">Last Name:</label>
+    <input class="text"type="text" id="lname" name="lastname" placeholder="Your last name..">
 
-    <button class="submit" type="submit" value="Submit"> Submit</button>
-    <button class="signup" type="signup"  value="Signup"> Signup</button>
+    <label for="email">Email:  </label>
+    <input class="text" type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+    <label for="contactname">Contact Name:  </label>
+    <input class="text" type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+    <label for="address">Address:  </label>
+    <input class="text" type="text" id="lname" name="lastname" placeholder="Your last name..">
+    <button class="save" type="save" form="editform" value="Save"><i class="fa fa-save"> Save</i></button>
+    <button class="cancel" type="cancel" form="editform" value="Cancel"><i class="fa fa-close"> Cancel</i></button>
   </form>
 </div>
 <!-- ChatBot -->
@@ -83,7 +92,7 @@
       <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
 
       <select data-conv-question="Please Confirm">
-        <option value="Yes">Conform</option>
+        <option value="Yes">Confirm</option>
       </select>
 
   	</form>
