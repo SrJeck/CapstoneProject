@@ -411,6 +411,40 @@
       line-height: 20px;
     }
 
+
+    /*Pagiantion*/  
+    table {
+      font-family: arial, sans-serif;
+      width: 50%;
+    }
+    
+    td, th {
+      text-align: left;
+      padding: 8px;
+      
+    }
+
+    .page-link:link, .page-link:visited {
+      background-color: white;
+      color: black;
+      border: 2px solid green;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .page-link:hover, .page-link:active {
+      background-color: green;
+      color: white;
+    }
+    ul{
+      overflow:hidden;
+      }
+      li{
+      display:inline-block;
+      }
+
   /*
   
   ======================== 
