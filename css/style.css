@@ -11,6 +11,7 @@
       position: fixed;
       top: 0;
       width: 100%;
+      z-index: 1;
     }
     .navbar a {
       float: left;
@@ -427,15 +428,15 @@
     .page-link:link, .page-link:visited {
       background-color: white;
       color: black;
-      border: 2px solid green;
-      padding: 10px 20px;
+      border: 2px solid #751518;
+      padding: 10px 15px;
       text-align: center;
       text-decoration: none;
       display: inline-block;
     }
     
     .page-link:hover, .page-link:active {
-      background-color: green;
+      background-color: #751518;
       color: white;
     }
     ul{
