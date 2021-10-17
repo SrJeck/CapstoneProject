@@ -55,7 +55,22 @@
     </div>
    </div>
 
-  
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Users</title>
+
+	<link rel="stylesheet" href="main.css" />
+</head>
+<body>
+
+	<main>
+		<div class="list" id="list"></div>
+		<div class="pagenumbers" id="pagination"></div>
+	</main>
+	<script src="main.js"></script>
+</body>
 
 <!-- ChatBot -->
 <div class="chat_icon">
