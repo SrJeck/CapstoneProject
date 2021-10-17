@@ -49,7 +49,7 @@
               <option style="font-size:17px" value="Analysis">Analysis</option>
               <option style="font-size:17px" value="Database">Database</option>
             </select>
-            <input type="text" id="speechToText" class="form-control form-input" placeholder="search here"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button">Search</button>
+            <input type="text" id="speechToText" class="form-control form-input" placeholder="Enter your search here"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button">Search</button>
           </div>
         </div>
     </div>
