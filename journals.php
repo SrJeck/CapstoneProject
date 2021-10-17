@@ -27,7 +27,7 @@
     <a style="margin-top: 5px;" href="index.php">HOME</a>
     <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 5px;" href="#">ANALYTICS</a>
-    <a style="margin-top: 5px;" href="#">PLAGIARISM CHECKER</a>
+    <a style="margin-top: 5px;" href="plagiarismchecker.php">PLAGIARISM CHECKER</a>
     <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
@@ -56,22 +56,100 @@
    </div>
 
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Users</title>
+   <?php
 
-	<link rel="stylesheet" href="main.css" />
-</head>
-<body>
+//Enter your host configuration here in my case it is root
 
-	<main>
-		<div class="list" id="list"></div>
-		<div class="pagenumbers" id="pagination"></div>
-	</main>
-	<script src="main.js"></script>
-</body>
+$conn = mysqli_connect('localhost', 'root', '');
 
+if (!$conn){
+
+    die("Database conn Failed" . mysqli_error($conn));
+
+}
+
+//Enter yoour database name here in my case i am using pagination.
+
+$select_db = mysqli_select_db($conn, 'test');
+
+if (!$select_db){
+    die("Database Selection Failed" . mysqli_error($conn));
+
+}
+/*************************************************************/
+
+$recordperpage = 3;
+if(isset($_GET['page']) & !empty($_GET['page'])){
+
+$currentpage = $_GET['page'];
+}else{
+
+$currentpage = 1;
+}
+$recordSkip = ($currentpage * $recordperpage) - $recordperpage;
+$query1 = "SELECT * FROM `research`";
+$totalpageCounted = mysqli_query($conn, $query1);
+$totalresult = mysqli_num_rows($totalpageCounted);
+
+$lastpage = ceil($totalresult/$recordperpage);
+$recordSkippage = 1; $nextpage = $currentpage + 1;
+$previouspage = $currentpage - 1;
+//It will select only required pages from database
+$query2 = "SELECT * FROM `research` LIMIT $recordSkip, $recordperpage";
+$res = mysqli_query($conn, $query2);
+?>
+
+<center>
+<div class="container">
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+ <div class="row">
+ <table class="table ">
+
+ <tbody>
+ <?php
+
+    while($r = mysqli_fetch_assoc($res)){
+ ?>
+  <tr>
+     <td><i class='far fa-file-alt' style="font-size: 100px; "></i><p style="margin-left: 90px; margin-top: -90px;"><?php echo $r['Research Type']; ?></p><p style="margin-left: 90px; "><?php echo $r['Title']; ?></p><p style="margin-left: 90px; "><p style="margin-left: 90px; "><?php echo $r['Author']; ?></p><p style="margin-left: 90px; "><?php echo $r['Publication_Date']; ?></p><p style="margin-left: 90px; "><?php echo $r['Research Type']; ?></p></td>
+  </tr>
+
+    <?php } ?>
+
+   </tbody>
+
+  </table>
+
+ </div> 
+ 
+  
+ <nav aria-label="Page navigation">
+  <ul class="pagination" style="list-style-type: none; white-space:nowrap; ">
+   <?php if($currentpage != $recordSkippage){ ?>     <li class="page-item">
+      <a class="page-link" href="?page=<?php echo $recordSkippage ?>" tabindex="-1" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">First</span>
+      </a>
+    </li>
+    <?php } ?>
+    <?php if($currentpage >= 5){ ?>
+    <li class="page-item"><a class="page-link" href="?page=<?php echo $previouspage ?>"><?php echo $previouspage ?></a></li>
+    <?php } ?>
+    <li class="page-item active"><a class="page-link" href="?page=<?php echo $currentpage ?>"><?php echo $currentpage ?></a></li>
+    <?php if($currentpage != $lastpage){ ?>
+    <li class="page-item"><a class="page-link" href="?page=<?php echo $nextpage ?>"><?php echo $nextpage ?></a></li>
+    <li class="page-item">
+      <a class="page-link" href="?page=<?php echo $lastpage ?>" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Last</span>
+      </a>
+     </li>
+     <?php } ?>
+    </ul>
+   </nav>
+  </div>
+  </center>
 <!-- ChatBot -->
 <div class="chat_icon">
   <img style="height: 80px;" src="images/chatboticon.png">
