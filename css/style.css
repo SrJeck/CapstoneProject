@@ -326,7 +326,90 @@
       width: 130px;
       height: 110px;
     }
+    /*Plagiarism Checker*/  
+    .circle{
+      margin-top: 20px;
 
+    }
+    .unique {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-radius: 50%;
+      font-size: 20px;
+      color: black;
+      text-align: center;
+      background: white;
+      border: 5px solid #2FCC71;
+      margin-left: 30px;
+    }
+    .plagiarized {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-radius: 50%;
+      font-size: 20px;
+      color: black;
+      text-align: center;
+      background: white;
+      border: 5px solid red;
+      margin-left: 100px
+    }
+    .checked {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-radius: 50%;
+      font-size: 20px;
+      color: black;
+      text-align: center;
+      background: white;
+      border: 5px solid #1E97FA;
+      margin-left: 700px
+    }
+    .scanbutton {
+      background-color: #751518;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      margin-top: 100px;
+      margin-left: 40px;
+    }
+    .filebutton {
+      background-color: #751518;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    .text1{
+      margin-left: 280px;
+      width: 450px;
+      border: 3px solid black;
+      color: black;
+      font-weight:lighter;
+      background-color: white;
+      line-height: 20px;
+    }
+    .text2{
+      margin-left: 100px;
+      width: 450px;
+      border: 3px solid black;
+      color: rgb(49, 185, 49);
+      background-color: white;
+      line-height: 20px;
+    }
 
   /*
   
