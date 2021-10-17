@@ -29,7 +29,7 @@ $currentpage = $_GET['page'];
 $currentpage = 1;
 }
 $recordSkip = ($currentpage * $recordperpage) - $recordperpage;
-$query1 = "SELECT * FROM `carDemo`";
+$query1 = "SELECT * FROM `research`";
 $totalpageCounted = mysqli_query($conn, $query1);
 $totalresult = mysqli_num_rows($totalpageCounted);
 
@@ -37,13 +37,12 @@ $lastpage = ceil($totalresult/$recordperpage);
 $recordSkippage = 1; $nextpage = $currentpage + 1;
 $previouspage = $currentpage - 1;
 //It will select only required pages from database
-$query2 = "SELECT * FROM `carDemo` LIMIT $recordSkip, $recordperpage";
+$query2 = "SELECT * FROM `research`  LIMIT $recordSkip, $recordperpage ";
 $res = mysqli_query($conn, $query2);
 ?>
 
 <!DOCTYPE html>
 <html>
- <head><title>Simple-pagination in php</title>
 
 
  <!--  --------------bootstrap css cdn-------------------  -->
@@ -56,16 +55,13 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
 
  <div class="row">
- <h1>PHP PAGINATION</h1>
  <table class="table ">
  <thead>
  <tr>
-   <th>Id</th>
-   <th>Car Name</th>
-   <th>Make</th>
-   <th>Model</th>
-   <th>Accessories</th>
-   <th>Update Records</th>
+   <th>Title</th>
+   <th>Author</th>
+   <th>Publication Date</th>
+   <th>Research Type</th>
  </tr>
 
  </thead>
@@ -77,20 +73,17 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
  ?>
     <tr>
-     <th scope="row"><?php echo $r['id']; ?></th>
 
-     <td><?php echo $r['car_name']; ?></td>
+     <td><?php echo $r['Title']; ?></td>
 
-    <td
-><?php echo $r['make']; ?></td>
+    <td><?php echo $r['Author']; ?></td>
 
-     <td><?php echo $r['model']; ?></td>
+     <td><?php  echo $r['Publication_Date']; ?></td>
 
-     <td><?php echo $r['accessories']; ?></td>
+     <td><?php echo $r['Research Type']; ?></td>
 
      <td>
 
-     <a href="delete.php?id=<?php echo $r['id']; ?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
 
     </td>
 
