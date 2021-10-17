@@ -111,6 +111,7 @@ $res = mysqli_query($conn, $query2);
 
     while($r = mysqli_fetch_assoc($res)){
  ?>
+ 
   <tr>
      <td><i class='far fa-file-alt' style="font-size: 100px; "></i><p style="margin-left: 90px; margin-top: -90px;"><?php echo $r['Research_Type']; ?></p><p style="margin-left: 90px; "><?php echo $r['Title']; ?></p><p style="margin-left: 90px; "><p style="margin-left: 90px; "><?php echo $r['Author']; ?></p><p style="margin-left: 90px; "><?php echo $r['Publication_Date']; ?></p></td>
   </tr>
