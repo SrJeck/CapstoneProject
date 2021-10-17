@@ -1,5 +1,5 @@
 const list_items = [
-	"Item 1 test",
+	"Item 1 test ",
 	"Item 2",
 	"Item 3",
 	"Item 4",
@@ -32,7 +32,6 @@ const list_items = [
 
 const list_element = document.getElementById('list');
 const pagination_element = document.getElementById('pagination');
-
 let current_page = 1;
 let rows = 4;
 
