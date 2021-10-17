@@ -83,7 +83,7 @@
       <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
 
       <select data-conv-question="Please Confirm">
-        <option value="Yes">Conform</option>
+        <option value="Yes">Confirm</option>
       </select>
 
   	</form>
