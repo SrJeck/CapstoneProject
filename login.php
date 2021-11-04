@@ -49,8 +49,8 @@
     <label for="lname">Password:</label>
     <input type="text" id="lname" name="lastname" placeholder="Password">
 
-    <button class="submit" type="submit" value="Submit"> Submit</button>
-    <button class="signup" type="signup"  value="Signup"> Signup</button>
+    <button class="submit" type="submit" value="Submit" onclick=""> Submit</button>
+    <button class="signup" type="signup"  value="Signup" onclick=""> Signup</button>
   </form>
 </div>
 <!-- ChatBot -->
