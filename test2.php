@@ -1,35 +1,4 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'journal');
-
-if(isset($_POST['submit'])){
-
-    if(!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['publication_date']) && !empty($_POST['research_type']) && !empty($_POST['institution'])  && !empty($_POST['publisher'])){
-     
-      $title = $_POST['title']; 
-      $author = $_POST['author']; 
-      $publication_date = $_POST['publication_date']; 
-      $research_type = $_POST['research_type']; 
-      $file_upload = $_POST['file_upload']; 
-      $institution = $_POST['institution']; 
-      $publisher = $_POST['publisher']; 
-
-      $upload_dir = '/images';
-
-      $query = "insert into research(title,author,publication_date,research_type,file_upload,institution,publisher) values('$title','$author','$publication_date','$research_type','$file_upload','$institution','$publisher')";
-
-      $run = mysqli_query($conn,$query) or die(mysqli_error());
-
-      if($run){
-      }
-      else{
-        echo "Form not Submitted";
-      }
-    }
-    else{
-      echo "All fields are required";
-    }
-  }
-
 ?>
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 10/05/2021 -->
@@ -40,10 +9,11 @@ if(isset($_POST['submit'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -60,7 +30,7 @@ if(isset($_POST['submit'])){
     <a style="margin-top: 5px;" href="#">HOME</a>
     <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 5px;" href="#">ANALYTICS</a>
-    <a style="margin-top: 5px;" href="#">PLAGIARISM CHECKER</a>
+    <a style="margin-top: 5px;" href="plagiarismchecker.php">PLAGIARISM CHECKER</a>
     <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
@@ -74,33 +44,90 @@ if(isset($_POST['submit'])){
 </div>
 <span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span>
 
+  <!-- HEADER IMAGE -->
+  <img class="bg" src="images/bookreadbackground.JPG">
+  <div class="container">
+      <h3 align="center">Live Data Search with Pagination in PHP Mysql using Ajax</h3>
+      <br />
+      <div class="card">
+        <div class="card-header">Dynamic Data</div>
+        <div class="card-body">
+          <div class="form-group">
+            <input type="text" name="search_box" id="search_box" class="form-control" placeholder="Type your search query here" />
+            <input type="submit" name="search" value="Filter"><br><br>
+          </div>
+          <div class="table-responsive" id="dynamic_content">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+  $(document).ready(function(){
 
-<button class="scanbutton">Scan for Plagiarism</button>
-<button class="filebutton">Upload a file</button>
+    load_data(1);
 
-<div class="check"><div>
+    function load_data(page, query = '')
+    {
+      $.ajax({
+        url:"fetch.php",
+        method:"POST",
+        data:{page:page, query:query},
+        success:function(data)
+        {
+          $('#dynamic_content').html(data);
+        }
+      });
+    }
 
-<div style="display: flex; margin-top: 80px;">
-<p class="text1">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam maximus sagittis sapien eget porttitor. Curabitur nec lorem luctus, ultrices libero et, fringilla dui. Nam porttitor sapien eget sollicitudin tincidunt. Etiam tortor risus, lobortis vitae turpis a, imperdiet congue libero. Etiam et nulla sed magna viverra pretium id at nisi. Phasellus sit amet dolor elementum, varius mauris in, commodo mauris. In eu nunc justo.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam maximus sagittis sapien eget porttitor. Curabitur nec lorem luctus, ultrices libero et, fringilla dui. Nam porttitor sapien eget sollicitudin tincidunt. Etiam tortor risus, lobortis vitae turpis a, imperdiet congue libero. Etiam et nulla sed magna viverra pretium id at nisi. Phasellus sit amet dolor elementum, varius mauris in, commodo mauris. In eu nunc justo.
-</p>
-<p class="text2">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam maximus sagittis sapien eget porttitor. Curabitur nec lorem luctus, ultrices libero et, fringilla dui. Nam porttitor sapien eget sollicitudin tincidunt. Etiam tortor risus, lobortis vitae turpis a, imperdiet congue libero. Etiam et nulla sed magna viverra pretium id at nisi. Phasellus sit amet dolor elementum, <b style="color:red;">varius mauris in, commodo mauris. In eu nunc justo.
-Lorem ipsum dolor sit amet,</b> consectetur adipiscing elit. Nullam maximus sagittis sapien eget porttitor. Curabitur nec lorem luctus, ultrices libero et, fringilla dui. Nam porttitor sapien eget sollicitudin tincidunt. Etiam tortor risus, lobortis vitae turpis a, imperdiet congue libero. Etiam et nulla sed magna viverra pretium id at nisi. Phasellus sit amet dolor elementum, varius mauris in, commodo mauris.  In eu nunc justo.
-</p>
-</div>
-<!--<input type="file" id="myPdf" /><br>
-<center><canvas id="pdfViewer" ></canvas></center>
-<script type="text/javascript" src="script.js"></script>-->
-<h3 style="margin-left: 35px;">Results:<h3>
+    $(document).on('click', '.page-link', function(){
+      var page = $(this).data('page_number');
+      var query = $('#search_box').val();
+      load_data(page, query);
+    });
 
-<div class="circle" style="display: flex; ">
-<div class="unique">90%</div><p style="font-weight:bold; margin-top:20px">UNIQUE</p>
-<div class="plagiarized">10%</div><p style="font-weight:bold; margin-top:20px">Plagiarized</p>
-<div class="checked">100%</div><p style="font-weight:bold;">COMPLETED: 100% CHECKED</p>
-</div>
+    $('#search_box').keyup(function(){
+      var query = $('#search_box').val();
+      load_data(1, query);
+    });
 
+  });
+</script>
+  <!-- SEARCH BAR CONTAINER -->
+  <div class="container">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div>
+            <div class="form"> 
+            <select class="topic" name="topic" id="topic">
+              <option value="" selected disabled hidden>Topic</option>
+              <option style="font-size:17px" value="Education">Education</option>
+              <option style="font-size:17px" value="Technology">Technology</option>
+              <option style="font-size:17px" value="Research">Research</option>
+              <option style="font-size:17px" value="Analysis">Analysis</option>
+              <option style="font-size:17px" value="Database">Database</option>
+            </select>
+            <input type="text" id="speechToText" class="form-control form-input" placeholder="Enter your search here"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button">Search</button>
+          </div>
+        </div>
+    </div>
+   </div>
+
+  <!-- INTRODUCTION -->
+    <h2 class="new" >Whats's New?</h2>
+    <p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam maximus sagittis sapien eget porttitor. 
+    Curabitur nec lorem luctus, ultrices libero et, fringilla dui. Nam porttitor sapien eget sollicitudin tincidunt. 
+    Etiam tortor risus, lobortis vitae turpis a, imperdiet congue libero. Etiam et nulla sed magna viverra pretium id at nisi. 
+    Phasellus sit amet dolor elementum, varius mauris in, commodo mauris. In eu nunc justo.
+    </p>
+  <!-- IMAGES -->
+  <div class="images">
+    <img class="book" src="images/book.JPG">
+    <button class="btn">Education</button>
+    <img class="chip" src="images/chip.JPG">
+    <button class="btn2">Technology</button>
+    <img class="business" src="images/business.JPG">
+    <button class="btn3">Business</button>
+  </div>
 
 <!-- ChatBot -->
 <div class="chat_icon">

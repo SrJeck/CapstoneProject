@@ -1,4 +1,102 @@
 <?php
+$conn = mysqli_connect('localhost', 'root', '', 'journal');
+
+if(isset($_POST['submit'])){
+
+    if(!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['publication_date']) && !empty($_POST['research_type']) && !empty($_POST['file_upload'])){
+     
+      $title = $_POST['title']; 
+      $author = $_POST['author']; 
+      $publication_date = $_POST['publication_date']; 
+      $research_type = $_POST['research_type']; 
+      $file_upload = $_POST['file_upload']; 
+
+
+      $query = "insert into research(title,author,publication_date,research_type) values('$title','$author','$publication_date','$research_type','$file_upload')";
+
+      $run = mysqli_query($conn,$query) or die(mysqli_error());
+
+      if($run){
+        echo "Form Submitted Successfully";
+      }
+      else{
+        echo "Form not Submitted";
+      }
+    }
+    else{
+      echo "All fields are required";
+    }
+  }
+
+?>
+
+<?php
+
+if(isset($_POST['search']))
+{
+    $valueToSearch = $_POST['valueToSearch'];
+    // search in all table columns
+    // using concat mysql function
+    $query = "SELECT * FROM `research` WHERE CONCAT(`id`, `title`, `author`, `publication_date`, 'research_type') LIKE '%".$valueToSearch."%'";
+    $search_result = filterTable($query);
+    
+}
+ else {
+    $query = "SELECT * FROM `research`";
+    $search_result = filterTable($query);
+}
+
+// function to connect and execute the query
+function filterTable($query)
+{
+    $connect = mysqli_connect("localhost", "root", "", "journal");
+    $filter_Result = mysqli_query($connect, $query);
+    return $filter_Result;
+}
+
+
+?>
+   <?php
+
+//Enter your host configuration here in my case it is root
+
+$conn = mysqli_connect('localhost', 'root', '');
+
+if (!$conn){
+
+    die("Database conn Failed" . mysqli_error($conn));
+
+}
+
+//Enter yoour database name here in my case i am using pagination.
+
+$select_db = mysqli_select_db($conn, 'journal');
+
+if (!$select_db){
+    die("Database Selection Failed" . mysqli_error($conn));
+
+}
+/*************************************************************/
+
+$recordperpage = 3;
+if(isset($_GET['page']) & !empty($_GET['page'])){
+
+$currentpage = $_GET['page'];
+}else{
+
+$currentpage = 1;
+}
+$recordSkip = ($currentpage * $recordperpage) - $recordperpage;
+$query1 = "SELECT * FROM `research`";
+$totalpageCounted = mysqli_query($conn, $query1);
+$totalresult = mysqli_num_rows($totalpageCounted);
+
+$lastpage = ceil($totalresult/$recordperpage);
+$recordSkippage = 1; $nextpage = $currentpage + 1;
+$previouspage = $currentpage - 1;
+//It will select only required pages from database
+$query2 = "SELECT * FROM `research` LIMIT $recordSkip, $recordperpage";
+$res = mysqli_query($conn, $query2);
 ?>
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 10/05/2021 -->
@@ -56,67 +154,49 @@
    </div>
 
 
-   <?php
 
-//Enter your host configuration here in my case it is root
-
-$conn = mysqli_connect('localhost', 'root', '');
-
-if (!$conn){
-
-    die("Database conn Failed" . mysqli_error($conn));
-
-}
-
-//Enter yoour database name here in my case i am using pagination.
-
-$select_db = mysqli_select_db($conn, 'journal');
-
-if (!$select_db){
-    die("Database Selection Failed" . mysqli_error($conn));
-
-}
-/*************************************************************/
-
-$recordperpage = 3;
-if(isset($_GET['page']) & !empty($_GET['page'])){
-
-$currentpage = $_GET['page'];
-}else{
-
-$currentpage = 1;
-}
-$recordSkip = ($currentpage * $recordperpage) - $recordperpage;
-$query1 = "SELECT * FROM `research`";
-$totalpageCounted = mysqli_query($conn, $query1);
-$totalresult = mysqli_num_rows($totalpageCounted);
-
-$lastpage = ceil($totalresult/$recordperpage);
-$recordSkippage = 1; $nextpage = $currentpage + 1;
-$previouspage = $currentpage - 1;
-//It will select only required pages from database
-$query2 = "SELECT * FROM `research` LIMIT $recordSkip, $recordperpage";
-$res = mysqli_query($conn, $query2);
-?>
 
 <center>
+<form action="journals.php" method="post">
+            <input type="text" name="valueToSearch" placeholder="Value To Search"><br><br>
+            <input type="submit" name="search" value="Filter"><br><br>
+            
+            <table>
+
+
+      <!-- populate table from mysql database -->
+                <?php while($row = mysqli_fetch_array($search_result)):?>
+                  <?php
+
+while($row = mysqli_fetch_assoc($res)){
+?>
+                <tr>
+
+                    <td><i class='far fa-file-alt' style="font-size: 100px; "></i>
+                    <p style="margin-left: 90px; margin-top: -90px;"><?php echo $row['research_type']; ?></p>
+                    <p style="margin-left: 90px; "><?php echo $row['title']; ?></p><p style="margin-left: 90px; ">
+                    <p style="margin-left: 90px; "><?php echo $row['author']; ?></p>
+                    <p style="margin-left: 90px; "><?php echo $row['publication_date']; ?></p>
+                    </td>
+                </tr>
+                <?php } ?>
+                <?php endwhile;?>
+            </table>
+        </form>
+        
+    </body>
+</html>
 <div class="container">
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
  <div class="row">
  <table class="table ">
 
+
  <tbody>
- <?php
 
-    while($r = mysqli_fetch_assoc($res)){
- ?>
- 
-  <tr>
-     <td><i class='far fa-file-alt' style="font-size: 100px; "></i><p style="margin-left: 90px; margin-top: -90px;"><?php echo $r['Research_Type']; ?></p><p style="margin-left: 90px; "><?php echo $r['Title']; ?></p><p style="margin-left: 90px; "><p style="margin-left: 90px; "><?php echo $r['Author']; ?></p><p style="margin-left: 90px; "><?php echo $r['Publication_Date']; ?></p></td>
-  </tr>
 
-    <?php } ?>
+
 
    </tbody>
 
