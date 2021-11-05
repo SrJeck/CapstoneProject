@@ -38,7 +38,7 @@
 
   <!-- Form -->
   <br>
-  <form action="plagscan.php" method="post">
+  <form action="insert.php" method="post">
     <label>Title:</label><input type="text" name="title"><br>
     <label>Authors:</label><input type="text" name="author"><br>
     <label>Research Type:</label><input type="text" name="research_type"><br>
