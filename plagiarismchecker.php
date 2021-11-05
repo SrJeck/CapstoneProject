@@ -75,13 +75,8 @@ if(isset($_POST['submit'])){
 <span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span>
 
 
-
-<form method="post" enctype="multipart/form-data">
-<input type="submit" name="submit" class="scanbutton" value="Scan for Plagiarism">
-<input type="File" name="file" id="file"  value="Upload a file" accept="application/pdf" style="display:none;"> 
-<label for="file" class="filebutton">Select file</label>
-</form>
-
+<button class="scanbutton">Scan for Plagiarism</button>
+<button class="filebutton">Upload a file</button>
 
 <div class="check"><div>
 
