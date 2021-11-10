@@ -1,5 +1,13 @@
   /*  START DATE 8/28/2021*/
   /*  UPDATE DATE 9/12/202*/
+        .displayResearch{      
+      text-decoration: none;
+      color: black;
+    }
+    .displayRow:hover{  
+      background-color:#a83034;
+      color: white;
+    }
     body {
       margin:0;
       background-color: #F7F5F7;

@@ -66,3 +66,10 @@ $("#myPdf").on("change", function(e){
 		fileReader.readAsArrayBuffer(file);
 	}
 });
+
+function displayResearch(id) {
+    xhr = new XMLHttpRequest();
+    xhr.open("POST","display.php",true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.send("id="+id);
+}

@@ -166,15 +166,14 @@ $res = mysqli_query($conn, $query2);
 
           while ($row = mysqli_fetch_assoc($res)) {
           ?>
-            <tr>
-
-              <td><i class='far fa-file-alt' style="font-size: 100px; "></i>
+            <tr class="displayRow">
+                
+                <td><a class="displayResearch"  target='_blank' href='display.php?id=<?php echo $row['id']; ?>'><i class='far fa-file-alt' style="font-size: 100px; "></i>
                 <p style="margin-left: 90px; margin-top: -90px;"><?php echo $row['research_type']; ?></p>
-                <p style="margin-left: 90px; "><?php echo $row['title']; ?></p>
-                <p style="margin-left: 90px; ">
+                <p style="margin-left: 90px; "><?php echo $row['title']; ?></p><p style="margin-left: 90px; ">
                 <p style="margin-left: 90px; "><?php echo $row['author']; ?></p>
-                <p style="margin-left: 90px; "><?php echo $row['publication_date']; ?></p>
-              </td>
+                <p style="margin-left: 90px; "><?php echo $row['publication_date']; ?></p></a>
+                </td>
             </tr>
           <?php } ?>
         <?php endwhile; ?>
