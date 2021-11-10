@@ -23,6 +23,7 @@
 </head>
 
 <body>
+
   <!-- NAVBAR -->
   <div class="navbar">
     <a href="#"><img style="height: 25px;" src="images/libraryLogo.png"></a>
@@ -33,59 +34,92 @@
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
-
-
+  </ul>
 
   <!-- Form -->
   <br>
-  <form action="plagscan.php" method="post">
-    <label>Title:</label><input type="text" name="title"><br>
-    <label>Authors:</label><input type="text" name="author"><br>
-    <label>Research Type:</label><input type="text" name="research_type"><br>
-    <label>Institution:</label><input type="text" name="institution"><br>
-    <label>Publication Date:</label><input type="date" name="publication_date"><br>
-    <label>Publisher:</label><input type="text" name="publisher"><br>
-    <label for="file-upload" class="custom-file-upload">
-      <i class="fa fa-cloud-upload"></i> Custom Upload
-    </label>
-    <input id="file-upload" type="file" name="file_upload" />
+
+  <form action="insert.php" method="post" enctype="multipart/form-data">
+    <span class="row">
+      <span class="col-25">
+        <label>Title:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="title">
+      </span>
+      <span class="col-25">
+        <label>Authors:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="author">
+      </span>
+      <span class="col-25">
+        <label>Publication Date:</label>
+      </span>
+      <span class="col-75">
+        <input type="date" name="publication_date">
+      </span>
+      <span class="col-25">
+        <label>Institution:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="institution">
+      </span>
+      <span class="col-25">
+        <label>Research Type:</label>
+      </span>
+      <span class="col-75">
+        <input value="Thesis" type="text" name="research_type" readonly>
+      </span>
+    </span>
+    <div class="file-upload">
+      <input class="file-upload__input" type="file" name="myfile" accept="application/pdf" id="myFile" multiple>
+      <button class="file-upload__button" type="button">Choose File(s)</button>
+      <span class="file-upload__label"></span>
+      <script type="text/javascript" src="js/custom.js"></script>
+    </div>
+    <!-- <input type="file" name="myfile" accept="application/pdf" style="display:block" /> -->
     <button class="submit" type="submit" name="submit">Submit</button>
   </form>
+  </div>
+
+
+
+
   <!-- ChatBot -->
   <div class="chat_icon">
     <img style="height: 80px;" src="images/chatboticon.png">
   </div>
 
   <div class="chat_box">
-    <div class="my-conv-form-wrapper">
-      <form action="" method="GET" class="hidden">
+    <form action="" method="GET" class="hidden">
 
-        <select data-conv-question="Hello! How can I help you" name="category">
-          <option value="WebDevelopment">Website Development ?</option>
-          <option value="DigitalMarketing">Digital Marketing ?</option>
-        </select>
+      <select data-conv-question="Hello! How can I help you" name="category">
+        <option value="WebDevelopment">Website Development ?</option>
+        <option value="DigitalMarketing">Digital Marketing ?</option>
+      </select>
 
-        <div data-conv-fork="category">
-          <div data-conv-case="WebDevelopment">
-            <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
-          </div>
-          <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
-            <input type="text" name="companyName" data-conv-question="Please, enter your company name">
-          </div>
+      <div data-conv-fork="category">
+        <div data-conv-case="WebDevelopment">
+          <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
         </div>
+        <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
+          <input type="text" name="companyName" data-conv-question="Please, enter your company name">
+        </div>
+      </div>
 
-        <input type="text" name="name" data-conv-question="Please, Enter your name">
+      <input type="text" name="name" data-conv-question="Please, Enter your name">
 
-        <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
+      <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
 
-        <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
+      <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
 
-        <select data-conv-question="Please Confirm">
-          <option value="Yes">Confirm</option>
-        </select>
+      <select data-conv-question="Please Confirm">
+        <option value="Yes">Confirm</option>
+      </select>
 
-      </form>
-    </div>
+    </form>
+  </div>
   </div>
   <!-- ChatBot end -->
 

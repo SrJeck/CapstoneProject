@@ -1,33 +1,37 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'journal');
+// $conn = mysqli_connect('localhost', 'root', '', 'journal');
 
-if (isset($_POST['submit'])) {
+// if (isset($_POST['submit'])) {
 
-    if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['publication_date']) && !empty($_POST['research_type']) && !empty($_POST['institution'])  && !empty($_POST['publisher'])) {
+//     if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['publication_date']) && !empty($_POST['research_type']) && !empty($_POST['institution'])  && !empty($_POST['publisher']) && !empty($_POST['volume']) && !empty($_POST['issue']) && !empty($_POST['pages']) && !empty($_POST['book'])) {
 
-        $title = $_POST['title'];
-        $author = $_POST['author'];
-        $publication_date = $_POST['publication_date'];
-        $research_type = $_POST['research_type'];
-        $file_upload = $_POST['file_upload'];
-        $institution = $_POST['institution'];
-        $publisher = $_POST['publisher'];
+//         $title = $_POST['title'];
+//         $author = $_POST['author'];
+//         $publication_date = $_POST['publication_date'];
+//         $research_type = $_POST['research_type'];
+//         $file_upload = $_POST['file_upload'];
+//         $institution = $_POST['institution'];
+//         $publisher = $_POST['publisher'];
+//         $volume = $_POST['volume'];
+//         $issue = $_POST['issue'];
+//         $pages = $_POST['pages'];
+//         $book = $_POST['book'];
 
-        $upload_dir = '/images';
+//         $upload_dir = '/images';
 
-        $query = "insert into research(title,author,publication_date,research_type,file_upload,institution,publisher) values('$title','$author','$publication_date','$research_type','$file_upload','$institution','$publisher')";
+//         $query = "insert into research(title,author,publication_date,research_type,file_upload,institution,publisher,volume,issue,pages,book) values('$title','$author','$publication_date','$research_type','$file_upload','$institution','$publisher','$volume','$issue','$pages','$book')";
 
-        $run = mysqli_query($conn, $query) or die(mysqli_error());
+//         $run = mysqli_query($conn, $query) or die(mysqli_error());
 
-        if ($run) {
-            echo "Form Submitted Successfully";
-        } else {
-            echo "Form not Submitted";
-        }
-    } else {
-        echo "All fields are required";
-    }
-}
+//         if ($run) {
+//             echo "Form Submitted Successfully";
+//         } else {
+//             echo "Form not Submitted";
+//         }
+//     } else {
+//         echo "All fields are required";
+//     }
+// }
 ?>
 <html lang="en">
 
