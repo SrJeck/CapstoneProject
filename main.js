@@ -35,10 +35,10 @@ const pagination_element = document.getElementById('pagination');
 let current_page = 1;
 let rows = 4;
 
-function DisplayList (items, wrapper, rows_per_page, page) {
+function DisplayList(items, wrapper, rows_per_page, page) {
 	wrapper.innerHTML = "";
 	page--;
-	
+
 	let start = rows_per_page * page;
 	let end = start + rows_per_page;
 	let paginatedItems = items.slice(start, end);
@@ -49,12 +49,12 @@ function DisplayList (items, wrapper, rows_per_page, page) {
 		let item_element = document.createElement('div');
 		item_element.classList.add('item');
 		item_element.innerText = item;
-		
+
 		wrapper.appendChild(item_element);
 	}
 }
 
-function SetupPagination (items, wrapper, rows_per_page) {
+function SetupPagination(items, wrapper, rows_per_page) {
 	wrapper.innerHTML = "";
 
 	let page_count = Math.ceil(items.length / rows_per_page);
@@ -64,7 +64,7 @@ function SetupPagination (items, wrapper, rows_per_page) {
 	}
 }
 
-function PaginationButton (page, items) {
+function PaginationButton(page, items) {
 	let button = document.createElement('button');
 	button.innerText = page;
 

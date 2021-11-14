@@ -301,7 +301,7 @@
       text-align: center;
       position: absolute;
       left: 77.4%;
-      bottom: 335px;
+      bottom: -160px;
     }
 
 
@@ -387,7 +387,7 @@ margin-top: 5px;
   display: inline-flex;
   align-items: center;
   font-size: 15px;
-  margin-left: 225px;
+  margin-left: 260px;
 }
 
 .file-upload__input {
@@ -439,8 +439,37 @@ margin-top: 5px;
       cursor: pointer;
       width: 20%;
     }
-    /* Navigation CSS */
+    /* Add Article Form */
     input[type=text]{
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      margin-left: -160px;
+
+    }
+    input[type=radio]{
+      height:15px; 
+      width:15px;
+      padding: 15px;
+      border-radius: 4px;
+      resize: vertical;
+      margin-left: -160px;
+      background-color: transparent;
+      box-shadow: none;
+
+    }
+    #degree{
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      margin-left: -160px;
+
+    }
+    textarea{
       width: 100%;
       padding: 12px;
       border: 1px solid #ccc;
@@ -472,6 +501,21 @@ margin-top: 5px;
       cursor: pointer;
       float: right;
     }
+    .inline {
+      display: flex; /* 2. display flex to the rescue */
+      flex-direction: row;
+    }
+    input.test2{
+      display: block;
+      width: 220px;
+      margin-left: 30px;
+    }
+    label.test{
+      display: block;
+      width: 115px;
+      margin-left: 70px;
+    }
+
     
     input[type=submit]:hover {
       background-color: #45a049;
@@ -502,7 +546,7 @@ margin-top: 5px;
       display: table;
       clear: both;
     }
-    
+
   /*
   
   ======================== 

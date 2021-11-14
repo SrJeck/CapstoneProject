@@ -1,24 +1,59 @@
-<?php
-  
-  // iSpeech PHP Script (2013-04-09), version 0.6 (beta)
-  // Requires the cURL PHP extension
-  // Designed for cloud-based speech synthesis and speech recognition
-  // For more information, visit: http://www.ispeech.org/api
-  
-  require_once('ispeech.php'); 
-  
-  $SpeechRecognizer = new SpeechRecognizer();
-  $SpeechRecognizer->setParameter('server', 'http://api.ispeech.org/api/rest');
-  $SpeechRecognizer->setParameter('apikey', 'developerdemokeydeveloperdemokey');
-  $SpeechRecognizer->setParameter('freeform', '3');
-  $SpeechRecognizer->setParameter('content-type', 'wav');
-  $SpeechRecognizer->setParameter('locale', 'en-US');
-  $SpeechRecognizer->setParameter('output', 'json');
-  
-  $filename = 'testing.wav';
-  $SpeechRecognizer->setParameter('audio', base64_encode(file_get_contents($filename)));
-  $result = $SpeechRecognizer->makeRequest();
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Live Data Search with Pagination in PHP using Ajax</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css">
+  </head>
+  <body>
+    <br />
+    <div class="container">
+      <h3 align="center">Live Data Search with Pagination in PHP Mysql using Ajax</h3>
+      <br />
+      <div class="card">
+        <div class="card-header">Dynamic Data</div>
+        <div class="card-body">
+          <div class="form-group">
+            <input type="text"  class="form-control" placeholder="Type your search query here" />
+            <input type="submit" nname="search_box" id="search_box" value="Filter"><br><br>
+          </div>
+          <div class="table-responsive" id="dynamic_content">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  $(document).ready(function(){
 
-  echo htmlentities(print_r($result, true), null, 'UTF-8');
-  
-?>
+    load_data(1);
+
+    function load_data(page, query = '')
+    {
+      $.ajax({
+        url:"fetch.php",
+        method:"POST",
+        data:{page:page, query:query},
+        success:function(data)
+        {
+          $('#dynamic_content').html(data);
+        }
+      });
+    }
+
+    $(document).on('click', '.page-link', function(){
+      var page = $(this).data('page_number');
+      var query = $('#search_box').val();
+      load_data(page, query);
+    });
+
+    $('#search_box').keyup(function(){
+      var query = $('#search_box').val();
+      load_data(1, query);
+    });
+
+  });
+</script>
