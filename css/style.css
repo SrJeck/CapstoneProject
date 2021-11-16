@@ -1,5 +1,13 @@
   /*  START DATE 8/28/2021*/
-  /*  UPDATE DATE 9/12/202*/
+  /*  UPDATE DATE 11/16/2021*/
+        .displayResearch{      
+      text-decoration: none;
+      color: black;
+    }
+    .displayRow:hover{  
+      background-color:#DCDFE2;
+      color: white;
+    }
     body {
       margin:0;
       background-color: #F7F5F7;
@@ -128,7 +136,7 @@
     /* BUTTON INSIDE THE 3 IMAGES */
     .images .btn {
       position: absolute;
-      top: 94%;
+      top: 100%;
       left: 29%;
       transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
@@ -145,7 +153,7 @@
     }
     .images .btn2 {
       position: absolute;
-      top: 94%;
+      top: 100%;
       left: 50%;
       transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
@@ -163,7 +171,7 @@
     }
     .images .btn3 {
       position: absolute;
-      top: 94%;
+      top: 100%;
       left: 71%;
       transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
@@ -333,29 +341,32 @@
 
     }
     .unique {
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
+      width: 60px;
+      height: 60px;
+      line-height: 55px;
       border-radius: 50%;
-      font-size: 20px;
+      font-size: 15px;
       color: black;
       text-align: center;
       background: white;
       border: 5px solid #2FCC71;
-      margin-left: 30px;
+      margin-left: 60px;
     }
     .plagiarized {
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
+      width: 60px;
+      height: 60px;
+      line-height: 55px;
       border-radius: 50%;
-      font-size: 20px;
+      font-size: 15px;
       color: black;
       text-align: center;
       background: white;
       border: 5px solid red;
-      margin-left: 100px
+      margin-left: 100px;
+      font-weight: bold;
+      
     }
+
     .checked {
       width: 50px;
       height: 50px;
@@ -379,8 +390,30 @@
       font-size: 16px;
       margin: 4px 2px;
       cursor: pointer;
-      margin-top: 100px;
-      margin-left: 40px;
+      margin-left: 79%;
+    }
+    .CheckNew {
+      background-color: #751518;
+      border: none;
+      color: white;
+      padding: 15px 52px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      margin-top: 5px;
+      margin-left: 79%;
+    }
+    .downR{
+      background-color: #751518;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      float: right;
+      margin-right: 150px;
+      margin-top: 40px;
     }
     .filebutton {
       background-color: #751518;
@@ -395,25 +428,81 @@
       cursor: pointer;
     }
     .text1{
-      margin-left: 280px;
-      width: 450px;
+      margin-top: -150px;
+      width: 64%;
       border: 3px solid black;
       color: black;
       font-weight:lighter;
       background-color: white;
       line-height: 20px;
+      outline: none;
+      box-shadow: none;
+      height: 30%;
+      padding: 15px;
+      font-family: 'Poppins', sans-serif;
+      border-radius: 5px;
+      resize: none;
+      margin-left: 32px;
     }
-    .text2{
-      margin-left: 100px;
-      width: 450px;
+
+
+    .topSource {
+      width: 28.67%;
+      font-family: 'Poppins', sans-serif;
+      font-size: small;   
       border: 3px solid black;
-      color: rgb(49, 185, 49);
-      background-color: white;
-      line-height: 20px;
+      border-radius: 5px;
+      padding: 10px;
+      /* margin: 0% 2% 0% 1%; */
+      float: right;
+      margin-right: 10px;
+  
+  }
+  .results {
+    width: 62.33%;
+    font-family: 'Poppins', sans-serif;
+    height:fit-content;
+    font-size: small;   
+    border: 3px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    /* margin: 0% 1% 0% 2%; */
+    float: left;
+    margin: 0% 2% 2% 2%;
+  }
+  .overview{
+    width: 28.67%;
+    font-family: 'Poppins', sans-serif;
+    font-size: small;   
+    border: 3px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    float: right;
+    margin-right: 10px;
+    margin-top: 30px;
+  }
+
+    .sent {
+      padding: 2px;
+      margin:1px 5px;
+    }
+    .plag,.uni {
+      float: left;
+      padding: 2px;
+      margin:1px 5px;
+    }
+    .plag {
+      background-color: rgb(245, 59, 59);
+      color: white;
+    }
+    .uni {
+      background-color: green;
+      color: white;
     }
 
 
-    /*Pagiantion*/  
+
+    /*Pagination*/  
     table {
       font-family: arial, sans-serif;
       width: 50%;
@@ -439,6 +528,7 @@
       background-color: #751518;
       color: white;
     }
+
     ul{
       overflow:hidden;
       }
@@ -446,6 +536,7 @@
       display:inline-block;
       }
 
+ 
   /*
   
   ======================== 
