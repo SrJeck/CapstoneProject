@@ -9,7 +9,7 @@ $db_handle = new DBController();
 
 $title = "";
 $author = "";
-$research_type = "";
+$topic = "";
 $publication_day = "";
 $publication_day = "";
 $publication_year = "";
@@ -19,10 +19,10 @@ if (!empty($_POST["search"])) {
   foreach ($_POST["search"] as $k => $v) {
     if (!empty($v)) {
 
-      $queryCases = array("title", "author", "research_type", "publication_day", "publication_day", "publication_year");
+      $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
       if (in_array($k, $queryCases)) {
         if (!empty($queryCondition)) {
-          $queryCondition .= " AND ";
+          $queryCondition .= " OR ";
         } else {
           $queryCondition .= " WHERE ";
         }
@@ -30,11 +30,7 @@ if (!empty($_POST["search"])) {
       switch ($k) {
         case "title":
           $title = $v;
-          $queryCondition .= "title LIKE '" . $v . "%'";
-          break;
-        case "author":
-          $author = $v;
-          $queryCondition .= "author LIKE '" . $v . "%'";
+          $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
           break;
       }
     }
@@ -42,9 +38,9 @@ if (!empty($_POST["search"])) {
 }
 $orderby = " ORDER BY id desc";
 $sql = "SELECT * FROM research " . $queryCondition;
-$href = 'search_page.php';
+$href = 'journals.php';
 
-$perPage = 2;
+$perPage = 3;
 $page = 1;
 if (isset($_POST['page'])) {
   $page = $_POST['page'];
@@ -100,83 +96,140 @@ if (!empty($result)) {
   <span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span>
 
   <!-- BANNER IMAGE -->
-  <img class="bg" src="images/bookreadbackground.JPG">
+  <div id="index">
+    <div class="slideshow-container">
 
-  <!-- SEARCH BAR CONTAINER -->
-  <form name="frmSearch" method="post" action="search_page.php">
-    <div class="container">
-      <div class="row height d-flex justify-content-center align-items-center">
-        <div>
-          <div class="form">
-            <select class="topic" name="topic" id="topic">
-              <option value="" selected disabled hidden>Topic</option>
-              <option style="font-size:17px" value="Education">Education</option>
-              <option style="font-size:17px" value="Technology">Technology</option>
-              <option style="font-size:17px" value="Research">Research</option>
-              <option style="font-size:17px" value="Analysis">Analysis</option>
-              <option style="font-size:17px" value="Database">Database</option>
-            </select>
-            <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Enter your search here" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+      <div class="mySlides fade">
+        <img src="images/Ban1.png" style="width:100%; height: 400px;">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/Ban2.png" style="width:100%; height: 400px;">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/Ban3.png" style="width:100%; height: 400px;">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/Ban1.png" style="width:100%; height: 400px;">
+      </div>
+
+
+      <div class="mySlides fade">
+        <img src="images/Ban2.png" style="width:100%; height: 400px;">
+      </div>
+
+    </div>
+    <br>
+
+
+    <div style="text-align:center">
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+    </div>
+    <script>
+      var slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 3000); // Change image every 3 seconds
+      }
+    </script>
+
+    <!-- SEARCH BAR CONTAINER -->
+    <form name="frmSearch" method="post" action="journals.php">
+      <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center">
+          <div>
+            <div class="form">
+              <select class="topic" name="topic" id="topic">
+                <option value="" selected disabled hidden>Topic</option>
+                <option style="font-size:17px" value="Education">Education</option>
+                <option style="font-size:17px" value="Technology">Technology</option>
+                <option style="font-size:17px" value="Research">Research</option>
+                <option style="font-size:17px" value="Analysis">Analysis</option>
+                <option style="font-size:17px" value="Database">Database</option>
+              </select>
+              <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Enter your search here" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+            </div>
           </div>
         </div>
       </div>
+    </form>
+
+    <!-- INTRODUCTION -->
+    <h2 class="new">Whats's New?</h2>
+    <p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam maximus sagittis sapien eget porttitor.
+      Curabitur nec lorem luctus, ultrices libero et, fringilla dui. Nam porttitor sapien eget sollicitudin tincidunt.
+      Etiam tortor risus, lobortis vitae turpis a, imperdiet congue libero. Etiam et nulla sed magna viverra pretium id at nisi.
+      Phasellus sit amet dolor elementum, varius mauris in, commodo mauris. In eu nunc justo.
+    </p>
+    <!-- 3 IMAGES -->
+    <div class="images">
+      <img class="book" src="images/book.JPG">
+      <button class="btn">Education</button>
+      <img class="chip" src="images/chip.JPG">
+      <button class="btn2">Technology</button>
+      <img class="business" src="images/business.JPG">
+      <button class="btn3">Business</button>
     </div>
-  </form>
 
-  <!-- INTRODUCTION -->
-  <h2 class="new">Whats's New?</h2>
-  <p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam maximus sagittis sapien eget porttitor.
-    Curabitur nec lorem luctus, ultrices libero et, fringilla dui. Nam porttitor sapien eget sollicitudin tincidunt.
-    Etiam tortor risus, lobortis vitae turpis a, imperdiet congue libero. Etiam et nulla sed magna viverra pretium id at nisi.
-    Phasellus sit amet dolor elementum, varius mauris in, commodo mauris. In eu nunc justo.
-  </p>
-  <!-- 3 IMAGES -->
-  <div class="images">
-    <img class="book" src="images/book.JPG">
-    <button class="btn">Education</button>
-    <img class="chip" src="images/chip.JPG">
-    <button class="btn2">Technology</button>
-    <img class="business" src="images/business.JPG">
-    <button class="btn3">Business</button>
-  </div>
-
-  <!-- ChatBot -->
-  <div class="chat_icon">
-    <img style="height: 80px;" src="images/chatboticon.png">
-  </div>
-
-  <div class="chat_box">
-    <div class="my-conv-form-wrapper">
-      <form action="" method="GET" class="hidden">
-
-        <select data-conv-question="Hello! How can I help you" name="category">
-          <option value="WebDevelopment">Website Development ?</option>
-          <option value="ThesisQuoForum">Thesis Quo Forum</option>
-        </select>
-
-        <div data-conv-fork="category">
-          <div data-conv-case="WebDevelopment">
-            <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
-          </div>
-          <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
-            <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
-          </div>
-        </div>
-
-        <input type="text" name="name" data-conv-question="Please, Enter your name">
-
-        <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
-
-        <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
-
-        <select data-conv-question="Please Confirm">
-          <option value="Yes">Confirm</option>
-        </select>
-
-      </form>
+    <!-- ChatBot -->
+    <div class="chat_icon">
+      <img style="height: 80px;" src="images/chatboticon.png">
     </div>
-  </div>
-  <!-- ChatBot end -->
+
+    <div class="chat_box">
+      <div class="my-conv-form-wrapper">
+        <form action="" method="GET" class="hidden">
+
+          <select data-conv-question="Hello! How can I help you" name="category">
+            <option value="WebDevelopment">Website Development ?</option>
+            <option value="ThesisQuoForum">Thesis Quo Forum</option>
+          </select>
+
+          <div data-conv-fork="category">
+            <div data-conv-case="WebDevelopment">
+              <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
+            </div>
+            <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
+              <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
+            </div>
+          </div>
+
+          <input type="text" name="name" data-conv-question="Please, Enter your name">
+
+          <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
+
+          <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
+
+          <select data-conv-question="Please Confirm">
+            <option value="Yes">Confirm</option>
+          </select>
+
+        </form>
+      </div>
+    </div>
+    <!-- ChatBot end -->
 
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->

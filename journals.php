@@ -18,7 +18,7 @@ if (!empty($_POST["search"])) {
       $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
       if (in_array($k, $queryCases)) {
         if (!empty($queryCondition)) {
-          $queryCondition .= " AND ";
+          $queryCondition .= " OR ";
         } else {
           $queryCondition .= " WHERE ";
         }
@@ -26,11 +26,7 @@ if (!empty($_POST["search"])) {
       switch ($k) {
         case "title":
           $title = $v;
-          $queryCondition .= "title LIKE '" . $v . "%'";
-          break;
-        case "author":
-          $author = $v;
-          $queryCondition .= "author LIKE '" . $v . "%'";
+          $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
           break;
       }
     }
@@ -89,103 +85,181 @@ if (!empty($result)) {
   </div>
 
   <!-- BANNER IMAGE -->
-  <img class="bg" src="images/bookreadbackground.JPG">
+  <div id="index" style="margin-top: 48px;">
+    <div class="slideshow-container">
 
-  <!-- SEARCH BAR CONTAINER -->
+      <div class="mySlides fade">
+        <img src="images/Ban1.png" style="width:100%; height: 400px;">
+      </div>
 
-  <center>
+      <div class="mySlides fade">
+        <img src="images/Ban2.png" style="width:100%; height: 400px;">
+      </div>
 
-    <form name="frmSearch" method="post" action="journals.php">
-      <!-- <div class="search-box">
-				<p><input type="text" placeholder="Name" name="search[title]" class="demoInputBox" value="<?php echo $title; ?>" /><input type="submit" name="go" class="btnSearch" value="Search"><input type="reset" class="btnSearch" value="Reset" onclick="window.location='journals.php'"></p>
-			</div> -->
-      <div class="container">
-        <div class="row height d-flex justify-content-center align-items-center">
-          <div>
-            <div class="form">
-              <select class="topic" name="topic" id="topic">
-                <option value="" selected disabled hidden>Topic</option>
-                <option style="font-size:17px" value="Education">Education</option>
-                <option style="font-size:17px" value="Technology">Technology</option>
-                <option style="font-size:17px" value="Research">Research</option>
-                <option style="font-size:17px" value="Analysis">Analysis</option>
-                <option style="font-size:17px" value="Database">Database</option>
-              </select>
-              <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Enter your search here" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+      <div class="mySlides fade">
+        <img src="images/Ban3.png" style="width:100%; height: 400px;">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/Ban1.png" style="width:100%; height: 400px;">
+      </div>
+
+
+      <div class="mySlides fade">
+        <img src="images/Ban2.png" style="width:100%; height: 400px;">
+      </div>
+
+    </div>
+    <br>
+
+
+    <div style="text-align:center">
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+    </div>
+    <script>
+      var slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 3000); // Change image every 3 seconds
+      }
+    </script>
+
+
+    <!-- SEARCH BAR CONTAINER -->
+
+    <center>
+
+      <form name="frmSearch" method="post" action="journals.php">
+        <div class="container">
+          <div class="row height d-flex justify-content-center align-items-center">
+            <div>
+              <div class="form">
+                <select class="topic" name="topic" id="topic">
+                  <option value="" selected disabled hidden>Topic</option>
+                  <option style="font-size:17px" value="Education">Education</option>
+                  <option style="font-size:17px" value="Technology">Technology</option>
+                  <option style="font-size:17px" value="Research">Research</option>
+                  <option style="font-size:17px" value="Analysis">Analysis</option>
+                  <option style="font-size:17px" value="Database">Database</option>
+                </select>
+                <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Enter your search here" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <table class="formview">
 
-        <?php
-        if (!empty($result)) {
-          foreach ($result as $k => $v) {
-            if (is_numeric($k)) {
-        ?>
-              <tr class="displayRow">
-                <td> <br>
-                  <a class="displayResearch" target='_blank' href='display.php?id=<?php echo $result[$k]['id']; ?>'><i style="font-size:80px" class="fa">&#xf0f6;</i>
-                    <p style="margin-left: 90px; margin-top: -90px;"><?php echo $result[$k]['topic']; ?></p>
-                    <p style="margin-left: 90px; "><?php echo $result[$k]["title"]; ?></p>
-                    <p style="margin-left: 90px; ">
-                      <p style="margin-left: 90px; "><?php echo $result[$k]["author"]; ?></p>
-                      <p style="margin-left: 90px; "><?php echo $result[$k]['publication_day'] . ' ' . $result[$k]['publication_month'] . ' ' . $result[$k]['publication_year']; ?></p>
-                      <hr style="border: 1px solid black;">
-                  </a>
-                </td>
+        <table class="formview">
 
-              </tr>
           <?php
+          if (!empty($result)) {
+            foreach ($result as $k => $v) {
+              if (is_numeric($k)) {
+          ?>
+                <tr class="displayRow">
+
+                  <td> <br>
+                    <a class="displayResearch" target='_blank' href='display.php?id=<?php echo $result[$k]['id']; ?>'><i style="font-size:80px" class="fa">&#xf0f6;</i>
+                      <p style="margin-left: 90px; margin-top: -90px;"><?php echo $result[$k]['topic']; ?></p>
+                      <p style="margin-left: 90px; "><?php echo $result[$k]["title"]; ?></p>
+                      <p style="margin-left: 90px; ">
+                        <p style="margin-left: 90px; "><?php echo $result[$k]["author"]; ?></p>
+                        <p style="margin-left: 90px; "><?php echo $result[$k]['publication_day'] . ' ' . $result[$k]['publication_month'] . ' ' . $result[$k]['publication_year']; ?></p>
+                        <hr style="border: 1px solid black;">
+                    </a>
+                  </td>
+
+                </tr>
+            <?php
+              }
             }
           }
-        }
-        if (isset($result["perpage"])) {
+          if (isset($result["perpage"])) {
+            ?>
+            <tr>
+              <td> <?php echo $result["perpage"]; ?></td>
+            </tr>
+          <?php } ?>
+          <?php
+
+
+          // $databaseHost = 'localhost';   //your db host 
+          // $databaseName = 'journal';  //your db name 
+          // $databaseUsername = 'root';    //your db username 
+          // $databasePassword = ''; //   db password 
+
+          // $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
+
+
+
+          // if (mysqli_connect_errno()) {
+          //   echo "Failed to connect to MySQL: " . mysqli_connect_error();
+          // }
+          // $sql = "select count('1') from research";
+          // $result = mysqli_query($mysqli, $sql);
+          // $row = mysqli_fetch_array($result);
+          // echo "<h3>$row[0]</h3>";
+          // mysqli_close($mysqli);
           ?>
-          <tr>
-            <td> <?php echo $result["perpage"]; ?></td>
-          </tr>
-        <?php } ?>
-      </table>
-    </form>
-    <center>
-      <!-- ChatBot -->
-      <div class="chat_icon">
-        <img style="height: 80px;" src="images/chatboticon.png">
-      </div>
-
-      <div class="chat_box">
-        <div class="my-conv-form-wrapper">
-          <form action="" method="GET" class="hidden">
-
-            <select data-conv-question="Hello! How can I help you" name="category">
-              <option value="WebDevelopment">Website Development ?</option>
-              <option value="ThesisQuoForum">Thesis Quo Forum</option>
-            </select>
-
-            <div data-conv-fork="category">
-              <div data-conv-case="WebDevelopment">
-                <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
-              </div>
-              <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
-                <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
-              </div>
-            </div>
-
-            <input type="text" name="name" data-conv-question="Please, Enter your name">
-
-            <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
-
-            <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
-
-            <select data-conv-question="Please Confirm">
-              <option value="Yes">Confirm</option>
-            </select>
-
-          </form>
+        </table>
+      </form>
+      <center>
+        <!-- ChatBot -->
+        <div class="chat_icon">
+          <img style="height: 80px;" src="images/chatboticon.png">
         </div>
-      </div>
-      <!-- ChatBot end -->
+
+        <div class="chat_box">
+          <div class="my-conv-form-wrapper">
+            <form action="" method="GET" class="hidden">
+
+              <select data-conv-question="Hello! How can I help you" name="category">
+                <option value="WebDevelopment">Website Development ?</option>
+                <option value="ThesisQuoForum">Thesis Quo Forum</option>
+              </select>
+
+              <div data-conv-fork="category">
+                <div data-conv-case="WebDevelopment">
+                  <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
+                </div>
+                <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
+                  <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
+                </div>
+              </div>
+
+              <input type="text" name="name" data-conv-question="Please, Enter your name">
+
+              <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
+
+              <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
+
+              <select data-conv-question="Please Confirm">
+                <option value="Yes">Confirm</option>
+              </select>
+
+            </form>
+          </div>
+        </div>
+        <!-- ChatBot end -->
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->
 <script>

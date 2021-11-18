@@ -12,9 +12,11 @@ function perpage($count, $per_page = '10', $href)
 		if (($_POST["page"] - 3) > 0) {
 			if ($_POST["page"] == 1)
 				$output = $output . '<span id=1 class="current-page">1</span>';
+
 			else
 				$output = $output . '<input type="submit" name="page" class="perpage-link" value="1" />';
 		}
+
 		if (($_POST["page"] - 3) > 1) {
 			$output = $output . '...';
 		}
@@ -27,7 +29,7 @@ function perpage($count, $per_page = '10', $href)
 			else
 				$output = $output . '<input type="submit" name="page" class="perpage-link" value="' . $i . '" />';
 		}
-
+		$output = $output . '<div class="count1">' . '<span class="count">Total Results: ' . $count . '</span>' . '</div>';
 		if (($pages - ($_POST["page"] + 2)) > 1) {
 			$output = $output . '...';
 		}
@@ -49,4 +51,5 @@ function showperpage($sql, $per_page = 10, $href)
 	$perpage = perpage($count, $per_page, $href);
 	return $perpage;
 }
+
 ?>

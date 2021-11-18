@@ -40,7 +40,7 @@
     }
     .form {
         position: relative;
-        bottom: 122px;
+        bottom: 162px;
         text-align: center;
     }
     /* MIC ICON*/
@@ -228,3 +228,13 @@
       background-color:#ebebeb;
       color: white;
     }
+    /* Count */
+    .count1 {
+      position: absolute;
+      bottom: 325px;
+      right: 90px;
+      font-size: 20px;
+      font-family: serif;
+      color: #7A7A7A;
+    }
+   
