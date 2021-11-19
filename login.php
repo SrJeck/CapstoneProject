@@ -13,7 +13,7 @@
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <link rel="stylesheet" type="text/css" href="css/loginstyle.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- ChatBot -->
   <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
@@ -25,10 +25,10 @@
 <body>
   <!-- NAVBAR -->
   <div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="index.php">HOME</a>
-    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
-    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a href="index.php"><img style="height: 25px;" src="images/libraryLogo.png"></a>
+    <a style="margin-top: 5px;" href="index.php">HOME</a>
+    <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 5px;" href="#">ANALYTICS</a>
     <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
@@ -45,16 +45,23 @@
   <img class="profilepencil" src="images/profile.png">
 
   <div class="container">
-    <form action="/action_page.php">
-      <label for="fname">Email or Username:</label>
-      <input type="text" id="fname" name="firstname" placeholder="Email or Username">
-
-      <label for="lname">Password:</label>
-      <input type="text" id="lname" name="lastname" placeholder="Password">
-
-      <button class="submit" type="submit" value="Submit"> Submit</button>
-      <button class="signup" type="signup" value="Signup"> Signup</button>
-    </form>
+  <form action="login_check.php" method="post" enctype="multipart/form-data">
+    <span class="row">
+    <span class="col-25">
+        <label>Institution:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="email">
+      </span>
+      <span class="col-25">
+        <label>Research Type:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="password">
+      </span>
+    </span>
+    <button class="submit" type="submit" name="submit">Submit</button>
+  </form>
   </div>
   <!-- ChatBot -->
   <div class="chat_icon">
@@ -67,15 +74,15 @@
 
         <select data-conv-question="Hello! How can I help you" name="category">
           <option value="WebDevelopment">Website Development ?</option>
-          <option value="ThesisQuoForum">Thesis Quo Forum</option>
+          <option value="DigitalMarketing">Digital Marketing ?</option>
         </select>
 
         <div data-conv-fork="category">
           <div data-conv-case="WebDevelopment">
             <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
           </div>
-          <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
-            <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
+          <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
+            <input type="text" name="companyName" data-conv-question="Please, enter your company name">
           </div>
         </div>
 
@@ -95,6 +102,19 @@
   <!-- ChatBot end -->
 
 </body>
+<!-- Below is the script for voice recognition and conversion to text-->
+<script>
+  function record() {
+    var recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-GB";
 
+    recognition.onresult = function(event) {
+      // console.log(event);
+      document.getElementById('speechToText').value = event.results[0][0].transcript;
+    }
+    recognition.start();
+
+  }
+</script>
 
 </html>

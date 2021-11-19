@@ -1,4 +1,5 @@
 <?php
+$id = $_GET['user_id'];
 ?>
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 10/05/2021 -->
@@ -25,10 +26,10 @@
 <body>
   <!-- NAVBAR -->
   <div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="index.php">HOME</a>
-    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
-    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a href="index.php"><img style="height: 25px;" src="images/libraryLogo.png"></a>
+    <a style="margin-top: 5px;" href="index.php">HOME</a>
+    <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 5px;" href="#">ANALYTICS</a>
     <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
@@ -36,8 +37,9 @@
 
 
   <div class="side">
-    <a href="#"><i class="fa fa-pencil"> <b>Edit Profile </b> &#xf105;</i></a>
-    <a href="security.php"><i class='fas fa-user-shield'> Password</i></a>
+    <a href="profile.php?user_id=<?php echo $id; ?>"><i class="fa fa-pencil"> <b>Profile </b> &#xf105;</i></a>
+    <a href="security.php?user_id=<?php echo $id; ?>"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
+    <a href="add_article.php?user_id=<?php echo $id; ?>"><i class='fa fa-plus'><b> Add Article</b></i></a>
   </div>
 
   <img class="profilepencil" src="images/profilepencil.png">
@@ -74,15 +76,15 @@
 
         <select data-conv-question="Hello! How can I help you" name="category">
           <option value="WebDevelopment">Website Development ?</option>
-          <option value="ThesisQuoForum">Thesis Quo Forum</option>
+          <option value="DigitalMarketing">Digital Marketing ?</option>
         </select>
 
         <div data-conv-fork="category">
           <div data-conv-case="WebDevelopment">
             <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
           </div>
-          <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
-            <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
+          <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
+            <input type="text" name="companyName" data-conv-question="Please, enter your company name">
           </div>
         </div>
 
@@ -100,5 +102,21 @@
     </div>
   </div>
   <!-- ChatBot end -->
+
+</body>
+<!-- Below is the script for voice recognition and conversion to text-->
+<script>
+  function record() {
+    var recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-GB";
+
+    recognition.onresult = function(event) {
+      // console.log(event);
+      document.getElementById('speechToText').value = event.results[0][0].transcript;
+    }
+    recognition.start();
+
+  }
+</script>
 
 </html>

@@ -13,7 +13,7 @@
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <link rel="stylesheet" type="text/css" href="css/loginstyle.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- ChatBot -->
   <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
@@ -25,70 +25,105 @@
 <body>
   <!-- NAVBAR -->
   <div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="index.php">HOME</a>
-    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
-    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a href="index.php"><img style="height: 25px;" src="images/libraryLogo.png"></a>
+    <a style="margin-top: 5px;" href="index.php">HOME</a>
+    <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 5px;" href="#">ANALYTICS</a>
     <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
 
 
-
+  
 
   <img class="profilepencil" src="images/profile.png">
 
   <div class="container">
-    <form action="registration_insert.php" method="post" enctype="multipart/form-data">
-      <label for="firstName">First Name:</label>
-      <input type="text" id="firstName" name="firstName" placeholder="First name">
-
-      <label for="middleName">Middle Name (Optional):</label>
-      <input type="text" id="middleName" name="middleName" placeholder="Middle name">
-
-      <label for="lastName">Last Name:</label>
-      <input type="text" id="lastName" name="lastName" placeholder="Last name">
-
-      <label for="phoneNum">Phone Number:</label>
-      <input type="text" id="phoneNum" name="phoneNumber" placeholder="Email or Username">
-
-      <label for="address">Address:</label>
-      <input type="text" id="address" name="address" placeholder="Address">
-
-      <label for="birthday">Birthday:</label></br>
-      <input type="date" id="birthday" name="birthday"></br>
-
-      <label for="sex">Sex:</label></br>
-        <label for="male"><input type="radio" id="male" name="sex" value="Male">Male</label><br>
-        <label for="female"><input type="radio" id="female" name="sex" value="Female">Female</label><br>
-
-      <label for="degree">Degree:</label>
-      <select name="degree" id="degree">
-        <option value="" disabled selected>Choose option</option>
-        <option value="Undergraduate Degree">Undergraduate Degree</option>
-        <option value="Transfer Degree">Transfer Degree</option>
-        <option value="Associate Degree">Associate Degree</option>
-        <option value="Bachelor Degree">Bachelor Degree</option>
-        <option value="Graduate Degree">Graduate Degree</option>
-        <option value="Master Degree">Master Degree</option>
-        <option value="Doctoral Degree">Doctoral Degree</option>
-        <option value="Professional Degree">Professional Degree</option>
-        <option value="Specialist Degree">Specialist Degree</option>
-      </select>
-
-      <label for="email">Email:</label>
-      <input type="text" id="email" name="email" placeholder="Email">
-
-      <label for="pass">Password:</label>
-      <input type="text" id="pass" name="pass" placeholder="Password">
-
-      <label for="confirmPass">Confirm Password:</label>
-      <input type="text" id="confirmPass" name="confirmPass" placeholder="Confirm Password">
-
-      <button class="submit" type="submit" value="Submit"> Submit</button>
-      <button class="login" type="login" value="Login"> Login</button>
-    </form>
+  <form action="registration_insert.php" method="post" enctype="multipart/form-data">
+    <span class="row">
+      <span class="col-25">
+        <label>First Name:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="firstName">
+      </span>
+      <span class="col-25">
+        <label>Middle Name:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="middleName">
+      </span>
+      <span class="col-25">
+        <label>Last Name:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="lastName">
+      </span>
+    </span>
+    <span class="col-25">
+        <label>Birthday:</label>
+      </span>
+      <span class="col-75">
+        <input type="date" name="birthday">
+      </span>
+    <span class=" row">
+      <span class="col-25">
+        <label>Phone Number:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="phoneNum">
+      </span>
+      <span class="col-25">
+        <label>Address:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="address">
+      </span>
+      <span class="col-25">
+        <label>Sex:</label>
+      </span>
+      <span class="col-75">
+        <input style="margin-left: 20px;" type="radio" id="download_only" name="sex" value="Male">
+        <label>Male</label>
+        <input style="margin-left: 20px;" type="radio" id="view_download" name="sex" value="Female">
+        <label>Female</label><br>
+      </span>
+      <span class="col-25">
+        <label>Degree Level:</label>
+      </span>
+      <span class="col-75">
+        <select name="degree_level" id="degree">
+          <option value="" selected disabled hidden>Select degree level</option>
+          <option value="Professional Certificates">Professional Certificates</option>
+          <option value="Undergraduate Degrees">Undergraduate Degrees</option>
+          <option value="Transfer Degrees">Transfer Degrees</option>
+          <option value="Associate Degrees">Associate Degrees</option>
+          <option value="Bachelor Degrees">Bachelor Degrees</option>
+          <option value="Graduate Degrees">Graduate Degrees</option>
+          <option value="Master Degrees">Master Degrees</option>
+          <option value="Doctoral Degrees">Doctoral Degrees</option>
+          <option value="Professional Degrees">Professional Degrees</option>
+          <option value="Others">Others</option>
+        </select>
+      </span>
+      <span class="col-25">
+        <label>Email:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="email">
+      </span>
+      <span class="col-25">
+        <label>Password:</label>
+      </span>
+      <span class="col-75">
+        <input type="text" name="password">
+      </span>
+      
+    </span>
+    </span>
+    <button class="submit" type="submit" name="submit">Submit</button>
+  </form>
   </div>
   <!-- ChatBot -->
   <div class="chat_icon">
@@ -101,15 +136,15 @@
 
         <select data-conv-question="Hello! How can I help you" name="category">
           <option value="WebDevelopment">Website Development ?</option>
-          <option value="ThesisQuoForum">Thesis Quo Forum</option>
+          <option value="DigitalMarketing">Digital Marketing ?</option>
         </select>
 
         <div data-conv-fork="category">
           <div data-conv-case="WebDevelopment">
             <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
           </div>
-          <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
-            <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
+          <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
+            <input type="text" name="companyName" data-conv-question="Please, enter your company name">
           </div>
         </div>
 
