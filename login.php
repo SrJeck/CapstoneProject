@@ -39,7 +39,6 @@
     <a href="editprofile.php"><i class="fa fa-pencil"> <b>Edit Profile </b> &#xf105;</i></a>
     <a href="security.php"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
     <a href="add_article.php"><i class='fa fa-plus'><b> Add Article</b></i></a>
-
   </div>
   <div class="content">
     <form action="login_check.php" method="post" enctype="multipart/form-data">

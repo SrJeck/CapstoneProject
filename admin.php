@@ -2,6 +2,7 @@
 $dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
 $id = $_GET['user_id'];
 ?>
+
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 10/05/2021 -->
 <html>
