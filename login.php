@@ -25,7 +25,7 @@
 <body>
   <!-- NAVBAR -->
   <div class="navbar">
-    <a href="index.php"><img style="height: 25px;" src="images/libraryLogo.png"></a>
+    <a href="index.php"><img style="height: 25px;" src="images/Logo.png"></a>
     <a style="margin-top: 5px;" href="index.php">HOME</a>
     <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 5px;" href="#">ANALYTICS</a>

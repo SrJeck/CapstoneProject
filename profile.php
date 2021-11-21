@@ -27,7 +27,7 @@ $id = $_GET['user_id'];
 <body>
   <!-- NAVBAR -->
   <div class="navbar">
-    <a href="index.php?user_id=<?php echo $id; ?>"><img style=" height: 25px;" src="images/libraryLogo.png"></a>
+    <a href="index.php?user_id=<?php echo $id; ?>"><img style=" height: 25px;" src="images/Logo.png"></a>
     <a style="margin-top: 5px;" href="index.php?user_id=<?php echo $id; ?>">HOME</a>
     <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 5px;" href="#">ANALYTICS</a>
