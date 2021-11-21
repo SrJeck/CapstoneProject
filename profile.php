@@ -1,5 +1,5 @@
 <?php
-$dbh = new PDO("mysql:host=localhost;dbname=research","root","");
+$dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
 $id = $_GET['user_id'];
 ?>
 <!-- START DATE 8/28/2021 -->
@@ -27,8 +27,8 @@ $id = $_GET['user_id'];
 <body>
   <!-- NAVBAR -->
   <div class="navbar">
-    <a href="index.php"><img style="height: 25px;" src="images/libraryLogo.png"></a>
-    <a style="margin-top: 5px;" href="index.php">HOME</a>
+    <a href="index.php?user_id=<?php echo $id; ?>"><img style=" height: 25px;" src="images/libraryLogo.png"></a>
+    <a style="margin-top: 5px;" href="index.php?user_id=<?php echo $id; ?>">HOME</a>
     <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 5px;" href="#">ANALYTICS</a>
     <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
@@ -48,34 +48,88 @@ $id = $_GET['user_id'];
   <div class="editform">
     <form action="/action_page.php" id="editform">
 
-    <table>
+      <table>
 
 
-<!-- populate table from mysql database -->
-<?php
-    
-    $stat = $dbh->prepare('select * from user where user_id=?');      
-    $stat->bindParam(1, $id);            
-    $stat->execute();           
-    $row = $stat->fetch();
-  ?>
-    
-    <tr class="displayRow">
-        <td><i class='far fa-file-alt' style="font-size: 100px; "></i>
-        <p style="margin-left: 90px; "><?php echo $row['firstName']; ?></p><p style="margin-left: 90px; ">
-        <p style="margin-left: 90px; "><?php echo $row['middleName']; ?></p>
-        <p style="margin-left: 90px; "><?php echo $row['lastName']; ?></p>
-        <p style="margin-left: 90px; "><?php echo $row['phoneNumber']; ?></p>
-        <p style="margin-left: 90px; "><?php echo $row['address']; ?></p>
-        <p style="margin-left: 90px; "><?php echo $row['sex']; ?></p>
-        <p style="margin-left: 90px; "><?php echo $row['birthday']; ?></p>
-        <p style="margin-left: 90px; "><?php echo $row['email']; ?></p>
-        <p style="margin-left: 90px; "><?php echo $row['degree_status']; ?></p>
-        </td>
-    </tr>
-</table>
+        <!-- populate table from mysql database -->
+        <?php
+
+        $stat = $dbh->prepare('select * from user where user_id=?');
+        $stat->bindParam(1, $id);
+        $stat->execute();
+        $row = $stat->fetch();
+        ?>
+
+        <tr class="displayRow">
+          <td>
+            <div class="name">
+              <label for="">First Name</label>
+              <p class="fname"><?php echo $row['firstName']; ?></p>
+              <label for="">Middle Name</label>
+              <p class="mname"><?php echo $row['middleName']; ?></p>
+              <label for="">Last Name</label>
+              <p class="lname"><?php echo $row['lastName']; ?></p>
+            </div>
+            <div class="emailrow">
+              <label>Email</label>
+              <p class="email"><?php echo $row['email']; ?></p>
+            </div>
+            <div class="addressrow">
+              <label class="labeladdress">Address</label>
+              <p class="address"><?php echo $row['address']; ?></p>
+            </div>
+            <div class="displayrow2">
+              <label for="">Contact Number</label>
+              <p class="pnumber"><?php echo $row['phoneNumber']; ?></p>
+              <label class="labelsex">Sex</label>
+              <p class="sex"><?php echo $row['sex']; ?></p>
+            </div>
+            <div class="displayrow3">
+              <label>Degree Status</label>
+              <p class="degree_status"><?php echo $row['degree_status']; ?></p>
+              <label class="labelbirthday">Birthday</label>
+              <p class="birthday"><?php echo $row['birthday']; ?></p>
+            </div>
+          </td>
+        </tr>
+      </table>
     </form>
+    <div class="vl"></div>
+
   </div>
+  <table class="table">
+    <tr class="tr">
+      <th class="th"><input type="checkbox"></th>
+      <th class="th">Title</th>
+      <th class="th">Published By</th>
+      <th class="th">Year</th>
+    </tr>
+    <tr class="tr">
+      <td class="td"><input type="checkbox"></th>
+      <td class="td">Game of Codes</td>
+      <td class="td">Mohammed Morad</td>
+      <td class="td">2021</td>
+    </tr>
+    <tr class="tr">
+      <td class="td"><input type="checkbox"></th>
+      <td class="td">Game of Codes</td>
+      <td class="td">Mohammed Morad</td>
+      <td class="td">2020</td>
+    </tr>
+    <tr class="tr">
+      <td class="td"><input type="checkbox"></th>
+      <td class="td">Game of Codes</td>
+      <td class="td">Mohammed Morad</td>
+      <td class="td">2019</td>
+    </tr>
+    <tr class="tr">
+      <td class="td"><input type="checkbox"></th>
+      <td class="td">Game of Codes</td>
+      <td class="td">Mohammed Morad</td>
+      <td class="td">2018 </td>
+    </tr>
+  </table>
+
   <!-- ChatBot -->
   <div class="chat_icon">
     <img style="height: 80px;" src="images/chatboticon.png">
@@ -87,15 +141,15 @@ $id = $_GET['user_id'];
 
         <select data-conv-question="Hello! How can I help you" name="category">
           <option value="WebDevelopment">Website Development ?</option>
-          <option value="DigitalMarketing">Digital Marketing ?</option>
+          <option value="ThesisQuoForum">Thesis Quo Forum</option>
         </select>
 
         <div data-conv-fork="category">
           <div data-conv-case="WebDevelopment">
             <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
           </div>
-          <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
-            <input type="text" name="companyName" data-conv-question="Please, enter your company name">
+          <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
+            <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
           </div>
         </div>
 
@@ -112,6 +166,7 @@ $id = $_GET['user_id'];
       </form>
     </div>
   </div>
+
   <!-- ChatBot end -->
 
 </body>

@@ -1,5 +1,5 @@
 <?php
-$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+$dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
 $stat = $dbh->prepare('select * from research');
 $stat->execute();
 while ($row = $stat->fetch()) {

@@ -1,6 +1,8 @@
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 11/16/2021 -->
-
+<?php
+$id = $_GET['user_id'];
+?>
 <!-- Search and Pagination -->
 <?php
 require_once("perpage.php");
@@ -87,13 +89,13 @@ if (!empty($result)) {
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
   <!-- MOBILE SIDEBAR -->
-  <div id="mySidenav" class="sidenav">
+  <!-- <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="index.php">HOME</a>
     <a href="journals.php">JOURNALS</a>
     <a href="#">ANALYTICS</a>
   </div>
-  <span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span>
+  <span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span> -->
 
   <!-- BANNER IMAGE -->
   <div id="index">

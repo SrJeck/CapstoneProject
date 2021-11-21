@@ -1,5 +1,5 @@
 <?php
-        $dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
+        $dbh = new PDO("mysql:host=localhost;dbname=research","root","");
         if (isset($_POST['btn'])) {
             if(!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['research_type']) && !empty($_POST['institution'])  && !empty($_POST['publisher'])){
             $name = $_FILES['myfile']['name'];
@@ -25,4 +25,3 @@
             header("Location: plagscan.php");
             }
         }
-?>

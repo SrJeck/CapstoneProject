@@ -1,5 +1,4 @@
 <?php
-$id = $_GET['user_id'];
 ?>
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 10/05/2021 -->
@@ -14,7 +13,7 @@ $id = $_GET['user_id'];
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/profilestyle.css">
+  <link rel="stylesheet" type="text/css" href="css/login.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- ChatBot -->
   <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
@@ -37,33 +36,86 @@ $id = $_GET['user_id'];
 
 
   <div class="side">
-    <a href="profile.php?user_id=<?php echo $id; ?>"><i class="fa fa-pencil"> <b>Profile </b> &#xf105;</i></a>
-    <a href="security.php?user_id=<?php echo $id; ?>"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
-    <a href="add_article.php?user_id=<?php echo $id; ?>"><i class='fa fa-plus'><b> Add Article</b></i></a>
+    <a href="editprofile.php"><i class="fa fa-pencil"> <b>Edit Profile </b> &#xf105;</i></a>
+    <a href="security.php"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
+    <a href="add_article.php"><i class='fa fa-plus'><b> Add Article</b></i></a>
+
   </div>
+  <br><br><br><br><br><br><br>
 
-  <img class="profilepencil" src="images/profilepencil.png">
+  <div class="content-register">
+    <form action="registration_insert.php" method="post" enctype="multipart/form-data">
 
-  <div class="editform">
-    <form action="/action_page.php" id="editform">
+      <div class="login-form">
+        <div class="top">
+          <div class="text-container">
+            <h1>Edit Profile</h1>
+          </div>
+          <div class="icon-container">
+            <img src="images/editprofile.png" alt="">
+          </div>
+        </div>
+        <div class="mid">
+          <div class="input-group">
+            <h4>First Name</h4>
+            <div class="input-area">
+              <input type="text" id="firstName" name="firstName" />
+              <div class="input-icon">
+                <svg fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <h4>Middle Name</h4>
+            <div class="input-area">
+              <input type="text" id="middleName" name="middleName" />
+              <div class="input-icon">
+                <svg fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <h4>Last Name</h4>
+            <div class="input-area">
+              <input type="text" id="lastName" name="lastName" />
+              <div class="input-icon">
+                <svg fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                </svg>
+              </div>
+            </div>
+          </div>
 
-      <label for="fname">First Name: </label>
-      <input class="text" type="text" id="fname" name="firstname" placeholder="Your name..">
+          <div class="input-group">
+            <h4>Phone Number</h4>
+            <div class="input-area">
+              <input type="text" id="phoneNum" name="phoneNum" />
+              <div class="input-icon">
+                <img src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/phone-512.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <h4>Email</h4>
+            <div class="input-area">
+              <input type="text" id="email" name="email" />
+              <div class="input-icon">
+                <img src="images/email.png" alt="">
+              </div>
+            </div>
+          </div>
 
-      <label class="lname" for="lname">Last Name:</label>
-      <input class="text" type="text" id="lname" name="lastname" placeholder="Your last name..">
 
-      <label for="email">Email: </label>
-      <input class="text" type="text" id="lname" name="lastname" placeholder="Your last name..">
+          <button name="submit">Submit</button><br><br>
+        </div>
 
-      <label for="contactname">Contact Name: </label>
-      <input class="text" type="text" id="lname" name="lastname" placeholder="Your last name..">
-
-      <label for="address">Address: </label>
-      <input class="text" type="text" id="lname" name="lastname" placeholder="Your last name..">
-      <button class="save" type="save" form="editform" value="Save"><i class="fa fa-save"> Save</i></button>
-      <button class="cancel" type="cancel" form="editform" value="Cancel"><i class="fa fa-close"> Cancel</i></button>
+      </div>
     </form>
+
   </div>
   <!-- ChatBot -->
   <div class="chat_icon">
@@ -76,15 +128,15 @@ $id = $_GET['user_id'];
 
         <select data-conv-question="Hello! How can I help you" name="category">
           <option value="WebDevelopment">Website Development ?</option>
-          <option value="DigitalMarketing">Digital Marketing ?</option>
+          <option value="ThesisQuoForum">Thesis Quo Forum</option>
         </select>
 
         <div data-conv-fork="category">
           <div data-conv-case="WebDevelopment">
             <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
           </div>
-          <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
-            <input type="text" name="companyName" data-conv-question="Please, enter your company name">
+          <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
+            <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
           </div>
         </div>
 

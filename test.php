@@ -1,58 +1,63 @@
-<div id="index">
-    <div class="slideshow-container">
+<?php
+error_reporting(0);
+$conn = mysqli_connect("localhost", "root", "", "research") or die(mysqli_error());
+$query = "SELECT COUNT(topic) as count FROM research WHERE topic='research'";
+$query_result = mysqli_query($conn, $query);
 
-        <div class="mySlides fade">
-            <img src="images/Ban1.png" style="width:110%; height: 400px;">
-        </div>
+while ($row = mysqli_fetch_assoc($query_result)) {
+    $output = "Number of rows" . $row['count'];
+}
+$sql = "SELECT * FROM research";
+$result = mysqli_query($conn, $sql);
 
-        <div class="mySlides fade">
-            <img src="images/Ban2.png" style="width:110%; height: 400px;">
-        </div>
+?>
+<!DOCTYPE html>
+<html>
 
-        <div class="mySlides fade">
-            <img src="images/Ban3.png" style="width:110%; height: 400px;">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="images/Ban1.png" style="width:110%; height: 400px;">
-        </div>
-
-
-        <div class="mySlides fade">
-            <img src="images/Ban2.png" style="width:110%; height: 400px;">
-        </div>
-
-    </div>
-    <br>
-
-
-    <div style="text-align:center">
-        <span style="display: none;" class="dot"></span>
-        <span style="display: none;" class="dot"></span>
-        <span style="display: none;" class="dot"></span>
-        <span style="display: none;" class="dot"></span>
-        <span style="display: none;" class="dot"></span>
-    </div>
-    <script>
-        var slideIndex = 0;
-        showSlides();
-
-        function showSlides() {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("dot");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " active";
-            setTimeout(showSlides, 2000); // Change image every 2 seconds
+<head>
+    <style>
+        table,
+        tr,
+        td {
+            text-align: center;
         }
-    </script>
+
+        table,
+        tr,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body-container" style="padding: 20px;">
+        <?php
+        echo $output;
+        ?>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Research</th>
+                <th>Degree Level</th>
+                <th>Topic</th>
+            </tr>
+            <?php
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>
+         <td>" . $row['id'] . "</td>
+         <td>" . $row['title'] . "</td>
+         <td>" . $row['research_type'] . "</td>
+         <td>" . $row['degree_level'] . "</td>
+         <td>" . $row['topic'] . "</td>
+         </tr>";
+            }
+            ?>
+        </table>
+    </div>
+
+</body>
+
+</html>

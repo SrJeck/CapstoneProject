@@ -1,6 +1,6 @@
 <?php
 
-$connect = new PDO("mysql:host=localhost; dbname=journal", "root", "");
+$connect = new PDO("mysql:host=localhost; dbname=research", "root", "");
 
 
 $limit = '4';
@@ -190,5 +190,3 @@ $output .= '
 ';
 
 echo $output;
-
-?>
