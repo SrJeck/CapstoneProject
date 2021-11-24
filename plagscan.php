@@ -20,7 +20,7 @@
         <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
         <a style="margin-top: 6px;" href="#">ANALYTICS</a>
         <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-        <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+        <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
         <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>
     <!-- <div id="mySidenav" class="sidenav">

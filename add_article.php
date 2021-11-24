@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+  $id = $_SESSION['user_id'];
+}
 ?>
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 11/16/2021 -->
@@ -21,12 +25,12 @@
 <body>
   <!-- NAVBAR -->
   <div class="navbar">
-    <a href="#"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
     <a style="margin-top: 6px;" href="index.php">HOME</a>
     <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 6px;" href="#">ANALYTICS</a>
-    <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-    <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
 

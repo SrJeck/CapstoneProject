@@ -1,7 +1,9 @@
 <?php
 session_start();
 $dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
-$id = $_SESSION['user_id'];
+if (isset($_SESSION['user_id'])) {
+  $id = $_SESSION['user_id'];
+}
 ?>
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 10/05/2021 -->
@@ -33,7 +35,7 @@ $id = $_SESSION['user_id'];
     <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 5px;" href="#">ANALYTICS</a>
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-    <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
 
@@ -73,15 +75,15 @@ $id = $_SESSION['user_id'];
             </div>
             <div class="emailrow">
               <label>Email</label>
-              <p class="email"><?php echo $row['email']; ?></p>
+              <p class="email"><?php echo $row['email_address']; ?></p>
             </div>
             <div class="addressrow">
               <label class="labeladdress">Address</label>
-              <p class="address"><?php echo $row['address']; ?></p>
+              <p class="address"><?php echo $row['homeAddress']; ?></p>
             </div>
             <div class="displayrow2">
               <label for="">Contact Number</label>
-              <p class="pnumber"><?php echo $row['phoneNumber']; ?></p>
+              <p class="pnumber"><?php echo $row['contactNumber']; ?></p>
               <label class="labelsex">Sex</label>
               <p class="sex"><?php echo $row['sex']; ?></p>
             </div>
