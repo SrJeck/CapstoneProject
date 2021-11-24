@@ -34,7 +34,12 @@ $result = mysqli_query($conn, $sql);
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/admin.css">
+
     <style>
         table,
         tr,
@@ -100,7 +105,64 @@ $result = mysqli_query($conn, $sql);
             </p>
         </div>
     </div>
+    <a href="#" class="btn btn-info btn-lg">
+        <span class="glyphicon glyphicon-bookmark"></span> Bookmark
+    </a>
+    <script>
+        $(function() {
+            //var bookmarkOn = '<i class="fa fa-bookmark"></i>'
+            //var bookmarkOff = '<i class="fa fa-bookmark-o"></i>'
 
+            $('.pp-bookmark-btn')
+                //.html( $('.pp-bookmark-btn').data('state') ? bookmarkOn : bookmarkOff )
+                //.html( $('.pp-bookmark-btn').hasClass( "active" ) ? bookmarkOn : bookmarkOff )
+                .click(function() {
+                    var btn = $(this);
+
+                    var context = $(this).data("context");
+                    var contextAction = $(this).data("context-action");
+                    var contextId = $(this).data("context-id");
+                    // $('#log').html(context + " " + contextAction + " " + contextId )
+
+                    // if( btn.data('state') ) {
+                    //    btn.data('state', false);
+                    if (btn.hasClass("active")) {
+                        btn.removeClass("active")
+                        // $getJSON
+                        //btn.html(bookmarkOff);
+                    } else {
+                        // btn.data('state', true);
+                        btn.addClass("active");
+                        //btn.html(bookmarkOn);
+                    };
+                });
+
+            /*
+              updateBookmarks(action, context, context-action, context-id) {
+              
+              }
+              */
+            //     $('form').html('asfafaf');
+            //     var btn = $('form').attr('action');
+            //     var jqxhr = $.ajax({
+            //         url: '/echo/html/',
+            //         dataType: 'json',
+            //         data:{ id: $('form input').val() }
+            //     })
+            //     .success(function(data) {
+            //         alert("success"+data);
+            //     })
+            //     .error(function(err) {
+            //         alert("error"+err);
+            //     })
+            //     .complete(function(stuff) {
+            //         alert("complete"+stuff);
+            //     });
+            //
+            //     e.preventDefault();
+
+        });
+    </script>
 </body>
 
 </html>
