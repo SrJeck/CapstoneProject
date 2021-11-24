@@ -1,7 +1,8 @@
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 11/16/2021 -->
 <?php
-$id = $_GET['user_id'];
+session_start();
+$id = $_SESSION['user_id'];
 ?>
 <!-- Search and Pagination -->
 <?php
@@ -80,14 +81,27 @@ if (!empty($result)) {
 
 <body>
   <!-- NAVBAR -->
-  <div class="navbar">
+  <?php
+  if (isset($_SESSION['user_id'])) {
+    echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
     <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 6px;" href="#">ANALYTICS</a>
-    <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
-  </div>
+  </div>';
+  }else{
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
+    </div>';
+  }
+  ?>
+  
   <!-- MOBILE SIDEBAR -->
   <!-- <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>

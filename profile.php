@@ -1,6 +1,7 @@
 <?php
+session_start();
 $dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
-$id = $_GET['user_id'];
+$id = $_SESSION['user_id'];
 ?>
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 10/05/2021 -->
@@ -27,20 +28,20 @@ $id = $_GET['user_id'];
 <body>
   <!-- NAVBAR -->
   <div class="navbar">
-    <a href="index.php?user_id=<?php echo $id; ?>"><img style=" height: 25px;" src="images/Logo.png"></a>
-    <a style="margin-top: 5px;" href="index.php?user_id=<?php echo $id; ?>">HOME</a>
+    <a href="index.php"><img style=" height: 25px;" src="images/Logo.png"></a>
+    <a style="margin-top: 5px;" href="index.php">HOME</a>
     <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 5px;" href="#">ANALYTICS</a>
-    <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
 
 
   <div class="side">
-    <a href="editprofile.php?user_id=<?php echo $id; ?>"><i class="fa fa-pencil"> <b>Edit Profile </b> &#xf105;</i></a>
-    <a href="security.php?user_id=<?php echo $id; ?>"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
-    <a href="add_article.php?user_id=<?php echo $id; ?>"><i class='fa fa-plus'><b> Add Article</b></i></a>
+    <a href="editprofile.php"><i class="fa fa-pencil"> <b>Edit Profile </b> &#xf105;</i></a>
+    <a href="security.php"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
+    <a href="add_article.php"><i class='fa fa-plus'><b> Add Article</b></i></a>
 
   </div>
   <img class="profilepencil" src="images/profilepencil.png">

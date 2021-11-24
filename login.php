@@ -29,17 +29,16 @@
     <a style="margin-top: 5px;" href="index.php">HOME</a>
     <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 5px;" href="#">ANALYTICS</a>
-    <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
 
 
-  <div class="side">
+  <!-- <div class="side">
     <a href="editprofile.php"><i class="fa fa-pencil"> <b>Edit Profile </b> &#xf105;</i></a>
     <a href="security.php"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
     <a href="add_article.php"><i class='fa fa-plus'><b> Add Article</b></i></a>
-  </div>
+  </div> -->
   <div class="content">
     <form action="login_check.php" method="post" enctype="multipart/form-data">
 

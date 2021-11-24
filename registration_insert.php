@@ -17,16 +17,6 @@
             $password = $_POST['password'];
             $status = "offline";
 
-            // echo $fName;
-            // echo $mName;
-            // echo $lName;
-            // echo $phoneNum;
-            // echo $address;
-            // echo $birthday;
-            // echo $sex;
-            // echo $degree;
-            // echo $email;
-            // echo $password;
             $stat = $dbh->prepare('select * from user where email=?');
             $stat->bindParam(1, $email);
             $stat->execute();

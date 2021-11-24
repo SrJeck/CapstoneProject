@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("perpage.php");
 require_once("dbcontroller.php");
 $db_handle = new DBController();
@@ -74,15 +75,26 @@ if (!empty($result)) {
 
 <body>
   <!-- NAVBAR -->
-  <div class="navbar">
+  <?php
+  if (isset($_SESSION['user_id'])) {
+    echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="index.php">HOME</a>
     <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 6px;" href="#">ANALYTICS</a>
-    <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
-  </div>
+  </div>';
+  }else{
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
+    </div>';
+  }
+  ?>
 
   <!-- BANNER IMAGE -->
   <div id="index" style="margin-top: 48px;">

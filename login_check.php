@@ -1,4 +1,5 @@
 <?php
+session_start();
         $dbh = new PDO("mysql:host=localhost;dbname=research","root","");
         if (isset($_POST['submit'])) {
             if(!empty($_POST['email']) && !empty($_POST['password'])){
@@ -10,7 +11,9 @@
                 $stat->execute();
                 $row = $stat->fetch();
                 if (!empty($row)) {
-                    header("Location: profile.php?user_id=".$row['user_id']);
+                    $id = $row['user_id'];
+                    $_SESSION['user_id'] = $id;
+                    header("Location: profile.php");
                 }else{
                     header("Location: login.php");
                 }
