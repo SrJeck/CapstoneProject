@@ -20,15 +20,27 @@
 
 <body>
     <!-- NAVBAR -->
-    <div class="navbar">
-        <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-        <a style="margin-top: 6px;" href="index.php">HOME</a>
-        <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
-        <a style="margin-top: 6px;" href="#">ANALYTICS</a>
-        <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-        <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-        <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
-    </div>
+    <?php
+    session_start();
+  if (isset($_SESSION['user_id'])) {
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
+  </div>';
+  }else{
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
+    </div>';
+  }
+  ?>
 
     <?php
     $dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");

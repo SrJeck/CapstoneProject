@@ -29,7 +29,7 @@
     <a style="margin-top: 5px;" href="index.php">HOME</a>
     <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 5px;" href="#">ANALYTICS</a>
-    <a style="float: right;" href="#"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
@@ -93,18 +93,9 @@
           <div class="input-group">
             <h4>Phone Number</h4>
             <div class="input-area">
-              <input type="text" id="phoneNum" name="phoneNum" />
+              <input type="text" id="contactNum" name="contactNum" />
               <div class="input-icon">
                 <img src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/phone-512.png" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="input-group">
-            <h4>Email</h4>
-            <div class="input-area">
-              <input type="text" id="email" name="email" />
-              <div class="input-icon">
-                <img src="images/email.png" alt="">
               </div>
             </div>
           </div>
