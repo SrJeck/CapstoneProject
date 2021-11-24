@@ -713,11 +713,17 @@
       }
 }
 .btn{
+  color: white;
   margin-top: 90px;
   margin-right: 20px;
   float: right;
   background-color:#751518;
 }
+.btn:focus{
+  background-color:#751518;
+  color: white;
+}
 .btn:hover{
   background-color:#a72025;
+  color: white;
 }

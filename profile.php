@@ -73,7 +73,7 @@ $id = $_SESSION['user_id'];
             </div>
             <div class="emailrow">
               <label>Email</label>
-              <p class="email"><?php echo $row['email']; ?></p>
+              <p class="email"><?php echo $row['email_address']; ?></p>
             </div>
             <div class="addressrow">
               <label class="labeladdress">Address</label>

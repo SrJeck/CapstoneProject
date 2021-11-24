@@ -31,7 +31,7 @@
         <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
         <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>
-    <a href="#" class="btn btn-info btn-lg">
+    <a href="#" class="btn btn-lg">
         <span class="glyphicon glyphicon-bookmark"></span> Bookmark
     </a>
     <?php
