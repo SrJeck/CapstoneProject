@@ -80,7 +80,7 @@ if (isset($_SESSION['user_id'])) {
               </div>
             </div>
           </div>
-          <button name="submit">Submit</button><br><br>
+          <button name="submit">Reset Password</button><br><br>
         </div>
       </div>
     </form>
