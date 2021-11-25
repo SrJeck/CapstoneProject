@@ -93,7 +93,7 @@ if (!empty($result)) {
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>';
-  }else{
+  } else {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
     <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
@@ -103,7 +103,7 @@ if (!empty($result)) {
     </div>';
   }
   ?>
-  
+
   <!-- MOBILE SIDEBAR -->
   <!-- <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
