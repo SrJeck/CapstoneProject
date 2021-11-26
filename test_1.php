@@ -72,128 +72,6 @@ if (!empty($result)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- ChatBot -->
-    <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
-    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery.convform.js"></script>
-    <script type="text/javascript" src="js/custom.js"></script>
-    <style type="text/css">
-        #outer {
-            position: relative;
-
-        }
-
-        #left {
-            float: left;
-            width: 210px;
-            margin-left: 40px;
-        }
-
-        #right {
-            float: right;
-            width: 60%;
-            margin-right: 40px;
-            padding-left: 10px;
-
-        }
-
-        .left-content,
-        .right-content {
-            background: #aaa;
-            margin: 15px;
-            background-color: white;
-            padding: 12px;
-        }
-
-        .left-content {
-            font-size: 16px;
-            border-radius: 5px;
-            box-shadow: 6px 6px 8px 0 #e0dfe0;
-        }
-
-        .right-content {
-            background: #bbb;
-            margin: 15px 13px 15px 0;
-            background-color: white;
-
-        }
-
-        .right-content-header {
-            padding: 5px;
-            color: #fff;
-            background: #ccc;
-            border-bottom: 1px solid #000;
-            height: auto;
-            background-color: white;
-
-        }
-
-        #center {
-            float: right;
-            width: 300px
-        }
-
-        .center-content {
-            margin: 15px
-        }
-
-        .left-content p {
-            margin-left: 3px;
-            color: #2a5db0;
-            padding: 5px;
-            cursor: pointer;
-        }
-
-        .left-content p:hover {
-            background-color: #EEEEEE;
-        }
-
-        .left-content-header,
-        .center-content-header {
-            padding: 5px;
-            color: black;
-            background: #ccc;
-            border-bottom: 1px solid #e7e7e7;
-            background-color: white;
-        }
-
-        .left-content-header {
-            font-size: 16px;
-            cursor: pointer;
-            color: #686868;
-        }
-
-
-        .center-content-header {
-            height: auto;
-        }
-
-        iframe {
-            height: 1000px;
-        }
-
-        #details {
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-
-
-        }
-
-        #details td,
-        #customers th {
-            padding: 8px;
-        }
-
-        td {
-            word-wrap: break-word;
-            margin-left: 20px;
-        }
-
-        #details tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 
 <body>
@@ -221,33 +99,61 @@ if (!empty($result)) {
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>';
     }
-    ?>
-    <a href="#" class="btn btn-lg">
-        <span class="glyphicon glyphicon-bookmark"></span> Bookmark
-    </a>
-    <a href="#" class="btn btn-lg">
-        <span class="fa fa-quote-right"></span> Cite
-    </a>
-    <a href="#" class="btn btn-lg">
-        <span class="fa fa-download"></span> Download
-    </a>
-    <a href="#" class="btn btn-lg">
-        <span class="fa fa-file-pdf-o"></span> View
-    </a>
-    <?php
     $dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
     $id = $_GET['id'];
     $stat = $dbh->prepare('select * from research where id=?');
     $stat->bindParam(1, $id);
     $stat->execute();
     $row = $stat->fetch();
+    ?>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Cite</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table style="width:100%">
+                        <tr>
+                            <td>APA</td>
+                            <td><?php echo  $row['author']  ?><span> (</span><?php echo  $row['publication_year']  ?><span>) </span>"<?php echo  $row['title'] ?>" <?php echo  $row['publisher']  ?></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="view btn-lg">
+        <span class="fa fa-bookmark-o"> Bookmark</span>
+    </a>
+    <!-- Button trigger modal -->
+    <button type="button" class="view btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <span class="fa fa-quote-right"> Cite</span>
+    </button>
+    <a href="#" class="view btn-lg">
+        <span class="fa fa-print" onclick="window.print()"> Print</span>
+    </a>
+    <?php echo "<a class='view btn-lg' target='_blank' href='view.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> View PDF </span></a>" ?>
+
+    <?php
+
     echo "
     <div class='row'>
         <br><br><h1 style='margin-left: 50px;max-width: 1100px'>" . $row['title'] . "</h1><p style='margin-left: 50px;'>" . "<strong>Authors:  </strong>" . $row['author'] . "</p><p style='margin-left: 50px;'>" . "<strong>Published Online: </strong>" . $row['publication_day'] . ' ' . $row['publication_month'] . ' ' . $row['publication_year'] . "</p>
         
         </div>";
     ?>
+
     <div id="outer">
+
         <div id="left">
             <div class="left-content">
                 <div class="left-content-header">Jump to:</div><br>
@@ -260,8 +166,6 @@ if (!empty($result)) {
                 <a href="#details">
                     <p>Details</p>
                 </a>
-
-
             </div>
         </div>
         <div id="center">
