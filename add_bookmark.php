@@ -19,5 +19,3 @@ if (empty($row)) {
     $stmt->execute();
     header("Location: display.php");
 }
-
-?>
