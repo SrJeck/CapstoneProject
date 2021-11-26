@@ -88,11 +88,13 @@ if (!empty($result)) {
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>';
-  }else{
+  } else {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
     <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
+
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>';
@@ -177,7 +179,7 @@ if (!empty($result)) {
                   <option style="font-size:17px" value="Analysis">Analysis</option>
                   <option style="font-size:17px" value="Database">Database</option>
                 </select>
-                <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Enter your search here" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+                <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
               </div>
             </div>
           </div>

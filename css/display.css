@@ -32,160 +32,12 @@
     }
 
     .navbar a:hover {
-      background: #ddd;
-      color: black;
+      background-color: #5a2325;
+      color: white;
+      text-decoration: underline;
     }
 
-    /* IMAGE HEADER BACKGROUND */
-    .bg{
-    width: 100%;
-    height: 45%;
-    }
-    /*SEARCH BAR INPUT */
-    input[type=text] {
-    width: 600px;
-    }
-    .form {
-        position: relative;
-        bottom: 122px;
-        text-align: center;
-    }
-    /* MIC ICON*/
-    .form span {
-        position: absolute;
-        right: 500px;
-        top: 14px;
-        padding: 5px;
-        border-left: 1px solid #d1d5db
-    }
-    /* SEARCH FORM*/
-    .left-pan {
-        padding-left: 7px
-    }
-    
-    .left-pan i {
-        padding-left: 10px
-    }
-    
-    .form-input {
-        height: 55px;
-        text-indent: 33px;
-    }
-    
-    .form-input:focus {
-        box-shadow: none;
-        border: none
-    }
-    /* SEARCH BUTTON*/
-    .button {
-        background-color: #751518;
-        border: none;
-        color: white;
-        padding: 18px 32px;
-        text-align: center;
-        text-decoration: none;
-        font-size: 16px;
-        cursor: pointer;
-        margin-left: -10px;
-        border-bottom-right-radius: 10px;
-        border-top-right-radius: 10px;
-      }
-    /* DROPDOWN CATEGORY */
-      .topic {
-        background-color: white;
-        color: black;
-        padding: 18px 22px;
-        text-decoration: none;
-        cursor: pointer;
-        margin-right: -4.2px;
-        border-bottom-left-radius: 10px;
-        border-top-left-radius: 10px;
-      }
-    /* INTRODUCTION */
-     .intro{
-      text-indent: 50px; 
-      max-width: 800px;
-      margin-left: 400px;
-     }
-    /* 3 IMAGES BOTTOM */
-     .book{
-      width: 284px;
-      height: 204px;
-      margin-left: 320px;
-      border-radius: 6px;
-      box-shadow: 12px 12px #BAB8BA;
-      border: 2px solid black;
-
-     }
-     .chip{
-      width: 284px;
-      height: 204px;
-      margin-left: 40px;
-      border-radius: 6px;
-      box-shadow: 12px 12px #BAB8BA;
-      border: 2px solid black;
-    }
-    .business{
-      width: 284px;
-      height: 204px;
-      margin-left: 40px;
-      border-radius: 6px;
-      box-shadow: 12px 12px #BAB8BA;
-      border: 2px solid black;
-    }
-    /* BUTTON INSIDE THE 3 IMAGES */
-    .images .btn {
-      position: absolute;
-      top: 100%;
-      left: 29%;
-      transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      background-color: #751518;
-      color: white;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      border-radius: 10px;
-      text-align: center;
-      border: 2px solid white;
-      height: 37px;
-      width: 136px;
-    }
-    .images .btn2 {
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      background-color: #751518;
-      color: white;
-      height: 37px;
-      width: 136px;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      border-radius: 10px;
-      text-align: center;
-      border: 2px solid white;
-
-    }
-    .images .btn3 {
-      position: absolute;
-      top: 100%;
-      left: 71%;
-      transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      background-color: #751518;
-      color: white;
-      font-size: 16px;
-      height: 37px;
-      width: 136px;
-      border: none;
-      cursor: pointer;
-      border-radius: 10px;
-      text-align: center;
-      border: 2px solid white;
-    }
+   
     /*SIDEBAR*/
 
     .side {
@@ -680,7 +532,6 @@
         /* MENU NAVBAR */
         .navbar {
           display: none;
-          
         }
 
 
@@ -714,10 +565,11 @@
 }
 .btn{
   color: white;
-  margin-top: 90px;
-  margin-right: 20px;
+  margin-top: 70px;
+  margin-right: 10px;
   float: right;
   background-color:#751518;
+  font-size: 13px;
 }
 .btn:focus{
   background-color:#751518;
@@ -726,4 +578,44 @@
 .btn:hover{
   background-color:#a72025;
   color: white;
+}
+/* title row */
+.row{
+  background-color: white;
+  padding-bottom: 15px;
+  max-width: auto;
+  font-family: 'Times New Roman', Times, serif;
+  margin-left: 10px;
+  box-shadow: 6px 6px 8px 0 #e0dfe0;
+
+}
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: white;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 13.2px;
+  background: #751518;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #a72025;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
 }

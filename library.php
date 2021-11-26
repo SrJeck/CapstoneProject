@@ -29,8 +29,8 @@ if (isset($_SESSION['user_id'])) {
 <body>
   <!-- NAVBAR -->
   <?php
-    if (isset($_SESSION['user_id'])) {
-      echo '<div class="navbar">
+  if (isset($_SESSION['user_id'])) {
+    echo '<div class="navbar">
       <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
       <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
       <a style="margin-top: 6px;" href="#">ANALYTICS</a>
@@ -38,15 +38,15 @@ if (isset($_SESSION['user_id'])) {
       <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
       <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>';
-    }else{
-      echo '<div class="navbar">
+  } else {
+    echo '<div class="navbar">
       <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
       <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
       <a style="margin-top: 6px;" href="#">ANALYTICS</a>
       <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
       <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
       </div>';
-    }
+  }
   ?>
 
   <!-- BANNER IMAGE -->
@@ -65,7 +65,7 @@ if (isset($_SESSION['user_id'])) {
             <option style="font-size:17px" value="Analysis">Analysis</option>
             <option style="font-size:17px" value="Database">Database</option>
           </select>
-          <input type="text" id="speechToText" class="form-control form-input" placeholder="Enter your search here"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button">Search</button>
+          <input type="text" id="speechToText" class="form-control form-input" placeholder="Search ThesisQuo"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button">Search</button>
         </div>
       </div>
     </div>

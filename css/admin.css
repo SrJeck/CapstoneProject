@@ -23,8 +23,9 @@
     }
 
     .navbar a:hover {
-      background: #ddd;
-      color: black;
+      background-color: #5a2325;
+      color: white;
+      text-decoration: underline;
     }
 
   
