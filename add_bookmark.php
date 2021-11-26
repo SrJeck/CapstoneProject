@@ -3,9 +3,9 @@ session_start();
 
 $user_id = $_SESSION['user_id'];
 $thesis_id = $_GET['thesis_id'];
-$dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
+$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
 
-$stat = $dbh->prepare('select * from bookmark where user_id=? and thesis_id=?');
+$stat = $dbh->prepare('select * from bookmark where user_id=? and id=?');
 $stat->bindParam(1, $user_id);
 $stat->bindParam(2, $thesis_id);
 $stat->execute();

@@ -3,6 +3,8 @@ session_start();
 if (isset($_SESSION['user_id'])) {
   $id = $_SESSION['user_id'];
 }
+
+$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
 ?>
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 10/05/2021 -->
