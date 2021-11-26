@@ -121,7 +121,7 @@ if (!empty($result)) {
         <div class="modal-body">
           <table style="width:100%">
             <tr>
-              <td>APA</td>
+              <td><strong>APA</strong> </td>
               <td><?php echo  $row['author']  ?><span> (</span><?php echo  $row['publication_year']  ?><span>) </span>"<?php echo  $row['title'] ?>" <?php echo  $row['publisher']  ?></td>
             </tr>
           </table>
