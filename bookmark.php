@@ -28,15 +28,28 @@ if (isset($_SESSION['user_id'])) {
 
 <body>
   <!-- NAVBAR -->
-  <div class="navbar">
-    <a href="#"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="index.php">HOME</a>
+  <?php
+  if (isset($_SESSION['user_id'])) {
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
     <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
-  </div>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+  </div>';
+  } else {
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+    </div>';
+  }
+  ?>
 
   <!-- BANNER IMAGE -->
   <img class="bg" src="images/bookreadbackground.JPG">
@@ -59,7 +72,40 @@ if (isset($_SESSION['user_id'])) {
       </div>
     </div>
   </div>
+<div>
+<table>
+  <?php
+      $stat = $dbh->prepare('select * from bookmark where user_id=?');
+      $stat->bindParam(1, $id);
+      $stat->execute();
+      $rows = $stat->fetch();
+      foreach ($rows as $row) {
+        $thesis_id = $row['thesis_id'];
+        $new_stat = $dbh->prepare('select * from thesis where thesis_id=?');
+        $new_stat->bindParam(1, $thesis_id);
+        $new_stat->execute();
+        $thesis = $stat->fetch();
+        echo '
+        <tr>
+        <td>'$thesis['thesis_title']'</td>
+        <td>'$thesis['thesis_author']'</td>
+        <td>'$thesis['publication_month'].$thesis['publication_day'].$thesis['publication_year']'</td>
+        <td>'$thesis['affiliation']'</td>
+        <td>'$thesis['degree_level']'</td>
+        <td>'$thesis['topic']'</td>
+        <td>'$thesis['research_type']'</td>
+        <td>'$thesis['publisher']'</td>
+        <td><a href="remove_bookmark.php?thesis_id='$thesis['thesis_id']'" class="view btn-lg">
+        <span class="fa fa-bookmark-o"> Remove Bookmark</span>
+      </a></td>
+        </tr>
+        
+        '
+      }
+  ?>
+</table>
 
+</div>
 
 
   <!-- ChatBot -->
