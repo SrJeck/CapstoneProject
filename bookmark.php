@@ -149,13 +149,16 @@ if (!empty($result)) {
       
                         <td> <br>
                           <a class="displayResearch" target="_blank" href="display.php?id=' . $thesis['id'] . '"><i style="font-size:80px" class="fa">&#xf0f6</i>
-                            <p style="margin-left: 90px; margin-top: -90px;">' . $thesis['topic'] .  '<a href="remove_bookmark.php?id=' . $thesis['id'] . '" class="view btn-lg"><i class="fa fa-trash-o"></i></a></p>
+                            <p style="margin-left: 90px; margin-top: -90px;">' . $thesis['topic'] .  '</p>
                             <p style="margin-left: 90px; ">' . $thesis["title"] . '</p>
                             <p style="margin-left: 90px; ">
                               <p style="margin-left: 90px; ">' . $thesis["author"] . '</p>
                               <p style="margin-left: 90px; ">' . $thesis['publication_day'] . ' ' . $thesis['publication_month'] . ' ' . $thesis['publication_year'] . '</p>
                               <hr style="border: 1px solid black;">
                           </a>
+                        </td>
+                        <td>
+                        <a href="remove_bookmark.php?id=' . $thesis['id'] . '" class="view btn-lg"><i class="fa fa-trash-o"></i></a>
                         </td>
 
                       </tr>
