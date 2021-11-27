@@ -135,7 +135,7 @@ if (!empty($result)) {
       </div>
     </div>
   </div>
-  <a href="add_bookmark.php?thesis_id=<?php echo $id; ?>" class="view btn-lg">
+  <a href="add_bookmark.php?id=<?php echo $id; ?>" class="view btn-lg">
     <span class="fa fa-bookmark-o"> Bookmark</span>
   </a>
   <!-- Button trigger modal -->

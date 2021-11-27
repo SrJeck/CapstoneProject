@@ -81,7 +81,7 @@ $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
       $stat->bindParam(1, $id);
       $stat->execute();
       while ($rows = $stat->fetch()) {
-        $thesis_id = $rows['thesis_id'];
+        $thesis_id = $rows['id'];
         $new_stat = $dbh->prepare('select * from journal where id=?');
         $new_stat->bindParam(1, $thesis_id);
         $new_stat->execute();
