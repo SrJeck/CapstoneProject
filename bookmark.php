@@ -82,7 +82,7 @@ $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
       $stat->execute();
       while ($rows = $stat->fetch()) {
         $thesis_id = $rows['id'];
-        $new_stat = $dbh->prepare('select * from journal where id=?');
+        $new_stat = $dbh->prepare('select * from research where id=?');
         $new_stat->bindParam(1, $thesis_id);
         $new_stat->execute();
         $thesis = $new_stat->fetch();
@@ -99,7 +99,7 @@ $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
         <td>' . $thesis['topic'] . '</td>
         <td>' . $thesis['research_type'] . '</td>
         <td>' . $thesis['publisher'] . '</td></a>
-        <td><a href="remove_bookmark.php?thesis_id=' . $thesis['id'] . '" class="view btn-lg">
+        <td><a href="remove_bookmark.php?id=' . $thesis['id'] . '" class="view btn-lg">
         <span class="fa fa-bookmark-o"> Remove Bookmark</span>
       </a></td>
         </tr>
