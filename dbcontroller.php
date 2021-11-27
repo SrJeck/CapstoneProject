@@ -4,7 +4,7 @@ class DBController
 	public $host = "localhost";
 	public $user = "root";
 	public $password = "";
-	public $database = "research";
+	public $database = "journal";
 	public $conn;
 
 	function __construct()

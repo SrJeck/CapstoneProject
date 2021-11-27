@@ -42,7 +42,7 @@ if (!empty($_POST["search"])) {
   }
 }
 $orderby = " ORDER BY id desc";
-$sql = "SELECT * FROM research " . $queryCondition;
+$sql = "SELECT * from research " . $queryCondition;
 $href = 'journals.php';
 
 $perPage = 3;

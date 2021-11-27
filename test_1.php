@@ -38,7 +38,7 @@ if (!empty($_POST["search"])) {
     }
 }
 $orderby = " ORDER BY id desc";
-$sql = "SELECT * FROM research " . $queryCondition;
+$sql = "SELECT * from journal " . $queryCondition;
 $href = 'journals.php';
 
 $perPage = 3;
@@ -99,9 +99,9 @@ if (!empty($result)) {
     <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>';
     }
-    $dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
+    $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
     $id = $_GET['id'];
-    $stat = $dbh->prepare('select * from research where id=?');
+    $stat = $dbh->prepare('select * from journal where id=?');
     $stat->bindParam(1, $id);
     $stat->execute();
     $row = $stat->fetch();

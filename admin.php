@@ -1,5 +1,5 @@
 <?php
-$dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
+$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
 $id = $_GET['user_id'];
 ?>
 

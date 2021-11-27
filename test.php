@@ -1,32 +1,32 @@
 <?php
 error_reporting(0);
-$conn = mysqli_connect("localhost", "root", "", "research") or die(mysqli_error());
-$query = "SELECT COUNT(topic) as count FROM research WHERE topic='technology'";
+$conn = mysqli_connect("localhost", "root", "", "journal") or die(mysqli_error());
+$query = "SELECT COUNT(topic) as count from journal WHERE topic='technology'";
 $query_result = mysqli_query($conn, $query);
 
 while ($row = mysqli_fetch_assoc($query_result)) {
     $output = $row['count'] . '<br>';
 }
-$query = "SELECT COUNT(topic) as count FROM research WHERE topic='education'";
+$query = "SELECT COUNT(topic) as count from journal WHERE topic='education'";
 $query_result = mysqli_query($conn, $query);
 
 while ($row = mysqli_fetch_assoc($query_result)) {
     $output2 = $row['count'] . '<br>';
 }
-$query = "SELECT COUNT(topic) as count FROM research WHERE topic='research'";
+$query = "SELECT COUNT(topic) as count from journal WHERE topic='research'";
 $query_result = mysqli_query($conn, $query);
 
 while ($row = mysqli_fetch_assoc($query_result)) {
     $output3 =  $row['count'];
 }
-$query = "SELECT COUNT(topic) as count FROM research WHERE topic='analysis'";
+$query = "SELECT COUNT(topic) as count from journal WHERE topic='analysis'";
 $query_result = mysqli_query($conn, $query);
 
 while ($row = mysqli_fetch_assoc($query_result)) {
     $output4 =  $row['count'];
 }
 
-$sql = "SELECT * FROM research";
+$sql = "SELECT * from journal";
 $result = mysqli_query($conn, $sql);
 
 ?>

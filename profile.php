@@ -1,6 +1,6 @@
 <?php
 session_start();
-$dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
+$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
 if (isset($_SESSION['user_id'])) {
   $id = $_SESSION['user_id'];
 }

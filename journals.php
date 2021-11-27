@@ -37,7 +37,7 @@ if (!empty($_POST["search"])) {
   }
 }
 $orderby = " ORDER BY id desc";
-$sql = "SELECT * FROM research " . $queryCondition;
+$sql = "SELECT * from research " . $queryCondition;
 $href = 'journals.php';
 
 $perPage = 3;
@@ -231,7 +231,7 @@ if (!empty($result)) {
           // if (mysqli_connect_errno()) {
           //   echo "Failed to connect to MySQL: " . mysqli_connect_error();
           // }
-          // $sql = "select count('1') from research";
+          // $sql = "select count('1') from journal";
           // $result = mysqli_query($mysqli, $sql);
           // $row = mysqli_fetch_array($result);
           // echo "<h3>$row[0]</h3>";

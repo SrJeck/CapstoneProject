@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("localhost", "root", "", "research");
+$con = mysqli_connect("localhost", "root", "", "journal");
 if ($con) {
   echo "connected";
 }
@@ -19,14 +19,14 @@ if ($con) {
       var data = google.visualization.arrayToDataTable([
         ['author', 'publication_year'],
         <?php
-        $conn = mysqli_connect("localhost", "root", "", "research") or die(mysqli_error());
-        $query = "SELECT COUNT(topic) as count FROM research WHERE topic='technology'";
+        $conn = mysqli_connect("localhost", "root", "", "journal") or die(mysqli_error());
+        $query = "SELECT COUNT(topic) as count from journal WHERE topic='technology'";
         $query_result = mysqli_query($conn, $query);
 
         while ($row = mysqli_fetch_assoc($query_result)) {
           $output = "Number of Technology " . $row['count'] . '<br>';
         }
-        $sql = "SELECT * FROM research";
+        $sql = "SELECT * from journal";
         $fire = mysqli_query($con, $sql);
         while ($result = mysqli_fetch_assoc($fire)) {
           echo "['" . $result['author'] . "'," . $result['publication_year'] . "],";

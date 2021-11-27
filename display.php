@@ -81,7 +81,7 @@ if (!empty($result)) {
   if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
   }
-  
+
   if (isset($_SESSION['user_id'])) {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
@@ -102,8 +102,8 @@ if (!empty($result)) {
     <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>';
   }
-  
-  $dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
+
+  $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
   $id = $_GET['id'];
   $stat = $dbh->prepare('select * from research where id=?');
   $stat->bindParam(1, $id);

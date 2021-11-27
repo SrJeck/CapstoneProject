@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 <?php
-// $stat = $dbh->prepare('select * from research');
+// $stat = $dbh->prepare('select * from journal');
 // $stat->execute();
 // while ($row = $stat->fetch()) {
 //   echo "<li><a href='view.php?id=".$row['id']."'>".$row['title']."</a></li>";
