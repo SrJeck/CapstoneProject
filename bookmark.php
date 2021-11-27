@@ -5,6 +5,59 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+
+require_once("perpage.php");
+require_once("dbcontroller.php");
+$db_handle = new DBController();
+
+$title = "";
+$author = "";
+$topic = "";
+$publication_day = "";
+$publication_day = "";
+$publication_year = "";
+
+$queryCondition = "";
+if (!empty($_POST["search"])) {
+  foreach ($_POST["search"] as $k => $v) {
+    if (!empty($v)) {
+
+      $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
+      if (in_array($k, $queryCases)) {
+        if (!empty($queryCondition)) {
+          $queryCondition .= " OR ";
+        } else {
+          $queryCondition .= " WHERE ";
+        }
+      }
+      switch ($k) {
+        case "title":
+          $title = $v;
+          $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
+          break;
+      }
+    }
+  }
+}
+$orderby = " ORDER BY id desc";
+$sql = "SELECT * from research " . $queryCondition;
+$href = 'journals.php';
+
+$perPage = 3;
+$page = 1;
+if (isset($_POST['page'])) {
+  $page = $_POST['page'];
+}
+$start = ($page - 1) * $perPage;
+if ($start < 0) $start = 0;
+
+$query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
+$result = $db_handle->runQuery($query);
+
+if (!empty($result)) {
+  $result["perpage"] = showperpage($sql, $perPage, $href);
+}
+?>
 ?>
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 10/05/2021 -->
@@ -18,7 +71,7 @@ $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/bookmark.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- ChatBot -->
@@ -26,6 +79,7 @@ $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/jquery.convform.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
+
 </head>
 
 <body>
@@ -57,82 +111,59 @@ $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
   <img class="bg" src="images/bookreadbackground.JPG">
 
   <!-- SEARCH BAR CONTAINER -->
-  <div class="container">
-    <div class="row height d-flex justify-content-center align-items-center">
-      <div>
-        <div class="form">
-          <select class="topic" name="topic" id="topic">
-            <option value="" selected disabled hidden>Topic</option>
-            <option style="font-size:17px" value="Education">Education</option>
-            <option style="font-size:17px" value="Technology">Technology</option>
-            <option style="font-size:17px" value="Research">Research</option>
-            <option style="font-size:17px" value="Analysis">Analysis</option>
-            <option style="font-size:17px" value="Database">Database</option>
-          </select>
-          <input type="text" id="speechToText" class="form-control form-input" placeholder="Search ThesisQuo"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button">Search</button>
+  <form name="frmSearch" method="post" action="journals.php">
+    <div class="container">
+      <div class="row height d-flex justify-content-center align-items-center">
+        <div>
+          <div class="form">
+            <select class="topic" name="topic" id="topic">
+              <option value="" selected disabled hidden>Topic</option>
+              <option style="font-size:17px" value="Education">Education</option>
+              <option style="font-size:17px" value="Technology">Technology</option>
+              <option style="font-size:17px" value="Research">Research</option>
+              <option style="font-size:17px" value="Analysis">Analysis</option>
+              <option style="font-size:17px" value="Database">Database</option>
+            </select>
+            <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div>
-    <table>
-      <?php
-      $stat = $dbh->prepare('select * from bookmark where user_id=?');
-      $stat->bindParam(1, $id);
-      $stat->execute();
-      while ($rows = $stat->fetch()) {
-        $thesis_id = $rows['id'];
-        $new_stat = $dbh->prepare('select * from research where id=?');
-        $new_stat->bindParam(1, $thesis_id);
-        $new_stat->execute();
-        $thesis = $new_stat->fetch();
-        echo '
+  </form>
 
-        <tr  class="bookmarkRow">
-        <a class="displayBookmark" target="_blank" href="display.php?id=' . $thesis['id'] . '">
-        <td><i style="font-size:80px" class="fa">&#xf0f6;</i></td>
-        <td>' . $thesis['title'] . '</td>
-        <td>' . $thesis['author'] . '</td>
-        <td>' . $thesis['publication_month'] . " " . $thesis['publication_day'] . ", " . $thesis['publication_year'] . '</td>
-        <td>' . $thesis['affiliation'] . '</td>
-        <td>' . $thesis['degree_level'] . '</td>
-        <td>' . $thesis['topic'] . '</td>
-        <td>' . $thesis['research_type'] . '</td>
-        <td>' . $thesis['publisher'] . '</td></a>
-        <td><a href="remove_bookmark.php?id=' . $thesis['id'] . '" class="view btn-lg">
-        <span class="fa fa-bookmark-o"> Remove Bookmark</span>
-      </a></td>
-        </tr>
-        
+
+  <?php
+  $stat = $dbh->prepare('select * from bookmark where user_id=?');
+  $stat->bindParam(1, $id);
+  $stat->execute();
+  while ($rows = $stat->fetch()) {
+    $thesis_id = $rows['id'];
+    $new_stat = $dbh->prepare('select * from research where id=?');
+    $new_stat->bindParam(1, $thesis_id);
+    $new_stat->execute();
+    $thesis = $new_stat->fetch();
+    echo '
+                <table class="formview">
+
+                      <tr class="displayRow">
+      
+                        <td> <br>
+                          <a class="displayResearch" target="_blank" href="display.php?id=' . $thesis['id'] . '"><i style="font-size:80px" class="fa">&#xf0f6</i>
+                            <p style="margin-left: 90px; margin-top: -90px;">' . $thesis['topic'] .  '<a href="remove_bookmark.php?id=' . $thesis['id'] . '" class="view btn-lg"><i class="fa fa-trash-o"></i></a></p>
+                            <p style="margin-left: 90px; ">' . $thesis["title"] . '</p>
+                            <p style="margin-left: 90px; ">
+                              <p style="margin-left: 90px; ">' . $thesis["author"] . '</p>
+                              <p style="margin-left: 90px; ">' . $thesis['publication_day'] . ' ' . $thesis['publication_month'] . ' ' . $thesis['publication_year'] . '</p>
+                              <hr style="border: 1px solid black;">
+                          </a>
+                        </td>
+
+                      </tr>
+        </table>
         ';
-      }
-
-
-      //   <tr class="bookmarkRow">
-
-      //   <td> <br>
-      //     <a class="displayBookmark" target="_blank" href="display.php?id='.$thesis['id'].'"><i style="font-size:80px" class="fa">&#xf0f6;</i>
-      //       <p style="margin-left: 90px; margin-top: -90px;">' . $thesis['title'] . '</p>
-      //       <p style="margin-left: 90px; ">' . $thesis['topic'] . '</p>
-      //       <p style="margin-left: 90px; ">
-      //         <p style="margin-left: 90px; ">' . $thesis['title'] . '</p>
-      //         <p style="margin-left: 90px; ">' . $thesis['author'] . '</p>
-      //         <p style="margin-left: 90px; ">' . $thesis['publication_month'] ." " . $thesis['publication_day'] .", " . $thesis['publication_year'] . '</p>
-      //         <p style="margin-left: 90px; ">' . $thesis['publisher'] . '</p>
-      //         <hr style="border: 1px solid black;">
-      //     </a>
-      //   </td>
-      //   <td><a href="remove_bookmark.php?thesis_id=' . $thesis['id'] . '" class="view btn-lg">
-      //   <span class="fa fa-bookmark-o"> Remove Bookmark</span>
-      //   </a></td>
-
-      // </tr>
-
-      ?>
-    </table>
-
-  </div>
-
+  }
+  ?>
+  <br><br>
 
   <!-- ChatBot -->
   <div class="chat_icon">

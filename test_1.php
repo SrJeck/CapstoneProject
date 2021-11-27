@@ -1,9 +1,11 @@
-<!-- Search and Pagination -->
 <?php
 session_start();
 if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
 }
+
+$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+
 require_once("perpage.php");
 require_once("dbcontroller.php");
 $db_handle = new DBController();
@@ -38,7 +40,7 @@ if (!empty($_POST["search"])) {
     }
 }
 $orderby = " ORDER BY id desc";
-$sql = "SELECT * from journal " . $queryCondition;
+$sql = "SELECT * from research " . $queryCondition;
 $href = 'journals.php';
 
 $perPage = 3;
@@ -56,8 +58,10 @@ if (!empty($result)) {
     $result["perpage"] = showperpage($sql, $perPage, $href);
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+?>
+<!-- START DATE 8/28/2021 -->
+<!-- UPDATE DATE 10/05/2021 -->
+<html>
 
 <head>
     <script type="text/javascript" src="js/script.js"></script>
@@ -67,162 +71,206 @@ if (!empty($result)) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/display.css">
+    <link rel="stylesheet" type="text/css" href="css/bookmark.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- ChatBot -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.convform.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+
 </head>
 
 <body>
     <!-- NAVBAR -->
     <?php
-    session_start();
-    if (isset($_SESSION['user_id'])) {
-        $id = $_SESSION['user_id'];
-    }
     if (isset($_SESSION['user_id'])) {
         echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
     <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>';
     } else {
         echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
     <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
     <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>';
     }
-    $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-    $id = $_GET['id'];
-    $stat = $dbh->prepare('select * from journal where id=?');
-    $stat->bindParam(1, $id);
-    $stat->execute();
-    $row = $stat->fetch();
     ?>
 
+    <!-- BANNER IMAGE -->
+    <div id="index" style="margin-top: 40px;">
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="images/Ban1.png" style="width:100%; height: 400px;">
+            </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">Cite</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table style="width:100%">
-                        <tr>
-                            <td>APA</td>
-                            <td><?php echo  $row['author']  ?><span> (</span><?php echo  $row['publication_year']  ?><span>) </span>"<?php echo  $row['title'] ?>" <?php echo  $row['publisher']  ?></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                </div>
+            <div class="mySlides fade">
+                <img src="images/Ban2.png" style="width:100%; height: 400px;">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Ban3.png" style="width:100%; height: 400px;">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Ban1.png" style="width:100%; height: 400px;">
+            </div>
+
+
+            <div class="mySlides fade">
+                <img src="images/Ban2.png" style="width:100%; height: 400px;">
             </div>
         </div>
-    </div>
-    <a href="#" class="view btn-lg">
-        <span class="fa fa-bookmark-o"> Bookmark</span>
-    </a>
-    <!-- Button trigger modal -->
-    <button type="button" class="view btn-primary" data-toggle="modal" data-target="#exampleModal">
-        <span class="fa fa-quote-right"> Cite</span>
-    </button>
-    <a href="#" class="view btn-lg">
-        <span class="fa fa-print" onclick="window.print()"> Print</span>
-    </a>
-    <?php echo "<a class='view btn-lg' target='_blank' href='view.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> View PDF </span></a>" ?>
+        <br>
 
-    <?php
 
-    echo "
-    <div class='row'>
-        <br><br><h1 style='margin-left: 50px;max-width: 1100px'>" . $row['title'] . "</h1><p style='margin-left: 50px;'>" . "<strong>Authors:  </strong>" . $row['author'] . "</p><p style='margin-left: 50px;'>" . "<strong>Published Online: </strong>" . $row['publication_day'] . ' ' . $row['publication_month'] . ' ' . $row['publication_year'] . "</p>
-        
-        </div>";
-    ?>
-
-    <div id="outer">
-
-        <div id="left">
-            <div class="left-content">
-                <div class="left-content-header">Jump to:</div><br>
-                <a href="#full-text">
-                    <p>Full text</p>
-                </a>
-                <a href="#abstract">
-                    <p>Abstract</p>
-                </a>
-                <a href="#details">
-                    <p>Details</p>
-                </a>
-            </div>
+        <div style="text-align:center">
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
         </div>
-        <div id="center">
-            <div class="center-content">
-                <form class="example" name="frmSearch" method="post" action="journals.php" style="margin:auto;max-width:300px">
-                    <input type="text" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>" name="search2">
-                    <button type="submit"><i class="fa fa-search"></i></button>
+        <script>
+            var slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) {
+                    slideIndex = 1
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+                setTimeout(showSlides, 3000); // Change image every 3 seconds
+            }
+        </script>
+        <!-- SEARCH BAR CONTAINER -->
+        <form name="frmSearch" method="post" action="journals.php">
+            <div class="container">
+                <div class="row height d-flex justify-content-center align-items-center">
+                    <div>
+                        <div class="form">
+                            <select class="topic" name="topic" id="topic">
+                                <option value="" selected disabled hidden>Topic</option>
+                                <option style="font-size:17px" value="Education">Education</option>
+                                <option style="font-size:17px" value="Technology">Technology</option>
+                                <option style="font-size:17px" value="Research">Research</option>
+                                <option style="font-size:17px" value="Analysis">Analysis</option>
+                                <option style="font-size:17px" value="Database">Database</option>
+                            </select>
+                            <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+        <?php
+        $stat = $dbh->prepare('select * from bookmark where user_id=?');
+        $stat->bindParam(1, $id);
+        $stat->execute();
+        while ($rows = $stat->fetch()) {
+            $thesis_id = $rows['id'];
+            $new_stat = $dbh->prepare('select * from research where id=?');
+            $new_stat->bindParam(1, $thesis_id);
+            $new_stat->execute();
+            $thesis = $new_stat->fetch();
+            echo '
+                <table class="formview">
+
+                      <tr class="displayRow">
+      
+                        <td> <br>
+                          <a class="displayResearch" target="_blank" href="display.php?id=' . $thesis['id'] . '"><i style="font-size:80px" class="fa">&#xf0f6</i>
+                            <p style="margin-left: 90px; margin-top: -90px;">' . $thesis['topic'] .  '<a href="remove_bookmark.php?id=' . $thesis['id'] . '" class="view btn-lg"><i class="fa fa-trash-o"></i></a></p>
+                            <p style="margin-left: 90px; ">' . $thesis["title"] . '</p>
+                            <p style="margin-left: 90px; ">
+                              <p style="margin-left: 90px; ">' . $thesis["author"] . '</p>
+                              <p style="margin-left: 90px; ">' . $thesis['publication_day'] . ' ' . $thesis['publication_month'] . ' ' . $thesis['publication_year'] . '</p>
+                              <hr style="border: 1px solid black;">
+                          </a>
+                        </td>
+
+                      </tr>
+        </table>
+        ';
+        }
+        ?>
+        <br><br>
+
+        <!-- ChatBot -->
+        <div class="chat_icon">
+            <img style="height: 80px;" src="images/chatboticon.png">
+        </div>
+
+        <div class="chat_box">
+            <div class="my-conv-form-wrapper">
+                <form action="" method="GET" class="hidden">
+
+                    <select data-conv-question="Hello! How can I help you" name="category">
+                        <option value="WebDevelopment">Website Development ?</option>
+                        <option value="ThesisQuoForum">Thesis Quo Forum</option>
+                    </select>
+
+                    <div data-conv-fork="category">
+                        <div data-conv-case="WebDevelopment">
+                            <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
+                        </div>
+                        <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
+                            <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
+                        </div>
+                    </div>
+
+                    <input type="text" name="name" data-conv-question="Please, Enter your name">
+
+                    <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
+
+                    <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
+
+                    <select data-conv-question="Please Confirm">
+                        <option value="Yes">Confirm</option>
+                    </select>
+
                 </form>
-
             </div>
         </div>
+        <!-- ChatBot end -->
 
-
-        <div id="right">
-            <div class="right-content">
-                <div class="right-content-header"></div>
-                <div id="full-text"><?php echo "<iframe ' type='application/pdf' src='data:" . $row['file_type'] . ";base64," . base64_encode($row['file_upload']) . "' height='150%' width='100%'></iframe>" ?></div>
-                <div id="abstract"><?php echo "<h3 style='font-family: Arial, Helvetica, sans-serif;'>Abstract</h3><p style='font-size: 1.1em;'>" . $row['abstract'] . "</p><h3>Keywords</h3><p style='font-size: 1.1em;'>" . $row['keywords'] . "</p><li>" ?>
-                </div>
-                <h3>Details</h3>
-                <table id="details">
-                    <tr>
-                        <td>Title</td>
-                        <td><?php echo  $row['title']  ?></td>
-                    </tr>
-                    <tr>
-                        <td>Author</td>
-                        <td><?php echo  $row['author']  ?></td>
-                    </tr>
-                    <tr>
-                        <td>Publication year</td>
-                        <td><?php echo  $row['publication_year']  ?></td>
-                    </tr>
-                    <tr>
-                        <td>Publication date</td>
-                        <td><?php echo  $row['publication_month']  ?> <?php echo  $row['publication_year']  ?></td>
-                    </tr>
-                    <tr>
-                        <td>Publisher</td>
-                        <td><?php echo  $row['publisher']  ?></td>
-                    </tr>
-                    <tr>
-                        <td>Topic</td>
-                        <td><?php echo  $row['topic']  ?></td>
-                    </tr>
-                    <tr>
-                        <td>Research Type</td>
-                        <td><?php echo  $row['research_type']  ?></td>
-                    </tr>
-                    <tr>
-                        <td>Citation</td>
-                        <td><?php echo  $row['citation']  ?></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
 </body>
+<!-- Below is the script for voice recognition and conversion to text-->
+<script>
+    function record() {
+        var recognition = new webkitSpeechRecognition();
+        recognition.lang = "en-GB";
+
+        recognition.onresult = function(event) {
+            // console.log(event);
+            document.getElementById('speechToText').value = event.results[0][0].transcript;
+        }
+        recognition.start();
+
+    }
+</script>
 
 </html>

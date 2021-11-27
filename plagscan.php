@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $id = $_SESSION['user_id'];
+}
+?>
 <html lang="en">
 
 <head>
@@ -13,16 +19,28 @@
 </head>
 
 <body>
-    <!-- NAVBAR -->
-    <div class="navbar">
-        <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-        <a style="margin-top: 6px;" href="index.php">HOME</a>
-        <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
-        <a style="margin-top: 6px;" href="#">ANALYTICS</a>
-        <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-        <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-        <a class="boomark" style="float: right;" href="#"><img style="height: 23px;" src="images/bookmark.png"></a>
-    </div>
+    <?php
+    if (isset($_SESSION['user_id'])) {
+        echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+  </div>';
+    } else {
+        echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+    </div>';
+    }
+    ?>
     <!-- <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="#">HOME</a>
