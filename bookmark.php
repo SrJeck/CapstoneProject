@@ -80,30 +80,54 @@ $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
       $stat = $dbh->prepare('select * from bookmark where user_id=?');
       $stat->bindParam(1, $id);
       $stat->execute();
-      $rows = $stat->fetch();
-      foreach ($rows as $row) {
-        $thesis_id = $row['thesis_id'];
-        $new_stat = $dbh->prepare('select * from research where thesis_id=?');
+      while($rows = $stat->fetch()){
+        $thesis_id = $rows['thesis_id'];
+        $new_stat = $dbh->prepare('select * from research where id=?');
         $new_stat->bindParam(1, $thesis_id);
         $new_stat->execute();
-        $thesis = $stat->fetch();
+        $thesis = $new_stat->fetch();
         echo '
-        <tr>
-        <td>' . $thesis['thesis_title'] . '</td>
-        <td>' . $thesis['thesis_author'] . '</td>
-        <td>' . $thesis['publication_month'] . $thesis['publication_day'] . $thesis['publication_year'] . '</td>
+
+        <tr  class="bookmarkRow">
+        <a class="displayBookmark" target="_blank" href="display.php?id='.$thesis['id'].'">
+        <td><i style="font-size:80px" class="fa">&#xf0f6;</i></td>
+        <td>' . $thesis['title'] . '</td>
+        <td>' . $thesis['author'] . '</td>
+        <td>' . $thesis['publication_month'] ." " . $thesis['publication_day'] .", " . $thesis['publication_year'] . '</td>
         <td>' . $thesis['affiliation'] . '</td>
         <td>' . $thesis['degree_level'] . '</td>
         <td>' . $thesis['topic'] . '</td>
         <td>' . $thesis['research_type'] . '</td>
-        <td>' . $thesis['publisher'] . '</td>
-        <td><a href="remove_bookmark.php?thesis_id=' . $thesis['thesis_id'] . '" class="view btn-lg">
+        <td>' . $thesis['publisher'] . '</td></a>
+        <td><a href="remove_bookmark.php?thesis_id=' . $thesis['id'] . '" class="view btn-lg">
         <span class="fa fa-bookmark-o"> Remove Bookmark</span>
       </a></td>
         </tr>
         
         ';
       }
+
+
+    //   <tr class="bookmarkRow">
+
+    //   <td> <br>
+    //     <a class="displayBookmark" target="_blank" href="display.php?id='.$thesis['id'].'"><i style="font-size:80px" class="fa">&#xf0f6;</i>
+    //       <p style="margin-left: 90px; margin-top: -90px;">' . $thesis['title'] . '</p>
+    //       <p style="margin-left: 90px; ">' . $thesis['topic'] . '</p>
+    //       <p style="margin-left: 90px; ">
+    //         <p style="margin-left: 90px; ">' . $thesis['title'] . '</p>
+    //         <p style="margin-left: 90px; ">' . $thesis['author'] . '</p>
+    //         <p style="margin-left: 90px; ">' . $thesis['publication_month'] ." " . $thesis['publication_day'] .", " . $thesis['publication_year'] . '</p>
+    //         <p style="margin-left: 90px; ">' . $thesis['publisher'] . '</p>
+    //         <hr style="border: 1px solid black;">
+    //     </a>
+    //   </td>
+    //   <td><a href="remove_bookmark.php?thesis_id=' . $thesis['id'] . '" class="view btn-lg">
+    //   <span class="fa fa-bookmark-o"> Remove Bookmark</span>
+    //   </a></td>
+
+    // </tr>
+
       ?>
     </table>
 

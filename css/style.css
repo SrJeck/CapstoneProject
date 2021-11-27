@@ -1,13 +1,21 @@
   /*  START DATE 8/28/2021*/
   /*  UPDATE DATE 11/16/2021*/
-        .displayResearch{      
-      text-decoration: none;
-      color: black;
-    }
-    .displayRow:hover{  
-      background-color:#DCDFE2;
-      color: white;
-    }
+  .displayResearch{      
+    text-decoration: none;
+    color: black;
+  }
+  .displayRow:hover{  
+    background-color:#DCDFE2;
+    color: white;
+  }        
+  .displayBookmark{      
+    text-decoration: none;
+    color: black;
+  }
+  .bookmarkRow:hover{  
+    background-color:#DCDFE2;
+    color: white;
+  }
     body {
       margin:0;
       background-color: #F7F5F7;

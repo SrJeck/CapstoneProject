@@ -1,6 +1,6 @@
 <?php
 session_start();
-        $dbh = new PDO("mysql:host=localhost;dbname=research","root","");
+        $dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
         if (isset($_POST['submit'])) {
             if(!empty($_POST['email']) && !empty($_POST['password'])){
                 $email = $_POST['email'];

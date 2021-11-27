@@ -1,5 +1,5 @@
 <?php
-        $dbh = new PDO("mysql:host=localhost;dbname=research","root","");
+        $dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
         if (isset($_POST['submit'])) {
             if(!empty($_POST['firstName']) && !empty($_POST['lastName']) && !empty($_POST['phoneNum']) && !empty($_POST['address'])  && !empty($_POST['birthday']) && !empty($_POST['sex'])  && !empty($_POST['degree_level']) && !empty($_POST['email'])  && !empty($_POST['password'])){
             $fName = $_POST['firstName'];

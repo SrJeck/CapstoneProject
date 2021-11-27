@@ -1,6 +1,6 @@
 <?php
 session_start();
-$dbh = new PDO("mysql:host=localhost;dbname=research","root","");
+$dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
 
 $id = $_SESSION['user_id'];
 $oldPass = $dbh->prepare('select email_password from user where user_id=?');

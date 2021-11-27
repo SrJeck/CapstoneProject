@@ -1,5 +1,5 @@
 <?php
-$dbh = new PDO("mysql:host=localhost;dbname=research", "root", "");
+$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
 if (isset($_POST['submit'])) {
     if (!empty($_POST['title']) && !empty($_POST['author'])) {
         $name = $_FILES['myfile']['name'];
