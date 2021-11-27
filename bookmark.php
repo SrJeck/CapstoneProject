@@ -144,9 +144,7 @@ if (!empty($result)) {
     $thesis = $new_stat->fetch();
     echo '
                 <table class="formview">
-
                       <tr class="displayRow">
-      
                         <td> <br>
                           <a class="displayResearch" target="_blank" href="display.php?id=' . $thesis['id'] . '"><i style="font-size:80px" class="fa">&#xf0f6</i>
                             <p style="margin-left: 90px; margin-top: -90px;">' . $thesis['topic'] .  '</p>
@@ -160,9 +158,8 @@ if (!empty($result)) {
                         <td>
                         <a href="remove_bookmark.php?id=' . $thesis['id'] . '" class="view btn-lg"><i class="fa fa-trash-o"></i></a>
                         </td>
-
                       </tr>
-        </table>
+                 </table>
         ';
   }
   ?>
