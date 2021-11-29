@@ -41,13 +41,7 @@ if (isset($_SESSION['user_id'])) {
     </div>';
     }
     ?>
-    <!-- <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">HOME</a>
-        <a href="journals.php">JOURNALS</a>
-        <a href="#">ANALYTICS</a>
-        <a href="#">PLAGIARISM CHECKER</a>
-    </div> -->
+
 
 
     <div class='main'>
@@ -56,7 +50,7 @@ if (isset($_SESSION['user_id'])) {
                 <div id='formDiv'>
                     <br><br><br><br><br><br>
                     <button class='scanbutton' onclick='myFunc()' id='sub-btn' type="submit">Scan For Plagiarism</button><br>
-                    <button class='CheckNew' type='reset' onclick='checkNew()'><i class='fas fa-sync-alt'></i> Check New </button><br><br><br>
+                    <button class='CheckNew' type='reset' onclick='checkNew()'><i class='fas fa-sync-alt'></i> Check New </button>
                     <textarea name="fullText" id='fullText' class="text1" placeholder="Enter Abstract to Run Check" required><?php $data = $_POST['fullText'] ?? null;
                                                                                                                                 echo "$data"; ?></textarea><br>
 
@@ -360,7 +354,8 @@ if (isset($_SESSION['user_id'])) {
             echo "
                 <div class = 'boxes' >
                       <button class = 'downR' onclick='window.print()'>  <i class='fas fa-download'></i>   Download Report </button>
-                </div>";
+                      <button class='submit' type='submit'> Submit </button><br><br><br>
+                      </div>";
         }
 
         ?>

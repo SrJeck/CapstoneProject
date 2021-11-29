@@ -393,7 +393,7 @@
       background-color: #751518;
       border: none;
       color: white;
-      padding: 15px 32px;
+      padding: 15px 31px;
       text-align: center;
       text-decoration: none;
       display: inline-block;
@@ -415,6 +415,21 @@
       cursor: pointer;
       margin-top: 5px;
       margin-left: 79%;
+    }
+    .submit {
+      background-color: #751518;
+      border: none;
+      color: white;
+      padding: 15px 78px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      position: relative;
+      bottom: 685px;
+      left: 173px;
     }
     .downR{
       background-color: #751518;
@@ -438,7 +453,7 @@
       cursor: pointer;
     }
     .text1{
-      margin-top: -150px;
+      margin-top: -120px;
       width: 64%;
       border: 3px solid black;
       color: black;
@@ -745,6 +760,7 @@
       .container{
         width: 230px;
       }
+  
 }
 /* Need to login */
 .ol-login-link{
