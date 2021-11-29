@@ -17,5 +17,5 @@ if (empty($row)) {
     $stmt->bindParam(1, $user_id);
     $stmt->bindParam(2, $id);
     $stmt->execute();
-    header("Location: display.php?id=".$id);
+    header("Location: display.php?id=" . $id);
 }

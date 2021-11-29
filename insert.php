@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
         $keywords = $_POST['keywords'];
         $publisher = $_POST['publisher'];
         $permission = $_POST['permission'];
-        $upload_status = $_POST['upload_status'];
+        $upload_status = 'Unpublished';
         $data = file_get_contents($_FILES['myfile']['tmp_name']);
         $stmt = $dbh->prepare("insert into research values('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         $stmt->bindParam(1, $title);

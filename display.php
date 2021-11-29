@@ -126,7 +126,7 @@ if (!empty($result)) {
           <table style="width:100%">
             <tr>
               <td><strong>APA</strong> </td>
-              <td><?php echo  $row['author']  ?><span> (</span><?php echo  $row['publication_year']  ?><span>) </span>"<?php echo  $row['title'] ?>" <?php echo  $row['publisher']  ?></td>
+              <td><?php echo  $row['author']  ?>.<span> (</span><?php echo  $row['publication_year']  ?><span>). </span><span><?php echo  $row['title']  ?>.</span> <?php echo  $row['publisher']  ?></td>
             </tr>
           </table>
         </div>

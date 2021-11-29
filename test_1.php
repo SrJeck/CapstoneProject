@@ -3,9 +3,6 @@ session_start();
 if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
 }
-
-$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-
 require_once("perpage.php");
 require_once("dbcontroller.php");
 $db_handle = new DBController();
@@ -58,9 +55,6 @@ if (!empty($result)) {
     $result["perpage"] = showperpage($sql, $perPage, $href);
 }
 ?>
-?>
-<!-- START DATE 8/28/2021 -->
-<!-- UPDATE DATE 10/05/2021 -->
 <html>
 
 <head>
@@ -71,15 +65,15 @@ if (!empty($result)) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bookmark.css">
+    <link rel="stylesheet" type="text/css" href="css/journals.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- ChatBot -->
     <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/jquery.convform.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
-
 </head>
 
 <body>
@@ -108,8 +102,9 @@ if (!empty($result)) {
     ?>
 
     <!-- BANNER IMAGE -->
-    <div id="index" style="margin-top: 40px;">
+    <div id="index" style="margin-top: 48px;">
         <div class="slideshow-container">
+
             <div class="mySlides fade">
                 <img src="images/Ban1.png" style="width:100%; height: 400px;">
             </div>
@@ -130,6 +125,7 @@ if (!empty($result)) {
             <div class="mySlides fade">
                 <img src="images/Ban2.png" style="width:100%; height: 400px;">
             </div>
+
         </div>
         <br>
 
@@ -164,99 +160,138 @@ if (!empty($result)) {
                 setTimeout(showSlides, 3000); // Change image every 3 seconds
             }
         </script>
+
+
         <!-- SEARCH BAR CONTAINER -->
-        <form name="frmSearch" method="post" action="journals.php">
-            <div class="container">
-                <div class="row height d-flex justify-content-center align-items-center">
-                    <div>
-                        <div class="form">
-                            <select class="topic" name="topic" id="topic">
-                                <option value="" selected disabled hidden>Topic</option>
-                                <option style="font-size:17px" value="Education">Education</option>
-                                <option style="font-size:17px" value="Technology">Technology</option>
-                                <option style="font-size:17px" value="Research">Research</option>
-                                <option style="font-size:17px" value="Analysis">Analysis</option>
-                                <option style="font-size:17px" value="Database">Database</option>
-                            </select>
-                            <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+
+        <center>
+
+            <form name="frmSearch" method="post" action="journals.php">
+                <div class="container">
+                    <div class="row height d-flex justify-content-center align-items-center">
+                        <div>
+                            <div class="form">
+                                <select class="topic" name="topic" id="topic">
+                                    <option value="" selected disabled hidden>Topic</option>
+                                    <option style="font-size:17px" value="Education">Education</option>
+                                    <option style="font-size:17px" value="Technology">Technology</option>
+                                    <option style="font-size:17px" value="Research">Research</option>
+                                    <option style="font-size:17px" value="Analysis">Analysis</option>
+                                    <option style="font-size:17px" value="Database">Database</option>
+                                </select>
+                                <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
 
-
-        <?php
-        $stat = $dbh->prepare('select * from bookmark where user_id=?');
-        $stat->bindParam(1, $id);
-        $stat->execute();
-        while ($rows = $stat->fetch()) {
-            $thesis_id = $rows['id'];
-            $new_stat = $dbh->prepare('select * from research where id=?');
-            $new_stat->bindParam(1, $thesis_id);
-            $new_stat->execute();
-            $thesis = $new_stat->fetch();
-            echo '
                 <table class="formview">
 
-                      <tr class="displayRow">
-      
-                        <td> <br>
-                          <a class="displayResearch" target="_blank" href="display.php?id=' . $thesis['id'] . '"><i style="font-size:80px" class="fa">&#xf0f6</i>
-                            <p style="margin-left: 90px; margin-top: -90px;">' . $thesis['topic'] .  '<a href="remove_bookmark.php?id=' . $thesis['id'] . '" class="view btn-lg"><i class="fa fa-trash-o"></i></a></p>
-                            <p style="margin-left: 90px; ">' . $thesis["title"] . '</p>
-                            <p style="margin-left: 90px; ">
-                              <p style="margin-left: 90px; ">' . $thesis["author"] . '</p>
-                              <p style="margin-left: 90px; ">' . $thesis['publication_day'] . ' ' . $thesis['publication_month'] . ' ' . $thesis['publication_year'] . '</p>
-                              <hr style="border: 1px solid black;">
-                          </a>
-                        </td>
+                    <?php
+                    $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+                    $stat = $dbh->prepare('select * from bookmark where user_id=?');
+                    $stat->bindParam(1, $id);
+                    $stat->execute();
+                    while ($rows = $stat->fetch()) {
+                        $thesis_id = $rows['id'];
+                        $new_stat = $dbh->prepare('select * from research where id=?');
+                        $new_stat->bindParam(1, $thesis_id);
+                        $new_stat->execute();
+                        $thesis = $new_stat->fetch();
+                        if (!empty($result)) {
+                            foreach ($result as $k => $v) {
+                                if (is_numeric($k)) {
+                    ?>
+                                    <tr class="displayRow">
 
-                      </tr>
-        </table>
-        ';
-        }
-        ?>
-        <br><br>
+                                        <td> <br>
+                                            <a class="displayResearch" target='_blank' href='display.php?id=<?php echo $result[$k]['id']; ?>'><i style="font-size:80px" class="fa">&#xf0f6;</i>
+                                                <p style="margin-left: 90px; margin-top: -90px;"><?php echo $result[$k]['topic']; ?></p>
+                                                <p style="margin-left: 90px; "><?php echo $result[$k]["title"]; ?></p>
+                                                <p style="margin-left: 90px; ">
+                                                    <p style="margin-left: 90px; "><?php echo $result[$k]["author"]; ?></p>
+                                                    <p style="margin-left: 90px; "><?php echo $result[$k]['publication_day'] . ' ' . $result[$k]['publication_month'] . ' ' . $result[$k]['publication_year']; ?></p>
+                                                    <hr style="border: 1px solid black;">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="add_bookmark_test.php?id=<?php echo  $id  ?>" class="view btn-lg">
+                                                <span class="fa fa-bookmark-o"> Bookmark</span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                        <?php
+                                }
+                            }
+                        }
+                    }
+                    if (isset($result["perpage"])) {
+                        ?>
+                        <tr>
+                            <td> <?php echo $result["perpage"]; ?></td>
+                        </tr>
+                    <?php } ?>
+                    <?php
 
-        <!-- ChatBot -->
-        <div class="chat_icon">
-            <img style="height: 80px;" src="images/chatboticon.png">
-        </div>
 
-        <div class="chat_box">
-            <div class="my-conv-form-wrapper">
-                <form action="" method="GET" class="hidden">
+                    // $databaseHost = 'localhost';   //your db host 
+                    // $databaseName = 'journal';  //your db name 
+                    // $databaseUsername = 'root';    //your db username 
+                    // $databasePassword = ''; //   db password 
 
-                    <select data-conv-question="Hello! How can I help you" name="category">
-                        <option value="WebDevelopment">Website Development ?</option>
-                        <option value="ThesisQuoForum">Thesis Quo Forum</option>
-                    </select>
+                    // $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
 
-                    <div data-conv-fork="category">
-                        <div data-conv-case="WebDevelopment">
-                            <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
-                        </div>
-                        <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
-                            <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
-                        </div>
+
+
+                    // if (mysqli_connect_errno()) {
+                    //   echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                    // }
+                    // $sql = "select count('1') from journal";
+                    // $result = mysqli_query($mysqli, $sql);
+                    // $row = mysqli_fetch_array($result);
+                    // echo "<h3>$row[0]</h3>";
+                    // mysqli_close($mysqli);
+                    ?>
+                </table>
+            </form>
+            <center>
+                <!-- ChatBot -->
+                <div class="chat_icon">
+                    <img style="height: 80px;" src="images/chatboticon.png">
+                </div>
+
+                <div class="chat_box">
+                    <div class="my-conv-form-wrapper">
+                        <form action="" method="GET" class="hidden">
+
+                            <select data-conv-question="Hello! How can I help you" name="category">
+                                <option value="WebDevelopment">Website Development ?</option>
+                                <option value="ThesisQuoForum">Thesis Quo Forum</option>
+                            </select>
+
+                            <div data-conv-fork="category">
+                                <div data-conv-case="WebDevelopment">
+                                    <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
+                                </div>
+                                <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
+                                    <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
+                                </div>
+                            </div>
+
+                            <input type="text" name="name" data-conv-question="Please, Enter your name">
+
+                            <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
+
+                            <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
+
+                            <select data-conv-question="Please Confirm">
+                                <option value="Yes">Confirm</option>
+                            </select>
+
+                        </form>
                     </div>
-
-                    <input type="text" name="name" data-conv-question="Please, Enter your name">
-
-                    <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
-
-                    <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
-
-                    <select data-conv-question="Please Confirm">
-                        <option value="Yes">Confirm</option>
-                    </select>
-
-                </form>
-            </div>
-        </div>
-        <!-- ChatBot end -->
-
+                </div>
+                <!-- ChatBot end -->
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->
 <script>
