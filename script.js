@@ -67,9 +67,54 @@ $("#myPdf").on("change", function(e){
 	}
 });
 
-function displayResearch(id) {
-    xhr = new XMLHttpRequest();
-    xhr.open("POST","display.php",true);
-    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xhr.send("id="+id);
+// function displayResearch(id) {
+//     xhr = new XMLHttpRequest();
+//     xhr.open("POST","display.php",true);
+//     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+//     xhr.send("id="+id);
+// }
+
+
+
+function chart() {
+	xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = () =>{
+        if(xhr.readyState == 4 && xhr.status == 200){
+
+			arr = xhr.responseText;
+			const new_arr = arr.split(',');
+			// const arr = [1,2,3,4,5,6,7,8,9];
+    
+			 const new_Arr = [];
+			 while(new_arr.length) new_Arr.push(new_arr.splice(0,2));
+
+			 drawChart(new_Arr);
+
+        }
+    }
+    xhr.open("POST","chart_analytics.php",true);
+    xhr.send();
+}
+
+
+// Draw the chart and set the chart values
+function drawChart() {
+
+	  test_arr1 = [
+  ['Task','Hours per Day'],
+  ['Work',8],
+  ['Friends',2],
+  ['Eat',2],
+  ['TV',2],
+  ['Gym',2],
+  ['Sleep',8]];
+  var data = google.visualization.arrayToDataTable(test_arr1);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'My Average Day', 'width':550, 'height':400};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
 }

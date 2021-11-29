@@ -28,7 +28,7 @@
     <a href="index.php"><img style="height: 25px;" src="images/Logo.png"></a>
     <a style="margin-top: 5px;" href="index.php">HOME</a>
     <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
-    <a style="margin-top: 5px;" href="#">ANALYTICS</a>
+    <a style="margin-top: 5px;" href="analytics.php">ANALYTICS</a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>

@@ -1,0 +1,272 @@
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+  $id = $_SESSION['user_id'];
+}
+
+$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+
+require_once("perpage.php");
+require_once("dbcontroller.php");
+$db_handle = new DBController();
+
+$title = "";
+$author = "";
+$topic = "";
+$publication_day = "";
+$publication_day = "";
+$publication_year = "";
+
+$queryCondition = "";
+if (!empty($_POST["search"])) {
+  foreach ($_POST["search"] as $k => $v) {
+    if (!empty($v)) {
+
+      $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
+      if (in_array($k, $queryCases)) {
+        if (!empty($queryCondition)) {
+          $queryCondition .= " OR ";
+        } else {
+          $queryCondition .= " WHERE ";
+        }
+      }
+      switch ($k) {
+        case "title":
+          $title = $v;
+          $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
+          break;
+      }
+    }
+  }
+}
+$orderby = " ORDER BY id desc";
+$sql = "SELECT * from research " . $queryCondition;
+$href = 'journals.php';
+
+$perPage = 3;
+$page = 1;
+if (isset($_POST['page'])) {
+  $page = $_POST['page'];
+}
+$start = ($page - 1) * $perPage;
+if ($start < 0) $start = 0;
+
+$query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
+$result = $db_handle->runQuery($query);
+
+if (!empty($result)) {
+  $result["perpage"] = showperpage($sql, $perPage, $href);
+}
+?>
+?>
+<!-- START DATE 8/28/2021 -->
+<!-- UPDATE DATE 10/05/2021 -->
+<html>
+
+<head>
+  <script type="text/javascript" src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bookmark.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- ChatBot -->
+  <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
+  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery.convform.js"></script>
+  <script type="text/javascript" src="js/custom.js"></script>
+
+</head>
+
+<body >
+  <!-- NAVBAR -->
+  <?php
+  if (isset($_SESSION['user_id'])) {
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+  </div>';
+  } else {
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+    </div>';
+  }
+  ?>
+<div id="piechart" style="width: 900px; height: 500px;"></div>
+<div id="curve_chart" style="width: 900px; height: 500px"></div>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Draw the pie chart for Sarah's pizza when Charts is loaded.
+      google.charts.setOnLoadCallback(drawPieChart);
+
+      // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+      google.charts.setOnLoadCallback(drawLineChart);
+
+      function drawPieChart() {
+
+        var pie_data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          <?php
+
+          $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+
+          $stat = $dbh->prepare('SELECT topic, COUNT(*) AS number_of_research FROM research GROUP BY topic');
+          $stat->execute();
+          while ($rows = $stat->fetch()) {
+              echo "['" .$rows['topic'] . "', " . $rows['number_of_research']."],";
+          }
+          ?>
+        ]);
+
+        var pie_options = {
+          title: 'Topics',
+          is3D: true
+        };
+
+        var pie_chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        pie_chart.draw(pie_data, pie_options);
+
+
+
+
+      }
+
+      function drawLineChart() {
+
+
+        var data = google.visualization.arrayToDataTable([
+          <?php
+        
+          $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+          //collect and store all years
+              $fetch_year = $dbh->prepare('SELECT publication_year, COUNT(*) AS number_of_year FROM research GROUP BY publication_year');
+              $fetch_year->execute();
+              $year_rows = "";
+              while ($fetched_year = $fetch_year->fetch()) {
+                  $year_rows = $year_rows . $fetched_year['publication_year'] . ',';
+              }
+
+              //collect and store all topic
+              $fetch_topic = $dbh->prepare('SELECT topic, COUNT(*) AS number_of_topic FROM research GROUP BY topic');
+              $fetch_topic->execute();
+              $topic_rows = "";
+              $first_row = "['Year'";
+              while ($fetched_topic = $fetch_topic->fetch()) {
+                  $topic_rows = $topic_rows . $fetched_topic['topic'] . ',';
+                  $first_row  = $first_row .",'".$fetched_topic['topic'] ."'";
+              }
+              echo $first_row .'],';
+
+
+              $topic_arr = explode(",",$topic_rows);
+              $year_arr = explode(",",$year_rows);
+
+              $topic_length = count($topic_arr)-1;
+              $year_length = count($year_arr);
+              $year_topic_count = "";
+              for ($i=0; $i < $year_length; $i++) { 
+                  //$year_topic_count = $year_arr[$i];
+                  $year_topic_count = "['". $year_arr[$i]."'";
+                  for ($j=0; $j < $topic_length; $j++) { 
+                      $fetch_count = $dbh->prepare('SELECT COUNT(*) AS number_count FROM research WHERE topic=? AND publication_year=?');
+                      $fetch_count->bindParam(1, $topic_arr[$j]);
+                      $fetch_count->bindParam(2, $year_arr[$i]);
+                      $fetch_count->execute();
+                      $fetched_count = $fetch_count->fetch();
+                      $year_topic_count = $year_topic_count . ", ". $fetched_count['number_count'];
+                  }
+                  echo $year_topic_count."],";
+                  $year_topic_count = "";
+              }
+          ?>
+        ]);
+
+        var options = {
+          title: 'Upload Per Year',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+
+
+      }
+    </script>
+
+  
+  <br><br>
+
+  <!-- ChatBot -->
+  <div class="chat_icon">
+    <img style="height: 80px;" src="images/chatboticon.png">
+  </div>
+
+  <div class="chat_box">
+    <div class="my-conv-form-wrapper">
+      <form action="" method="GET" class="hidden">
+
+        <select data-conv-question="Hello! How can I help you" name="category">
+          <option value="WebDevelopment">Website Development ?</option>
+          <option value="ThesisQuoForum">Thesis Quo Forum</option>
+        </select>
+
+        <div data-conv-fork="category">
+          <div data-conv-case="WebDevelopment">
+            <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
+          </div>
+          <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
+            <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
+          </div>
+        </div>
+
+        <input type="text" name="name" data-conv-question="Please, Enter your name">
+
+        <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
+
+        <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
+
+        <select data-conv-question="Please Confirm">
+          <option value="Yes">Confirm</option>
+        </select>
+
+      </form>
+    </div>
+  </div>
+  <!-- ChatBot end -->
+
+</body>
+<!-- Below is the script for voice recognition and conversion to text-->
+<script>
+  function record() {
+    var recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-GB";
+
+    recognition.onresult = function(event) {
+      // console.log(event);
+      document.getElementById('speechToText').value = event.results[0][0].transcript;
+    }
+    recognition.start();
+
+  }
+</script>
+
+</html>
