@@ -83,13 +83,13 @@ if (!empty($result)) {
 
 </head>
 
-<body >
+<body>
   <!-- NAVBAR -->
   <?php
   if (isset($_SESSION['user_id'])) {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
@@ -99,7 +99,7 @@ if (!empty($result)) {
   } else {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
@@ -107,112 +107,116 @@ if (!empty($result)) {
     </div>';
   }
   ?>
-<div id="piechart" style="width: 900px; height: 500px;"></div>
-<div id="curve_chart" style="width: 900px; height: 500px"></div>
-<script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
+  <div id="piechart" style="width: 900px; height: 500px;"></div>
+  <div id="curve_chart" style="width: 900px; height: 500px"></div>
+  <script type="text/javascript">
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
 
-      // Draw the pie chart for Sarah's pizza when Charts is loaded.
-      google.charts.setOnLoadCallback(drawPieChart);
+    // Draw the pie chart for Sarah's pizza when Charts is loaded.
+    google.charts.setOnLoadCallback(drawPieChart);
 
-      // Draw the pie chart for the Anthony's pizza when Charts is loaded.
-      google.charts.setOnLoadCallback(drawLineChart);
+    // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+    google.charts.setOnLoadCallback(drawLineChart);
 
-      function drawPieChart() {
+    function drawPieChart() {
 
-        var pie_data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          <?php
+      var pie_data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        <?php
 
-          $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+        $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
 
-          $stat = $dbh->prepare('SELECT topic, COUNT(*) AS number_of_research FROM research GROUP BY topic');
-          $stat->execute();
-          while ($rows = $stat->fetch()) {
-              echo "['" .$rows['topic'] . "', " . $rows['number_of_research']."],";
+        $stat = $dbh->prepare('SELECT topic, COUNT(*) AS number_of_research FROM research GROUP BY topic');
+        $stat->execute();
+        while ($rows = $stat->fetch()) {
+          echo "['" . $rows['topic'] . "', " . $rows['number_of_research'] . "],";
+        }
+        ?>
+      ]);
+
+      var pie_options = {
+        title: 'Topics',
+        is3D: true
+      };
+
+      var pie_chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      pie_chart.draw(pie_data, pie_options);
+
+
+
+
+    }
+
+    function drawLineChart() {
+
+
+      var data = google.visualization.arrayToDataTable([
+        <?php
+
+        $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+        //collect and store all years
+        $fetch_year = $dbh->prepare('SELECT publication_year, COUNT(*) AS number_of_year FROM research GROUP BY publication_year');
+        $fetch_year->execute();
+        $year_rows = "";
+        while ($fetched_year = $fetch_year->fetch()) {
+          $year_rows = $year_rows . $fetched_year['publication_year'] . ',';
+        }
+
+        //collect and store all topic
+        $fetch_topic = $dbh->prepare('SELECT topic, COUNT(*) AS number_of_topic FROM research GROUP BY topic');
+        $fetch_topic->execute();
+        $topic_rows = "";
+        $first_row = "['Year'";
+        while ($fetched_topic = $fetch_topic->fetch()) {
+          $topic_rows = $topic_rows . $fetched_topic['topic'] . ',';
+          $first_row  = $first_row . ",'" . $fetched_topic['topic'] . "'";
+        }
+        echo $first_row . '],';
+
+
+        $topic_arr = explode(",", $topic_rows);
+        $year_arr = explode(",", $year_rows);
+
+        $topic_length = count($topic_arr) - 1;
+        $year_length = count($year_arr);
+        $year_topic_count = "";
+        for ($i = 0; $i < $year_length; $i++) {
+          //$year_topic_count = $year_arr[$i];
+          $year_topic_count = "['" . $year_arr[$i] . "'";
+          for ($j = 0; $j < $topic_length; $j++) {
+            $fetch_count = $dbh->prepare('SELECT COUNT(*) AS number_count FROM research WHERE topic=? AND publication_year=?');
+            $fetch_count->bindParam(1, $topic_arr[$j]);
+            $fetch_count->bindParam(2, $year_arr[$i]);
+            $fetch_count->execute();
+            $fetched_count = $fetch_count->fetch();
+            $year_topic_count = $year_topic_count . ", " . $fetched_count['number_count'];
           }
-          ?>
-        ]);
+          echo $year_topic_count . "],";
+          $year_topic_count = "";
+        }
+        ?>
+      ]);
 
-        var pie_options = {
-          title: 'Topics',
-          is3D: true
-        };
+      var options = {
+        title: 'Upload Per Year',
+        curveType: 'function',
+        legend: {
+          position: 'bottom'
+        }
+      };
 
-        var pie_chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-        pie_chart.draw(pie_data, pie_options);
-
-
-
-
-      }
-
-      function drawLineChart() {
-
-
-        var data = google.visualization.arrayToDataTable([
-          <?php
-        
-          $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-          //collect and store all years
-              $fetch_year = $dbh->prepare('SELECT publication_year, COUNT(*) AS number_of_year FROM research GROUP BY publication_year');
-              $fetch_year->execute();
-              $year_rows = "";
-              while ($fetched_year = $fetch_year->fetch()) {
-                  $year_rows = $year_rows . $fetched_year['publication_year'] . ',';
-              }
-
-              //collect and store all topic
-              $fetch_topic = $dbh->prepare('SELECT topic, COUNT(*) AS number_of_topic FROM research GROUP BY topic');
-              $fetch_topic->execute();
-              $topic_rows = "";
-              $first_row = "['Year'";
-              while ($fetched_topic = $fetch_topic->fetch()) {
-                  $topic_rows = $topic_rows . $fetched_topic['topic'] . ',';
-                  $first_row  = $first_row .",'".$fetched_topic['topic'] ."'";
-              }
-              echo $first_row .'],';
+      chart.draw(data, options);
 
 
-              $topic_arr = explode(",",$topic_rows);
-              $year_arr = explode(",",$year_rows);
-
-              $topic_length = count($topic_arr)-1;
-              $year_length = count($year_arr);
-              $year_topic_count = "";
-              for ($i=0; $i < $year_length; $i++) { 
-                  //$year_topic_count = $year_arr[$i];
-                  $year_topic_count = "['". $year_arr[$i]."'";
-                  for ($j=0; $j < $topic_length; $j++) { 
-                      $fetch_count = $dbh->prepare('SELECT COUNT(*) AS number_count FROM research WHERE topic=? AND publication_year=?');
-                      $fetch_count->bindParam(1, $topic_arr[$j]);
-                      $fetch_count->bindParam(2, $year_arr[$i]);
-                      $fetch_count->execute();
-                      $fetched_count = $fetch_count->fetch();
-                      $year_topic_count = $year_topic_count . ", ". $fetched_count['number_count'];
-                  }
-                  echo $year_topic_count."],";
-                  $year_topic_count = "";
-              }
-          ?>
-        ]);
-
-        var options = {
-          title: 'Upload Per Year',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
+    }
+  </script>
 
 
-      }
-    </script>
-
-  
   <br><br>
 
   <!-- ChatBot -->

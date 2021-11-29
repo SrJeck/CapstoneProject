@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
         $stmt->bindParam(18, $permission);
         $stmt->bindParam(19, $upload_status);
         $stmt->execute();
-        header("Location: plagscan.php");
+        header("Location: index.php");
     }
 }
 ?>

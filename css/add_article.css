@@ -1,8 +1,10 @@
   /*  START DATE 8/28/2021*/
   /*  UPDATE DATE 9/12/202*/
   body {
-    margin:0;
+    margin: auto;
     background-color: #F7F5F7;
+    width: auto;
+    overflow-x: hidden; /* Hide scrollbars */
   }
   /* MENU NAVBAR */
   .navbar {
@@ -287,9 +289,9 @@
     border-radius: 4px;
     cursor: pointer;
     text-align: center;
-    position: absolute;
+    position: relative;
     left: 77.4%;
-    bottom: -255px;
+    bottom: 120px;
   }
   /*File Upload*/
 
@@ -617,3 +619,168 @@ position: relative;
 left: 800px;
 bottom: 55px;
 }
+  /*Plagiarism Checker*/  
+  .circle{
+    margin-top: 20px;
+
+  }
+  .unique {
+    width: 60px;
+    height: 60px;
+    line-height: 55px;
+    border-radius: 50%;
+    font-size: 15px;
+    color: black;
+    text-align: center;
+    background: white;
+    border: 5px solid #2FCC71;
+    margin-left: 60px;
+  }
+  .plagiarized {
+    width: 60px;
+    height: 60px;
+    line-height: 55px;
+    border-radius: 50%;
+    font-size: 15px;
+    color: black;
+    text-align: center;
+    background: white;
+    border: 5px solid red;
+    margin-left: 100px;
+    font-weight: bold;
+    
+  }
+
+  .checked {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    background: white;
+    border: 5px solid #1E97FA;
+    margin-left: 700px
+  }
+  .scanbutton {
+    background-color: #751518;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-left: 79%;
+  }
+  .CheckNew {
+    background-color: #751518;
+    border: none;
+    color: white;
+    padding: 15px 52px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-left: 79%;
+  }
+  .downR{
+    background-color: #751518;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    float: right;
+    margin-right: 150px;
+    margin-top: 40px;
+  }
+  .filebutton {
+    background-color: #751518;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .text1{
+    margin-top: -150px;
+    width: 64%;
+    border: 3px solid black;
+    color: black;
+    font-weight:lighter;
+    background-color: white;
+    line-height: 20px;
+    outline: none;
+    box-shadow: none;
+    height: 30%;
+    padding: 15px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    resize: none;
+    margin-left: 32px;
+  }
+
+
+  .topSource {
+    width: 28.67%;
+    font-family: 'Poppins', sans-serif;
+    font-size: small;   
+    border: 3px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    /* margin: 0% 2% 0% 1%; */
+    float: right;
+    margin-right: 10px;
+
+}
+.results {
+  width: 62.33%;
+  font-family: 'Poppins', sans-serif;
+  height:fit-content;
+  font-size: small;   
+  border: 3px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  /* margin: 0% 1% 0% 2%; */
+  float: left;
+  margin: 0% 2% 2% 2%;
+}
+.overview{
+  width: 28.67%;
+  font-family: 'Poppins', sans-serif;
+  font-size: small;   
+  border: 3px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  float: right;
+  margin-right: 10px;
+  margin-top: 30px;
+}
+
+  .sent {
+    padding: 2px;
+    margin:1px 5px;
+  }
+  .plag,.uni {
+    float: left;
+    padding: 2px;
+    margin:1px 5px;
+  }
+  .plag {
+    background-color: rgb(245, 59, 59);
+    color: white;
+  }
+  .uni {
+    background-color: green;
+    color: white;
+  }
+

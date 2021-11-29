@@ -32,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
   <div class="navbar">
     <a href="index.php"><img style=" height: 25px;" src="images/Logo.png"></a>
     <a style="margin-top: 5px;" href="index.php">HOME</a>
-    <a style="margin-top: 5px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 5px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 5px;" href="analytics.php">ANALYTICS</a>
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
@@ -102,31 +102,26 @@ if (isset($_SESSION['user_id'])) {
   </div>
   <table class="table">
     <tr class="tr">
-      <th class="th"><input type="checkbox"></th>
       <th class="th">Title</th>
       <th class="th">Published By</th>
       <th class="th">Year</th>
     </tr>
     <tr class="tr">
-      <td class="td"><input type="checkbox"></th>
       <td class="td">Game of Codes</td>
       <td class="td">Mohammed Morad</td>
       <td class="td">2021</td>
     </tr>
     <tr class="tr">
-      <td class="td"><input type="checkbox"></th>
       <td class="td">Game of Codes</td>
       <td class="td">Mohammed Morad</td>
       <td class="td">2020</td>
     </tr>
     <tr class="tr">
-      <td class="td"><input type="checkbox"></th>
       <td class="td">Game of Codes</td>
       <td class="td">Mohammed Morad</td>
       <td class="td">2019</td>
     </tr>
     <tr class="tr">
-      <td class="td"><input type="checkbox"></th>
       <td class="td">Game of Codes</td>
       <td class="td">Mohammed Morad</td>
       <td class="td">2018 </td>
