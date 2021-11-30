@@ -152,7 +152,7 @@ if (isset($_SESSION['user_id'])) {
     </div>
     <div class="terms">
       <p class="detail">I agree to the <span id="myBtn">Terms & Conditions </span>and <span id="myBtns">Privacy Policy.</span>
-        <input type="checkbox" ng-model="chkvalue" class="ng-valid ng-dirty ng-valid-parse ng-touched ng-pristine ng-untouched ng-empty" />
+        <input onclick="changeColor('sendNewSms')" type="checkbox" ng-model="chkvalue" class="ng-valid ng-dirty ng-valid-parse ng-touched ng-pristine ng-untouched ng-empty" id="checkme" />
       </p>
     </div>
     <!-- The Modal -->
@@ -376,7 +376,25 @@ if (isset($_SESSION['user_id'])) {
         }
       }
     </script>
-    <button class="submit" type="submit" name="submit">Submit</button>
+    <button class="submit" type="submit" name="submit" disabled="disabled" id="sendNewSms">Submit</button>
+
+    <script>
+      var checker = document.getElementById('checkme');
+      var sendbtn = document.getElementById('sendNewSms');
+      // when unchecked or checked, run the function
+      checker.onchange = function() {
+        if (this.checked) {
+          sendNewSms.style.backgroundColor = "#157572";
+
+          sendbtn.disabled = false;
+        } else {
+          sendNewSms.style.backgroundColor = "#b8bdbd";
+          sendbtn.disabled = true;
+        }
+
+      }
+    </script>
+
   </form>
   </div>
 </body>

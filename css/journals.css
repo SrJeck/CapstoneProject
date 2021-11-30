@@ -37,7 +37,27 @@
     }
     /*SEARCH BAR INPUT */
     input[type=text] {
-    width: 600px;
+    width: 680px;
+    border-radius: 10px;
+    font-size: 16px;
+    }
+    input[type=text].fromDate {
+      width: 154px;
+      height: 35;
+      padding: 6px 12px;
+      box-shadow: 0 2px 0 rgb(0 0 0 / 8%);
+      font-size: 14px;
+      border-radius: 5px;
+    }
+
+    input[type=text].toDate {
+      width: 154px;
+      height: 35;
+      padding: 6px 12px;
+      box-shadow: 0 2px 0 rgb(0 0 0 / 8%);
+      font-size: 14px;
+      border-radius: 5px;
+
     }
     .form {
         position: relative;
@@ -47,7 +67,7 @@
     /* MIC ICON*/
     .form span {
         position: absolute;
-        right: 500px;
+        right: 520px;
         top: 14px;
         padding: 5px;
         border-left: 1px solid #d1d5db
@@ -64,6 +84,7 @@
     .form-input {
         height: 55px;
         text-indent: 33px;
+        padding: 6px 12px;
     }
     
     .form-input:focus {
@@ -189,8 +210,9 @@
       background-color: white;
       box-shadow: 6px 6px 8px 0 #f2eff2;
       padding:20px;
-      width: 75%;
+      width: 80%;
       margin-left: 250px;
+      margin-top: -625px;
     }
     .pagination{
       margin-left: 120px;
@@ -205,14 +227,16 @@
       background-color: white;
       border: none;
       margin-left: 1px;
+      cursor: pointer;
     }
     .perpage-link:hover
-    {background-color: #ddd;}
+    {background-color: #ddd; cursor: pointer;}
 
     span.current-page {
       background-color: #d2edef;
       color: #337ab7;
       padding: 8px 16px;
+      cursor: pointer;
     }
     ul{
       overflow:hidden;
@@ -232,7 +256,7 @@
     /* Count */
     .count1 {
       position: absolute;
-      bottom: 200px;
+      bottom: 180px;
       right: 90px;
       font-size: 20px;
       font-family: serif;

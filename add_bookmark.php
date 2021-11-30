@@ -18,4 +18,7 @@ if (empty($row)) {
     $stmt->bindParam(2, $id);
     $stmt->execute();
     header("Location: display.php?id=" . $id);
+} else {
+
+    header("Location: display.php?id=" . $id);
 }

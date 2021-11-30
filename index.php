@@ -117,28 +117,29 @@ if (!empty($result)) {
   <span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span> -->
 
   <!-- BANNER IMAGE -->
+  <br>
   <div id="index">
     <div class="slideshow-container">
 
       <div class="mySlides fade">
-        <img src="images/Ban1.png" style="width:100%; height: 400px;">
+        <img src="images/Ban1.png" style="width:100%; height: 430px; ">
       </div>
 
       <div class="mySlides fade">
-        <img src="images/Ban2.png" style="width:100%; height: 400px;">
+        <img src="images/Ban2.png" style="width:100%; height: 430px; ">
       </div>
 
       <div class="mySlides fade">
-        <img src="images/Ban3.png" style="width:100%; height: 400px;">
+        <img src="images/Ban3.png" style="width:100%; height: 430px;">
       </div>
 
       <div class="mySlides fade">
-        <img src="images/Ban1.png" style="width:100%; height: 400px;">
+        <img src="images/Ban1.png" style="width:100%; height: 430px; ">
       </div>
 
 
       <div class="mySlides fade">
-        <img src="images/Ban2.png" style="width:100%; height: 400px;">
+        <img src="images/Ban2.png" style="width:100%; height: 430px; ">
       </div>
 
     </div>
@@ -182,14 +183,6 @@ if (!empty($result)) {
         <div class="row height d-flex justify-content-center align-items-center">
           <div>
             <div class="form">
-              <select class="topic" name="topic" id="topic">
-                <option value="" selected disabled hidden>Topic</option>
-                <option style="font-size:17px" value="Education">Education</option>
-                <option style="font-size:17px" value="Technology">Technology</option>
-                <option style="font-size:17px" value="Research">Research</option>
-                <option style="font-size:17px" value="Analysis">Analysis</option>
-                <option style="font-size:17px" value="Database">Database</option>
-              </select>
               <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
             </div>
           </div>

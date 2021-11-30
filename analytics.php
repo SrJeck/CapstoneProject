@@ -172,148 +172,11 @@ $db_handle = new DBController();
 
   ?>
   <br><br><br>
-  <div class="main-part">
-    <div class="cpanel">
-      <div class="icon-part">
-        <i class="fa fa-users" aria-hidden="true"></i><br>
-        <small>Users</small>
-        <p><?php
-            echo $users;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-green">
-      <div class="icon-part">
-        <i class="fa fa-book" aria-hidden="true"></i><br>
-        <small>Education</small>
-        <p><?php
-            echo $output2;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-orange">
-      <div class="icon-part">
-        <i class="fa fa-search" aria-hidden="true"></i><br>
-        <small>Research</small>
-        <p><?php
-            echo $output3;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-tech">
-      <div class="icon-part">
-        <i class="fas fa-laptop-code" aria-hidden="true"></i><br>
-        <small>Technology</small>
-        <p> <?php
-            echo $output;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-mint-green">
-      <div class="icon-part">
-        <i class="fa fa-bar-chart" aria-hidden="true"></i><br>
-        <small>Analysis</small>
-        <p> <?php
-            echo $output4;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-db">
-      <div class="icon-part">
-        <i class="fa fa-database" aria-hidden="true"></i><br>
-        <small>Database</small>
-        <p><?php
-            echo $database;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-blue">
-      <div class="icon-part">
-        <i class="fas fa-seedling" aria-hidden="true"></i><br>
-        <small>Agriculture</small>
-        <p><?php
-            echo $agriculture;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-red">
-      <div class="icon-part">
-        <i class="fa fa-medkit" aria-hidden="true"></i><br>
-        <small>Health</small>
-        <p><?php
-            echo $health;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-pol">
-      <div class="icon-part">
-        <i class="fas fa-vote-yea" aria-hidden="true"></i><br>
-        <small>Politics</small>
-        <p><?php
-            echo $politcs;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-skyblue">
-      <div class="icon-part">
-        <i class="fas fa-brain" aria-hidden="true"></i><br>
-        <small>Psychology</small>
-        <p><?php
-            echo $psychology;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-business">
-      <div class="icon-part">
-        <i class="fa fa-building" aria-hidden="true"></i><br>
-        <small>Business</small>
-        <p><?php
-            echo $business;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-market">
-      <div class="icon-part">
-        <i class="fa fa-poll" aria-hidden="true"></i><br>
-        <small>Marketing and Advertising</small>
-        <p><?php
-            echo $market;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-mech">
-      <div class="icon-part">
-        <i class="fa fa-wrench" aria-hidden="true"></i><br>
-        <small>Mechanical</small>
-        <p><?php
-            echo $mechanical;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-ethics">
-      <div class="icon-part">
-        <i class="fa fa-balance-scale" aria-hidden="true"></i><br>
-        <small>Ethics</small>
-        <p><?php
-            echo $ethics;
-            ?></p>
-      </div>
-    </div>
-    <div class="cpanel cpanel-others">
-      <div class="icon-part">
-        <i class="fas fa-globe" aria-hidden="true"></i><br>
-        <small>Others</small>
-        <p><?php
-            echo $others;
-            ?></p>
-      </div>
-    </div>
-  </div>
+  <h1 style="margin-left: 30px;">Analytics Overview</h1>
 
   <div class="flex-container">
-
-    <div id="piechart" style="width: 900px; height: 500px; float:left"></div>
-    <div id="curve_chart" style="width: 900px; height: 500px; float:right"></div>
+    <div id="piechart" style="width: 800px; height: 420px; float:left"></div>
+    <div id="curve_chart" style="width: 800px; height: 420px; float:right"></div>
   </div>
   <script type="text/javascript">
     google.charts.load('current', {
@@ -457,12 +320,148 @@ $db_handle = new DBController();
         <select data-conv-question="Please Confirm">
           <option value="Yes">Confirm</option>
         </select>
-
       </form>
     </div>
   </div>
-  <!-- ChatBot end -->
-
+  <h1 style="margin-left: 30px; ">Topics Overview</h1>
+  <div class="main-part">
+    <div class="cpanel">
+      <div class="icon-part">
+        <i class="fa fa-users" aria-hidden="true"></i><br>
+        <small>Users</small>
+        <p><?php
+            echo $users;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-green">
+      <div class="icon-part">
+        <i class="fa fa-book" aria-hidden="true"></i><br>
+        <small>Education</small>
+        <p><?php
+            echo $output2;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-orange">
+      <div class="icon-part">
+        <i class="fa fa-search" aria-hidden="true"></i><br>
+        <small>Research</small>
+        <p><?php
+            echo $output3;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-tech">
+      <div class="icon-part">
+        <i class="fas fa-laptop-code" aria-hidden="true"></i><br>
+        <small>Technology</small>
+        <p> <?php
+            echo $output;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-mint-green">
+      <div class="icon-part">
+        <i class="fa fa-bar-chart" aria-hidden="true"></i><br>
+        <small>Analysis</small>
+        <p> <?php
+            echo $output4;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-db">
+      <div class="icon-part">
+        <i class="fa fa-database" aria-hidden="true"></i><br>
+        <small>Database</small>
+        <p><?php
+            echo $database;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-blue">
+      <div class="icon-part">
+        <i class="fas fa-seedling" aria-hidden="true"></i><br>
+        <small>Agriculture</small>
+        <p><?php
+            echo $agriculture;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-red">
+      <div class="icon-part">
+        <i class="fa fa-medkit" aria-hidden="true"></i><br>
+        <small>Health</small>
+        <p><?php
+            echo $health;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-pol">
+      <div class="icon-part">
+        <i class="fas fa-vote-yea" aria-hidden="true"></i><br>
+        <small>Politics</small>
+        <p><?php
+            echo $politcs;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-skyblue">
+      <div class="icon-part">
+        <i class="fas fa-brain" aria-hidden="true"></i><br>
+        <small>Psychology</small>
+        <p><?php
+            echo $psychology;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-business">
+      <div class="icon-part">
+        <i class="fa fa-building" aria-hidden="true"></i><br>
+        <small>Business</small>
+        <p><?php
+            echo $business;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-market">
+      <div class="icon-part">
+        <i class="fa fa-poll" aria-hidden="true"></i><br>
+        <small>Marketing and Advertising</small>
+        <p><?php
+            echo $market;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-mech">
+      <div class="icon-part">
+        <i class="fa fa-wrench" aria-hidden="true"></i><br>
+        <small>Mechanical</small>
+        <p><?php
+            echo $mechanical;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-ethics">
+      <div class="icon-part">
+        <i class="fa fa-balance-scale" aria-hidden="true"></i><br>
+        <small>Ethics</small>
+        <p><?php
+            echo $ethics;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-others">
+      <div class="icon-part">
+        <i class="fas fa-globe" aria-hidden="true"></i><br>
+        <small>Others</small>
+        <p><?php
+            echo $others;
+            ?></p>
+      </div>
+    </div>
+  </div>
+  <br><br>
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->
 <script>

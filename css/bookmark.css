@@ -43,7 +43,9 @@
     }
     /*SEARCH BAR INPUT */
     input[type=text] {
-    width: 600px;
+      width: 680px;
+      border-radius: 10px;
+      font-size: 16px;
     }
     .form {
         position: relative;
@@ -52,11 +54,11 @@
     }
     /* MIC ICON*/
     .form span {
-        position: absolute;
-        right: 500px;
-        top: 14px;
-        padding: 5px;
-        border-left: 1px solid #d1d5db
+      position: absolute;
+      right: 520px;
+      top: 14px;
+      padding: 5px;
+      border-left: 1px solid #d1d5db
     }
     /* SEARCH FORM*/
     .left-pan {

@@ -219,10 +219,7 @@ if (!empty($result)) {
             <td>Research Type</td>
             <td><?php echo  $row['research_type']  ?></td>
           </tr>
-          <tr>
-            <td>Citation</td>
-            <td><?php echo  $row['citation']  ?></td>
-          </tr>
+
         </table>
       </div>
     </div>

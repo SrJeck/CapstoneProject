@@ -109,41 +109,92 @@ if (!empty($result)) {
   ?>
 
   <!-- BANNER IMAGE -->
-  <img class="bg" src="images/bookreadbackground.JPG">
+  <br>
+  <div id="index">
+    <div class="slideshow-container">
 
-  <!-- SEARCH BAR CONTAINER -->
-  <form name="frmSearch" method="post" action="research.php">
-    <div class="container">
-      <div class="row height d-flex justify-content-center align-items-center">
-        <div>
-          <div class="form">
-            <select class="topic" name="topic" id="topic">
-              <option value="" selected disabled hidden>Topic</option>
-              <option style="font-size:17px" value="Education">Education</option>
-              <option style="font-size:17px" value="Technology">Technology</option>
-              <option style="font-size:17px" value="Research">Research</option>
-              <option style="font-size:17px" value="Analysis">Analysis</option>
-              <option style="font-size:17px" value="Database">Database</option>
-            </select>
-            <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+      <div class="mySlides fade">
+        <img src="images/Ban1.png" style="width:100%; height: 430px;">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/Ban2.png" style="width:100%; height: 430px;">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/Ban3.png" style="width:100%; height: 430px;">
+      </div>
+
+      <div class="mySlides fade">
+        <img src="images/Ban1.png" style="width:100%; height: 430px;">
+      </div>
+
+
+      <div class="mySlides fade">
+        <img src="images/Ban2.png" style="width:100%; height: 430px;">
+      </div>
+
+    </div>
+    <br>
+
+
+    <div style="text-align:center">
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+      <span style="display: none;" class="dot"></span>
+    </div>
+    <script>
+      var slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 3000); // Change image every 3 seconds
+      }
+    </script>
+
+    <!-- SEARCH BAR CONTAINER -->
+    <form name="frmSearch" method="post" action="research.php">
+      <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center">
+          <div>
+            <div class="form">
+
+              <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
 
 
-  <?php
-  $stat = $dbh->prepare('select * from bookmark where user_id=?');
-  $stat->bindParam(1, $id);
-  $stat->execute();
-  while ($rows = $stat->fetch()) {
-    $thesis_id = $rows['id'];
-    $new_stat = $dbh->prepare('select * from research where id=?');
-    $new_stat->bindParam(1, $thesis_id);
-    $new_stat->execute();
-    $thesis = $new_stat->fetch();
-    echo '
+    <?php
+    $stat = $dbh->prepare('select * from bookmark where user_id=?');
+    $stat->bindParam(1, $id);
+    $stat->execute();
+    while ($rows = $stat->fetch()) {
+      $thesis_id = $rows['id'];
+      $new_stat = $dbh->prepare('select * from research where id=?');
+      $new_stat->bindParam(1, $thesis_id);
+      $new_stat->execute();
+      $thesis = $new_stat->fetch();
+      echo '
                 <table class="formview">
                       <tr class="displayRow">
                         <td> <br>
@@ -162,47 +213,47 @@ if (!empty($result)) {
                       </tr>
                  </table>
         ';
-  }
-  ?>
-  <br><br>
+    }
+    ?>
+    <br><br>
 
-  <!-- ChatBot -->
-  <div class="chat_icon">
-    <img style="height: 80px;" src="images/chatboticon.png">
-  </div>
-
-  <div class="chat_box">
-    <div class="my-conv-form-wrapper">
-      <form action="" method="GET" class="hidden">
-
-        <select data-conv-question="Hello! How can I help you" name="category">
-          <option value="WebDevelopment">Website Development ?</option>
-          <option value="ThesisQuoForum">Thesis Quo Forum</option>
-        </select>
-
-        <div data-conv-fork="category">
-          <div data-conv-case="WebDevelopment">
-            <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
-          </div>
-          <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
-            <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
-          </div>
-        </div>
-
-        <input type="text" name="name" data-conv-question="Please, Enter your name">
-
-        <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
-
-        <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
-
-        <select data-conv-question="Please Confirm">
-          <option value="Yes">Confirm</option>
-        </select>
-
-      </form>
+    <!-- ChatBot -->
+    <div class="chat_icon">
+      <img style="height: 80px;" src="images/chatboticon.png">
     </div>
-  </div>
-  <!-- ChatBot end -->
+
+    <div class="chat_box">
+      <div class="my-conv-form-wrapper">
+        <form action="" method="GET" class="hidden">
+
+          <select data-conv-question="Hello! How can I help you" name="category">
+            <option value="WebDevelopment">Website Development ?</option>
+            <option value="ThesisQuoForum">Thesis Quo Forum</option>
+          </select>
+
+          <div data-conv-fork="category">
+            <div data-conv-case="WebDevelopment">
+              <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
+            </div>
+            <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
+              <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
+            </div>
+          </div>
+
+          <input type="text" name="name" data-conv-question="Please, Enter your name">
+
+          <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
+
+          <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
+
+          <select data-conv-question="Please Confirm">
+            <option value="Yes">Confirm</option>
+          </select>
+
+        </form>
+      </div>
+    </div>
+    <!-- ChatBot end -->
 
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->

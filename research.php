@@ -59,6 +59,7 @@ if (!empty($result)) {
 
 <head>
   <title>Research</title>
+
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -75,6 +76,62 @@ if (!empty($result)) {
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/jquery.convform.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
+  <style>
+    .grid-container {
+      display: grid;
+      grid-column-gap: 100px;
+      grid-template-columns: auto auto auto;
+      padding: 10px;
+    }
+
+    .grid-item {
+      border: 1px solid #e7e7e7;
+      border-radius: 6px;
+      background-color: white;
+      box-shadow: 6px 6px 8px 0 #f2eff2;
+      padding: 10px;
+      font-size: 30px;
+      text-align: left;
+      width: 40%;
+    }
+
+
+    .sorted {
+      font-size: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #585858;
+    }
+
+    .sortby {
+      width: 153;
+      height: 35;
+      padding: 6px 12px;
+      box-shadow: 0 2px 0 rgb(0 0 0 / 8%);
+      font-size: 14px;
+      border-radius: 5px;
+    }
+
+    .selecttopic {
+      width: 153;
+      height: 35;
+      padding: 6px 12px;
+      box-shadow: 0 2px 0 rgb(0 0 0 / 8%);
+      font-size: 14px;
+      border-radius: 5px;
+    }
+
+    .apply {
+      background-color: #157572;
+      border: none;
+      color: white;
+      padding: 10px 18px;
+      text-align: right;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
@@ -103,28 +160,29 @@ if (!empty($result)) {
   ?>
 
   <!-- BANNER IMAGE -->
-  <div id="index" style="margin-top: 48px;">
+  <br>
+  <div id="index">
     <div class="slideshow-container">
 
       <div class="mySlides fade">
-        <img src="images/Ban1.png" style="width:100%; height: 400px;">
+        <img src="images/Ban1.png" style="width:100%; height: 430px;">
       </div>
 
       <div class="mySlides fade">
-        <img src="images/Ban2.png" style="width:100%; height: 400px;">
+        <img src="images/Ban2.png" style="width:100%; height: 430px;">
       </div>
 
       <div class="mySlides fade">
-        <img src="images/Ban3.png" style="width:100%; height: 400px;">
+        <img src="images/Ban3.png" style="width:100%; height: 430px;">
       </div>
 
       <div class="mySlides fade">
-        <img src="images/Ban1.png" style="width:100%; height: 400px;">
+        <img src="images/Ban1.png" style="width:100%; height: 430px;">
       </div>
 
 
       <div class="mySlides fade">
-        <img src="images/Ban2.png" style="width:100%; height: 400px;">
+        <img src="images/Ban2.png" style="width:100%; height: 430px;">
       </div>
 
     </div>
@@ -172,17 +230,49 @@ if (!empty($result)) {
           <div class="row height d-flex justify-content-center align-items-center">
             <div>
               <div class="form">
-                <select class="topic" name="topic" id="topic">
-                  <option value="" selected disabled hidden>Topic</option>
-                  <option style="font-size:17px" value="Education">Education</option>
-                  <option style="font-size:17px" value="Technology">Technology</option>
-                  <option style="font-size:17px" value="Research">Research</option>
-                  <option style="font-size:17px" value="Analysis">Analysis</option>
-                  <option style="font-size:17px" value="Database">Database</option>
-                </select>
                 <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="grid-container">
+          <div class="grid-item">
+            <h3 class="sorted">Sorted By</h3>
+            <select class="sortby">
+              <option selected="selected" value="relevance">Relevance</option>
+              <option value="DateAsc">Newest-Oldest</option>
+              <option value="DateDesc">Oldest-Newest</option>
+              <option value="title">Title</option>
+              <option value="author">Author</option>
+            </select>
+            <hr>
+            <h3 class="sorted">Topic</h3>
+            <select name="topic" id="topic" class="selecttopic">
+              <option value="" selected disabled hidden>Select topic</option>
+              <option value="Education">Education</option>
+              <option value="Technology">Technology</option>
+              <option value="Research">Research</option>
+              <option value="Analysis">Analysis</option>
+              <option value="Database">Database</option>
+              <option value="Agriculture">Agriculture</option>
+              <option value="Health">Health</option>
+              <option value="Politics">Politics</option>
+              <option value="Psychology">Psychology</option>
+              <option value="Business">Business</option>
+              <option value="Marketing and Advertising">Marketing and Advertising</option>
+              <option value="Mechanical">Mechanical</option>
+              <option value="Ethics">Ethics</option>
+              <option value="Others">Others</option>
+            </select>
+            <hr>
+            <h3 class="sorted">Publication Date</h3>
+            <p style="font-size: 14px;">From:</p>
+            <input type="text" class="fromDate" value="2019"><br>
+            <p style="font-size: 14px;">To:</p>
+            <input type="text" class="toDate" value="2021">
+            <br><br>
+            <button type="submit" class="apply">Apply Filters</button>
+            <br><br>
           </div>
         </div>
 
@@ -219,6 +309,7 @@ if (!empty($result)) {
           <?php } ?>
         </table>
       </form>
+
       <center>
         <!-- ChatBot -->
         <div class="chat_icon">
