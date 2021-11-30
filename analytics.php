@@ -10,68 +10,27 @@ require_once("perpage.php");
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 
-$title = "";
-$author = "";
-$topic = "";
-$publication_day = "";
-$publication_day = "";
-$publication_year = "";
 
-$queryCondition = "";
-if (!empty($_POST["search"])) {
-  foreach ($_POST["search"] as $k => $v) {
-    if (!empty($v)) {
-
-      $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
-      if (in_array($k, $queryCases)) {
-        if (!empty($queryCondition)) {
-          $queryCondition .= " OR ";
-        } else {
-          $queryCondition .= " WHERE ";
-        }
-      }
-      switch ($k) {
-        case "title":
-          $title = $v;
-          $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
-          break;
-      }
-    }
-  }
-}
-$orderby = " ORDER BY id desc";
-$sql = "SELECT * from research " . $queryCondition;
-$href = 'journals.php';
-
-$perPage = 3;
-$page = 1;
-if (isset($_POST['page'])) {
-  $page = $_POST['page'];
-}
-$start = ($page - 1) * $perPage;
-if ($start < 0) $start = 0;
-
-$query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
-$result = $db_handle->runQuery($query);
-
-if (!empty($result)) {
-  $result["perpage"] = showperpage($sql, $perPage, $href);
-}
-?>
 ?>
 <!-- START DATE 8/28/2021 -->
 <!-- UPDATE DATE 10/05/2021 -->
 <html>
 
 <head>
+  <title>Analytics</title>
   <script type="text/javascript" src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/bookmark.css">
+  <link rel="stylesheet" type="text/css" href="css/analytics.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -107,8 +66,255 @@ if (!empty($result)) {
     </div>';
   }
   ?>
-  <div id="piechart" style="width: 900px; height: 500px;"></div>
-  <div id="curve_chart" style="width: 900px; height: 500px"></div>
+  <?php
+  $conn = mysqli_connect("localhost", "root", "", "journal");
+  $query = "SELECT COUNT(*) as count from user";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $users = $row['count'] . '<br>';
+  }
+
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='technology'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $output = $row['count'] . '<br>';
+  }
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='education'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $output2 = $row['count'] . '<br>';
+  }
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='research'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $output3 =  $row['count'];
+  }
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='analysis'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $output4 =  $row['count'];
+  }
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='database'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $database =  $row['count'];
+  }
+
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='agriculture'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $agriculture =  $row['count'];
+  }
+
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='health'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $health =  $row['count'];
+  }
+
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='politcs'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $politcs =  $row['count'];
+  }
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='psychology'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $psychology =  $row['count'];
+  }
+
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='business'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $business =  $row['count'];
+  }
+
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='marketing and advertising'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $market =  $row['count'];
+  }
+
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='mechanical'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $mechanical =  $row['count'];
+  }
+
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='ethics'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $ethics =  $row['count'];
+  }
+
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='others'";
+  $query_result = mysqli_query($conn, $query);
+
+  while ($row = mysqli_fetch_assoc($query_result)) {
+    $others =  $row['count'];
+  }
+  $sql = "SELECT * from journal";
+  $result = mysqli_query($conn, $sql);
+
+  ?>
+  <br><br><br>
+  <div class="main-part">
+    <div class="cpanel">
+      <div class="icon-part">
+        <i class="fa fa-users" aria-hidden="true"></i><br>
+        <small>Users</small>
+        <p><?php
+            echo $users;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-green">
+      <div class="icon-part">
+        <i class="fa fa-book" aria-hidden="true"></i><br>
+        <small>Education</small>
+        <p><?php
+            echo $output2;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-orange">
+      <div class="icon-part">
+        <i class="fa fa-search" aria-hidden="true"></i><br>
+        <small>Research</small>
+        <p><?php
+            echo $output3;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-tech">
+      <div class="icon-part">
+        <i class="fas fa-laptop-code" aria-hidden="true"></i><br>
+        <small>Technology</small>
+        <p> <?php
+            echo $output;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-mint-green">
+      <div class="icon-part">
+        <i class="fa fa-bar-chart" aria-hidden="true"></i><br>
+        <small>Analysis</small>
+        <p> <?php
+            echo $output4;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-db">
+      <div class="icon-part">
+        <i class="fa fa-database" aria-hidden="true"></i><br>
+        <small>Database</small>
+        <p><?php
+            echo $database;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-blue">
+      <div class="icon-part">
+        <i class="fas fa-seedling" aria-hidden="true"></i><br>
+        <small>Agriculture</small>
+        <p><?php
+            echo $agriculture;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-red">
+      <div class="icon-part">
+        <i class="fa fa-medkit" aria-hidden="true"></i><br>
+        <small>Health</small>
+        <p><?php
+            echo $health;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-pol">
+      <div class="icon-part">
+        <i class="fas fa-vote-yea" aria-hidden="true"></i><br>
+        <small>Politics</small>
+        <p><?php
+            echo $politcs;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-skyblue">
+      <div class="icon-part">
+        <i class="fas fa-brain" aria-hidden="true"></i><br>
+        <small>Psychology</small>
+        <p><?php
+            echo $psychology;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-business">
+      <div class="icon-part">
+        <i class="fa fa-building" aria-hidden="true"></i><br>
+        <small>Business</small>
+        <p><?php
+            echo $business;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-market">
+      <div class="icon-part">
+        <i class="fa fa-poll" aria-hidden="true"></i><br>
+        <small>Marketing and Advertising</small>
+        <p><?php
+            echo $market;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-mech">
+      <div class="icon-part">
+        <i class="fa fa-wrench" aria-hidden="true"></i><br>
+        <small>Mechanical</small>
+        <p><?php
+            echo $mechanical;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-ethics">
+      <div class="icon-part">
+        <i class="fa fa-balance-scale" aria-hidden="true"></i><br>
+        <small>Ethics</small>
+        <p><?php
+            echo $ethics;
+            ?></p>
+      </div>
+    </div>
+    <div class="cpanel cpanel-others">
+      <div class="icon-part">
+        <i class="fas fa-globe" aria-hidden="true"></i><br>
+        <small>Others</small>
+        <p><?php
+            echo $others;
+            ?></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-container">
+
+    <div id="piechart" style="width: 900px; height: 500px; float:left"></div>
+    <div id="curve_chart" style="width: 900px; height: 500px; float:right"></div>
+  </div>
   <script type="text/javascript">
     google.charts.load('current', {
       'packages': ['corechart']

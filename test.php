@@ -1,168 +1,170 @@
-<?php
-error_reporting(0);
-$conn = mysqli_connect("localhost", "root", "", "journal") or die(mysqli_error());
-$query = "SELECT COUNT(topic) as count from journal WHERE topic='technology'";
-$query_result = mysqli_query($conn, $query);
-
-while ($row = mysqli_fetch_assoc($query_result)) {
-    $output = $row['count'] . '<br>';
-}
-$query = "SELECT COUNT(topic) as count from journal WHERE topic='education'";
-$query_result = mysqli_query($conn, $query);
-
-while ($row = mysqli_fetch_assoc($query_result)) {
-    $output2 = $row['count'] . '<br>';
-}
-$query = "SELECT COUNT(topic) as count from journal WHERE topic='research'";
-$query_result = mysqli_query($conn, $query);
-
-while ($row = mysqli_fetch_assoc($query_result)) {
-    $output3 =  $row['count'];
-}
-$query = "SELECT COUNT(topic) as count from journal WHERE topic='analysis'";
-$query_result = mysqli_query($conn, $query);
-
-while ($row = mysqli_fetch_assoc($query_result)) {
-    $output4 =  $row['count'];
-}
-
-$sql = "SELECT * from journal";
-$result = mysqli_query($conn, $sql);
-
-?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/admin.css">
-
-    <style>
-        table,
-        tr,
-        td {
-            text-align: center;
+    <title>Admin panel dashboard card design usign html and css - www.pakainfo.com</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,600" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        body {
+            background: #eee;
+            font-family: 'Raleway', sans-serif;
         }
 
-        table,
-        tr,
-        th,
-        td {
-            border: 1px solid #ccc;
+        .main-part {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0px 5px;
+        }
+
+        .cpanel {
+            width: 32%;
+            display: inline-block;
+            background-color: #34495E;
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        .icon-part i {
+            font-size: 30px;
+            padding: 10px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            margin-top: -25px;
+            margin-bottom: 10px;
+            background-color: #34495E;
+        }
+
+        .icon-part p {
+            margin: 0px;
+            font-size: 20px;
+            padding-bottom: 10px;
+        }
+
+        .card-content-part {
+            background-color: #2F4254;
+            padding: 5px 0px;
+        }
+
+        .cpanel .card-content-part:hover {
+            background-color: #5a5a5a;
+            cursor: pointer;
+        }
+
+        .card-content-part a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .cpanel-green .icon-part,
+        .cpanel-green .icon-part i {
+            background-color: #16A085;
+        }
+
+        .cpanel-green .card-content-part {
+            background-color: #149077;
+        }
+
+        .cpanel-orange .icon-part,
+        .cpanel-orange .icon-part i {
+            background-color: #F39C12;
+        }
+
+        .cpanel-orange .card-content-part {
+            background-color: #DA8C10;
+        }
+
+        .cpanel-blue .icon-part,
+        .cpanel-blue .icon-part i {
+            background-color: #2980B9;
+        }
+
+        .cpanel-blue .card-content-part {
+            background-color: #2573A6;
+        }
+
+        .cpanel-red .icon-part,
+        .cpanel-red .icon-part i {
+            background-color: #E74C3C;
+        }
+
+        .cpanel-red .card-content-part {
+            background-color: #CF4436;
+        }
+
+        .cpanel-skyblue .icon-part,
+        .cpanel-skyblue .icon-part i {
+            background-color: #8E44AD;
+        }
+
+        .cpanel-skyblue .card-content-part {
+            background-color: #803D9B;
         }
     </style>
 </head>
 
 <body>
-
-
-    <div class="wrapper">
-        <div class="counter col_fourth">
-            <i class="fa fa-code fa-2x"></i>
-            <h2 class="timer count-title count-number" data-to="300" data-speed="1500"></h2>
-            <p class="count-text ">Technology</p>
-            <p class="count-text ">
-                <?php
-                echo $output;
-                ?>
-            </p>
-
+    <div class="main-part">
+        <div class="cpanel">
+            <div class="icon-part">
+                <i class="fa fa-users" aria-hidden="true"></i><br>
+                <small>Members</small>
+                <p>985</p>
+            </div>
+            <div class="card-content-part">
+                <a href="#">More Details </a>
+            </div>
         </div>
-
-        <div class="counter col_fourth">
-            <i class="fa fa-coffee fa-2x"></i>
-            <h2 class="timer count-title count-number" data-to="1700" data-speed="1500"></h2>
-            <p class="count-text ">Education</p>
-            <p class="count-text ">
-                <?php
-                echo $output2;
-                ?>
-            </p>
+        <div class="cpanel cpanel-green">
+            <div class="icon-part">
+                <i class="fa fa-money" aria-hidden="true"></i><br>
+                <small>Account</small>
+                <p>$ 452</p>
+            </div>
+            <div class="card-content-part">
+                <a href="#">More Details </a>
+            </div>
         </div>
-
-        <div class="counter col_fourth">
-            <i class="fa fa-lightbulb-o fa-2x"></i>
-            <h2 class="timer count-title count-number" data-to="11900" data-speed="1500"></h2>
-            <p class="count-text ">Research</p>
-            <p class="count-text ">
-                <?php
-                echo $output3;
-                ?>
-            </p>
+        <div class="cpanel cpanel-orange">
+            <div class="icon-part">
+                <i class="fa fa-bell" aria-hidden="true"></i><br>
+                <small>Alert</small>
+                <p>11 New</p>
+            </div>
+            <div class="card-content-part">
+                <a href="#">More Details </a>
+            </div>
         </div>
-
-        <div class="counter col_fourth end">
-            <i class="fa fa-bug fa-2x"></i>
-            <h2 class="timer count-title count-number" data-to="157" data-speed="1500"></h2>
-            <p class="count-text">Analysis</p>
-            <p class="count-text ">
-                <?php
-                echo $output4;
-                ?>
-            </p>
+        <div class="cpanel cpanel-blue">
+            <div class="icon-part">
+                <i class="fa fa-tasks" aria-hidden="true"></i><br>
+                <small>Task</small>
+                <p>85</p>
+            </div>
+            <div class="card-content-part">
+                <a href="#">More Details </a>
+            </div>
+        </div>
+        <div class="cpanel cpanel-red">
+            <div class="icon-part">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i><br>
+                <small>Cart</small>
+                <p>$ 45</p>
+            </div>
+            <div class="card-content-part">
+                <a href="#">More Details </a>
+            </div>
+        </div>
+        <div class="cpanel cpanel-skyblue">
+            <div class="icon-part">
+                <i class="fa fa-comments" aria-hidden="true"></i><br>
+                <small>Mentions</small>
+                <p>104</p>
+            </div>
+            <div class="card-content-part">
+                <a href="#">More Details </a>
+            </div>
         </div>
     </div>
-    <a href="#" class="btn btn-info btn-lg">
-        <span class="glyphicon glyphicon-bookmark"></span> Bookmark
-    </a>
-    <script>
-        $(function() {
-            //var bookmarkOn = '<i class="fa fa-bookmark"></i>'
-            //var bookmarkOff = '<i class="fa fa-bookmark-o"></i>'
-
-            $('.pp-bookmark-btn')
-                //.html( $('.pp-bookmark-btn').data('state') ? bookmarkOn : bookmarkOff )
-                //.html( $('.pp-bookmark-btn').hasClass( "active" ) ? bookmarkOn : bookmarkOff )
-                .click(function() {
-                    var btn = $(this);
-
-                    var context = $(this).data("context");
-                    var contextAction = $(this).data("context-action");
-                    var contextId = $(this).data("context-id");
-                    // $('#log').html(context + " " + contextAction + " " + contextId )
-
-                    // if( btn.data('state') ) {
-                    //    btn.data('state', false);
-                    if (btn.hasClass("active")) {
-                        btn.removeClass("active")
-                        // $getJSON
-                        //btn.html(bookmarkOff);
-                    } else {
-                        // btn.data('state', true);
-                        btn.addClass("active");
-                        //btn.html(bookmarkOn);
-                    };
-                });
-
-            /*
-              updateBookmarks(action, context, context-action, context-id) {
-              
-              }
-              */
-            //     $('form').html('asfafaf');
-            //     var btn = $('form').attr('action');
-            //     var jqxhr = $.ajax({
-            //         url: '/echo/html/',
-            //         dataType: 'json',
-            //         data:{ id: $('form input').val() }
-            //     })
-            //     .success(function(data) {
-            //         alert("success"+data);
-            //     })
-            //     .error(function(err) {
-            //         alert("error"+err);
-            //     })
-            //     .complete(function(stuff) {
-            //         alert("complete"+stuff);
-            //     });
-            //
-            //     e.preventDefault();
-
-        });
-    </script>
 </body>
-
-</html>

@@ -10,6 +10,7 @@ if (isset($_SESSION['user_id'])) {
 <html>
 
 <head>
+  <title>Add Article</title>
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -27,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
   <div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
     <a style="margin-top: 6px;" href="index.php">HOME</a>
-    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="research.php">JOURNALS</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
@@ -43,28 +44,28 @@ if (isset($_SESSION['user_id'])) {
         <label>Title:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="title">
+        <input type="text" name="title" required>
       </span>
       <span class="col-25">
         <label>Authors:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="author" placeholder="Ex. Pineda, Dizon, Ramos, Reyes">
+        <input type="text" name="author" placeholder="Ex. Pineda, Dizon, Ramos, Reyes" required>
       </span>
     </span>
     <div class="inline">
       <label class="test" for="name">Publication Date:</label>
       <span></span>
-      <input class="test2" type="text" id="name" name="publication_month" placeholder="Month (ex. Jan, Feb, March)" />
-      <input class="test2" type="text" id="address" name="publication_day" placeholder="Day (ex. 10, 22, 29)" />
-      <input class="test2" type="text" id="address" name="publication_year" placeholder="Year (ex. 2021, 2022, 2023)" />
+      <input class="test2" type="text" id="name" name="publication_month" placeholder="Month (ex. Jan, Feb, March)" required />
+      <input class="test2" type="text" id="address" name="publication_day" placeholder="Day (ex. 10, 22, 29)" required />
+      <input class="test2" type="text" id="address" name="publication_year" placeholder="Year (ex. 2021, 2022, 2023)" required />
     </div>
     <span class=" row">
       <span class="col-25">
         <label>Institution:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="institution">
+        <input type="text" name="institution" required>
       </span>
       <span class="col-25">
         <label>Affiliation:</label>
@@ -76,7 +77,7 @@ if (isset($_SESSION['user_id'])) {
         <label>Degree Level:</label>
       </span>
       <span class="col-75">
-        <select name="degree_level" id="degree">
+        <select name="degree_level" id="degree" required>
           <option value="" selected disabled hidden>Select degree level</option>
           <option value="Professional Certificates">Professional Certificates</option>
           <option value="Undergraduate Degrees">Undergraduate Degrees</option>
@@ -94,21 +95,21 @@ if (isset($_SESSION['user_id'])) {
         <label>Topic:</label>
       </span>
       <span class="col-75">
-        <select name="topic" id="topic">
+        <select name="topic" id="topic" required>
           <option value="" selected disabled hidden>Select topic type</option>
           <option value="Education">Education</option>
           <option value="Technology">Technology</option>
           <option value="Research">Research</option>
           <option value="Analysis">Analysis</option>
           <option value="Database">Database</option>
-          <option value="Database">Agriculture</option>
-          <option value="Database">Health</option>
-          <option value="Database">Politics</option>
-          <option value="Database">Psychology</option>
-          <option value="Database">Business</option>
-          <option value="Database">Business</option>
-          <option value="Database">Mechanical</option>
-          <option value="Database">Ethics</option>
+          <option value="Agriculture">Agriculture</option>
+          <option value="Health">Health</option>
+          <option value="Politics">Politics</option>
+          <option value="Psychology">Psychology</option>
+          <option value="Business">Business</option>
+          <option value="Marketing and Advertising">Marketing and Advertising</option>
+          <option value="Mechanical">Mechanical</option>
+          <option value="Ethics">Ethics</option>
           <option value="Others">Others</option>
         </select>
       </span>
@@ -122,7 +123,7 @@ if (isset($_SESSION['user_id'])) {
         <label>Abstract:</label>
       </span>
       <span class="col-75">
-        <textarea type="text" name="abstract" rows="7" cols="50"></textarea>
+        <textarea type="text" name="abstract" rows="7" cols="50" required></textarea>
       </span>
       <span class="col-25">
         <label>Citation:</label>
@@ -140,7 +141,7 @@ if (isset($_SESSION['user_id'])) {
         <label>Publisher:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="publisher">
+        <input type="text" name="publisher" required>
       </span>
       <span class="col-25">
         <label>Permission Type:</label>

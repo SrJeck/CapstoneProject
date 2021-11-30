@@ -3,77 +3,42 @@ session_start();
 if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
 }
+
+$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+
 require_once("perpage.php");
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 
-$title = "";
-$author = "";
-$topic = "";
-$publication_day = "";
-$publication_day = "";
-$publication_year = "";
 
-$queryCondition = "";
-if (!empty($_POST["search"])) {
-    foreach ($_POST["search"] as $k => $v) {
-        if (!empty($v)) {
-
-            $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
-            if (in_array($k, $queryCases)) {
-                if (!empty($queryCondition)) {
-                    $queryCondition .= " OR ";
-                } else {
-                    $queryCondition .= " WHERE ";
-                }
-            }
-            switch ($k) {
-                case "title":
-                    $title = $v;
-                    $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
-                    break;
-            }
-        }
-    }
-}
-$orderby = " ORDER BY id desc";
-$sql = "SELECT * from research " . $queryCondition;
-$href = 'journals.php';
-
-$perPage = 3;
-$page = 1;
-if (isset($_POST['page'])) {
-    $page = $_POST['page'];
-}
-$start = ($page - 1) * $perPage;
-if ($start < 0) $start = 0;
-
-$query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
-$result = $db_handle->runQuery($query);
-
-if (!empty($result)) {
-    $result["perpage"] = showperpage($sql, $perPage, $href);
-}
 ?>
+<!-- START DATE 8/28/2021 -->
+<!-- UPDATE DATE 10/05/2021 -->
 <html>
 
 <head>
-    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/journals.css">
+    <link rel="stylesheet" type="text/css" href="css/analytics.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <!-- ChatBot -->
     <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/jquery.convform.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
+
 </head>
 
 <body>
@@ -82,8 +47,8 @@ if (!empty($result)) {
     if (isset($_SESSION['user_id'])) {
         echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
-    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
@@ -92,206 +57,411 @@ if (!empty($result)) {
     } else {
         echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="journals.php">JOURNALS</a>
-    <a style="margin-top: 6px;" href="#">ANALYTICS</a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>';
     }
     ?>
+    <?php
+    $conn = mysqli_connect("localhost", "root", "", "journal");
+    $query = "SELECT COUNT(*) as count from user";
+    $query_result = mysqli_query($conn, $query);
 
-    <!-- BANNER IMAGE -->
-    <div id="index" style="margin-top: 48px;">
-        <div class="slideshow-container">
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $users = $row['count'] . '<br>';
+    }
 
-            <div class="mySlides fade">
-                <img src="images/Ban1.png" style="width:100%; height: 400px;">
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='technology'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $output = $row['count'] . '<br>';
+    }
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='education'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $output2 = $row['count'] . '<br>';
+    }
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='research'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $output3 =  $row['count'];
+    }
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='analysis'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $output4 =  $row['count'];
+    }
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='database'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $database =  $row['count'];
+    }
+
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='agriculture'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $agriculture =  $row['count'];
+    }
+
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='health'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $health =  $row['count'];
+    }
+
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='politcs'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $politcs =  $row['count'];
+    }
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='psychology'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $psychology =  $row['count'];
+    }
+
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='business'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $business =  $row['count'];
+    }
+
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='marketing and advertising'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $market =  $row['count'];
+    }
+
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='mechanical'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $mechanical =  $row['count'];
+    }
+
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='ethics'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $ethics =  $row['count'];
+    }
+
+    $query = "SELECT COUNT(topic) as count from research WHERE topic='others'";
+    $query_result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($query_result)) {
+        $others =  $row['count'];
+    }
+    $sql = "SELECT * from journal";
+    $result = mysqli_query($conn, $sql);
+
+    ?>
+    <br><br><br>
+    <div class="main-part">
+        <div class="cpanel">
+            <div class="icon-part">
+                <i class="fa fa-users" aria-hidden="true"></i><br>
+                <small>Users</small>
+                <p><?php
+                    echo $users;
+                    ?></p>
             </div>
-
-            <div class="mySlides fade">
-                <img src="images/Ban2.png" style="width:100%; height: 400px;">
-            </div>
-
-            <div class="mySlides fade">
-                <img src="images/Ban3.png" style="width:100%; height: 400px;">
-            </div>
-
-            <div class="mySlides fade">
-                <img src="images/Ban1.png" style="width:100%; height: 400px;">
-            </div>
-
-
-            <div class="mySlides fade">
-                <img src="images/Ban2.png" style="width:100%; height: 400px;">
-            </div>
-
         </div>
-        <br>
-
-
-        <div style="text-align:center">
-            <span style="display: none;" class="dot"></span>
-            <span style="display: none;" class="dot"></span>
-            <span style="display: none;" class="dot"></span>
-            <span style="display: none;" class="dot"></span>
-            <span style="display: none;" class="dot"></span>
+        <div class="cpanel cpanel-green">
+            <div class="icon-part">
+                <i class="fa fa-book" aria-hidden="true"></i><br>
+                <small>Education</small>
+                <p><?php
+                    echo $output2;
+                    ?></p>
+            </div>
         </div>
-        <script>
-            var slideIndex = 0;
-            showSlides();
+        <div class="cpanel cpanel-orange">
+            <div class="icon-part">
+                <i class="fa fa-search" aria-hidden="true"></i><br>
+                <small>Research</small>
+                <p><?php
+                    echo $output3;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-tech">
+            <div class="icon-part">
+                <i class="fas fa-laptop-code" aria-hidden="true"></i><br>
+                <small>Technology</small>
+                <p> <?php
+                    echo $output;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-mint-green">
+            <div class="icon-part">
+                <i class="fa fa-bar-chart" aria-hidden="true"></i><br>
+                <small>Analysis</small>
+                <p> <?php
+                    echo $output4;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-db">
+            <div class="icon-part">
+                <i class="fa fa-database" aria-hidden="true"></i><br>
+                <small>Database</small>
+                <p><?php
+                    echo $database;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-blue">
+            <div class="icon-part">
+                <i class="fas fa-seedling" aria-hidden="true"></i><br>
+                <small>Agriculture</small>
+                <p><?php
+                    echo $agriculture;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-red">
+            <div class="icon-part">
+                <i class="fa fa-medkit" aria-hidden="true"></i><br>
+                <small>Health</small>
+                <p><?php
+                    echo $health;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-pol">
+            <div class="icon-part">
+                <i class="fas fa-vote-yea" aria-hidden="true"></i><br>
+                <small>Politics</small>
+                <p><?php
+                    echo $politcs;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-skyblue">
+            <div class="icon-part">
+                <i class="fas fa-brain" aria-hidden="true"></i><br>
+                <small>Psychology</small>
+                <p><?php
+                    echo $psychology;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-business">
+            <div class="icon-part">
+                <i class="fa fa-building" aria-hidden="true"></i><br>
+                <small>Business</small>
+                <p><?php
+                    echo $business;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-market">
+            <div class="icon-part">
+                <i class="fa fa-poll" aria-hidden="true"></i><br>
+                <small>Marketing and Advertising</small>
+                <p><?php
+                    echo $market;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-mech">
+            <div class="icon-part">
+                <i class="fa fa-wrench" aria-hidden="true"></i><br>
+                <small>Mechanical</small>
+                <p><?php
+                    echo $mechanical;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-ethics">
+            <div class="icon-part">
+                <i class="fa fa-balance-scale" aria-hidden="true"></i><br>
+                <small>Ethics</small>
+                <p><?php
+                    echo $ethics;
+                    ?></p>
+            </div>
+        </div>
+        <div class="cpanel cpanel-others">
+            <div class="icon-part">
+                <i class="fas fa-globe" aria-hidden="true"></i><br>
+                <small>Others</small>
+                <p><?php
+                    echo $others;
+                    ?></p>
+            </div>
+        </div>
+    </div>
 
-            function showSlides() {
-                var i;
-                var slides = document.getElementsByClassName("mySlides");
-                var dots = document.getElementsByClassName("dot");
-                for (i = 0; i < slides.length; i++) {
-                    slides[i].style.display = "none";
+    <div class="flex-container">
+
+        <div id="piechart" style="width: 900px; height: 500px; float:left"></div>
+        <div id="curve_chart" style="width: 900px; height: 500px; float:right"></div>
+    </div>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+
+        // Draw the pie chart for Sarah's pizza when Charts is loaded.
+        google.charts.setOnLoadCallback(drawPieChart);
+
+        // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+        google.charts.setOnLoadCallback(drawLineChart);
+
+        function drawPieChart() {
+
+            var pie_data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                <?php
+
+                $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+
+                $stat = $dbh->prepare('SELECT topic, COUNT(*) AS number_of_research FROM research GROUP BY topic');
+                $stat->execute();
+                while ($rows = $stat->fetch()) {
+                    echo "['" . $rows['topic'] . "', " . $rows['number_of_research'] . "],";
                 }
-                slideIndex++;
-                if (slideIndex > slides.length) {
-                    slideIndex = 1
+                ?>
+            ]);
+
+            var pie_options = {
+                title: 'Topics',
+                is3D: true
+            };
+
+            var pie_chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            pie_chart.draw(pie_data, pie_options);
+
+
+
+
+        }
+
+        function drawLineChart() {
+
+
+            var data = google.visualization.arrayToDataTable([
+                <?php
+
+                $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+                //collect and store all years
+                $fetch_year = $dbh->prepare('SELECT publication_year, COUNT(*) AS number_of_year FROM research GROUP BY publication_year');
+                $fetch_year->execute();
+                $year_rows = "";
+                while ($fetched_year = $fetch_year->fetch()) {
+                    $year_rows = $year_rows . $fetched_year['publication_year'] . ',';
                 }
-                for (i = 0; i < dots.length; i++) {
-                    dots[i].className = dots[i].className.replace(" active", "");
+
+                //collect and store all topic
+                $fetch_topic = $dbh->prepare('SELECT topic, COUNT(*) AS number_of_topic FROM research GROUP BY topic');
+                $fetch_topic->execute();
+                $topic_rows = "";
+                $first_row = "['Year'";
+                while ($fetched_topic = $fetch_topic->fetch()) {
+                    $topic_rows = $topic_rows . $fetched_topic['topic'] . ',';
+                    $first_row  = $first_row . ",'" . $fetched_topic['topic'] . "'";
                 }
-                slides[slideIndex - 1].style.display = "block";
-                dots[slideIndex - 1].className += " active";
-                setTimeout(showSlides, 3000); // Change image every 3 seconds
-            }
-        </script>
+                echo $first_row . '],';
 
 
-        <!-- SEARCH BAR CONTAINER -->
+                $topic_arr = explode(",", $topic_rows);
+                $year_arr = explode(",", $year_rows);
 
-        <center>
-
-            <form name="frmSearch" method="post" action="journals.php">
-                <div class="container">
-                    <div class="row height d-flex justify-content-center align-items-center">
-                        <div>
-                            <div class="form">
-                                <select class="topic" name="topic" id="topic">
-                                    <option value="" selected disabled hidden>Topic</option>
-                                    <option style="font-size:17px" value="Education">Education</option>
-                                    <option style="font-size:17px" value="Technology">Technology</option>
-                                    <option style="font-size:17px" value="Research">Research</option>
-                                    <option style="font-size:17px" value="Analysis">Analysis</option>
-                                    <option style="font-size:17px" value="Database">Database</option>
-                                </select>
-                                <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <table class="formview">
-
-                    <?php
-                    $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-                    $stat = $dbh->prepare('select * from bookmark where user_id=?');
-                    $stat->bindParam(1, $id);
-                    $stat->execute();
-                    while ($rows = $stat->fetch()) {
-                        $thesis_id = $rows['id'];
-                        $new_stat = $dbh->prepare('select * from research where id=?');
-                        $new_stat->bindParam(1, $thesis_id);
-                        $new_stat->execute();
-                        $thesis = $new_stat->fetch();
-                        if (!empty($result)) {
-                            foreach ($result as $k => $v) {
-                                if (is_numeric($k)) {
-                    ?>
-                                    <tr class="displayRow">
-
-                                        <td> <br>
-                                            <a class="displayResearch" target='_blank' href='display.php?id=<?php echo $result[$k]['id']; ?>'><i style="font-size:80px" class="fa">&#xf0f6;</i>
-                                                <p style="margin-left: 90px; margin-top: -90px;"><?php echo $result[$k]['topic']; ?></p>
-                                                <p style="margin-left: 90px; "><?php echo $result[$k]["title"]; ?></p>
-                                                <p style="margin-left: 90px; ">
-                                                    <p style="margin-left: 90px; "><?php echo $result[$k]["author"]; ?></p>
-                                                    <p style="margin-left: 90px; "><?php echo $result[$k]['publication_day'] . ' ' . $result[$k]['publication_month'] . ' ' . $result[$k]['publication_year']; ?></p>
-                                                    <hr style="border: 1px solid black;">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="add_bookmark_test.php?id=<?php echo  $id  ?>" class="view btn-lg">
-                                                <span class="fa fa-bookmark-o"> Bookmark</span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                        <?php
-                                }
-                            }
-                        }
+                $topic_length = count($topic_arr) - 1;
+                $year_length = count($year_arr);
+                $year_topic_count = "";
+                for ($i = 0; $i < $year_length; $i++) {
+                    //$year_topic_count = $year_arr[$i];
+                    $year_topic_count = "['" . $year_arr[$i] . "'";
+                    for ($j = 0; $j < $topic_length; $j++) {
+                        $fetch_count = $dbh->prepare('SELECT COUNT(*) AS number_count FROM research WHERE topic=? AND publication_year=?');
+                        $fetch_count->bindParam(1, $topic_arr[$j]);
+                        $fetch_count->bindParam(2, $year_arr[$i]);
+                        $fetch_count->execute();
+                        $fetched_count = $fetch_count->fetch();
+                        $year_topic_count = $year_topic_count . ", " . $fetched_count['number_count'];
                     }
-                    if (isset($result["perpage"])) {
-                        ?>
-                        <tr>
-                            <td> <?php echo $result["perpage"]; ?></td>
-                        </tr>
-                    <?php } ?>
-                    <?php
+                    echo $year_topic_count . "],";
+                    $year_topic_count = "";
+                }
+                ?>
+            ]);
+
+            var options = {
+                title: 'Upload Per Year',
+                curveType: 'function',
+                legend: {
+                    position: 'bottom'
+                }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
 
 
-                    // $databaseHost = 'localhost';   //your db host 
-                    // $databaseName = 'journal';  //your db name 
-                    // $databaseUsername = 'root';    //your db username 
-                    // $databasePassword = ''; //   db password 
-
-                    // $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
+        }
+    </script>
 
 
+    <br><br>
 
-                    // if (mysqli_connect_errno()) {
-                    //   echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                    // }
-                    // $sql = "select count('1') from journal";
-                    // $result = mysqli_query($mysqli, $sql);
-                    // $row = mysqli_fetch_array($result);
-                    // echo "<h3>$row[0]</h3>";
-                    // mysqli_close($mysqli);
-                    ?>
-                </table>
-            </form>
-            <center>
-                <!-- ChatBot -->
-                <div class="chat_icon">
-                    <img style="height: 80px;" src="images/chatboticon.png">
-                </div>
+    <!-- ChatBot -->
+    <div class="chat_icon">
+        <img style="height: 80px;" src="images/chatboticon.png">
+    </div>
 
-                <div class="chat_box">
-                    <div class="my-conv-form-wrapper">
-                        <form action="" method="GET" class="hidden">
+    <div class="chat_box">
+        <div class="my-conv-form-wrapper">
+            <form action="" method="GET" class="hidden">
 
-                            <select data-conv-question="Hello! How can I help you" name="category">
-                                <option value="WebDevelopment">Website Development ?</option>
-                                <option value="ThesisQuoForum">Thesis Quo Forum</option>
-                            </select>
+                <select data-conv-question="Hello! How can I help you" name="category">
+                    <option value="WebDevelopment">Website Development ?</option>
+                    <option value="ThesisQuoForum">Thesis Quo Forum</option>
+                </select>
 
-                            <div data-conv-fork="category">
-                                <div data-conv-case="WebDevelopment">
-                                    <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
-                                </div>
-                                <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
-                                    <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
-                                </div>
-                            </div>
-
-                            <input type="text" name="name" data-conv-question="Please, Enter your name">
-
-                            <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
-
-                            <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
-
-                            <select data-conv-question="Please Confirm">
-                                <option value="Yes">Confirm</option>
-                            </select>
-
-                        </form>
+                <div data-conv-fork="category">
+                    <div data-conv-case="WebDevelopment">
+                        <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
+                    </div>
+                    <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
+                        <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
                     </div>
                 </div>
-                <!-- ChatBot end -->
+
+                <input type="text" name="name" data-conv-question="Please, Enter your name">
+
+                <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
+
+                <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
+
+                <select data-conv-question="Please Confirm">
+                    <option value="Yes">Confirm</option>
+                </select>
+
+            </form>
+        </div>
+    </div>
+    <!-- ChatBot end -->
+
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->
 <script>

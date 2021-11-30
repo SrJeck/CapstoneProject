@@ -64,6 +64,7 @@ if (!empty($result)) {
 <html>
 
 <head>
+  <title>Bookmark</title>
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -111,7 +112,7 @@ if (!empty($result)) {
   <img class="bg" src="images/bookreadbackground.JPG">
 
   <!-- SEARCH BAR CONTAINER -->
-  <form name="frmSearch" method="post" action="journals.php">
+  <form name="frmSearch" method="post" action="research.php">
     <div class="container">
       <div class="row height d-flex justify-content-center align-items-center">
         <div>

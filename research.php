@@ -38,7 +38,7 @@ if (!empty($_POST["search"])) {
 }
 $orderby = " ORDER BY id desc";
 $sql = "SELECT * from research " . $queryCondition;
-$href = 'journals.php';
+$href = 'research.php';
 
 $perPage = 3;
 $page = 1;
@@ -58,6 +58,7 @@ if (!empty($result)) {
 <html>
 
 <head>
+  <title>Research</title>
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -166,7 +167,7 @@ if (!empty($result)) {
 
     <center>
 
-      <form name="frmSearch" method="post" action="journals.php">
+      <form name="frmSearch" method="post" action="research.php">
         <div class="container">
           <div class="row height d-flex justify-content-center align-items-center">
             <div>
@@ -216,27 +217,6 @@ if (!empty($result)) {
               <td> <?php echo $result["perpage"]; ?></td>
             </tr>
           <?php } ?>
-          <?php
-
-
-          // $databaseHost = 'localhost';   //your db host 
-          // $databaseName = 'journal';  //your db name 
-          // $databaseUsername = 'root';    //your db username 
-          // $databasePassword = ''; //   db password 
-
-          // $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
-
-
-
-          // if (mysqli_connect_errno()) {
-          //   echo "Failed to connect to MySQL: " . mysqli_connect_error();
-          // }
-          // $sql = "select count('1') from journal";
-          // $result = mysqli_query($mysqli, $sql);
-          // $row = mysqli_fetch_array($result);
-          // echo "<h3>$row[0]</h3>";
-          // mysqli_close($mysqli);
-          ?>
         </table>
       </form>
       <center>

@@ -33,7 +33,7 @@ if (isset($_SESSION['user_id'])) {
     <div class="navbar">
         <a href="index.php"><img style=" height: 25px;" src="images/Logo.png"></a>
         <a style="margin-top: 5px;" href="users.php">USERS</a>
-        <a style="margin-top: 5px;" href="journals.php">RESEARCH</a>
+        <a style="margin-top: 5px;" href="research.php">RESEARCH</a>
         <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
         <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     </div>

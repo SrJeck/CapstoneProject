@@ -174,7 +174,7 @@ if (!empty($result)) {
     </div>
     <div id="center">
       <div class="center-content">
-        <form class="example" name="frmSearch" method="post" action="journals.php" style="margin:auto;max-width:300px">
+        <form class="example" name="frmSearch" method="post" action="research.php" style="margin:auto;max-width:300px">
           <input type="text" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>" name="search2">
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
