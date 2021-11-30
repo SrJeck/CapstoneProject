@@ -68,12 +68,6 @@ if (isset($_SESSION['user_id'])) {
         <input type="text" name="institution" required>
       </span>
       <span class="col-25">
-        <label>Affiliation:</label>
-      </span>
-      <span class="col-75">
-        <input type="text" name="affiliation">
-      </span>
-      <span class="col-25">
         <label>Degree Level:</label>
       </span>
       <span class="col-75">
@@ -124,12 +118,6 @@ if (isset($_SESSION['user_id'])) {
       </span>
       <span class="col-75">
         <textarea type="text" name="abstract" rows="7" cols="50" required></textarea>
-      </span>
-      <span class="col-25">
-        <label>Citation:</label>
-      </span>
-      <span class="col-75">
-        <input type="text" name="citation">
       </span>
       <span class="col-25">
         <label>Keywords:</label>
