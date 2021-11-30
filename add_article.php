@@ -377,7 +377,23 @@ if (isset($_SESSION['user_id'])) {
         }
       }
     </script>
-    <button class="submit" type="submit" name="submit" onclick="test()">Submit</button>
+    <button class="submit" type="submit" name="submit" onclick="test()" id="sendNewSms">Submit</button>
+    <script>
+      var checker = document.getElementById('checkme');
+      var sendbtn = document.getElementById('sendNewSms');
+      // when unchecked or checked, run the function
+      checker.onchange = function() {
+        if (this.checked) {
+          sendNewSms.style.backgroundColor = "#157572";
+
+          sendbtn.disabled = false;
+        } else {
+          sendNewSms.style.backgroundColor = "#b8bdbd";
+          sendbtn.disabled = true;
+        }
+
+      }
+    </script>
   </form>
   </div>
   <div id="plagscan_output"></div>
