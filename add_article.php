@@ -11,7 +11,7 @@ if (isset($_SESSION['user_id'])) {
 
 <head>
   <title>Add Article</title>
-  <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
@@ -44,34 +44,34 @@ if (isset($_SESSION['user_id'])) {
         <label>Title:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="title" required>
+        <input type="text" name="title" id="title" required>
       </span>
       <span class="col-25">
         <label>Authors:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="author" placeholder="Ex. Pineda, Dizon, Ramos, Reyes" required>
+        <input type="text" name="author" id="author" placeholder="Ex. Pineda, Dizon, Ramos, Reyes" required>
       </span>
     </span>
     <div class="inline">
       <label class="test" for="name">Publication Date:</label>
       <span></span>
-      <input class="test2" type="text" id="name" name="publication_month" placeholder="Month (ex. Jan, Feb, March)" required />
-      <input class="test2" type="text" id="address" name="publication_day" placeholder="Day (ex. 10, 22, 29)" required />
-      <input class="test2" type="text" id="address" name="publication_year" placeholder="Year (ex. 2021, 2022, 2023)" required />
+      <input class="test2" type="text" id="publication_month" name="publication_month" placeholder="Month (ex. Jan, Feb, March)" required />
+      <input class="test2" type="text" id="publication_day" name="publication_day" placeholder="Day (ex. 10, 22, 29)" required />
+      <input class="test2" type="text" id="publication_year" name="publication_year" placeholder="Year (ex. 2021, 2022, 2023)" required />
     </div>
     <span class=" row">
       <span class="col-25">
         <label>Institution:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="institution" required>
+        <input type="text" name="institution" id="institution" required>
       </span>
       <span class="col-25">
         <label>Degree Level:</label>
       </span>
       <span class="col-75">
-        <select name="degree_level" id="degree" required>
+        <select name="degree_level" id="degree_level" required>
           <option value="" selected disabled hidden>Select degree level</option>
           <option value="Professional Certificates">Professional Certificates</option>
           <option value="Undergraduate Degrees">Undergraduate Degrees</option>
@@ -111,25 +111,26 @@ if (isset($_SESSION['user_id'])) {
         <label>Research Type:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="research_type" value="Thesis" readonly>
+        <input type="text" id="research_type" name="research_type" value="Thesis" readonly>
       </span>
       <span class="col-25">
         <label>Abstract:</label>
       </span>
       <span class="col-75">
-        <textarea type="text" name="abstract" rows="7" cols="50" required></textarea>
+        <textarea type="text" name="abstract" id="abstract" rows="7" cols="50" required></textarea>
+        <button class='scanbutton' onclick='plagScan()' id='sub-btn'>Scan For Plagiarism</button><br>
       </span>
       <span class="col-25">
         <label>Keywords:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="keywords">
+        <input type="text" id="keywords" name="keywords">
       </span>
       <span class="col-25">
         <label>Publisher:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="publisher" required>
+        <input type="text" name="publisher" id="publisher" required>
       </span>
       <span class="col-25">
         <label>Permission Type:</label>
@@ -376,9 +377,10 @@ if (isset($_SESSION['user_id'])) {
         }
       }
     </script>
-    <button class="submit" type="submit" name="submit">Submit</button>
+    <button class="submit" type="submit" name="submit" onclick="test()">Submit</button>
   </form>
   </div>
+  <div id="plagscan_output"></div>
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->
 <script>

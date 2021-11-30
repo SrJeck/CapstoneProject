@@ -39,10 +39,10 @@ $topic_rows = "";
 $first_row = "['Year'";
 while ($fetched_topic = $fetch_topic->fetch()) {
     //echo $fetched_topic['topic'] . ' : ' . $fetched_topic['number_of_topic'].'<br>';
-    $topic_rows = $topic_rows . $fetched_topic['topic'] . ',';
+    $topic_rows = $topic_rows . ',' . $fetched_topic['topic'];
     $first_row  = $first_row .",'".$fetched_topic['topic'] ."'";
 }
-echo $first_row .'],<br>';
+echo $first_row .']';
 
 
 $topic_arr = explode(",",$topic_rows);
@@ -51,10 +51,12 @@ $year_arr = explode(",",$new_year_rows);
 
 $topic_length = count($topic_arr);
 $year_length = count($year_arr);
+
+
 $year_topic_count = "";
 for ($i=0; $i < $year_length; $i++) { 
     //$year_topic_count = $year_arr[$i];
-    $year_topic_count = "['". $year_arr[$i]."'";
+    $year_topic_count = ",['". $year_arr[$i]."'";
     for ($j=0; $j < $topic_length-1; $j++) { 
         $fetch_count = $dbh->prepare('SELECT COUNT(*) AS number_count FROM research WHERE topic=? AND publication_year=?');
         $fetch_count->bindParam(1, $topic_arr[$j]);
@@ -63,10 +65,13 @@ for ($i=0; $i < $year_length; $i++) {
         $fetched_count = $fetch_count->fetch();
         $year_topic_count = $year_topic_count . ", ". $fetched_count['number_count'];
     }
-    echo $year_topic_count."],";
+    echo $year_topic_count."]";
     $year_topic_count = "";
 }
-
+echo  $topic_rows."<br>";
+echo  $year_rows."<br>";
+echo  $topic_length." topic <br>";
+echo  $year_length." year <br>";
 // $fetch_topic = $dbh->prepare('SELECT COUNT(*) AS number_occured FROM research WHERE topic="analysis" AND publication_year=1996');
 // $fetch_topic->execute();
 // while ($fetched_topic = $fetch_topic->fetch()) {

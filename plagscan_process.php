@@ -1,78 +1,18 @@
 <?php
 
-        
-
 session_start();
 if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
 }
 $output_string = "";
-?>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Syne+Mono&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Staatliches&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plagiarism Checker</title>
-    <script src="https://kit.fontawesome.com/d591665a2d.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script type="text/javascript" src="js/custom.js"></script>
-</head>
+// if ($_POST['fullText'] ?? null) {
+//     $output_string =  $output_string . "<script>document.getElementById('fullText').disabled = true;"."document.getElementById('sub-btn').disabled = true;</script>";
+// } else {
+//     $output_string = $output_string . "<script>document.getElementById('fullText').enabled = 'true';"."document.getElementById('sub-btn').enabled = 'true';</script>";
+// }
 
-<body>
-    <?php
-    if (isset($_SESSION['user_id'])) {
-        echo '<div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    
-    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
-  </div>';
-    } else {
-        echo '<div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
-    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
-    </div>';
-    }
-    ?>
-
-
-
-    <div class='main'>
-        <div class='container'>
-            <form id='myForm' action="" method="POST">
-                <div id='formDiv'>
-                    <br><br><br><br><br><br>
-                    <button class='scanbutton' onclick='myFunc()' id='sub-btn' type="submit">Scan For Plagiarism</button><br>
-                    <button class='CheckNew' type='reset' onclick='checkNew()'><i class='fas fa-sync-alt'></i> Check New </button>
-                    <textarea name="fullText" id='fullText' class="text1" placeholder="Enter Abstract to Run Check" required><?php //$data = $_POST['fullText'] ?? null;
-                                                                                                                                //echo "$data"; ?></textarea><br>
-
-                    <?php
-                    if ($_POST['fullText'] ?? null) {
-                        $output_string =  $output_string . "<script>document.getElementById('fullText').disabled = true;"."document.getElementById('sub-btn').disabled = true;</script>";
-                    } else {
-                        $output_string = $output_string . "<script>document.getElementById('fullText').enabled = 'true';"."document.getElementById('sub-btn').enabled = 'true';</script>";
-                    }
-                    ?>
-                </div>
-            </form>
-
-            <div id='image' class='image'></div>
-        </div>
-
-        <?php
-        error_reporting(0);
+error_reporting(0);
         // getting the form input and preparing the results block
         require 'simple_html_dom.php';
         $data = $_POST['fullText'] ?? null;
@@ -299,10 +239,7 @@ $output_string = "";
         $plagPercent = ($plagCount / $totalSentences) * 100;
         $unPercent = 100 - $plagPercent;
 
-        ?>
 
-        <?php
-        // printing the top sources block
         if (count($plagUrls) > 0) {
             $output_string = $output_string .  "<div class = 'topSource'><h4>Top Sources</h4><br>";
             foreach ($plagUrls as $key => $value) {
@@ -317,8 +254,7 @@ $output_string = "";
                         document.getElementById('result').style.margin = '2% 2% 3% 2%';
                     </script>";
         }
-        ?>
-        <?php
+
         // printing the overview block
         if (is_countable($plagUrls) && count($plagUrls) > 0) {
             $output_string = $output_string .  "<div class = 'overview' ><h4>Results:</h4>
@@ -343,8 +279,6 @@ $output_string = "";
             </div>";
         }
 
-        ?>
-        <?php
         // printing the Download button and Check New button
         if ($_POST['fullText'] ?? null) {
             $output_string = $output_string ."
@@ -357,18 +291,6 @@ $output_string = "";
         }
 
         echo $output_string;
-        ?>
-    </div>
 
 
-
-
-</body>
-<script>
-    function checkNew() {
-        document.getElementById('myForm').reset();
-        window.location.replace(location.pathname);
-    }
-</script>
-
-</html>
+?>

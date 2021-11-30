@@ -380,18 +380,20 @@ $db_handle = new DBController();
           $topic_rows = $topic_rows . $fetched_topic['topic'] . ',';
           $first_row  = $first_row . ",'" . $fetched_topic['topic'] . "'";
         }
-        echo $first_row . '],';
+        echo $first_row . ']';
 
 
-        $topic_arr = explode(",", $topic_rows);
-        $year_arr = explode(",", $year_rows);
 
-        $topic_length = count($topic_arr) - 1;
+        $new_topic_rows = substr_replace($topic_rows,"",-1);
+        $new_year_rows = substr_replace($year_rows,"",-1);
+        $topic_arr = explode(",", $new_topic_rows);
+        $year_arr = explode(",", $new_year_rows);
+
+        $topic_length = count($topic_arr);
         $year_length = count($year_arr);
         $year_topic_count = "";
         for ($i = 0; $i < $year_length; $i++) {
-          //$year_topic_count = $year_arr[$i];
-          $year_topic_count = "['" . $year_arr[$i] . "'";
+          $year_topic_count = ",['" . $year_arr[$i] . "'";
           for ($j = 0; $j < $topic_length; $j++) {
             $fetch_count = $dbh->prepare('SELECT COUNT(*) AS number_count FROM research WHERE topic=? AND publication_year=?');
             $fetch_count->bindParam(1, $topic_arr[$j]);
@@ -400,7 +402,7 @@ $db_handle = new DBController();
             $fetched_count = $fetch_count->fetch();
             $year_topic_count = $year_topic_count . ", " . $fetched_count['number_count'];
           }
-          echo $year_topic_count . "],";
+          echo $year_topic_count . "]";
           $year_topic_count = "";
         }
         ?>
