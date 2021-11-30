@@ -49,7 +49,7 @@ if (isset($_SESSION['user_id'])) {
   <br><br><br><br><br><br><br>
 
   <div class="content-register">
-    <form action="registration_insert.php" method="post" enctype="multipart/form-data">
+    <form action="update_profile.php" method="post" enctype="multipart/form-data">
 
       <div class="login-form">
         <div class="top">

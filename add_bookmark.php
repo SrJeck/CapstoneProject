@@ -19,6 +19,5 @@ if (empty($row)) {
     $stmt->execute();
     header("Location: display.php?id=" . $id);
 } else {
-
     header("Location: display.php?id=" . $id);
 }
