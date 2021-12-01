@@ -75,6 +75,7 @@ $("#myPdf").on("change", function(e){
 // }
 
 function plagScan() {
+	document.getElementById('add_article_form').submit();
 	var fullText = document.getElementById('abstract').value;
 
 	xhr = new XMLHttpRequest();
@@ -88,4 +89,8 @@ function plagScan() {
         xhr.open("POST","plagscan_process.php",true);
         xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         xhr.send("fullText="+fullText);
+}
+
+function proceed() {
+	window.location.href = "logOrProf.php";
 }
