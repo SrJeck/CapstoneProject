@@ -1,9 +1,8 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-}else{
-    
-    header("Location: profile.php");
+    header("Location: index.php");
+} else {
+
+    header("Location: admin.php");
 }
-?>
