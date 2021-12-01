@@ -6,16 +6,43 @@ if (isset($_SESSION['user_id'])) {
 }
 $output_string = "";
 
-// if ($_POST['fullText'] ?? null) {
-//     $output_string =  $output_string . "<script>document.getElementById('fullText').disabled = true;"."document.getElementById('sub-btn').disabled = true;</script>";
-// } else {
-//     $output_string = $output_string . "<script>document.getElementById('fullText').enabled = 'true';"."document.getElementById('sub-btn').enabled = 'true';</script>";
-// }
+?>
+<html>
 
-error_reporting(0);
+<head>
+  <title>Add Article</title>
+  <script type="text/javascript" src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/add_article.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="index.php">HOME</a>
+    <a style="margin-top: 6px;" href="research.php">JOURNALS</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+  </div>
+
+  <div>
+  <?php
+
+        error_reporting(0);
         // getting the form input and preparing the results block
         require 'simple_html_dom.php';
-        $data = $_POST['fullText'] ?? null;
+        //$data = $_POST['fullText'] ?? null;
+        $data = $_POST['abstract'] ?? null;
         $not_printed = true;
         $data_arr = explode(PHP_EOL, $data);
         for ($i = 0; $i < count($data_arr); $i++) {
@@ -280,17 +307,68 @@ error_reporting(0);
         }
 
         // printing the Download button and Check New button
-        if ($_POST['fullText'] ?? null) {
+        // if ($_POST['fullText'] ?? null) {
+        if ($_POST['abstract'] ?? null) {
             $output_string = $output_string ."
                 <div class = 'boxes' >
-                <form  id='myForm2' action='' method='POST'>
-                      <button class = 'downR' onclick='window.print()'>  <i class='fas fa-download'></i>   Download Report </button>
-                      <button class='submit' type='submit' name='proceed'> Submit </button><br><br><br></form>
-                      </div>";
+                
+                <button class = 'downR' onclick='window.print()'>  <i class='fas fa-download'></i>   Download Report </button>
+                <button class='submit' name='proceed' onclick='proceed()'> Finish </button><br><br><br>
+                </div>";
         
         }
 
         echo $output_string;
+?>
 
+  </div>
+
+
+  </body>
+
+  </html>
+
+
+<?php
+        $name = $_FILES['myfile']['name'];
+        $type = $_FILES['myfile']['type'];
+        $title = $_POST['title'];
+        $author = $_POST['author'];
+        $publication_month = $_POST['publication_month'];
+        $publication_day = $_POST['publication_day'];
+        $publication_year = $_POST['publication_year'];
+        $institution = $_POST['institution'];
+        $degree_level = $_POST['degree_level'];
+        $topic = $_POST['topic'];
+        $research_type = $_POST['research_type'];
+        $abstract = $_POST['abstract'];
+        // $abstract = $_POST['fullText'];
+        $keywords = $_POST['keywords'];
+        $publisher = $_POST['publisher'];
+        $permission = $_POST['permission'];
+        $upload_status = 'Unposted';
+        $data = file_get_contents($_FILES['myfile']['tmp_name']);
+        $stmt = $dbh->prepare("insert into research values('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'')");
+        $stmt->bindParam(1, $title);
+        $stmt->bindParam(2, $author);
+        $stmt->bindParam(3, $publication_month);
+        $stmt->bindParam(4, $publication_day);
+        $stmt->bindParam(5, $publication_year);
+        $stmt->bindParam(6, $name);
+        $stmt->bindParam(7, $data);
+        $stmt->bindParam(8, $type);
+        $stmt->bindParam(9, $institution);
+        $stmt->bindParam(10, $degree_level);
+        $stmt->bindParam(11, $topic);
+        $stmt->bindParam(12, $research_type);
+        $stmt->bindParam(13, $abstract);
+        $stmt->bindParam(14, $keywords);
+        $stmt->bindParam(15, $publisher);
+        $stmt->bindParam(16, $permission);
+        $stmt->bindParam(17, $upload_status);
+        $stmt->bindParam(18, $plagPercent);
+        $stmt->bindParam(19, $unPercent);
+        $stmt->bindParam(20, $user_id);
+        $stmt->execute();
 
 ?>

@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
         $permission = $_POST['permission'];
         $upload_status = 'Unpublished';
         $data = file_get_contents($_FILES['myfile']['tmp_name']);
-        $stmt = $dbh->prepare("insert into research values('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt = $dbh->prepare("insert into research values('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'')");
         $stmt->bindParam(1, $title);
         $stmt->bindParam(2, $author);
         $stmt->bindParam(3, $publication_month);
@@ -44,6 +44,6 @@ if (isset($_POST['submit'])) {
         $stmt->bindParam(19, $unPercent);
         $stmt->bindParam(20, $user_id);
         $stmt->execute();
-        header("Location: plagscan.php");
+        header("Location: logOrProf.php");
     }
 }

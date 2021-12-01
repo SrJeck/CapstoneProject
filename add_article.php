@@ -38,8 +38,15 @@ if (isset($_SESSION['user_id'])) {
 
   <!-- Form -->
   <br>
-  <form action="insert.php" method="post" enctype="multipart/form-data">
+  <form id="add_article_form" action="plagscan_process.php" method="post" enctype="multipart/form-data">
     <span class="row">
+    <span class="col-25">
+        <label>Abstract:</label>
+      </span>
+      <span class="col-75">
+        <textarea type="text" name="abstract" id="abstract" rows="7" cols="50" required></textarea>
+        <!-- <button class='scanbutton' onclick='plagScan()' id='sub-btn'>Scan For Plagiarism</button><br> -->
+      </span>
       <span class="col-25">
         <label>Title:</label>
       </span>
@@ -113,13 +120,7 @@ if (isset($_SESSION['user_id'])) {
       <span class="col-75">
         <input type="text" id="research_type" name="research_type" value="Thesis" readonly>
       </span>
-      <span class="col-25">
-        <label>Abstract:</label>
-      </span>
-      <span class="col-75">
-        <textarea type="text" name="abstract" id="abstract" rows="7" cols="50" required></textarea>
-        <button class='scanbutton' onclick='plagScan()' id='sub-btn'>Scan For Plagiarism</button><br>
-      </span>
+      
       <span class="col-25">
         <label>Keywords:</label>
       </span>
@@ -377,7 +378,7 @@ if (isset($_SESSION['user_id'])) {
         }
       }
     </script>
-    <button class="submit" type="submit" name="submit" onclick="test()" id="sendNewSms">Submit</button>
+    <button class="submit" type="submit" name="submit" id="sendNewSms">Submit</button>
     <script>
       var checker = document.getElementById('checkme');
       var sendbtn = document.getElementById('sendNewSms');
