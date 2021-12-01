@@ -247,8 +247,8 @@ $db_handle = new DBController();
 
 
 
-        $new_topic_rows = substr_replace($topic_rows,"",-1);
-        $new_year_rows = substr_replace($year_rows,"",-1);
+        $new_topic_rows = substr_replace($topic_rows, "", -1);
+        $new_year_rows = substr_replace($year_rows, "", -1);
         $topic_arr = explode(",", $new_topic_rows);
         $year_arr = explode(",", $new_year_rows);
 
@@ -330,7 +330,7 @@ $db_handle = new DBController();
     <div class="cpanel">
       <div class="icon-part">
         <i class="fa fa-users" aria-hidden="true"></i><br>
-        <small>Users</small>
+        <small>Active Users</small>
         <p><?php
             echo $users;
             ?></p>
