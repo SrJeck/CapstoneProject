@@ -397,7 +397,6 @@ if (isset($_SESSION['user_id'])) {
     </script>
   </form>
   </div>
-  <div id="plagscan_output"></div>
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->
 <script>
