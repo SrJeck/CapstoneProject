@@ -2,7 +2,7 @@
 
 <head>
  
-<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="script.js"></script>
 </head>
 <body>
     
@@ -154,7 +154,12 @@ for ($i=0; $i < $counted; $i+=3) {
 echo $test;
 for ($i=0; $i < $num; $i++) { 
     $new_num = $i+1;
-    echo "<button  type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button>";
+    //echo "<button class='btn$new_num' type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button>";
+    if ($new_num > 5) {
+        echo "<button class='btn$new_num' style='display:none' type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button>";
+    }else{
+        echo "<button class='btn$new_num' style='display:block' type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button>";
+    }
 }
 ?>
 <script>

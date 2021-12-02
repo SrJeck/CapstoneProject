@@ -111,4 +111,94 @@ prevNum = num;
 		}
 	}
   }    
+
+    if (num == 1 ) {
+	  for (let index = 1; index < (total_count+1); index++) {
+		if (num == index || (num+1) == index || (num+2) == index || (num+3) == index) {
+			var items = document.getElementsByClassName("btn"+index);
+			for (var i=0; i < items.length; i++) {
+				items[i].style.display = "block";
+			}
+		}else{
+			var items = document.getElementsByClassName("btn"+index);
+			for (var i=0; i < items.length; i++) {
+				items[i].style.display = "none";
+			}
+		}
+		var items = document.getElementsByClassName("btn"+total_count);
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "block";
+		}
+	  }
+  	}  else if (num > 1 && num < total_count) {
+
+	  for (let index = 1; index < (total_count+1); index++) {
+		var items = document.getElementsByClassName("btn"+1);
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "block";
+		}
+		if ((num-1) == 1) {
+			if (num == index || (num+1) == index || (num+2) == index) {
+				var items = document.getElementsByClassName("btn"+index);
+				for (var i=0; i < items.length; i++) {
+					items[i].style.display = "block";
+				}
+			}else{
+				var items = document.getElementsByClassName("btn"+index);
+				for (var i=0; i < items.length; i++) {
+					items[i].style.display = "none";
+				}
+			}
+		} else if ((num+1) == total_count) {
+			if ((num-2) == index || (num-1) == index || num == index) {
+				var items = document.getElementsByClassName("btn"+index);
+				for (var i=0; i < items.length; i++) {
+					items[i].style.display = "block";
+				}
+			}else{
+				var items = document.getElementsByClassName("btn"+index);
+				for (var i=0; i < items.length; i++) {
+					items[i].style.display = "none";
+				}
+			}
+		}else{
+			if ((num-1) == index || num == index || (num+1) == index) {
+				var items = document.getElementsByClassName("btn"+index);
+				for (var i=0; i < items.length; i++) {
+					items[i].style.display = "block";
+				}
+			}else{
+				var items = document.getElementsByClassName("btn"+index);
+				for (var i=0; i < items.length; i++) {
+					items[i].style.display = "none";
+				}
+			}
+		}
+		
+		var items = document.getElementsByClassName("btn"+total_count);
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "block";
+		}
+	  }
+	  
+  }  else if (num == total_count) {
+	  for (let index = 1; index < (total_count+1); index++) {
+		var items = document.getElementsByClassName("btn"+1);
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "block";
+		}
+		if ((num-3) == index || (num-2) == index || (num-1) == index ||  num == index) {
+			var items = document.getElementsByClassName("btn"+index);
+			for (var i=0; i < items.length; i++) {
+				items[i].style.display = "block";
+			}
+		}else{
+			var items = document.getElementsByClassName("btn"+index);
+			for (var i=0; i < items.length; i++) {
+				items[i].style.display = "none";
+			}
+		}
+	  }
   }
+
+}
