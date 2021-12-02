@@ -19,7 +19,7 @@ if (isset($_SESSION['user_id'])) {
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="admin.css">
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- ChatBot -->
     <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
@@ -85,37 +85,63 @@ if (isset($_SESSION['user_id'])) {
     </div>
     <table class="table">
         <tr class="tr">
-            <th class="th"><input type="checkbox"></th>
             <th class="th">Title</th>
             <th class="th">Published By</th>
             <th class="th">Year</th>
         </tr>
         <tr class="tr">
-            <td class="td"><input type="checkbox"></th>
             <td class="td">Game of Codes</td>
             <td class="td">Mohammed Morad</td>
             <td class="td">2021</td>
         </tr>
         <tr class="tr">
-            <td class="td"><input type="checkbox"></th>
             <td class="td">Game of Codes</td>
             <td class="td">Mohammed Morad</td>
             <td class="td">2020</td>
         </tr>
         <tr class="tr">
-            <td class="td"><input type="checkbox"></th>
             <td class="td">Game of Codes</td>
             <td class="td">Mohammed Morad</td>
             <td class="td">2019</td>
         </tr>
         <tr class="tr">
-            <td class="td"><input type="checkbox"></th>
             <td class="td">Game of Codes</td>
             <td class="td">Mohammed Morad</td>
             <td class="td">2018 </td>
         </tr>
     </table>
-
+    <table class="table2">
+        <tr class="tr2">
+            <th class="th2">Admin Name</th>
+            <th class="th2">Email</th>
+            <th class="th2">Access</th>
+            <th class="th2">Login Status</th>
+        </tr>
+        <tr class="tr2">
+            <td class="td2">Juan Dela Cruz</td>
+            <td class="td2">juan@gmail.com</td>
+            <td class="td2">Internal User</td>
+            <td class="td2">Active</td>
+        </tr>
+        <tr class="tr2">
+            <td class="td2">Juan Dela Cruz</td>
+            <td class="td2">juan@gmail.com</td>
+            <td class="td2">Portal User</td>
+            <td class="td2">Active</td>
+        </tr>
+        <tr class="tr2">
+            <td class="td2">Juan Dela Cruz</td>
+            <td class="td2">juan@gmail.com</td>
+            <td class="td2">Read Only</td>
+            <td class="td2">Inactive</td>
+        </tr>
+        <tr class="tr2">
+            <td class="td2">Juan Dela Cruz</td>
+            <td class="td2">juan@gmail.com</td>
+            <td class="td2">Read and Create </td>
+            <td class="td2">Active</td>
+        </tr>
+    </table>
     <!-- ChatBot -->
     <div class="chat_icon">
         <img style="height: 80px;" src="images/chatboticon.png">

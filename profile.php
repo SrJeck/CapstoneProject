@@ -101,23 +101,27 @@ if (isset($_SESSION['user_id'])) {
     <div class="vl"></div>
 
   </div>
-  <table class="table">
-    <tr class="tr">
-      <th class="th">Title</th>
-      <th class="th">Topic</th>
-      <th class="th">Author</th>
-      <th class="th">Duplicate Title Count</th>
-      <th class="th">Year</th>
-      <th class="th">Status</th>
-    </tr>
-    <?php
-        
+  <div class="table">
+    <table>
+      <thead>
+        <t>
+          <th class="th">Title</th>
+          <th class="th">Topic</th>
+          <th class="th">Author</th>
+          <th class="th">Duplicate Title Count</th>
+          <th class="th">Year</th>
+          <th class="th">Status</th>
+          </tr>
+      </thead>
+
+      <?php
+
 
 
       $new_stat = $dbh->prepare('select * from research where user_id=?');
       $new_stat->bindParam(1, $id);
       $new_stat->execute();
-      while($new_row = $new_stat->fetch()){
+      while ($new_row = $new_stat->fetch()) {
         $title = $new_row["title"];
         $dupli_count = $dbh->prepare('select count(*) as total_count from research where title=?');
         $dupli_count->bindParam(1, $title);
@@ -127,20 +131,21 @@ if (isset($_SESSION['user_id'])) {
         if ($total_count["total_count"] > 1) {
           $count = $total_count["total_count"];
         }
-        echo '<tr class="tr">
-        <td class="td">'.$new_row["title"].'</td>
-        <td class="td">'.$new_row["topic"].'</td>
-        <td class="td">'.$new_row["author"].'</td>
-        <td class="td">'.$count.'</td>
-        <td class="td">'.$new_row["publication_year"].'</td>
-        <td class="td">'.$new_row["upload_status"].'</td>
-      </tr>';
+        echo '<tbody><tr >
+        <td class="td">' . $new_row["title"] . '</td>
+        <td class="td">' . $new_row["topic"] . '</td>
+        <td class="td">' . $new_row["author"] . '</td>
+        <td class="td">' . $count . '</td>
+        <td class="td">' . $new_row["publication_year"] . '</td>
+        <td class="td">' . $new_row["upload_status"] . '</td>
+      </tr></tbody>';
       }
 
 
-    ?>
-    
-  </table>
+      ?>
+
+    </table>
+  </div>
 
   <!-- ChatBot -->
   <div class="chat_icon">

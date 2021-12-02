@@ -90,11 +90,12 @@ if (!empty($result)) {
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
-  </div>';
+    <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+    <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+
+    </div>';
   } else {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
@@ -112,7 +113,7 @@ if (!empty($result)) {
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="index.php">HOME</a>
     <a href="research.php">RESEARCH</a>
-    <a href="#">ANALYTICS</a>
+    <a href="analytics.php">ANALYTICS</a>
   </div>
   <span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span> -->
 

@@ -38,6 +38,8 @@ if (!empty($_POST["search"])) {
 }
 $orderby = " ORDER BY id desc";
 $sql = "SELECT * from research " . $queryCondition;
+// $sql = "SELECT * from research where topic='" . $_POST['topic'] . "' ";
+
 $href = 'research.php';
 
 $perPage = 3;
@@ -142,10 +144,10 @@ if (!empty($result)) {
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    
-    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+    <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+    <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
   </div>';
   } else {
     echo '<div class="navbar">

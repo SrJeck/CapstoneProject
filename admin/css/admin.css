@@ -158,8 +158,8 @@
     /*Image icon*/
     .profilepencil{
       position: relative;
-      top: 25%;
-      left: 20%;
+      top: 27%;
+      left: 0%;
       width: 160px;
     }
     .lock{
@@ -170,16 +170,13 @@
       height: 110px;
     }
     /* Name */
-    label{
-      float: left;
-      font-weight: bold;
-    }
+
     .name{
       display: inline;
       float: left;
       position: relative;
-      top: 140px;
-      right: 380px;
+      top: 10px;
+      right: 320px;
       margin-bottom: 20px;
         }
     .fname{
@@ -191,14 +188,14 @@
     }
     .mname{
       position: relative;
-      right: 93px;
+      right: 70px;
       float: left;
       line-height: 35px;
       font-size: 22px;
     }
     .lname{
       position: relative;
-      right: 75px;
+      right: 60px;
       float: left;
       line-height: 35px;
       font-size: 22px;
@@ -208,27 +205,12 @@
       display: inline;
       float: left;
       position: relative;
-      top: 220px;
-      right: 90%;
+      top: 40px;
+      right: 64.1%;
     }
     .email{
       position: relative;
       right: 40px;
-      float: left;
-      line-height: 35px;
-      font-size: 22px;
-    }
-    /* Address Row */
-    .addressrow{
-      display: inline;
-      float: left;
-      position: relative;
-      top: 220px;
-      right: 86.5%;
-     }
-     .address{
-      position: relative;
-      right: 92px;
       float: left;
       line-height: 35px;
       font-size: 22px;
@@ -239,27 +221,26 @@
       float: left;
       position: relative;
       top: 220px;
-      right: 36.5%;
+      right: 90%;
       margin-bottom: 20px;
     }
     .pnumber{
       float: left;
       position: relative;
-      right: 115px;
+      left: 229px;
+      bottom: 227px;
       line-height: 35px;
       font-size: 22px;
     }
-    .labeladdress{
+
+    .address{
       position: relative;
-      right: 37px;
-
+      left: 109px;
+      bottom: 200px;
+      float: left;
+      line-height: 35px;
+      font-size: 22px;
     }
-    .labelsex{
-      position: relative;
-      right: 34px;
-
-    }
-
     .sex{
       position: relative;
       right: 58px;
@@ -268,32 +249,10 @@
       font-size: 22px;
 
     }
-    /* Third Line */
-    .displayrow3{
-      display: inline;
-      float: left;
+    /* Display Row */
+    .displayRow{
       position: relative;
-      top: 300px;
-      right: 66%;
-    }
-    .labelbirthday{
-      position: relative;
-      left: 100px;
-    }
-    .birthday{
-      float: left;
-      position: relative;
-      left: 38px;
-      line-height: 35px;
-      font-size: 22px;
-    }
-
-    .degree_status{
-      position: relative;
-      right: 95px;
-      float: left;
-      line-height: 35px;
-      font-size: 22px;
+        bottom: 20px;
     }
     /* Vertical Line */
     .vl {
@@ -308,16 +267,16 @@
     /* Table */
 
     .table, .td, .th {  
-      border: 1px solid #ddd;
       text-align: center;
+      border: 1px solid black;
+
     }
     
     .table {
       border-collapse: collapse;
       width: 48%;
       position: relative;
-      left: 51%;
-      bottom: 22%;
+      left: 1%;
       background-color: white;
     }
     
@@ -334,3 +293,32 @@
       background-color: #c2a87c;
       color: white;
     }
+    /* table2 */
+    .table2, .td2, .th2 {  
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    
+    .table2 {
+      border-collapse: collapse;
+      width: 48%;
+      position: relative;
+      left: 51%;
+      bottom: 32%;
+      background-color: white;
+    }
+    
+    .th2, .td2 {
+      padding: 15px;
+    }
+    .table2 .tr2:nth-child(even){background-color: #f2f2f2;}
+
+    .table2 .tr2:hover {background-color: #ddd;}
+    
+    .table2 .th2 {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background-color: #c2a87c;
+      color: white;
+    }
+    

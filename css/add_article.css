@@ -293,6 +293,9 @@
     left: 77.4%;
     bottom: 110px;
   }
+  #degree_level{
+      margin-right: 40px;
+  }
   /*File Upload*/
 
   input[type="file"] {
@@ -452,6 +455,15 @@
 
   }
   #topic{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    margin-left: -160px;
+
+  }
+  #degree_level{
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
