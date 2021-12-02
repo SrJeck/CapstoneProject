@@ -94,3 +94,21 @@ function plagScan() {
 function proceed() {
 	window.location.href = "logOrProf.php";
 }
+
+var prevNum = 0;
+function pageDisplay(num,total_count) {
+prevNum = num;
+  for (let index = 1; index < (total_count+1); index++) {
+	if (index == num) {
+		var items = document.getElementsByClassName("page"+index);
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "block";
+		}
+	}else{
+		var items = document.getElementsByClassName("page"+index);
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "none";
+		}
+	}
+  }    
+  }
