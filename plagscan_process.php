@@ -64,7 +64,7 @@ $stmt->execute();
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/add_article.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -80,6 +80,7 @@ $stmt->execute();
         <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>
     <br><br><br><br>
+
     <div>
         <?php
 
@@ -97,6 +98,9 @@ $stmt->execute();
         $totalSentences = 0;
         $plagUrls = [];
         $plagCount = 0;
+
+        echo "<h1>Plagiarised</h1>";
+
         foreach ($data_arr as $line) {
             $line = explode(". ", $line);
             for ($i = 0; $i < count($line); $i++) {
@@ -106,12 +110,10 @@ $stmt->execute();
             $line = array_filter($line);
             if (count($line) > 0 && $not_printed) {
 
-                $output_string = $output_string . "<div class = 'results' id='result'><h4>Results</h4>";
                 $not_printed = false;
             }
 
             // print_r($data);
-
             foreach ($line as $sentence) {
                 if (strlen($sentence) < 2) {
                     continue;
@@ -126,6 +128,7 @@ $stmt->execute();
 
                 $s1 = "";
                 $n = strlen($sentence);
+
                 for ($i = 0; $i < $n; $i++) {
                     // echo $sentence[$i]."<br>";
                     if (
@@ -159,12 +162,15 @@ $stmt->execute();
                         $s1 .= $sentence[$i];
                     }
                 }
+
                 $sentence = $s1;
                 $query = urlencode($sentence);
                 $url = 'https://www.google.com/search?q=' . $query;
                 //echo $url;
+
                 $result = file_get_html($url);
                 $found = false;
+
                 foreach ($result->find('#main div .ZINbbc.xpd.O9g5cc.uUPGi') as $entry) {
                     // echo $entry;
                     $text = $entry->find('.kCrYT div .BNeawe.s3v9rd.AP7Wnd div div (.BNeawe.s3v9rd.AP7Wnd)');
@@ -178,6 +184,7 @@ $stmt->execute();
                     $text = str_replace('&#8217;', "'", $text);
                     $s1 = "";
                     $n = strlen($text);
+
                     for ($i = 0; $i < $n; $i++) {
                         if (
                             $text[$i] == ' '
@@ -219,13 +226,18 @@ $stmt->execute();
                     $urlstring = $matches[2];
                     // echo "$urlstring<br>$text<br><br>";
                     // $arr[$urlstring] = $text;
+
                     if (strpos($text, $sentence) !== false) {
+
                         $plagCount++;
                         $plagUrls[$urlstring]++;
-                        echo "<div class = 'sent'>
-                                    <div class = 'plag'>plagiarised</div>$sentence - <strong>$urlstring</strong>
-                                    </div><br>";
+
+                        echo "<div class = 'sent' style='border: 1px solid black;padding: 10px;box-shadow: 3px 7px #dad4d4;'>
+                                    <div class = 'plag' >plagiarised</div>$sentence - <strong>$urlstring</strong>
+                                    </div></div><br>";
                         $found = true;
+                        // echo "</div>";
+
                         break;
                     }
                 }
@@ -246,6 +258,7 @@ $stmt->execute();
                         $text = str_replace('&#8217;', "'", $text);
                         $s1 = "";
                         $n = strlen($text);
+
                         for ($i = 0; $i < $n; $i++) {
                             if (
                                 $text[$i] == ' '
@@ -287,25 +300,29 @@ $stmt->execute();
                         $urlstring = $matches[2];
                         // echo "$urlstring<br>$text<br><br>";
                         // $arr[$urlstring] = $text;
+
                         if (strpos($text, $sentence) != false) {
                             $plagCount++;
                             $plagUrls[$urlstring]++;
 
                             $output_string = $output_string . "<div class = 'sent'>
-                                        <div class = 'plag'>plagiarised</div>$sentence - <strong>$urlstring</strong>
+                                        <div class = 'plag'>plagiarised2</div>$sentence - <strong>$urlstring</strong>
                                     </div><br>";
                             $found = true;
+
                             break;
                         }
                     }
                     if ($found === false) {
-                        $output_string = $output_string . "<div class = 'sent'>
-                                        <div class = 'uni'>unique</div>$sentence
+                        $output_string = $output_string . "<div class = 'sent' style='border: 1px solid black;padding: 10px; box-shadow: 3px 7px #dad4d4;'>
+                                        <div class = 'uni'>uniques</div>$sentence
                                     </div><br>";
                     }
                 }
             }
         }
+        echo "<h1>Uniques</h1>";
+
         $output_string = $output_string . "</div>";
         // print_r($plagUrls);
         $plagPercent = ($plagCount / $totalSentences) * 100;
@@ -358,7 +375,7 @@ $stmt->execute();
                 <div class = 'boxes' >
                 
                 <button class = 'downR' onclick='window.print()'>  <i class='fas fa-download'></i>   Download Report </button>
-                <button class='submit' name='proceed' onclick='proceed()'> Finish </button><br><br><br>
+                <button class='finish' name='proceed' onclick='proceed()'> Finish </button><br><br><br>
                 </div>";
         }
 

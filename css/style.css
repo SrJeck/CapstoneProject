@@ -431,6 +431,14 @@
       margin-left: 50px;
   
     }
+    .finish{
+      background-color: #751518;
+      border: none;
+      color: white;
+      padding: 15px 40px;
+      float: right;
+      margin-right: 10px;
+    }
     .downR{
       background-color: #751518;
       border: none;
@@ -438,7 +446,6 @@
       padding: 15px 32px;
       float: right;
       margin-right: 150px;
-      margin-top: 40px;
     }
     .filebutton {
       background-color: #751518;
@@ -504,7 +511,6 @@
     padding: 10px;
     float: right;
     margin-right: 10px;
-    margin-top: 30px;
   }
 
     .sent {

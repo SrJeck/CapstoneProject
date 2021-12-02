@@ -3,6 +3,7 @@
     body {
       margin:0;
       background-color: #F7F5F7;
+      overflow: hidden;
     }
     /* MENU NAVBAR */
     .navbar {
@@ -317,11 +318,16 @@
       width: 48%;
       position: relative;
       left: 51%;
-      bottom: 22%;
+      bottom: 30%;
       background-color: white;
-      
+      overflow: auto;
+      height: 400px;
     }
-    
+    .table thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
     .th, .td {
       padding: 15px;
     }
