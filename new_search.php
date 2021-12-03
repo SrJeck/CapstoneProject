@@ -36,7 +36,7 @@
 <button type="submit">apply</button>
 </form>
 <?php
-
+session_start();
 if (!empty($_POST["topic"])) {
     $topic = $_POST["topic"];
     $topic2 = $_POST["topic"];
@@ -45,6 +45,8 @@ if (!empty($_POST["yearFrom"])) {
     $yearFrom = $_POST["yearFrom"];
     $yearFrom2 = $_POST["yearFrom"];
 }
+
+
 
 $query = "";
 $sort = " ORDER BY publication_year DESC";
@@ -58,14 +60,39 @@ $between2 = "";
 
 if (!empty($_POST["search"])) {
     $query = "SELECT COUNT(*) AS counted FROM research WHERE topic LIKE '%". $_POST["search"] . "%' OR title LIKE '%". $_POST["search"] . "%' OR author LIKE '%". $_POST["search"] . "%'";
-}else{
-    $query = "SELECT COUNT(*) AS counted FROM research ";
-}
-if (!empty($_POST["sort"])) {
-    $sort = " ORDER BY publication_year ".$_POST["sort"];
+    $query2 = "SELECT *FROM research WHERE topic LIKE '%". $_POST["search"] . "%' OR title LIKE '%". $_POST["search"] . "%' OR author LIKE '%". $_POST["search"] . "%'";
+    
+    $_SESSION['search_session1'] = $query;
+    $_SESSION['search_session2'] = $query2;
 }
 if (!empty($_POST["topic"])) {
         $query = "SELECT COUNT(*) AS counted FROM research WHERE topic LIKE '%". $_POST["topic"] . "%'";
+        $query2 = "SELECT * FROM research WHERE topic LIKE '%". $_POST["topic"] . "%'";
+        $_SESSION['search_session1'] = $query;
+        $_SESSION['search_session2'] = $query2;
+}
+if (isset($_POST["Education"])) {
+    $query = "SELECT COUNT(*) AS counted FROM research WHERE topic LIKE '%Education%'";
+    $query2 = "SELECT * FROM research WHERE topic LIKE '%Education%'";
+    $_SESSION['search_session1'] = $query;
+    $_SESSION['search_session2'] = $query2;
+}
+if (isset($_POST["Technology"])) {
+    $query = "SELECT COUNT(*) AS counted FROM research WHERE topic LIKE '%Technology%'";
+    $query2 = "SELECT * FROM research WHERE topic LIKE '%Technology%'";
+    $_SESSION['search_session1'] = $query;
+    $_SESSION['search_session2'] = $query2;
+}
+if (isset($_POST["Business"])) {
+    $query = "SELECT COUNT(*) AS counted FROM research WHERE topic LIKE '%Business%'";
+    $query2 = "SELECT * FROM research WHERE topic LIKE '%Business%'";
+    $_SESSION['search_session1'] = $query;
+    $_SESSION['search_session2'] = $query2;
+}
+
+if (!empty($_POST["sort"])) {
+    $sort = " ORDER BY publication_year ".$_POST["sort"];
+    $sort2 = " ORDER BY publication_year ".$_POST["sort"];
 }
 if (!empty($_POST["yearFrom"])) {
     if (!empty($_POST["yearTo"])) {
@@ -73,14 +100,21 @@ if (!empty($_POST["yearFrom"])) {
         $query = "SELECT COUNT(*) AS counted FROM research ";
         $between = " WHERE publication_year BETWEEN ".$yearFrom." AND ".$yearTo;
         $sort = " ORDER BY publication_year ASC";
+        $yearTo2 = $_POST["yearTo"];
+        $query2 = "SELECT * FROM research ";
+        $between2 = " WHERE publication_year BETWEEN ".$yearFrom2." AND ".$yearTo2;
+        $sort2 = " ORDER BY publication_year ASC";
     }else {
         $query = "SELECT COUNT(*) AS counted FROM research ";
         $between = " WHERE publication_year BETWEEN ".$yearFrom." AND ".$yearTo;
         $sort = " ORDER BY publication_year ASC";
+        $query2 = "SELECT *  FROM research ";
+        $between2 = " WHERE publication_year BETWEEN ".$yearFrom2." AND ".$yearTo2;
+        $sort2 = " ORDER BY publication_year ASC";
     }
 }
 $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-$fetching = $dbh->prepare($query.$between.$sort);
+$fetching = $dbh->prepare($_SESSION['search_session1'].$between.$sort);
 $fetching->execute();
 $fetched = $fetching->fetch();
 $counted = $fetched['counted'];
@@ -91,34 +125,13 @@ $test = "<table>
 <th>author</th>
 <th>date</th>
 <th>topic</th></tr>";
+if ($counted == 0) {
+    $test .= "<tr><td colspan='4' style='text-align:center'>No Results</td></tr>";
+}
 $num = 0;
 $prevNum = 0;
-if (!empty($_POST["search"])) {
-    $query2 = "SELECT *FROM research WHERE topic LIKE '%". $_POST["search"] . "%' OR title LIKE '%". $_POST["search"] . "%' OR author LIKE '%". $_POST["search"] . "%'";
-}else{
-    $query2 = "SELECT * FROM research ";
-}
-if (!empty($_POST["sort"])) {
-    $sort2 = " ORDER BY publication_year ".$_POST["sort"];
-}
-if (!empty($_POST["topic"])) {
-        $query2 = "SELECT * FROM research WHERE topic LIKE '%". $_POST["topic"] . "%'";
-}
-if (!empty($_POST["yearFrom"])) {
-    if (!empty($_POST["yearTo"])) {
-        $yearTo2 = $_POST["yearTo"];
-        $query2 = "SELECT * FROM research ";
-        $between2 = " WHERE publication_year BETWEEN ".$yearFrom2." AND ".$yearTo2;
-        $sort2 = " ORDER BY publication_year ASC";
-        
-    } else {
-        $query2 = "SELECT *  FROM research ";
-        $between2 = " WHERE publication_year BETWEEN ".$yearFrom2." AND ".$yearTo2;
-        $sort2 = " ORDER BY publication_year ASC";
-    }
-}
 for ($i=0; $i < $counted; $i+=3) { 
-    $fetching2 = $dbh->prepare($query2.$between2.$sort2." LIMIT ?,?");
+    $fetching2 = $dbh->prepare($_SESSION['search_session2'].$between2.$sort2." LIMIT ?,?");
     $fetching2->bindParam(1,$i,PDO::PARAM_INT);
     $fetching2->bindParam(2,$limit,PDO::PARAM_INT);
     $fetching2->execute();
@@ -150,11 +163,9 @@ for ($i=0; $i < $counted; $i+=3) {
     }
     
 }
-
 echo $test;
 for ($i=0; $i < $num; $i++) { 
     $new_num = $i+1;
-    //echo "<button class='btn$new_num' type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button>";
     if ($new_num > 5) {
         echo "<button class='btn$new_num' style='display:none' type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button>";
     }else{
