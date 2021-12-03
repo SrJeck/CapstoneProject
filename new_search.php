@@ -57,13 +57,27 @@ $query2 = "";
 $sort2 = " ORDER BY publication_year DESC";
 $yearTo2 = date("Y");
 $between2 = "";
-
+$counted = 0;
+$limit = "3";
+$test = "<table>
+<tr>
+<th>title</th>
+<th>author</th>
+<th>date</th>
+<th>topic</th></tr>";
 if (!empty($_POST["search"])) {
     $query = "SELECT COUNT(*) AS counted FROM research WHERE topic LIKE '%". $_POST["search"] . "%' OR title LIKE '%". $_POST["search"] . "%' OR author LIKE '%". $_POST["search"] . "%'";
     $query2 = "SELECT *FROM research WHERE topic LIKE '%". $_POST["search"] . "%' OR title LIKE '%". $_POST["search"] . "%' OR author LIKE '%". $_POST["search"] . "%'";
     
     $_SESSION['search_session1'] = $query;
     $_SESSION['search_session2'] = $query2;
+}
+if (empty($_POST["search"])) {
+    if (empty($_POST["topic"])) {
+        $test = "Please enter a query in the search box above."; 
+    }
+    unset($_SESSION['search_session1']);
+    unset($_SESSION['search_session2']);
 }
 if (!empty($_POST["topic"])) {
         $query = "SELECT COUNT(*) AS counted FROM research WHERE topic LIKE '%". $_POST["topic"] . "%'";
@@ -114,24 +128,22 @@ if (!empty($_POST["yearFrom"])) {
     }
 }
 $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-$fetching = $dbh->prepare($_SESSION['search_session1'].$between.$sort);
-$fetching->execute();
-$fetched = $fetching->fetch();
-$counted = $fetched['counted'];
-$limit = "3";
-$test = "<table>
-<tr>
-<th>title</th>
-<th>author</th>
-<th>date</th>
-<th>topic</th></tr>";
-if ($counted == 0) {
-    $test .= "<tr><td colspan='4' style='text-align:center'>No Results</td></tr>";
+
+if (isset($_SESSION['search_session1'])) {
+    $fetching = $dbh->prepare($_SESSION['search_session1'].$between.$sort);
+    $fetching->execute();
+    $fetched = $fetching->fetch();
+    $counted = $fetched['counted'];
+    if ($counted == 0) {
+        $test .= "<tr><td colspan='4' style='text-align:center'>No Results</td></tr>";
+    }
 }
 $num = 0;
 $prevNum = 0;
 for ($i=0; $i < $counted; $i+=3) { 
-    $fetching2 = $dbh->prepare($_SESSION['search_session2'].$between2.$sort2." LIMIT ?,?");
+    if (isset($_SESSION['search_session2'])) {
+        $fetching2 = $dbh->prepare($_SESSION['search_session2'].$between2.$sort2." LIMIT ?,?");
+    }
     $fetching2->bindParam(1,$i,PDO::PARAM_INT);
     $fetching2->bindParam(2,$limit,PDO::PARAM_INT);
     $fetching2->execute();
