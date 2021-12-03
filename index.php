@@ -201,14 +201,13 @@ if (!empty($result)) {
     <!-- 3 IMAGES -->
     <div class="images">
       <form action="new_search.php" method="POST">
-      <img class="book" src="images/book.JPG">
-      <button class="btn" type="submit" name="Education">Education</button>
-      <img class="chip" src="images/chip.JPG">
-      <button class="btn2" type="submit" name="Technology">Technology</button>
-      <img class="business" src="images/business.JPG">
-      <button class="btn3" type="submit" name="Business" >Business</button>
-      //onclick="moveToSearch('Business')"  
-    </form>
+        <img class="book" src="images/book.JPG">
+        <button class="btn" type="submit" name="Education">Education</button>
+        <img class="chip" src="images/chip.JPG">
+        <button class="btn2" type="submit" name="Technology">Technology</button>
+        <img class="business" src="images/business.JPG">
+        <button class="btn3" type="submit" name="Business">Business</button>
+      </form>
     </div>
 
     <!-- ChatBot -->
