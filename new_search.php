@@ -170,7 +170,7 @@ session_start();
                 <div class="row height d-flex justify-content-center align-items-center">
                     <div>
                         <div class="form">
-                            <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="submit" name="go">Search</button>
+                            <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php echo $_POST["search"]; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
                         </div>
                     </div>
                 </div>
@@ -185,7 +185,7 @@ session_start();
                     </select>
                     <hr>
                     <h3 class="sorted">Topic</h3>
-                    <select name="topic" id="topic" class="selecttopic" name="topic">
+                    <select name="topic" id="topic" class="selecttopic">
                         <option value="" selected disabled hidden>Select topic</option>
                         <option value="Education">Education</option>
                         <option value="Technology">Technology</option>
@@ -205,9 +205,9 @@ session_start();
                     <hr>
                     <h3 class="sorted">Publication Date</h3>
                     <p style="font-size: 14px;">From:</p>
-                    <input type="text" name="yearFrom" class="fromDate"><br>
+                    <input type="text" name="yearFrom" class="fromDate" value="<?php echo $_POST["yearFrom"]; ?>"><br>
                     <p style="font-size: 14px;">To:</p>
-                    <input type="text" name="yearTo" class="toDate">
+                    <input type="text" name="yearTo" class="toDate" value="<?php echo $_POST["yearTo"]; ?>">
                     <br><br>
                     <button type="submit" class="apply">Apply Filters</button>
                     <br><br>
@@ -249,7 +249,7 @@ session_start();
             $_SESSION['search_session2'] = $query2;
         }
         if (empty($_POST["search"]) && empty($_POST["topic"]) && empty($_POST["sort"]) && empty($_POST["yearFrom"]) && empty($_POST["yearTo"])) {
-            $test = "Please enter a query in the search box above.";
+            $test = "<span class='noFound'>Please enter a query in the search box above. </span>";
             unset($_SESSION['search_session1']);
             unset($_SESSION['search_session2']);
         }
@@ -337,7 +337,7 @@ session_start();
                         <p style='margin-left: 90px; '>
                             <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
                             <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
-                            <hr style='border: 1px solid black;'>
+                            <hr style='border: 1px solid black;'width='1200px;'>
                     </a>
                 </td>
                     
@@ -353,7 +353,7 @@ session_start();
                     <p style='margin-left: 90px; '>
                         <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
                         <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
-                        <hr style='border: 1px solid black;'>
+                        <hr style='border: 1px solid black;' width='1200px;'>
                 </a>
             </td>
     </tr>";
@@ -367,10 +367,10 @@ session_start();
                     <p style='margin-left: 90px; '>
                         <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
                         <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
-                        <hr style='border: 1px solid black;'>
+                        <hr style='border: 1px solid black;' width='1200px;'>
                 </a>
             </td>
-    </tr>";
+    </tr></table>";
                 }
             }
         }
@@ -386,9 +386,9 @@ session_start();
         for ($i = 0; $i < $num; $i++) {
             $new_num = $i + 1;
             if ($new_num > 5) {
-                echo  "<span class='a'><button class='a btn$new_num' style='display:none' type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button></span>";
+                echo  "<span class='a'><button class='btn$new_num b' style='display:none' type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button></span>";
             } else {
-                echo "<span class='a'> <button class='a btn$new_num' style='display:block' type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button></span>";
+                echo "<span class='a'> <button class='btn$new_num b' style='display:block' type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button></span>";
             }
         }
         ?>
