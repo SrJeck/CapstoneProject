@@ -40,6 +40,44 @@ $db_handle = new DBController();
   <script type="text/javascript" src="js/jquery.convform.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
 
+  <style>
+    .descriptive {
+      background-color: white;
+      width: 685px;
+      padding: 20px;
+      margin: 20px;
+      display: inline-block;
+      border: 2px solid black;
+      border-radius: 10px;
+      margin-left: 42px;
+      font-size: 20px;
+    }
+
+    .predictive {
+      background-color: white;
+      width: 685px;
+      padding: 20px;
+      margin: 20px;
+      display: inline-block;
+      border: 2px solid black;
+      border-radius: 10px;
+      font-size: 20px;
+
+    }
+
+    .prescriptive {
+      background-color: white;
+      width: auto;
+      padding: 20px;
+      margin: 20px;
+      display: inline-block;
+      border: 2px solid black;
+      border-radius: 10px;
+      font-size: 20px;
+      margin-right: 40px;
+      margin-left: 50px;
+    }
+  </style>
 </head>
 
 <body>
@@ -175,8 +213,8 @@ $db_handle = new DBController();
   <h1 style="margin-left: 30px;">Analytics Overview</h1>
 
   <div class="flex-container">
-    <div id="piechart" style="width: 800px; height: 420px; float:left"></div>
-    <div id="curve_chart" style="width: 800px; height: 420px; float:right"></div>
+    <div id="piechart" style="width: 800px; height: 420px; margin-left: 25px;"></div>
+    <div id="curve_chart" style="width: 800px; height: 420px; margin-right: 25px;"></div>
   </div>
   <script type="text/javascript">
     google.charts.load('current', {
@@ -275,7 +313,8 @@ $db_handle = new DBController();
         title: 'Upload Per Year',
         curveType: 'function',
         legend: {
-          position: 'bottom'
+          position: 'bottom',
+          backgroundcolor: 'red',
         }
       };
 
@@ -287,7 +326,16 @@ $db_handle = new DBController();
     }
   </script>
 
+  <div class="descriptive">Descriptive
+    <br><br>
 
+    The highest_var have the highest number of uploaded topics with high_num number of uploads while the lowest_var have the lowet number of uploaded topics with low_num number of uploads.
+  </div>
+  <div class="predictive">Predictive
+    <br><br>
+
+    Based on the graphs above, the Highest_var have a total of total_ups in the past 7 days. if the uploads on the highest_var will not change, the study that will be uploaded might become saturated and have too similar conclusion.
+  </div>
   <br><br>
 
   <!-- ChatBot -->
@@ -462,6 +510,11 @@ $db_handle = new DBController();
             ?></p>
       </div>
     </div>
+  </div>
+  <div class="prescriptive">Prescriptive
+    <br><br>
+
+    The current highest uploaded topic is the highest_var with a total of total_ups upload. to develop a new and unique study, we recommend developing a study about lowest_var3, lowest_var2, or lowest_var1
   </div>
   <br><br>
 </body>
