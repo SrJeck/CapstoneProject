@@ -211,8 +211,9 @@
       box-shadow: 6px 6px 8px 0 #f2eff2;
       padding:20px;
       width: 80%;
-      margin-left: 250px;
-      margin-top: -625px;
+      margin-left: 280px;
+      margin-top: -695px;
+      height: 30px;
     }
     .pagination{
       margin-left: 120px;
@@ -231,7 +232,6 @@
     }
     .perpage-link:hover
     {background-color: #ddd; cursor: pointer;}
-
     span.current-page {
       background-color: #d2edef;
       color: #337ab7;
@@ -277,4 +277,12 @@
 .icon-open-layer-login {
 background: url(https://www.proquest.com/assets/meta/31b8cbc0/images/icons/auth-login.png) no-repeat 0 2px;
 background-size: 20px;
+}
+
+.a {
+  color: #337ab7;
+  padding: 8px 16px;
+  cursor: pointer;
+  display: inline-block;
+
 }
