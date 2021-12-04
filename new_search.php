@@ -170,7 +170,7 @@ session_start();
                 <div class="row height d-flex justify-content-center align-items-center">
                     <div>
                         <div class="form">
-                            <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php echo $_POST["search"]; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+                            <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {echo $_POST["search"];}  ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
                         </div>
                     </div>
                 </div>
@@ -205,9 +205,9 @@ session_start();
                     <hr>
                     <h3 class="sorted">Publication Date</h3>
                     <p style="font-size: 14px;">From:</p>
-                    <input type="text" name="yearFrom" class="fromDate" value="<?php echo $_POST["yearFrom"]; ?>"><br>
+                    <input type="text" name="yearFrom" class="fromDate" value="<?php if (isset($_POST["yearFrom"])) {echo $_POST["yearFrom"];} ?>"><br>
                     <p style="font-size: 14px;">To:</p>
-                    <input type="text" name="yearTo" class="toDate" value="<?php echo $_POST["yearTo"]; ?>">
+                    <input type="text" name="yearTo" class="toDate" value="<?php if (isset($_POST["yearTo"])) {echo $_POST["yearTo"];} ?>">
                     <br><br>
                     <button type="submit" class="apply">Apply Filters</button>
                     <br><br>
@@ -280,11 +280,11 @@ session_start();
         if (!empty($_POST["yearFrom"])) {
             if (!empty($_POST["yearTo"])) {
                 $yearTo = $_POST["yearTo"];
-                $between = " AND publication_year BETWEEN " . ($yearFrom - 1) . " AND " . $yearTo;
+                $between = " AND publication_year BETWEEN " . $yearFrom  . " AND " . $yearTo;
                 $sort = " ORDER BY publication_year ASC";
                 $yearTo2 = $_POST["yearTo"];
                 $sort2 = " ORDER BY publication_year ASC";
-                $between2 = " AND  publication_year BETWEEN " . ($yearFrom - 1) . " AND " . $yearTo2;
+                $between2 = " AND  publication_year BETWEEN " . $yearFrom . " AND " . $yearTo2;
             } else {
                 if ($yearFrom == $yearTo) {
                     $between = " AND  publication_year ='" . $yearFrom . "'";
@@ -292,9 +292,9 @@ session_start();
                     $between2 = " AND  publication_year ='" . $yearFrom2 . "'";
                     $sort2 = " ORDER BY publication_year ASC";
                 } else {
-                    $between = " AND  publication_year BETWEEN " . ($yearFrom - 1) . " AND " . $yearTo;
+                    $between = " AND  publication_year BETWEEN " . $yearFrom . " AND " . $yearTo;
                     $sort = " ORDER BY publication_year ASC";
-                    $between2 = " AND  publication_year BETWEEN " . ($yearFrom - 1) . " AND " . $yearTo2;
+                    $between2 = " AND  publication_year BETWEEN " . $yearFrom . " AND " . $yearTo2;
                     $sort2 = " ORDER BY publication_year ASC";
                 }
             }
@@ -330,7 +330,7 @@ session_start();
                 if ($num > 1) {
                     $test .= "<tr class='displayRow page$num' style='display:none'>
                     <td> <br>
-                    <a class='displayResearch' target='_blank' href='display.php'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
+                    <a class='displayResearch' target='_blank' href='display.php?id=".$fetched2['id']."'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
  
                         <p style='margin-left: 90px; margin-top: -90px;'>" . $fetched2['topic'] . "</p>
                         <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
@@ -346,7 +346,7 @@ session_start();
 
                     $test .= "<tr  class='displayRow page$num'  style='display:block'> 
                     <td> <br>
-                    <a class='displayResearch' target='_blank' href='display.php'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
+                    <a class='displayResearch' target='_blank' href='display.php?id=".$fetched2['id']."'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
 
                     <p style='margin-left: 90px; margin-top: -90px;'>" . $fetched2['topic'] . "</p>
                     <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
@@ -360,7 +360,7 @@ session_start();
                 } elseif ($num % 3 == 0) {
                     $test .= "<tr  class='displayRow page$num' >
                     <td> <br>
-                    <a class='displayResearch' target='_blank' href='display.php'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
+                    <a class='displayResearch' target='_blank' href='display.php?id=".$fetched2['id']."'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
 
                     <p style='margin-left: 90px; margin-top: -90px;'>" . $fetched2['topic'] . "</p>
                     <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
