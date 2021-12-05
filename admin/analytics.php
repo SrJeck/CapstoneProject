@@ -273,7 +273,7 @@ $db_handle = new DBController();
 
       var options = {
         title: 'Upload Per Year',
-        curveType: 'function',
+        curveType: 'none',
         legend: {
           position: 'bottom'
         }
