@@ -1,0 +1,15 @@
+(1 highest_var with continuous month)
+the most common topic with total of TOTAL_UPS is HIGHEST_VAR for the last NUMBER of months, 
+if the uploads on the HIGHEST_VAR will not change, the study that will be uploaded might become saturated and have too similar conclusion.
+
+(1 highest_var without continuous month)
+the most common topic with total of TOTAL_UPS is HIGHEST_VAR for some months, 
+if the uploads on the HIGHEST_VAR will not change, the study that will be uploaded might not become saturated and have too similar conclusion.
+
+(more than 1 highest_var with continuous month)
+the most common topics with total of TOTAL_UPS are HIGHEST_VAR1 for the last NUMBER months and HIGHEST_VAR2 for the last NUMBER months,
+if the uploads on the HIGHEST_VAR1 and HIGHEST_VAR2  will not change, the study that will be uploaded might become saturated and have too similar conclusion.
+
+(more than 1 highest_var without continuous month)
+the most common topics with total of TOTAL_UPS are HIGHEST_VAR1 for the last NUMBER months and HIGHEST_VAR2 for some months,
+if the uploads on the HIGHEST_VAR1 will not change, the study that will be uploaded might become saturated and have too similar conclusion but not for HIGHEST_VAR2.
