@@ -565,9 +565,19 @@ $string_output2 = explode(" / ",substr($string_output,0,-3));
 for ($i=0; $i < count($string_output2); $i++) { 
     $string_output3 = explode(" - ",$string_output2[$i]);
     $string_holder = $string_output3[1];
+    $asc_string .=  $string_output3[0]." - ";
     $desc_string .= $string_output3[0]." - ";
+    $string_output4 = explode(", ",substr_replace($string_output3[1],"",-2));
     $string_output5 = explode(", ",substr_replace($string_output3[1],"",-2));
+    sort($string_output4);
     rsort($string_output5);
+    for ($j=0; $j < count($string_output4); $j++) { 
+      $string_holder1 = $string_output4[0];
+      $string_holder2 = $string_output4[$j];
+        if ($string_holder1[0] == $string_holder2[0]) {
+            $asc_string .= $string_output4[$j]. ", ";
+        }
+    }
     for ($j=0; $j < count($string_output5); $j++) { 
       $string_holder1 = $string_output5[0];
       $string_holder2 = $string_output5[$j];
