@@ -507,7 +507,7 @@ if ($desc_count > 1) {
         }else{
             $desc_output_key .= $desc_topic_array_key[$i].", ";
         }
-        array_push($asc_topic_array_key2,$asc_topic_array_key[$i]);
+        array_push($desc_topic_array_key2,$desc_topic_array_key[$i]);
     }
     $desc_output_count = $desc_topic_array_count[0];
 }else{
