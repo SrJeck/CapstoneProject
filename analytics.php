@@ -707,7 +707,7 @@ $db_handle = new DBController();
     } else if (count($desc_counter_output5) == 1 && count($desc_counter_output4) > 0) {
       $sentence_output4 .= $desc_counter_output5[0];
     }
-    if (count($desc_counter_output4) == 0 && count($desc_counter_output5) > 0) {
+    if (count($desc_counter_output5) == 0 && count($desc_counter_output4) > 0) {
       $sentence_changer = " not";
     }
 
@@ -723,12 +723,12 @@ $db_handle = new DBController();
       } else {
         $sentence_output5 .= $desc_counter_output5[count($desc_counter_output5)-1];
       }
-      if (count($desc_counter_output4) == 0 && count($desc_counter_output5) > 0) {
+      if (count($desc_counter_output5) == 0 && count($desc_counter_output4) > 0) {
         $sentence_changer = " not";
       }
     }
 
-    echo "Based on the graphs above, the most common " . $sentence_topic1 . " with total of " . $count_list[$end_pos] . " " . $sentence_topic2 . " " . $sentence_output1 . $sentence_output2 . ". if the uploads on the " . $sentence_topic1 . " " . $sentence_output3 . $sentence_output5 . " will" . $sentence_changer . " change, the study that will be uploaded might not become saturated and have too similar conclusion" . $sentence_output4;
+    echo "Based on the graphs above, the most common " . $sentence_topic1 . " with total of " . $count_list[$end_pos] . " " . $sentence_topic2 . " " . rtrim($sentence_output1,", ") . rtrim($sentence_output2,", ") . ". if the uploads on the " . $sentence_topic1 . " " . $sentence_output3 . $sentence_output5 . " will" . $sentence_changer . " change, the study that will be uploaded might". $sentence_changer ." become saturated and have too similar conclusion" . $sentence_output4;
     ?>
   </div>
   <br><br>
