@@ -105,6 +105,9 @@ $db_handle = new DBController();
   }
   ?>
   <?php
+
+  $topic_list = array("technology","education","research","analysis","database","agriculture","health","politics","business","marketing","mechanical","ethics","others");
+  $count_list = array();
   $conn = mysqli_connect("localhost", "root", "", "journal");
   $query = "SELECT COUNT(*) as count from user";
   $query_result = mysqli_query($conn, $query);
@@ -158,7 +161,7 @@ $db_handle = new DBController();
     $health =  $row['count'];
   }
 
-  $query = "SELECT COUNT(topic) as count from research WHERE topic='politcs'";
+  $query = "SELECT COUNT(topic) as count from research WHERE topic='politics'";
   $query_result = mysqli_query($conn, $query);
 
   while ($row = mysqli_fetch_assoc($query_result)) {
@@ -235,10 +238,13 @@ $db_handle = new DBController();
 
         $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
 
-        $stat = $dbh->prepare('SELECT topic, COUNT(*) AS number_of_research FROM research GROUP BY topic');
-        $stat->execute();
-        while ($rows = $stat->fetch()) {
-          echo "['" . $rows['topic'] . "', " . $rows['number_of_research'] . "],";
+        for ($i=0; $i < count($topic_list); $i++) { 
+          $topic = $dbh->prepare('SELECT COUNT(*) AS number_of_research FROM research WHERE topic=?');
+          $topic->bindParam(1,$topic_list[$i]);
+          $topic->execute();
+          $topic_rows = $topic->fetch();
+          array_push($count_list,$topic_rows['number_of_research']);
+          echo "['" . $topic_list[$i] . "', " . $topic_rows['number_of_research'] . "],";
         }
         ?>
       ]);
@@ -265,7 +271,7 @@ $db_handle = new DBController();
 
         $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
         //collect and store all years
-        $fetch_year = $dbh->prepare('SELECT publication_year, COUNT(*) AS number_of_year FROM research GROUP BY publication_year');
+        $fetch_year = $dbh->prepare('SELECT publication_year, COUNT(*) AS number_of_year FROM research GROUP BY publication_year ASC');
         $fetch_year->execute();
         $year_rows = "";
         while ($fetched_year = $fetch_year->fetch()) {
@@ -273,13 +279,15 @@ $db_handle = new DBController();
         }
 
         //collect and store all topic
-        $fetch_topic = $dbh->prepare('SELECT topic, COUNT(*) AS number_of_topic FROM research GROUP BY topic');
-        $fetch_topic->execute();
         $topic_rows = "";
         $first_row = "['Year'";
-        while ($fetched_topic = $fetch_topic->fetch()) {
-          $topic_rows = $topic_rows . $fetched_topic['topic'] . ',';
-          $first_row  = $first_row . ",'" . $fetched_topic['topic'] . "'";
+        for ($i=0; $i < count($topic_list); $i++) { 
+          $fetch_topic = $dbh->prepare('SELECT COUNT(*) AS number_of_research FROM research WHERE topic=?');
+          $fetch_topic->bindParam(1,$topic_list[$i]);
+          $fetch_topic->execute();
+          $fetched_topic = $fetch_topic->fetch();
+          $topic_rows .= $topic_list[$i] . ',';
+          $first_row  .= ",'" . $topic_list[$i] . "'";
         }
         echo $first_row . ']';
 
@@ -290,14 +298,14 @@ $db_handle = new DBController();
         $topic_arr = explode(",", $new_topic_rows);
         $year_arr = explode(",", $new_year_rows);
 
-        $topic_length = count($topic_arr);
+        $topic_length = count($topic_list);
         $year_length = count($year_arr);
         $year_topic_count = "";
         for ($i = 0; $i < $year_length; $i++) {
           $year_topic_count = ",['" . $year_arr[$i] . "'";
           for ($j = 0; $j < $topic_length; $j++) {
             $fetch_count = $dbh->prepare('SELECT COUNT(*) AS number_count FROM research WHERE topic=? AND publication_year=?');
-            $fetch_count->bindParam(1, $topic_arr[$j]);
+            $fetch_count->bindParam(1, $topic_list[$j]);
             $fetch_count->bindParam(2, $year_arr[$i]);
             $fetch_count->execute();
             $fetched_count = $fetch_count->fetch();
@@ -311,7 +319,7 @@ $db_handle = new DBController();
 
       var options = {
         title: 'Upload Per Year',
-        curveType: 'function',
+        curveType: 'none',
         legend: {
           position: 'bottom',
           backgroundcolor: 'red',
@@ -328,13 +336,390 @@ $db_handle = new DBController();
 
   <div class="descriptive">Descriptive
     <br><br>
+<?php
 
-    The highest_var have the highest number of uploaded topics with high_num number of uploads while the lowest_var have the lowet number of uploaded topics with low_num number of uploads.
+$topic_string = "";
+for ($i=0; $i < count($topic_list); $i++) { 
+    $topic = $dbh->prepare('SELECT COUNT(*) AS number_of_research FROM research WHERE topic=?');
+    $topic->bindParam(1,$topic_list[$i]);
+    $topic->execute();
+    $topic_rows = $topic->fetch();
+    $topic_string .= $topic_rows['number_of_research'] . " : " .$topic_list[$i].", ";
+  }
+
+
+ $asc_topic_array = explode(", ",rtrim($topic_string, ", "));
+ $desc_topic_array = explode(", ",rtrim($topic_string, ", "));
+
+ $asc_topic_array_count = array();
+ $asc_topic_array_key = array();
+ $desc_topic_array_count = array();
+ $desc_topic_array_key = array();
+ sort($asc_topic_array);
+ rsort($desc_topic_array);
+ for ($i=0; $i < count($asc_topic_array); $i++) {
+    $splitter = explode(" : ",$asc_topic_array[$i]);
+    array_push($asc_topic_array_count,$splitter[0]);
+    array_push($asc_topic_array_key,$splitter[1]);
+ }
+ for ($i=0; $i < count($desc_topic_array); $i++) {
+    $splitter = explode(" : ",$desc_topic_array[$i]);
+    array_push($desc_topic_array_count,$splitter[0]);
+    array_push($desc_topic_array_key,$splitter[1]);
+ }
+$asc_count = 0;
+$desc_count = 0;
+for ($i=0; $i < count($asc_topic_array_count); $i++) { 
+    if ($asc_topic_array_count[$i] == $asc_topic_array_count[0]) {
+        $asc_count++;
+    }
+}
+for ($i=0; $i < count($desc_topic_array_count); $i++) { 
+    if ($desc_topic_array_count[$i] == $desc_topic_array_count[0]) {
+        $desc_count++;
+    }
+}
+
+$asc_output_key = "";
+$asc_output_count = "";
+if ($asc_count > 1) {
+    for ($i=0; $i < $asc_count; $i++) { 
+        if ($i == ($asc_count-2)) {
+            $asc_output_key .= $asc_topic_array_key[$i]." and ";
+        }else{
+            $asc_output_key .= $asc_topic_array_key[$i].", ";
+        }
+    }
+    if ($asc_topic_array_count[0] == 0) {
+        $asc_output_count = "no";
+    }else{
+        $asc_output_count = $asc_topic_array_count[0];
+    }
+}else{
+    $asc_output_key = $asc_topic_array_key[0];
+    if ($asc_topic_array_count[0] == 0) {
+        $asc_output_count = "no";
+    }else{
+        $asc_output_count = $asc_topic_array_count[0];
+    }
+}
+
+
+$desc_output_key = "";
+$desc_output_count = "";
+if ($desc_count > 1) {
+    for ($i=0; $i < $desc_count; $i++) { 
+        if ($i == ($asc_count-2)) {
+            $desc_output_key .= $desc_topic_array_key[$i]." and ";
+        }else{
+            $desc_output_key .= $desc_topic_array_key[$i].", ";
+        }
+    }
+    $desc_output_count = $desc_topic_array_count[0];
+}else{
+    $desc_output_key = $desc_topic_array_key[0];
+    $desc_output_count = $desc_topic_array_count[0];
+}
+echo "The ".rtrim($desc_output_key, ", ")." have the highest number of uploaded topics with ".$desc_output_count." number of uploads while the ".rtrim($asc_output_key, ", ")." have the lowest number of uploaded topics with ".$asc_output_count." number of uploads.";
+?>
   </div>
   <div class="predictive">Predictive
     <br><br>
+<?php
 
-    Based on the graphs above, the Highest_var have a total of total_ups in the past 7 days. if the uploads on the highest_var will not change, the study that will be uploaded might become saturated and have too similar conclusion.
+$topic_string = "";
+for ($i=0; $i < count($topic_list); $i++) { 
+    $topic = $dbh->prepare('SELECT COUNT(*) AS number_of_research FROM research WHERE topic=?');
+    $topic->bindParam(1,$topic_list[$i]);
+    $topic->execute();
+    $topic_rows = $topic->fetch();
+    $topic_string .= $topic_rows['number_of_research'] . " : " .$topic_list[$i].", ";
+  }
+
+
+ $asc_topic_array = explode(", ",rtrim($topic_string, ", "));
+ $desc_topic_array = explode(", ",rtrim($topic_string, ", "));
+
+ $asc_topic_array_count = array();
+ $asc_topic_array_key = array();
+ $asc_topic_array_key2 = array();
+ $desc_topic_array_count = array();
+ $desc_topic_array_key = array();
+ $desc_topic_array_key2 = array();
+ sort($asc_topic_array);
+ rsort($desc_topic_array);
+ for ($i=0; $i < count($asc_topic_array); $i++) {
+    $splitter = explode(" : ",$asc_topic_array[$i]);
+    array_push($asc_topic_array_count,$splitter[0]);
+    array_push($asc_topic_array_key,$splitter[1]);
+ }
+ for ($i=0; $i < count($desc_topic_array); $i++) {
+    $splitter = explode(" : ",$desc_topic_array[$i]);
+    array_push($desc_topic_array_count,$splitter[0]);
+    array_push($desc_topic_array_key,$splitter[1]);
+ }
+$asc_count = 0;
+$desc_count = 0;
+for ($i=0; $i < count($asc_topic_array_count); $i++) { 
+    if ($asc_topic_array_count[$i] == $asc_topic_array_count[0]) {
+        $asc_count++;
+    }
+}
+for ($i=0; $i < count($desc_topic_array_count); $i++) { 
+    if ($desc_topic_array_count[$i] == $desc_topic_array_count[0]) {
+        $desc_count++;
+    }
+}
+
+$asc_output_key = "";
+$asc_output_count = "";
+if ($asc_count > 1) {
+    for ($i=0; $i < $asc_count; $i++) { 
+        if ($i == ($asc_count-2)) {
+            $asc_output_key .= $asc_topic_array_key[$i]." and ";
+        }else{
+            $asc_output_key .= $asc_topic_array_key[$i].", ";
+        }
+        array_push($asc_topic_array_key2,$asc_topic_array_key[$i]);
+    }
+    if ($asc_topic_array_count[0] == 0) {
+        $asc_output_count = "no";
+    }else{
+        $asc_output_count = $asc_topic_array_count[0];
+    }
+}else{
+    array_push($asc_topic_array_key2,$asc_topic_array_key[0]);
+    $asc_output_key = $asc_topic_array_key[0];
+    if ($asc_topic_array_count[0] == 0) {
+        $asc_output_count = "no";
+    }else{
+        $asc_output_count = $asc_topic_array_count[0];
+    }
+}
+
+
+$desc_output_key = "";
+$desc_output_count = "";
+if ($desc_count > 1) {
+    for ($i=0; $i < $desc_count; $i++) { 
+        if ($i == ($asc_count-2)) {
+            $desc_output_key .= $desc_topic_array_key[$i]." and ";
+        }else{
+            $desc_output_key .= $desc_topic_array_key[$i].", ";
+        }
+        array_push($asc_topic_array_key2,$asc_topic_array_key[$i]);
+    }
+    $desc_output_count = $desc_topic_array_count[0];
+}else{
+    array_push($desc_topic_array_key2,$desc_topic_array_key[0]);
+    $desc_output_key = $desc_topic_array_key[0];
+    $desc_output_count = $desc_topic_array_count[0];
+}
+
+
+
+
+
+$asc_string = "";
+$asc_count = 0;
+$desc_string = "";
+$desc_count = 0;
+$topic_string = "";
+for ($i=0; $i < count($topic_list); $i++) { 
+    $topic = $dbh->prepare('SELECT COUNT(*) AS number_of_research FROM research WHERE topic=?');
+    $topic->bindParam(1,$topic_list[$i]);
+    $topic->execute();
+    $topic_rows = $topic->fetch();
+    $topic_string .= $topic_rows['number_of_research'] . " : " .$topic_list[$i].", ";
+  }
+
+
+$string_output = "";
+$desc_string_output = "";
+//collect and store all years
+$fetch_year = $dbh->prepare('SELECT publication_year, COUNT(*) AS number_of_year FROM research GROUP BY publication_year DESC');
+$fetch_year->execute();
+$year_rows = "";
+while ($fetched_year = $fetch_year->fetch()) {
+  $year_rows .= $fetched_year['publication_year'] . ',';
+}
+
+$year_arr = explode(",",substr_replace($year_rows,"",-1)) ;
+
+$topic_length = count($topic_list);
+$year_length = count($year_arr);
+
+for ($i = 0; $i < $year_length; $i++) {
+  $string_output .= $year_arr[$i]." - ";
+  for ($j = 0; $j < $topic_length; $j++) {
+    $fetch_count = $dbh->prepare('SELECT COUNT(*) AS number_count FROM research WHERE topic=? AND publication_year=?');
+    $fetch_count->bindParam(1, $topic_list[$j]);
+    $fetch_count->bindParam(2, $year_arr[$i]);
+    $fetch_count->execute();
+    $fetched_count = $fetch_count->fetch();
+    $string_output .= $fetched_count['number_count'] . " : " . $topic_list[$j].", ";
+  }
+  $string_output .= " / ";
+}
+$string_output2 = explode(" / ",substr($string_output,0,-3));
+for ($i=0; $i < count($string_output2); $i++) { 
+    $string_output3 = explode(" - ",$string_output2[$i]);
+    $string_holder = $string_output3[1];
+    $desc_string .= $string_output3[0]." - ";
+    $string_output5 = explode(", ",substr_replace($string_output3[1],"",-2));
+    rsort($string_output5);
+    for ($j=0; $j < count($string_output5); $j++) { 
+      $string_holder1 = $string_output5[0];
+      $string_holder2 = $string_output5[$j];
+      if ($string_holder1[0] == $string_holder2[0]) {
+        $desc_string .= $string_output5[$j]. ", ";
+      }
+    }
+    $asc_string .= " / ";
+    $desc_string .= " / ";
+}
+$desc_string_output2 = explode(" / ",substr_replace($desc_string,"",-4)) ;
+$desc_counter = 0;
+$desc_counter_output  = "";
+$desc_counter_output2 = array();
+$desc_counter_output3 = array();
+$desc_counter_output4 = array();
+$desc_counter_output5 = array();
+for ($i=0; $i < count($desc_topic_array_key2); $i++) { 
+    for ($j=0; $j < count($desc_string_output2); $j++) {
+        if (str_contains($desc_string_output2[$j],$desc_topic_array_key2[$i])) {
+            $desc_counter++;
+        }else{
+            $desc_counter=0;
+            break;
+        }
+    }
+    if ($desc_counter > 0) {
+        array_push($desc_counter_output4,$desc_topic_array_key2[$i]);
+        array_push($desc_counter_output2,$desc_topic_array_key2[$i] ." for the last ".$desc_counter." years");
+    }else{
+        array_push($desc_counter_output5,$desc_topic_array_key2[$i]);
+        array_push($desc_counter_output3,$desc_topic_array_key2[$i] ." for only few years");
+    }
+}
+
+$sentence_output1 = "";
+$sentence_output2 = "";
+$sentence_output3 = "";
+$sentence_output4 = "";
+$sentence_output5 = "";
+$sentence_changer = "";
+$sentence_array1 = array();
+$sentence_array2 = array();
+$desc_final_array = explode(",",substr_replace($desc_counter_output,"",-1)) ;
+if (count($desc_final_array) > 1) {
+    for ($i=0; $i < count($desc_final_array); $i++) { 
+        $desc_final_array2 = explode(" : ",$desc_final_array[$i]);
+        if ($i == (count($desc_final_array)-2)) {
+            $sentence_output1 .= $desc_final_array2[0]." and ";
+        }else{
+            $sentence_output1 .= $desc_final_array2[0].", ";
+        }
+    }
+}else{
+    $desc_final_array2 = explode(" : ",$desc_final_array[0]);
+    $sentence_output1 .= $desc_final_array2[0];
+}
+sort($count_list);
+$end_pos = (count($count_list)-1);
+
+$sentence_topic1 = "";
+$sentence_topic2 = "";
+if (count($desc_final_array) > 1) {
+    $sentence_topic1 = "topics";
+    $sentence_topic2 = "are";
+}else{
+    $sentence_topic1 = "topic";
+    $sentence_topic2 = "is";
+}
+if (count($desc_counter_output2) > 1 && count($desc_counter_output3) == 0 ) {
+    for ($i=0; $i < count($desc_counter_output2); $i++) { 
+        if ($i == (count($desc_counter_output2)-2)) {
+            $sentence_output1 .= $desc_counter_output2[$i]." and ";
+        }else{
+            $sentence_output1 .= $desc_counter_output2[$i].", ";
+        }
+    }
+}else if (count($desc_counter_output2) > 1 && count($desc_counter_output3) > 1 ) {
+    for ($i=0; $i < count($desc_counter_output2); $i++) { 
+        $sentence_output1 .= $desc_counter_output2[$i].", ";
+    }
+}else if (count($desc_counter_output2) == 1 && count($desc_counter_output3) == 0 ) {
+    $sentence_output1 .= $desc_counter_output2[0];
+}else if (count($desc_counter_output2) == 1 && count($desc_counter_output3) > 0 ) {
+    $sentence_output1 .= $desc_counter_output2[0].", ";
+}
+
+if (count($desc_counter_output3) > 1) {
+    for ($i=0; $i < count($desc_counter_output3); $i++) { 
+        if ($i == (count($desc_counter_output3)-2)) {
+            $sentence_output2 .= $desc_counter_output3[$i]." and ";
+        }else{
+            $sentence_output2 .= $desc_counter_output3[$i].", ";
+        }
+    }
+}else{
+    $sentence_output2 .= $desc_counter_output3[0];
+}
+
+if (count($desc_counter_output4) > 1 && count($desc_counter_output5) == 0 ) {
+    for ($i=0; $i < count($desc_counter_output4); $i++) { 
+        if ($i == (count($desc_counter_output4)-2)) {
+            $sentence_output3 .= $desc_counter_output4[$i]." and ";
+        }else{
+            $sentence_output3 .= $desc_counter_output4[$i].", ";
+        }
+    }
+}else if (count($desc_counter_output4) > 1 && count($desc_counter_output5) > 1 ) {
+    for ($i=0; $i < count($desc_counter_output4); $i++) { 
+        $sentence_output3 .= $desc_counter_output4[$i].", ";
+    }
+}else if (count($desc_counter_output4) == 1 && count($desc_counter_output5) == 0 ) {
+    $sentence_output3 .= $desc_counter_output4[0];
+}else if (count($desc_counter_output4) == 1 && count($desc_counter_output5) > 0 ) {
+    $sentence_output3 .= $desc_counter_output4[0].", ";
+}
+
+if (count($desc_counter_output5) > 1 && count($desc_counter_output4) > 0 ) {
+    $sentence_output4 .= " but not for ";
+    for ($i=0; $i < count($desc_counter_output5); $i++) { 
+        if ($i == (count($desc_counter_output5)-2)) {
+            $sentence_output4 .= $desc_counter_output5[$i]." and ";
+        }else{
+            $sentence_output4 .= $desc_counter_output5[$i].", ";
+        }
+    }
+}else if (count($desc_counter_output5) == 1 && count($desc_counter_output4) > 0 ) {
+    $sentence_output4 .= $desc_counter_output5[0];
+}
+if (count($desc_counter_output4) == 0 && count($desc_counter_output5) > 0 ) {
+    $sentence_changer = " not";
+}
+
+if (empty($sentence_output3)) {
+  if (count($desc_counter_output5) > 1 ) {
+    for ($i=0; $i < count($desc_counter_output5); $i++) { 
+        if ($i == (count($desc_counter_output5)-2)) {
+            $sentence_output5 .= $desc_counter_output5[$i]." and ";
+        }else{
+            $sentence_output5 .= $desc_counter_output5[$i].", ";
+        }
+    }
+}else {
+    $sentence_output5 .= $desc_counter_output5[0];
+}
+if (count($desc_counter_output4) == 0 && count($desc_counter_output5) > 0 ) {
+    $sentence_changer = " not";
+}
+}
+
+echo "Based on the graphs above, the most common ".$sentence_topic1." with total of ".$count_list[$end_pos]." ".$sentence_topic2." ".$sentence_output1.$sentence_output2.". if the uploads on the ".$sentence_topic1." ".$sentence_output3.$sentence_output5." will".$sentence_changer." change, the study that will be uploaded might not become saturated and have too similar conclusion".$sentence_output4;
+?>
   </div>
   <br><br>
 
