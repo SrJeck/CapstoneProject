@@ -1,68 +1,9 @@
 <?php
 session_start();
-if (isset($_SESSION['user_id'])) {
-  $id = $_SESSION['user_id'];
-}
-require_once("perpage.php");
-require_once("dbcontroller.php");
-$db_handle = new DBController();
-
-$title = "";
-$author = "";
-$topic = "";
-$publication_day = "";
-$publication_day = "";
-$publication_year = "";
-
-$queryCondition = "";
-if (!empty($_POST["search"])) {
-  foreach ($_POST["search"] as $k => $v) {
-    if (!empty($v)) {
-
-      $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
-      if (in_array($k, $queryCases)) {
-        if (!empty($queryCondition)) {
-          $queryCondition .= " OR ";
-        } else {
-          $queryCondition .= " WHERE ";
-        }
-      }
-      switch ($k) {
-        case "title":
-          $title = $v;
-          $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
-          break;
-      }
-    }
-  }
-}
-$orderby = " ORDER BY id desc";
-$sql = "SELECT * from research " . $queryCondition;
-// $sql = "SELECT * from research where topic='" . $_POST['topic'] . "' ";
-
-$href = 'research.php';
-
-$perPage = 3;
-$page = 1;
-if (isset($_POST['page'])) {
-  $page = $_POST['page'];
-}
-$start = ($page - 1) * $perPage;
-if ($start < 0) $start = 0;
-
-$query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
-$result = $db_handle->runQuery($query);
-
-if (!empty($result)) {
-  $result["perpage"] = showperpage($sql, $perPage, $href);
-}
 ?>
 <html>
 
 <head>
-  <title>Research</title>
-
-  <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
@@ -78,6 +19,9 @@ if (!empty($result)) {
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/jquery.convform.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
+
+  <script type="text/javascript" src="script.js"></script>
+
   <style>
     .grid-container {
       display: grid;
@@ -222,148 +166,243 @@ if (!empty($result)) {
       }
     </script>
 
-
-    <!-- SEARCH BAR CONTAINER -->
-
-    <center>
-
-      <form name="frmSearch" method="post" action="research.php">
-        <div class="container">
-          <div class="row height d-flex justify-content-center align-items-center">
-            <div>
-              <div class="form">
-                <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
-              </div>
+    <form name="frmSearch" method="post">
+      <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center">
+          <div>
+            <div class="form">
+              <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
+                                                                                                                                          echo $_POST["search"];
+                                                                                                                                        }  ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
             </div>
           </div>
         </div>
-        <div class="grid-container">
-          <div class="grid-item">
-            <h3 class="sorted">Sorted By</h3>
-            <select class="sortby">
-              <option selected="selected" value="relevance">Relevance</option>
-              <option value="DateAsc">Newest-Oldest</option>
-              <option value="DateDesc">Oldest-Newest</option>
-              <option value="title">Title</option>
-              <option value="author">Author</option>
-            </select>
-            <hr>
-            <h3 class="sorted">Topic</h3>
-            <select name="topic" id="topic" class="selecttopic">
-              <option value="" selected disabled hidden>Select topic</option>
-              <option value="Education">Education</option>
-              <option value="Technology">Technology</option>
-              <option value="Research">Research</option>
-              <option value="Analysis">Analysis</option>
-              <option value="Database">Database</option>
-              <option value="Agriculture">Agriculture</option>
-              <option value="Health">Health</option>
-              <option value="Politics">Politics</option>
-              <option value="Psychology">Psychology</option>
-              <option value="Business">Business</option>
-              <option value="Marketing and Advertising">Marketing and Advertising</option>
-              <option value="Mechanical">Mechanical</option>
-              <option value="Ethics">Ethics</option>
-              <option value="Others">Others</option>
-            </select>
-            <hr>
-            <h3 class="sorted">Publication Date</h3>
-            <p style="font-size: 14px;">From:</p>
-            <input type="text" class="fromDate" value="2019"><br>
-            <p style="font-size: 14px;">To:</p>
-            <input type="text" class="toDate" value="2021">
-            <br><br>
-            <button type="submit" class="apply">Apply Filters</button>
-            <br><br>
-          </div>
+      </div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <h3 class="sorted">Sorted By</h3>
+          <select class="sortby" name="sort">
+            <option selected="selected" value="" selected disabled hidden>Relevance</option>
+            <option value="DESC">Newest-Oldest</option>
+            <option value="ASC">Oldest-Newest</option>
+          </select>
+          <hr>
+          <h3 class="sorted">Topic</h3>
+          <select name="topic" id="topic" class="selecttopic">
+            <option value="" selected disabled hidden>Select topic</option>
+            <option value="Education">Education</option>
+            <option value="Technology">Technology</option>
+            <option value="Research">Research</option>
+            <option value="Analysis">Analysis</option>
+            <option value="Database">Database</option>
+            <option value="Agriculture">Agriculture</option>
+            <option value="Health">Health</option>
+            <option value="Politics">Politics</option>
+            <option value="Psychology">Psychology</option>
+            <option value="Business">Business</option>
+            <option value="Marketing and Advertising">Marketing and Advertising</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Ethics">Ethics</option>
+            <option value="Others">Others</option>
+          </select>
+          <hr>
+          <h3 class="sorted">Publication Date</h3>
+          <p style="font-size: 14px;">From:</p>
+          <input type="text" name="yearFrom" class="fromDate" value="<?php if (isset($_POST["yearFrom"])) {
+                                                                        echo $_POST["yearFrom"];
+                                                                      } ?>"><br>
+          <p style="font-size: 14px;">To:</p>
+          <input type="text" name="yearTo" class="toDate" value="<?php if (isset($_POST["yearTo"])) {
+                                                                    echo $_POST["yearTo"];
+                                                                  } ?>">
+          <br><br>
+          <button type="submit" class="apply">Apply Filters</button>
+          <br><br>
         </div>
+      </div>
 
-        <table class="formview">
 
-          <?php
-          if (!empty($result)) {
-            foreach ($result as $k => $v) {
-              if (is_numeric($k)) {
-          ?>
-                <tr class="displayRow">
-
-                  <td> <br>
-                    <a class="displayResearch" target='_blank' href='display.php?id=<?php echo $result[$k]['id']; ?>'><i style="font-size:80px" class="fa">&#xf0f6;</i>
-                      <p style="margin-left: 90px; margin-top: -90px;"><?php echo $result[$k]['topic']; ?></p>
-                      <p style="margin-left: 90px; "><?php echo $result[$k]["title"]; ?></p>
-                      <p style="margin-left: 90px; ">
-                        <p style="margin-left: 90px; "><?php echo $result[$k]["author"]; ?></p>
-                        <p style="margin-left: 90px; "><?php echo $result[$k]['publication_day'] . ' ' . $result[$k]['publication_month'] . ' ' . $result[$k]['publication_year']; ?></p>
-                        <hr style="border: 1px solid black;">
-                    </a>
-                  </td>
-
-                </tr>
-            <?php
-              }
-            }
-          }
-          if (isset($result["perpage"])) {
-            ?>
-            <tr>
-              <td> <?php echo $result["perpage"]; ?></td>
-            </tr>
-          <?php } ?>
-        </table>
-      </form>
-
-      <center>
-        <!-- ChatBot -->
-        <div class="chat_icon">
-          <img style="height: 80px;" src="images/chatboticon.png">
-        </div>
-
-        <div class="chat_box">
-          <div class="my-conv-form-wrapper">
-            <form action="" method="GET" class="hidden">
-
-              <select data-conv-question="Hello! How can I help you" name="category">
-                <option value="WebDevelopment">Website Development ?</option>
-                <option value="ThesisQuoForum">Thesis Quo Forum</option>
-              </select>
-
-              <div data-conv-fork="category">
-                <div data-conv-case="WebDevelopment">
-                  <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
-                </div>
-                <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
-                  <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
-                </div>
-              </div>
-
-              <input type="text" name="name" data-conv-question="Please, Enter your name">
-
-              <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
-
-              <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
-
-              <select data-conv-question="Please Confirm">
-                <option value="Yes">Confirm</option>
-              </select>
-
-            </form>
-          </div>
-        </div>
-        <!-- ChatBot end -->
-</body>
-<!-- Below is the script for voice recognition and conversion to text-->
-<script>
-  function record() {
-    var recognition = new webkitSpeechRecognition();
-    recognition.lang = "en-GB";
-
-    recognition.onresult = function(event) {
-      // console.log(event);
-      document.getElementById('speechToText').value = event.results[0][0].transcript;
+    </form>
+    <?php
+    if (!empty($_POST["topic"])) {
+      $topic = $_POST["topic"];
+      $topic2 = $_POST["topic"];
     }
-    recognition.start();
+    if (!empty($_POST["yearFrom"])) {
+      $yearFrom = $_POST["yearFrom"];
+      $yearFrom2 = $_POST["yearFrom"];
+    }
 
-  }
-</script>
+
+
+    $query = "";
+    $sort = " ORDER BY publication_year DESC";
+    $yearTo = date("Y");
+    $between = "";
+    $table = "</table>";
+    $query2 = "";
+    $sort2 = " ORDER BY publication_year DESC";
+    $yearTo2 = date("Y");
+    $between2 = "";
+    $counted = 0;
+    $limit = "3";
+    $test = "<table class='formview'>
+";
+    if (!empty($_POST["search"])) {
+      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('unposted') AND title LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('unposted') AND author LIKE '%" . $_POST["search"] . "%')";
+      $query2 = "SELECT *FROM research  WHERE (upload_status IN ('unposted') AND topic LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('unposted') AND title LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('unposted') AND author LIKE '%" . $_POST["search"] . "%')";
+
+      $_SESSION['search_session1'] = $query;
+      $_SESSION['search_session2'] = $query2;
+    }
+    if (empty($_POST["search"]) && empty($_POST["topic"]) && empty($_POST["sort"]) && empty($_POST["yearFrom"]) && empty($_POST["yearTo"])) {
+      $test = "<span class='noFound'>Please enter a query in the search box above. </span>";
+      unset($_SESSION['search_session1']);
+      unset($_SESSION['search_session2']);
+    }
+    if (!empty($_POST["topic"])) {
+      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%" . $_POST["topic"] . "%')";
+      $query2 = "SELECT * FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%" . $_POST["topic"] . "%')";
+      $_SESSION['search_session1'] = $query;
+      $_SESSION['search_session2'] = $query2;
+    }
+    if (isset($_POST["Education"])) {
+      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Education%')";
+      $query2 = "SELECT * FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Education%')";
+      $_SESSION['search_session1'] = $query;
+      $_SESSION['search_session2'] = $query2;
+    }
+    if (isset($_POST["Technology"])) {
+      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Technology%')";
+      $query2 = "SELECT * FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Technology%')";
+      $_SESSION['search_session1'] = $query;
+      $_SESSION['search_session2'] = $query2;
+    }
+    if (isset($_POST["Business"])) {
+      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Business%')";
+      $query2 = "SELECT * FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Business%')";
+      $_SESSION['search_session1'] = $query;
+      $_SESSION['search_session2'] = $query2;
+    }
+    if (!empty($_POST["yearFrom"])) {
+      if (!empty($_POST["yearTo"])) {
+        $yearTo = $_POST["yearTo"];
+        $between = " AND publication_year BETWEEN " . $yearFrom  . " AND " . $yearTo;
+        $sort = " ORDER BY publication_year ASC";
+        $yearTo2 = $_POST["yearTo"];
+        $sort2 = " ORDER BY publication_year ASC";
+        $between2 = " AND  publication_year BETWEEN " . $yearFrom . " AND " . $yearTo2;
+      } else {
+        if ($yearFrom == $yearTo) {
+          $between = " AND  publication_year ='" . $yearFrom . "'";
+          $sort = " ORDER BY publication_year ASC";
+          $between2 = " AND  publication_year ='" . $yearFrom2 . "'";
+          $sort2 = " ORDER BY publication_year ASC";
+        } else {
+          $between = " AND  publication_year BETWEEN " . $yearFrom . " AND " . $yearTo;
+          $sort = " ORDER BY publication_year ASC";
+          $between2 = " AND  publication_year BETWEEN " . $yearFrom . " AND " . $yearTo2;
+          $sort2 = " ORDER BY publication_year ASC";
+        }
+      }
+    }
+
+    if (!empty($_POST["sort"])) {
+      $sort = " ORDER BY publication_year " . $_POST["sort"];
+      $sort2 = " ORDER BY publication_year " . $_POST["sort"];
+    }
+
+    $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+
+    if (isset($_SESSION['search_session1'])) {
+      $fetching = $dbh->prepare($_SESSION['search_session1'] . $between . $sort);
+      $fetching->execute();
+      $fetched = $fetching->fetch();
+      $counted = $fetched['counted'];
+      if ($counted == 0) {
+        $test .= "<tr><td colspan='4' style='text-align:center'>No Results</td></tr>";
+      }
+    }
+    $num = 0;
+    $prevNum = 0;
+    for ($i = 0; $i < $counted; $i += 3) {
+      if (isset($_SESSION['search_session2'])) {
+        $fetching2 = $dbh->prepare($_SESSION['search_session2'] . $between2 . $sort2 . " LIMIT ?,?");
+      }
+      $fetching2->bindParam(1, $i, PDO::PARAM_INT);
+      $fetching2->bindParam(2, $limit, PDO::PARAM_INT);
+      $fetching2->execute();
+      $num++;
+      while ($fetched2 = $fetching2->fetch()) {
+        if ($num > 1) {
+          $test .= "<tr class='displayRow page$num' style='display:none'>
+                    <td> <br>
+                    <a class='displayResearch' target='_blank' href='display.php?id=" . $fetched2['id'] . "'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
+ 
+                        <p style='margin-left: 90px; margin-top: -90px;'>" . $fetched2['topic'] . "</p>
+                        <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
+                        <p style='margin-left: 90px; '>
+                            <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+                            <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
+                            <hr style='border: 1px solid black;'width='1200px;'>
+                    </a>
+                </td>
+                    
+    </tr> ";
+        } else if ($num == 1) {
+
+          $test .= "<tr  class='displayRow page$num'  style='display:block'> 
+                    <td> <br>
+                    <a class='displayResearch' target='_blank' href='display.php?id=" . $fetched2['id'] . "'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
+
+                    <p style='margin-left: 90px; margin-top: -90px;'>" . $fetched2['topic'] . "</p>
+                    <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
+                    <p style='margin-left: 90px; '>
+                        <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+                        <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
+                        <hr style='border: 1px solid black;' width='1200px;'>
+                </a>
+            </td>
+    </tr>";
+        } elseif ($num % 3 == 0) {
+          $test .= "<tr  class='displayRow page$num' >
+                    <td> <br>
+                    <a class='displayResearch' target='_blank' href='display.php?id=" . $fetched2['id'] . "'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
+
+                    <p style='margin-left: 90px; margin-top: -90px;'>" . $fetched2['topic'] . "</p>
+                    <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
+                    <p style='margin-left: 90px; '>
+                        <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+                        <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
+                        <hr style='border: 1px solid black;' width='1200px;'>
+                </a>
+            </td>
+    </tr></table>";
+        }
+      }
+    }
+
+    // if (isset($_SESSION['search_session1'])) {
+    //     echo $_SESSION['search_session1'].$between.$sort."<br>";
+    // }
+    // if (isset($_SESSION['search_session2'])) {
+    //     echo $_SESSION['search_session2'].$between2.$sort2."<br>";
+    // }
+
+    echo $test;
+    for ($i = 0; $i < $num; $i++) {
+      $new_num = $i + 1;
+      if ($new_num > 5) {
+        echo  "<span class='a'><button class='btn$new_num b' style='display:none' type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button></span>";
+      } else {
+        echo "<span class='a'> <button class='btn$new_num b' style='display:block' type='button' onclick='pageDisplay($new_num,$num)'>$new_num</button></span>";
+      }
+    }
+    ?>
+
+    <script>
+
+    </script>
+</body>
 
 </html>

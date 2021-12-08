@@ -453,3 +453,20 @@ input[type=password]
 .options h4:hover{
   color: blue;
  }
+ /* Need to login */
+.ol-login-link{
+  color: #fff;
+ display: inline-block;
+ border: 1px solid #fff;
+ padding: 1px;
+ border-radius: 4px;
+ margin-top: 3px;
+ margin-left: 200px;
+ font-size: 12px;
+
+}
+
+.icon-open-layer-login {
+background: url(https://www.proquest.com/assets/meta/31b8cbc0/images/icons/auth-login.png) no-repeat 0 2px;
+background-size: 20px;
+}

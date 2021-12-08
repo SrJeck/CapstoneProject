@@ -25,26 +25,6 @@ $result = $db_handle->runQuery("SELECT * FROM user WHERE user_id='" . $_GET["id"
 			$("#name").css('background-color', '#FFFFDF');
 			valid = false;
 		}
-		if (!$("#code").val()) {
-			$("#code-info").html("(required)");
-			$("#code").css('background-color', '#FFFFDF');
-			valid = false;
-		}
-		if (!$("#category").val()) {
-			$("#category-info").html("(required)");
-			$("#category").css('background-color', '#FFFFDF');
-			valid = false;
-		}
-		if (!$("#price").val()) {
-			$("#price-info").html("(required)");
-			$("#price").css('background-color', '#FFFFDF');
-			valid = false;
-		}
-		if (!$("#stock_count").val()) {
-			$("#stock_count-info").html("(required)");
-			$("#stock_count").css('background-color', '#FFFFDF');
-			valid = false;
-		}
 		return valid;
 	}
 </script>

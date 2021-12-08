@@ -80,6 +80,9 @@ if (!empty($result)) {
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/jquery.convform.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
+
+  <script type="text/javascript" src="script.js"></script>
+
 </head>
 
 <body>
@@ -184,7 +187,9 @@ if (!empty($result)) {
         <div class="row height d-flex justify-content-center align-items-center">
           <div>
             <div class="form">
-              <input type="text" id="speechToText" class="form-control form-input" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+              <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
+                                                                                                                                          echo $_POST["search"];
+                                                                                                                                        }  ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
             </div>
           </div>
         </div>
