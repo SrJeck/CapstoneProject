@@ -674,7 +674,7 @@ $db_handle = new DBController();
         }
       }
     } else {
-      $sentence_output2 .= $desc_counter_output3[0];
+      $sentence_output2 .= $desc_counter_output3[count($desc_counter_output3)-1];
     }
 
     if (count($desc_counter_output4) > 1 && count($desc_counter_output5) == 0) {
@@ -712,7 +712,7 @@ $db_handle = new DBController();
     }
 
     if (empty($sentence_output3)) {
-      if (count($desc_counter_output5) > 1) {
+      if (count($desc_counter_output5) > 0) {
         for ($i = 0; $i < count($desc_counter_output5); $i++) {
           if ($i == (count($desc_counter_output5) - 2)) {
             $sentence_output5 .= $desc_counter_output5[$i] . " and ";
@@ -721,7 +721,7 @@ $db_handle = new DBController();
           }
         }
       } else {
-        $sentence_output5 .= $desc_counter_output5[0];
+        $sentence_output5 .= $desc_counter_output5[count($desc_counter_output5)-1];
       }
       if (count($desc_counter_output4) == 0 && count($desc_counter_output5) > 0) {
         $sentence_changer = " not";
