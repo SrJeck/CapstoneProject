@@ -16,12 +16,12 @@
             $password = $_POST['password'];
             $status = "offline";
 
-            $stat = $dbh->prepare('select * from user where email=?');
+            $stat = $dbh->prepare('select * from admin where email=?');
             $stat->bindParam(1, $email);
             $stat->execute();
             $row = $stat->fetch();
             if (empty($row)) {
-                $stmt = $dbh->prepare("insert into user values('',?,?,?,?,?,?,?,?,?,?)");
+                $stmt = $dbh->prepare("insert into admin values('',?,?,?,?,?,?,?,?,?,?)");
                 $stmt->bindParam(1,$fName);
                 $stmt->bindParam(2,$mName);
                 $stmt->bindParam(3,$lName);
