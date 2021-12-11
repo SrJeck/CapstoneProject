@@ -85,6 +85,7 @@ if (isset($_SESSION['admin_id'])) {
     </div>
     <table class="table">
         <tr class="tr">
+            <th class="th">ID</th>
             <th class="th">Title</th>
             <th class="th">Published By</th>
             <th class="th">Year</th>
@@ -94,6 +95,7 @@ if (isset($_SESSION['admin_id'])) {
         $research->execute();
         while ($row = $research->fetch()) {
             echo '<tr class="tr">
+            <th class="th">'.$row['id'].'</th>
             <th class="th">'.$row['title'].'</th>
             <th class="th">'.$row['author'].'</th>
             <th class="th">'.$row['publication_year'].'</th>
@@ -115,6 +117,7 @@ if (isset($_SESSION['admin_id'])) {
             echo '<tr class="tr">
             <th class="th">'.$row['firstName'].'</th>
             <th class="th">'.$row['email'].'</th>
+            <th class="th">'.$row['access'].'</th>
         </tr>';
         }
         

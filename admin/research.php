@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (isset($_SESSION['user_id'])) {
-  $id = $_SESSION['user_id'];
+if (isset($_SESSION['admin_id'])) {
+  $id = $_SESSION['admin_id'];
 }
 
 $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");

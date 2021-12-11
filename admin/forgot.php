@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (isset($_SESSION['user_id'])) {
-  $id = $_SESSION['user_id'];
+if (isset($_SESSION['admin_id'])) {
+  $id = $_SESSION['admin_id'];
 }
 ?>
 <!-- START DATE 8/28/2021 -->

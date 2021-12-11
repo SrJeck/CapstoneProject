@@ -120,6 +120,14 @@
             <label>Female</label><br>
           </div>
           <div class="input-group">
+            <h4>Access Level</h4>
+            <select name="access" id="access">
+              <option value="" selected disabled hidden>Select access level</option>
+              <option value="Super Admin">Super Admin</option>
+              <option value="Admin">Admin</option>
+            </select>
+          </div>
+          <div class="input-group">
             <h4>Email</h4>
             <div class="input-area">
               <input type="text" id="email" name="email" />

@@ -2,8 +2,8 @@
 session_start();
 $dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
 
-$id = $_SESSION['user_id'];
-$stat = $dbh->prepare('select * from user where user_id=?');
+$id = $_SESSION['admin_id'];
+$stat = $dbh->prepare('select * from admin where admin_id=?');
 $stat->bindParam(1, $id);
 $stat->execute();
 $row = $stat->fetch();
