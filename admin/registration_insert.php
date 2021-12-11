@@ -33,10 +33,10 @@
                 $stmt->bindParam(9,$password);
                 $stmt->bindParam(10,$status);
                 $stmt->execute();
-                header("Location: /admin/index.php");
+                header("Location: admin/index.php");
                 echo "success";  
             }else{
-                header("Location: /admin/registration.php");
+                header("Location: admin/registration.php");
                 echo "failed";  
             }
             }
