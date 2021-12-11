@@ -1,8 +1,8 @@
 <?php
 session_start();
 $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-if (isset($_SESSION['user_id'])) {
-    $id = $_SESSION['user_id'];
+if (isset($_SESSION['admin_id'])) {
+    $id = $_SESSION['admin_id'];
 }
 ?>
 
@@ -55,7 +55,7 @@ if (isset($_SESSION['user_id'])) {
                 <!-- populate table from mysql database -->
                 <?php
 
-                $stat = $dbh->prepare('select * from user where user_id=?');
+                $stat = $dbh->prepare('select * from admin where admin_id=?');
                 $stat->bindParam(1, $id);
                 $stat->execute();
                 $row = $stat->fetch();
@@ -69,11 +69,11 @@ if (isset($_SESSION['user_id'])) {
                             <p class="lname"><?php echo $row['lastName']; ?></p>
                         </div>
                         <div class="emailrow">
-                            <p class="email"><?php echo $row['email_address']; ?></p>
+                            <p class="email"><?php echo $row['email']; ?></p>
                         </div>
                         <div class="displayrow2">
-                            <p class="pnumber"><?php echo $row['contactNumber']; ?></p>
-                            <p class="address"><?php echo $row['homeAddress']; ?></p>
+                            <p class="pnumber"><?php echo $row['phoneNumber']; ?></p>
+                            <p class="address"><?php echo $row['address']; ?></p>
                         </div>
 
                     </td>
@@ -89,26 +89,9 @@ if (isset($_SESSION['user_id'])) {
             <th class="th">Published By</th>
             <th class="th">Year</th>
         </tr>
-        <tr class="tr">
-            <td class="td">Game of Codes</td>
-            <td class="td">Mohammed Morad</td>
-            <td class="td">2021</td>
-        </tr>
-        <tr class="tr">
-            <td class="td">Game of Codes</td>
-            <td class="td">Mohammed Morad</td>
-            <td class="td">2020</td>
-        </tr>
-        <tr class="tr">
-            <td class="td">Game of Codes</td>
-            <td class="td">Mohammed Morad</td>
-            <td class="td">2019</td>
-        </tr>
-        <tr class="tr">
-            <td class="td">Game of Codes</td>
-            <td class="td">Mohammed Morad</td>
-            <td class="td">2018 </td>
-        </tr>
+        <?php
+        
+        ?>
     </table>
     <table class="table2">
         <tr class="tr2">
@@ -117,30 +100,9 @@ if (isset($_SESSION['user_id'])) {
             <th class="th2">Access</th>
             <th class="th2">Login Status</th>
         </tr>
-        <tr class="tr2">
-            <td class="td2">Juan Dela Cruz</td>
-            <td class="td2">juan@gmail.com</td>
-            <td class="td2">Internal User</td>
-            <td class="td2">Active</td>
-        </tr>
-        <tr class="tr2">
-            <td class="td2">Juan Dela Cruz</td>
-            <td class="td2">juan@gmail.com</td>
-            <td class="td2">Portal User</td>
-            <td class="td2">Active</td>
-        </tr>
-        <tr class="tr2">
-            <td class="td2">Juan Dela Cruz</td>
-            <td class="td2">juan@gmail.com</td>
-            <td class="td2">Read Only</td>
-            <td class="td2">Inactive</td>
-        </tr>
-        <tr class="tr2">
-            <td class="td2">Juan Dela Cruz</td>
-            <td class="td2">juan@gmail.com</td>
-            <td class="td2">Read and Create </td>
-            <td class="td2">Active</td>
-        </tr>
+        <?php
+        
+        ?>
     </table>
     <!-- ChatBot -->
     <div class="chat_icon">
