@@ -12,7 +12,6 @@
             $address = $_POST['address'];
             $birthday = $_POST['birthday'];
             $sex = $_POST['sex'];
-            $degree = $_POST['degree_level'];
             $email = $_POST['email'];
             $password = $_POST['password'];
             $status = "offline";
@@ -22,7 +21,7 @@
             $stat->execute();
             $row = $stat->fetch();
             if (empty($row)) {
-                $stmt = $dbh->prepare("insert into user values('',?,?,?,?,?,?,?,?,?,?,?)");
+                $stmt = $dbh->prepare("insert into user values('',?,?,?,?,?,?,?,?,?,?)");
                 $stmt->bindParam(1,$fName);
                 $stmt->bindParam(2,$mName);
                 $stmt->bindParam(3,$lName);
@@ -32,13 +31,12 @@
                 $stmt->bindParam(7,$birthday);
                 $stmt->bindParam(8,$email);
                 $stmt->bindParam(9,$password);
-                $stmt->bindParam(10,$degree);
-                $stmt->bindParam(11,$status);
+                $stmt->bindParam(10$status);
                 $stmt->execute();
-                header("Location: login.php");
+                header("Location: /admin/index.php");
                 echo "success";  
             }else{
-                header("Location: registration.php");
+                header("Location: /admin/registration.php");
                 echo "failed";  
             }
             }

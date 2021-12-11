@@ -120,24 +120,6 @@
             <label>Female</label><br>
           </div>
           <div class="input-group">
-            <h4>Degree Level</h4>
-            <select name="degree_level" id="degree">
-              <option value="" selected disabled hidden>Select degree level</option>
-              <option value="Professional Certificates">Professional Certificates</option>
-              <option value="Undergraduate Degrees">Undergraduate Degrees</option>
-              <option value="Transfer Degrees">Transfer Degrees</option>
-              <option value="Associate Degrees">Associate Degrees</option>
-              <option value="Bachelor Degrees">Bachelor Degrees</option>
-              <option value="Graduate Degrees">Graduate Degrees</option>
-              <option value="Master Degrees">Master Degrees</option>
-              <option value="Doctoral Degrees">Doctoral Degrees</option>
-              <option value="Professional Degrees">Professional Degrees</option>
-              <option value="Others">Others</option>
-            </select>
-
-
-          </div>
-          <div class="input-group">
             <h4>Email</h4>
             <div class="input-area">
               <input type="text" id="email" name="email" />
