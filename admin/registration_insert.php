@@ -39,5 +39,5 @@ if (isset($_POST['submit'])) {
             header("Location: registration.php");
             echo "failed";
         }
-    
-
+    }
+}
