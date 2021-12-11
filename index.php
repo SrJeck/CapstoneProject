@@ -205,7 +205,7 @@ if (!empty($result)) {
     </p>
     <!-- 3 IMAGES -->
     <div class="images">
-      <form action="new_search.php" method="POST">
+      <form action="research.php" method="POST">
         <img class="book" src="images/book.JPG">
         <button class="btn" type="submit" name="Education">Education</button>
         <img class="chip" src="images/chip.JPG">
