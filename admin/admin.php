@@ -90,6 +90,16 @@ if (isset($_SESSION['admin_id'])) {
             <th class="th">Year</th>
         </tr>
         <?php
+        $research = $dbh->prepare('select * from research where upload_status=?');
+        $research->bindParam(1, $id);
+        $research->execute();
+        while ($row = $research->fetch()) {
+            echo '<tr class="tr">
+            <th class="th">'.$row['title'].'</th>
+            <th class="th">'.$row['author'].'</th>
+            <th class="th">'.$row['publication_year'].'</th>
+        </tr>';
+        }
         
         ?>
     </table>
