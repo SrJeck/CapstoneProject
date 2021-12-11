@@ -90,8 +90,7 @@ if (isset($_SESSION['admin_id'])) {
             <th class="th">Year</th>
         </tr>
         <?php
-        $research = $dbh->prepare('select * from research where upload_status=?');
-        $research->bindParam(1, $id);
+        $research = $dbh->prepare('select * from research where upload_status="unposted"');
         $research->execute();
         while ($row = $research->fetch()) {
             echo '<tr class="tr">
@@ -108,9 +107,16 @@ if (isset($_SESSION['admin_id'])) {
             <th class="th2">Admin Name</th>
             <th class="th2">Email</th>
             <th class="th2">Access</th>
-            <th class="th2">Login Status</th>
         </tr>
         <?php
+        $admins = $dbh->prepare('select * from admin');
+        $admins->execute();
+        while ($row = $admins->fetch()) {
+            echo '<tr class="tr">
+            <th class="th">'.$row['firstName'].'</th>
+            <th class="th">'.$row['email'].'</th>
+        </tr>';
+        }
         
         ?>
     </table>
