@@ -380,6 +380,10 @@ $db_handle = new DBController();
       }
     }
 
+    $des_topic1 = "";
+    $des_topic2 = "";
+    $des_topic3 = "";
+    $des_topic4 = "";
     $asc_output_key = "";
     $asc_output_count = "";
     if ($asc_count > 1) {
@@ -395,6 +399,8 @@ $db_handle = new DBController();
       } else {
         $asc_output_count = $asc_topic_array_count[0];
       }
+      $des_topic1 = "topics";
+      $des_topic3 = "are";
     } else {
       $asc_output_key = $asc_topic_array_key[0];
       if ($asc_topic_array_count[0] == 0) {
@@ -402,6 +408,8 @@ $db_handle = new DBController();
       } else {
         $asc_output_count = $asc_topic_array_count[0];
       }
+      $des_topic1 = "topic";
+      $des_topic3 = "is";
     }
 
 
@@ -416,11 +424,15 @@ $db_handle = new DBController();
         }
       }
       $desc_output_count = $desc_topic_array_count[0];
+      $des_topic2 = "topics";
+      $des_topic4 = "are";
     } else {
       $desc_output_key = $desc_topic_array_key[0];
       $desc_output_count = $desc_topic_array_count[0];
+      $des_topic2 = "topic";
+      $des_topic4 = "is";
     }
-    echo "The " . rtrim($desc_output_key, ", ") . " have the highest number of uploaded topics with " . $desc_output_count . " number of uploads while the " . rtrim($asc_output_key, ", ") . " have the lowest number of uploaded topics with " . $asc_output_count . " number of uploads.";
+    echo "The " . rtrim($desc_output_key, ", ") . " have the highest number of uploaded ".$des_topic2." with " . $desc_output_count . " number of uploads while the " . rtrim($asc_output_key, ", ") . " have the lowest number of uploaded ".$des_topic1." with " . $asc_output_count . " number of uploads.";
     ?>
   </div>
   <div class="predictive">Predictive
@@ -524,7 +536,9 @@ $db_handle = new DBController();
     $asc_count = 0;
     $desc_string = "";
     $desc_count = 0;
-    $topic_string = "";
+    $asc_string_array = array();
+    $desc_string_array = array();
+    $topic_string_array = array();
     for ($i = 0; $i < count($topic_list); $i++) {
       $topic = $dbh->prepare('SELECT COUNT(*) AS number_of_research FROM research WHERE topic=?');
       $topic->bindParam(1, $topic_list[$i]);
@@ -576,6 +590,7 @@ $db_handle = new DBController();
         $string_holder2 = $string_output4[$j];
         if ($string_holder1[0] == $string_holder2[0]) {
           $asc_string .= $string_output4[$j] . ", ";
+          //array_push($asc_string_array,$string_output4[$j]);
         }
       }
       for ($j = 0; $j < count($string_output5); $j++) {
@@ -583,11 +598,13 @@ $db_handle = new DBController();
         $string_holder2 = $string_output5[$j];
         if ($string_holder1[0] == $string_holder2[0]) {
           $desc_string .= $string_output5[$j] . ", ";
+          //array_push($desc_string_array,$string_output5[$j]);
         }
       }
       $asc_string .= " / ";
       $desc_string .= " / ";
     }
+    $asc_string_output2 = explode(" / ", substr_replace($asc_string, "", -4));
     $desc_string_output2 = explode(" / ", substr_replace($desc_string, "", -4));
     $desc_counter = 0;
     $desc_counter_output  = "";
@@ -729,6 +746,7 @@ $db_handle = new DBController();
     }
 
     echo "Based on the graphs above, the most common " . $sentence_topic1 . " with total of " . $count_list[$end_pos] . " " . $sentence_topic2 . " " . rtrim($sentence_output1,", ") . rtrim($sentence_output2,", ") . ". if the uploads on the " . $sentence_topic1 . " " . $sentence_output3 . $sentence_output5 . " will" . $sentence_changer . " change, the study that will be uploaded might". $sentence_changer ." become saturated and have too similar conclusion" . $sentence_output4;
+
     ?>
   </div>
   <br><br>
@@ -909,7 +927,81 @@ $db_handle = new DBController();
   <div class="prescriptive">Prescriptive
     <br><br>
 
-    The current highest uploaded topic is the highest_var with a total of total_ups upload. to develop a new and unique study, we recommend developing a study about lowest_var3, lowest_var2, or lowest_var1
+      <?php
+      
+    $asc_string_key_output = "";
+    $desc_string_key_output= "";
+  
+    $final_asc_string_array = array();
+    $final_desc_string_array  = array();
+    $final_asc_string_key ="";
+    $final_desc_string_key  = "";
+    $final_asc_count= 0;
+    $final_desc_count  = 0;
+    $asc_string_array_output = explode(" ",substr($asc_string_output2[0], strpos($asc_string_output2[0], " - ")+3));
+    $desc_string_array_output = explode(" ",substr($desc_string_output2[0], strpos($desc_string_output2[0], " - ")+3));
+    for ($i=0; $i < count($asc_string_array_output); $i++) {
+      if (ctype_alpha(rtrim($asc_string_array_output[$i], ","))) {
+        array_push($final_asc_string_array,rtrim($asc_string_array_output[$i], ","));
+      } 
+      if (ctype_digit(rtrim($asc_string_array_output[$i], ","))) {
+       $final_asc_count = rtrim($asc_string_array_output[$i], ",");
+      } 
+    }
+    for ($i=0; $i < count($desc_string_array_output); $i++) { 
+      if (ctype_alpha(rtrim($desc_string_array_output[$i], ","))) {
+        array_push($final_desc_string_array,rtrim($desc_string_array_output[$i], ","));
+      } 
+      if (ctype_digit(rtrim($desc_string_array_output[$i], ","))) {
+       $final_desc_count = rtrim($desc_string_array_output[$i], ",");
+      } 
+    }
+      if (count($final_asc_string_array)> 1) {
+      for ($i = 0; $i < count($final_asc_string_array); $i++) {
+        if ($i == (count($final_asc_string_array) - 2)) {
+          $final_asc_string_key .= $final_asc_string_array[$i] . " and ";
+        } else {
+          $final_asc_string_key .= $final_asc_string_array[$i] . ", ";
+        }
+      }
+    } else {
+      $final_asc_string_key = $final_asc_string_array[0];
+    }
+    if (count($final_desc_string_array)> 1) {
+      for ($i = 0; $i < count($final_desc_string_array); $i++) {
+        if ($i == (count($final_desc_string_array) - 2)) {
+          $final_desc_string_key .= $final_desc_string_array[$i] . " and ";
+        } else {
+          $final_desc_string_key .= $final_desc_string_array[$i] . ", ";
+        }
+      }
+    } else {
+      $final_desc_string_key = $final_desc_string_array[0];
+    }
+    //echo rtrim($asc_output_key, ", ")."<br>";
+    //echo rtrim($desc_output_key, ", ")."<br>";
+    //echo $final_asc_string_key."<br>";
+    //echo $final_desc_string_key;
+    $pres_topic1 = "";
+    $pres_topic2 = "";
+    $pres_topic3 = "";
+    $pres_topic4 = "";
+    if (count($final_desc_string_array)>1) {
+      $pres_topic1 = "topics";
+      $pres_topic3 = "are";
+    }else{
+      $pres_topic1 = "topic";
+      $pres_topic3 = "is";
+    }
+    if (count($final_asc_string_array)>1) {
+      $pres_topic2 = "topics";
+      $pres_topic4 = "are";
+    }else{
+      $pres_topic2 = "topic";
+      $pres_topic4 = "is";
+    }
+    echo "The current highest uploaded ".$pres_topic1." this year ".$pres_topic3." ".rtrim($final_desc_string_key,", ")." with ".$final_desc_count." upload and the current highest uploaded ".$des_topic2." in total ".$des_topic4." ".rtrim($desc_output_key,", ")." with ".$desc_output_count ." upload. to develop a new and unique study, we recommend developing a study about the lowest uploaded ".$pres_topic2." this year which ".$pres_topic4." ".rtrim($final_asc_string_key,", ")  ." or the lowest uploaded ".$des_topic1." in total which ".$des_topic3." ".rtrim($asc_output_key,", ");
+      ?>
   </div>
   <br><br>
 </body>
