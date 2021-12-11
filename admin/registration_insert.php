@@ -31,7 +31,7 @@
                 $stmt->bindParam(7,$birthday);
                 $stmt->bindParam(8,$email);
                 $stmt->bindParam(9,$password);
-                $stmt->bindParam(10$status);
+                $stmt->bindParam(10,$status);
                 $stmt->execute();
                 header("Location: /admin/index.php");
                 echo "success";  
