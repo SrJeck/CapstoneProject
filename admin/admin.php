@@ -42,6 +42,7 @@ if (isset($_SESSION['admin_id'])) {
     <div class="side">
         <a href="editprofile.php?user_id=<?php echo $id; ?>"><i class="fa fa-pencil"> <b>Edit Profile </b> &#xf105;</i></a>
         <a href="security.php?user_id=<?php echo $id; ?>"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
+        <a href="registration.php"><i class='fas fa-user' style="bold:none;"> Create Admin Account</i></a>
 
     </div>
     <img class="profilepencil" src="images/profilepencil.png">
@@ -89,16 +90,19 @@ if (isset($_SESSION['admin_id'])) {
             <th class="th">Title</th>
             <th class="th">Published By</th>
             <th class="th">Year</th>
+            <th class="th" colspan="2">action</th>
         </tr>
         <?php
         $research = $dbh->prepare('select * from research where upload_status="unposted"');
         $research->execute();
         while ($row = $research->fetch()) {
             echo '<tr class="tr">
-            <th class="th">'.$row['id'].'</th>
-            <th class="th">'.$row['title'].'</th>
-            <th class="th">'.$row['author'].'</th>
-            <th class="th">'.$row['publication_year'].'</th>
+            <td class="th">'.$row['id'].'</td>
+            <td class="th">'.$row['title'].'</td>
+            <td class="th">'.$row['author'].'</td>
+            <td class="th">'.$row['publication_year'].'</td>
+            <td class="th"><button><a href="accept_research.php?id=' . $row['id'] . '">accept</a></button></td>
+            <td class="th"><button><a href="reject_research.php?id=' . $row['id'] . '">reject</a></button></td>
         </tr>';
         }
         
@@ -114,11 +118,13 @@ if (isset($_SESSION['admin_id'])) {
         $admins = $dbh->prepare('select * from admin');
         $admins->execute();
         while ($row = $admins->fetch()) {
-            echo '<tr class="tr">
-            <th class="th">'.$row['firstName'].'</th>
-            <th class="th">'.$row['email'].'</th>
-            <th class="th">'.$row['access'].'</th>
+            if ($row['admin_id'] != $_SESSION['admin_id']) {
+                echo '<tr class="tr">
+            <td class="th">'.$row['firstName'].'</td>
+            <td class="th">'.$row['email'].'</td>
+            <td class="th">'.$row['access'].'</td>
         </tr>';
+            }
         }
         
         ?>

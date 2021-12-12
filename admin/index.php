@@ -88,9 +88,6 @@
             <a href="forgot.php">
               <h4>Forgot your password?</h4>
             </a>
-            <a href="registration.php">
-              <h4>Don't have an account?</h4>
-            </a>
           </div>
         </div>
       </div>
