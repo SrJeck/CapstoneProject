@@ -42,7 +42,16 @@ if (isset($_SESSION['admin_id'])) {
     <div class="side">
         <a href="editprofile.php?user_id=<?php echo $id; ?>"><i class="fa fa-pencil"> <b>Edit Profile </b> &#xf105;</i></a>
         <a href="security.php?user_id=<?php echo $id; ?>"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
-        <a href="registration.php"><i class='fas fa-user' style="bold:none;"> Create Admin Account</i></a>
+        <?php
+            $stat = $dbh->prepare('select * from admin where admin_id=?');
+            $stat->bindParam(1, $id);
+            $stat->execute();
+            $row = $stat->fetch();
+            if ($row["access"] == "Super Admin") {
+               echo '<a href="registration.php"><i class="fas fa-user" style="bold:none;"> Create Admin Account</i></a>';
+            }
+        ?>
+        
 
     </div>
     <img class="profilepencil" src="images/profilepencil.png">
