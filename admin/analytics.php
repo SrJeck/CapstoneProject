@@ -176,9 +176,11 @@ $db_handle = new DBController();
     <div id="piechart" style="width: 800px; height: 420px; float:left"></div>
     <div id="curve_chart" style="width: 800px; height: 420px; float:right"></div>
   </div>
+  
+  <div id="columnchart_material" style="width: 100%; height: 420px; float:right"></div>
   <script type="text/javascript">
     google.charts.load('current', {
-      'packages': ['corechart']
+      'packages': ['corechart', 'bar']
     });
 
     // Draw the pie chart for Sarah's pizza when Charts is loaded.
@@ -186,6 +188,9 @@ $db_handle = new DBController();
 
     // Draw the pie chart for the Anthony's pizza when Charts is loaded.
     google.charts.setOnLoadCallback(drawLineChart);
+
+    // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+    google.charts.setOnLoadCallback(drawBarChart);
 
     function drawPieChart() {
 
@@ -283,6 +288,33 @@ $db_handle = new DBController();
 
 
     }
+
+    function drawBarChart() {
+      var data = google.visualization.arrayToDataTable([
+          ['Year','Total Uploads'],
+
+          <?php
+          $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+          $fetch_year = $dbh->prepare('SELECT publication_year, COUNT(*) AS number_of_topic FROM research GROUP BY publication_year ASC');
+          $fetch_year->execute();
+          while ($fetched_year = $fetch_year->fetch()) {
+            echo "['".$fetched_year['publication_year']."',".$fetched_year['number_of_topic']."],";
+          }
+          ?>
+        ]);
+        var options = {
+          chart: {
+            title: 'Total Upload Per Year',
+          }
+        };
+
+
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+    
   </script>
 
 
