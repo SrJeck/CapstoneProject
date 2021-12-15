@@ -208,13 +208,13 @@ session_start();
           <hr>
           <h3 class="sorted">Publication Date</h3>
           <p style="font-size: 14px;">From:</p>
-          <input type="text" name="yearFrom" class="fromDate" value="<?php if (isset($_POST["yearFrom"])) {
-                                                                        echo $_POST["yearFrom"];
-                                                                      } ?>"><br>
+          <input type="text" name="yearFrom" placeholder="Year" class="fromDate" value="<?php if (isset($_POST["yearFrom"])) {
+                                                                                          echo $_POST["yearFrom"];
+                                                                                        } ?>"><br>
           <p style="font-size: 14px;">To:</p>
-          <input type="text" name="yearTo" class="toDate" value="<?php if (isset($_POST["yearTo"])) {
-                                                                    echo $_POST["yearTo"];
-                                                                  } ?>">
+          <input type="text" name="yearTo" placeholder="Year" class="toDate" value="<?php if (isset($_POST["yearTo"])) {
+                                                                                      echo $_POST["yearTo"];
+                                                                                    } ?>">
           <br><br>
           <button type="submit" class="apply">Apply Filters</button>
           <br><br>
@@ -255,11 +255,11 @@ session_start();
       $_SESSION['search_session1'] = $query;
       $_SESSION['search_session2'] = $query2;
     }
-    if (empty($_POST["search"]) && empty($_POST["topic"]) && empty($_POST["sort"]) && empty($_POST["yearFrom"]) && empty($_POST["yearTo"])) {
-      $test = "<span class='noFound'>Please enter a query in the search box above. </span>";
-      unset($_SESSION['search_session1']);
-      unset($_SESSION['search_session2']);
-    }
+    // if (empty($_POST["search"]) && empty($_POST["topic"]) && empty($_POST["sort"]) && empty($_POST["yearFrom"]) && empty($_POST["yearTo"])) {
+    //   $test = "<span class='noFound'>Please enter a query in the search box above. </span>";
+    //   unset($_SESSION['search_session1']);
+    //   unset($_SESSION['search_session2']);
+    // }
     if (!empty($_POST["topic"])) {
       $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%" . $_POST["topic"] . "%')";
       $query2 = "SELECT * FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%" . $_POST["topic"] . "%')";

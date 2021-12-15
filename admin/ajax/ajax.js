@@ -42,7 +42,7 @@ $(document).on('click', '#update', function (e) {
 			if (dataResult.statusCode == 200) {
 				$('#editEmployeeModal').modal('hide');
 				swal('Data updated successfully !');
-				window.setTimeout(function () { location.reload() }, 2000)
+				window.setTimeout(function () { location.reload() }, 1500)
 
 			}
 			else if (dataResult.statusCode == 201) {
