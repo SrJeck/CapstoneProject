@@ -194,7 +194,8 @@ if (!empty($result)) {
       $new_stat->bindParam(1, $thesis_id);
       $new_stat->execute();
       $thesis = $new_stat->fetch();
-      echo '
+      if (!empty($thesis)) {
+        echo '
                 <table class="formview">
                       <tr class="displayRow">
                         <td> <br>
@@ -213,6 +214,7 @@ if (!empty($result)) {
                       </tr>
                  </table>
         ';
+      }
     }
     ?>
     <br><br>
