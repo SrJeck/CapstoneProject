@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
         if (!empty($row)) {
             $id = $row['admin_id'];
             $_SESSION['admin_id'] = $id;
-            header("Location: admin.php");
+            header("Location: profile.php");
         } else {
             header("Location: index.php");
         }
