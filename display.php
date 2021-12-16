@@ -60,7 +60,6 @@ if (!empty($result)) {
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <title>Display</title>
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -78,6 +77,32 @@ if (!empty($result)) {
 <body>
   <!-- NAVBAR -->
   <?php
+  session_start();
+  if (isset($_SESSION['user_id'])) {
+    $id = $_SESSION['user_id'];
+  }
+
+  if (isset($_SESSION['user_id'])) {
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+  </div>';
+  } else {
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+    </div>';
+  }
+
   $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
   $id = $_GET['id'];
   $stat = $dbh->prepare('select * from research where id=?');
@@ -87,7 +112,50 @@ if (!empty($result)) {
   ?>
 
 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel">Cite</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table style="width:100%">
+            <tr>
+              <td><strong>APA</strong> </td>
+              <td><?php echo  $row['author']  ?>.<span> (</span><?php echo  $row['publication_year']  ?><span>). </span><span><?php echo  $row['title']  ?>.</span> <?php echo  $row['publisher']  ?></td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="add_bookmark.php?id=<?php echo $id; ?>" class="view btn-lg">
+    <span class="fa fa-bookmark-o"> Bookmark</span>
+  </a>
+  <!-- Button trigger modal -->
+  <button type="button" class="view btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <span class="fa fa-quote-right"> Cite</span>
+  </button>
 
+  <?php
+  if ($row['permission'] == "Download Only") {
+
+    echo "<a class='view btn-lg' target='_blank' href='download.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> Download PDF </span></a>";
+  } else if ($row['permission'] == "View Only") {
+
+    echo "<a class='view btn-lg' target='_blank' href='view.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> View PDF </span></a>";
+  } else if ($row['permission'] == "View and Download") {
+
+    echo "<a class='view btn-lg' target='_blank' href='download.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> Download PDF </span></a>";
+    echo "<a class='view btn-lg' target='_blank' href='view.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> View PDF </span></a>";
+  }
+  ?>
   <?php
 
   echo "
@@ -115,7 +183,10 @@ if (!empty($result)) {
     </div>
     <div id="center">
       <div class="center-content">
-
+        <form class="example" name="frmSearch" method="post" action="research.php" style="margin:auto;max-width:300px">
+          <input type="text" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>" name="search2">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
 
       </div>
     </div>

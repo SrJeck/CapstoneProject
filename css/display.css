@@ -20,6 +20,7 @@
       top: 0;
       width: 100%;
       z-index: 1;
+      font-family: 'Times New Roman', Times, serif;
     }
     .navbar a {
       float: left;

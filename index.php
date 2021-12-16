@@ -188,7 +188,6 @@ if (!empty($result)) {
           <div>
             <div class="form">
               <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
-                                                                                                                                          echo $_POST["search"];
                                                                                                                                         }  ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
             </div>
           </div>

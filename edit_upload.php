@@ -51,20 +51,20 @@ $row = $stat->fetch();
         <label>Abstract:</label>
       </span>
       <span class="col-75">
-        <textarea type="text" name="abstract" id="abstract" rows="7" cols="50" required><?php echo $row['abstract']?></textarea>
+        <textarea type="text" name="abstract" id="abstract" rows="7" cols="50" required><?php echo $row['abstract'] ?></textarea>
         <!-- <button class='scanbutton' onclick='plagScan()' id='sub-btn'>Scan For Plagiarism</button><br> -->
       </span>
       <span class="col-25">
         <label>Title:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="title" id="title"  value="<?php echo $row['title']?>" required>
+        <input type="text" name="title" id="title" value="<?php echo $row['title'] ?>" required>
       </span>
       <span class="col-25">
         <label>Authors:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="author" id="author"  value="<?php echo $row['author']?>" required>
+        <input type="text" name="author" id="author" value="<?php echo $row['author'] ?>" required>
       </span>
     </span>
     <span class=" row">
@@ -72,14 +72,14 @@ $row = $stat->fetch();
         <label>Institution:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="institution" id="institution" value="<?php echo $row['institution']?>"  required>
+        <input type="text" name="institution" id="institution" value="<?php echo $row['institution'] ?>" required>
       </span>
       <span class="col-25">
         <label>Degree Level:</label>
       </span>
       <span class="col-75">
         <select name="degree_level" id="degree_level" required>
-          <option  value="<?php echo $row['degree_level']?>"  selected disabled hidden><?php echo $row['degree_level']?> </option>
+          <option value="<?php echo $row['degree_level'] ?>" selected disabled hidden><?php echo $row['degree_level'] ?> </option>
           <option value="Professional Certificates">Professional Certificates</option>
           <option value="Undergraduate Degrees">Undergraduate Degrees</option>
           <option value="Transfer Degrees">Transfer Degrees</option>
@@ -97,7 +97,7 @@ $row = $stat->fetch();
       </span>
       <span class="col-75">
         <select name="topic" id="topic" required>
-          <option value="<?php echo $row['topic']?>"  selected disabled hidden><?php echo $row['topic']?></option>
+          <option value="<?php echo $row['topic'] ?>" selected disabled hidden><?php echo $row['topic'] ?></option>
           <option value="Education">Education</option>
           <option value="Technology">Technology</option>
           <option value="Research">Research</option>
@@ -118,20 +118,20 @@ $row = $stat->fetch();
         <label>Research Type:</label>
       </span>
       <span class="col-75">
-        <input type="text" id="research_type" name="research_type"  value="<?php echo $row['research_type']?>"  readonly>
+        <input type="text" id="research_type" name="research_type" value="<?php echo $row['research_type'] ?>" readonly>
       </span>
 
       <span class="col-25">
         <label>Keywords:</label>
       </span>
       <span class="col-75">
-        <input type="text"  value="<?php echo $row['keywords']?>"  id="keywords" name="keywords">
+        <input type="text" value="<?php echo $row['keywords'] ?>" id="keywords" name="keywords">
       </span>
       <span class="col-25">
         <label>Publisher:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="publisher" id="publisher"  value="<?php echo $row['publisher']?>" required>
+        <input type="text" name="publisher" id="publisher" value="<?php echo $row['publisher'] ?>" required>
       </span>
       <span class="col-25">
         <label>Permission Type:</label>

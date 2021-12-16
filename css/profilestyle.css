@@ -309,7 +309,7 @@
     /* Table */
 
     .table, .td, .th {  
-      border: 1px solid #ddd;
+      border: 1px solid rgb(167, 167, 167);
       text-align: center;
     }
     
@@ -340,4 +340,20 @@
       padding-bottom: 12px;
       background-color: #c2a87c;
       color: white;
+    }
+    .editBtn{
+      background-color: #c2a87c;
+      border: none;
+      color: white;
+      padding: 5px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 7px;
+      border: 1px solid rgb(129, 126, 126);
+    }
+    .editBtn:hover{
+      background-color: #caaf80;
     }

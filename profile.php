@@ -30,15 +30,28 @@ if (isset($_SESSION['user_id'])) {
 
 <body>
   <!-- NAVBAR -->
-  <div class="navbar">
-    <a href="index.php"><img style=" height: 25px;" src="images/Logo.png"></a>
-    <a style="margin-top: 5px;" href="index.php">HOME</a>
-    <a style="margin-top: 5px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 5px;" href="analytics.php">ANALYTICS</a>
+  <?php
+  if (isset($_SESSION['user_id'])) {
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+
+    </div>';
+  } else {
+    echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
-  </div>
+    </div>';
+  }
+  ?>
 
 
   <div class="side">
@@ -122,14 +135,14 @@ if (isset($_SESSION['user_id'])) {
       $new_stat->bindParam(1, $id);
       $new_stat->execute();
       while ($new_row = $new_stat->fetch()) {
-        
+
         echo '<tbody><tr >
         <td class="td">' . $new_row["title"] . '</td>
         <td class="td">' . $new_row["topic"] . '</td>
         <td class="td">' . $new_row["author"] . '</td>
         <td class="td">' . $new_row["publication_year"] . '</td>
         <td class="td">' . $new_row["upload_status"] . '</td>
-        <td class="td"><button><a href="edit_upload.php?id=' . $new_row['id'] . '">Edit Upload</a></button></td>
+        <td class="td"><button class="editBtn"><a style="text-decoration:none;color:white;" href="edit_upload.php?id=' . $new_row['id'] . '">Edit Upload</a></button></td>
       </tr></tbody>';
       }
 
