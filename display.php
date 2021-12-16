@@ -60,6 +60,7 @@ if (!empty($result)) {
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+  <title>Display</title>
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
