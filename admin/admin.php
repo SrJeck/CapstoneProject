@@ -99,19 +99,20 @@ if (isset($_SESSION['admin_id'])) {
             <th class="th">Title</th>
             <th class="th">Published By</th>
             <th class="th">Year</th>
-            <th class="th" colspan="2">action</th>
+            <th class="th" colspan="3">action</th>
         </tr>
         <?php
         $research = $dbh->prepare('select * from research where upload_status="unposted"');
         $research->execute();
         while ($row = $research->fetch()) {
             echo '<tr class="tr">
-            <td class="th">'.$row['id'].'</td>
-            <td class="th">'.$row['title'].'</td>
-            <td class="th">'.$row['author'].'</td>
-            <td class="th">'.$row['publication_year'].'</td>
-            <td class="th"><button><a href="accept_research.php?id=' . $row['id'] . '">accept</a></button></td>
-            <td class="th"><button><a href="reject_research.php?id=' . $row['id'] . '">reject</a></button></td>
+            <td class="td">'.$row['id'].'</td>
+            <td class="td">'.$row['title'].'</td>
+            <td class="td">'.$row['author'].'</td>
+            <td class="td">'.$row['publication_year'].'</td>
+            <td class="td"><button><a href="display.php?id=' . $row['id'] . '">review</a></button></td>
+            <td class="td"><button><a href="reject_research.php?id=' . $row['id'] . '">accept</a></button></td>
+            <td class="td"><button><a href="reject_research.php?id=' . $row['id'] . '">reject</a></button></td>
         </tr>';
         }
         
