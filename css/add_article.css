@@ -95,6 +95,16 @@
       border-bottom-left-radius: 10px;
       border-top-left-radius: 10px;
     }
+    .research_type {
+      background-color: white;
+      color: black;
+      padding: 18px 22px;
+      text-decoration: none;
+      cursor: pointer;
+      margin-right: -4.2px;
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+    }
   /* INTRODUCTION */
    .intro{
     text-indent: 50px; 
@@ -461,7 +471,14 @@
     border-radius: 4px;
     resize: vertical;
     margin-left: -160px;
-
+  }
+  #research_type {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    margin-left: -160px;
   }
   #degree_level{
     width: 100%;
