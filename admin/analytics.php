@@ -310,7 +310,10 @@ $db_handle = new DBController();
         var options = {
           chart: {
             title: 'Total Upload Per Year',
-          }
+          },
+          legend: {
+          position: 'bottom'
+        }
         };
 
 
