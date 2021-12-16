@@ -173,11 +173,13 @@ $db_handle = new DBController();
   <h1 style="margin-left: 30px;">Analytics Overview</h1>
 
   <div class="flex-container">
-    <div id="piechart" style="width: 800px; height: 420px; float:left"></div>
-    <div id="curve_chart" style="width: 800px; height: 420px; float:right"></div>
+    <div id="piechart" style="width: 45%; height: 420px; float:left"></div>
+    <div id="curve_chart" style="width: 45%; height: 420px; float:right"></div>
   </div>
-  
-  <div id="columnchart_material" style="width: 100%; height: 420px; float:right"></div>
+  <div class="flex-container2">
+  <div id="chart_div" style="width: 45%; height: 420px;"></div>
+  <div id="columnchart_material" style="width: 45%; height: 420px; float:right"></div>
+</div>
   <script type="text/javascript">
     google.charts.load('current', {
       'packages': ['corechart', 'bar']
@@ -191,6 +193,9 @@ $db_handle = new DBController();
 
     // Draw the pie chart for the Anthony's pizza when Charts is loaded.
     google.charts.setOnLoadCallback(drawBarChart);
+
+    // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+    google.charts.setOnLoadCallback(drawChart);
 
     function drawPieChart() {
 
@@ -314,6 +319,28 @@ $db_handle = new DBController();
 
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Registered'],
+          <?php
+          $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+          $fetch_year = $dbh->prepare('SELECT registration_year, COUNT(*) AS number_of_user FROM user GROUP BY registration_year ASC');
+          $fetch_year->execute();
+          while ($fetched_year = $fetch_year->fetch()) {
+            echo "['".$fetched_year['registration_year']."',".$fetched_year['number_of_user']."],";
+          }
+          ?>
+        ]);
+
+        var options = {
+          title: 'Total Registeration Per Year',
+          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
     
   </script>
 
