@@ -296,7 +296,7 @@ $db_handle = new DBController();
 
     function drawBarChart() {
       var data = google.visualization.arrayToDataTable([
-          ['Year','Total Uploads'],
+          ['Year','Uploads'],
 
           <?php
           $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
