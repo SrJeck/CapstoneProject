@@ -176,9 +176,9 @@ $db_handle = new DBController();
     <div id="piechart" style="width: 45%; height: 420px; float:left"></div>
     <div id="curve_chart" style="width: 45%; height: 420px; float:right"></div>
   </div>
-  <div class="flex-container">
+  <div class="flex-container2">
     <div id="chart_div" style="width: 45%; height: 420px;"></div>
-    <div id="columnchart_material" style="width: 45%; height: 420px; float:right; font-size:12px;"></div>
+    <div id="columnchart_material" style="width: 45%; height: 420px; float:right"></div>
   </div>
   <script type="text/javascript">
     google.charts.load('current', {
