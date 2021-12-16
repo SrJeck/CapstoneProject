@@ -110,7 +110,7 @@ if (isset($_SESSION['admin_id'])) {
             <td class="td">'.$row['title'].'</td>
             <td class="td">'.$row['author'].'</td>
             <td class="td">'.$row['publication_year'].'</td>
-            <td class="td"><button><a href="display.php?id=' . $row['id'] . '">review</a></button></td>
+            <td class="td"><button><a href="review.php?id=' . $row['id'] . '">review</a></button></td>
             <td class="td"><button><a href="reject_research.php?id=' . $row['id'] . '">accept</a></button></td>
             <td class="td"><button><a href="reject_research.php?id=' . $row['id'] . '">reject</a></button></td>
         </tr>';

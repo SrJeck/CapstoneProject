@@ -1,8 +1,8 @@
 <!-- Search and Pagination -->
 <?php
 session_start();
-if (isset($_SESSION['user_id'])) {
-  $id = $_SESSION['user_id'];
+if (isset($_SESSION['admin_id'])) {
+  $id = $_SESSION['admin_id'];
 }
 require_once("perpage.php");
 require_once("dbcontroller.php");
@@ -60,7 +60,6 @@ if (!empty($result)) {
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <title>Display</title>
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -77,27 +76,12 @@ if (!empty($result)) {
 
 <body>
   <!-- NAVBAR -->
-  <?php    
-  if (isset($_SESSION['user_id'])) {
-        echo '<div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    <a     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
-    <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
-  </div>';
-    } else {
-        echo '<div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
-    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
-    </div>';
-    }
+  <?php
+  if (isset($_SESSION['admin_id'])) {
+    $id = $_SESSION['admin_id'];
+  }
+  
+
   $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
   $id = $_GET['id'];
   $stat = $dbh->prepare('select * from research where id=?');
@@ -107,11 +91,15 @@ if (!empty($result)) {
   ?>
 
 
+  <!-- Modal -->
+  
+  <!-- Button trigger modal -->
 
   <?php
 
   echo "
     <div class='row'>
+      
         <br><br><h1 style='margin-left: 50px;max-width: 1100px'>" . $row['title'] . "</h1><p style='margin-left: 50px;'>" . "<strong>Authors:  </strong>" . $row['author'] . "</p><p style='margin-left: 50px;'>" . "<strong>Published Online: </strong>" . $row['publication_day'] . ' ' . $row['publication_month'] . ' ' . $row['publication_year'] . "</p>
         
         </div>";
@@ -131,11 +119,13 @@ if (!empty($result)) {
         <a href="#details">
           <p>Details</p>
         </a>
+        <a href="admin.php">
+          <p>Return to Admin</p>
+        </a>
       </div>
     </div>
     <div id="center">
       <div class="center-content">
-
 
       </div>
     </div>
