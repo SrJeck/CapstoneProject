@@ -176,10 +176,10 @@ $db_handle = new DBController();
     <div id="piechart" style="width: 45%; height: 420px; float:left"></div>
     <div id="curve_chart" style="width: 45%; height: 420px; float:right"></div>
   </div>
-  <div class="flex-container2">
-  <div id="chart_div" style="width: 45%; height: 420px;"></div>
-  <div id="columnchart_material" style="width: 45%; height: 420px; float:right"></div>
-</div>
+  <div class="flex-container">
+    <div id="chart_div" style="width: 45%; height: 420px;"></div>
+    <div id="columnchart_material" style="width: 45%; height: 420px; float:right"></div>
+  </div>
   <script type="text/javascript">
     google.charts.load('current', {
       'packages': ['corechart', 'bar']
@@ -296,52 +296,59 @@ $db_handle = new DBController();
 
     function drawBarChart() {
       var data = google.visualization.arrayToDataTable([
-          ['Year','Total Uploads'],
+        ['Year', 'Total Uploads'],
 
-          <?php
-          $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-          $fetch_year = $dbh->prepare('SELECT publication_year, COUNT(*) AS number_of_topic FROM research GROUP BY publication_year ASC');
-          $fetch_year->execute();
-          while ($fetched_year = $fetch_year->fetch()) {
-            echo "['".$fetched_year['publication_year']."',".$fetched_year['number_of_topic']."],";
-          }
-          ?>
-        ]);
-        var options = {
-          chart: {
-            title: 'Total Upload Per Year',
-          }
-        };
+        <?php
+        $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+        $fetch_year = $dbh->prepare('SELECT publication_year, COUNT(*) AS number_of_topic FROM research GROUP BY publication_year ASC');
+        $fetch_year->execute();
+        while ($fetched_year = $fetch_year->fetch()) {
+          echo "['" . $fetched_year['publication_year'] . "'," . $fetched_year['number_of_topic'] . "],";
+        }
+        ?>
+      ]);
+      var options = {
+        chart: {
+          title: 'Total Upload Per Year',
+        }
+      };
 
 
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+      chart.draw(data, google.charts.Bar.convertOptions(options));
     }
+
     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Registered'],
-          <?php
-          $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-          $fetch_year = $dbh->prepare('SELECT registration_year, COUNT(*) AS number_of_user FROM user GROUP BY registration_year ASC');
-          $fetch_year->execute();
-          while ($fetched_year = $fetch_year->fetch()) {
-            echo "['".$fetched_year['registration_year']."',".$fetched_year['number_of_user']."],";
+      var data = google.visualization.arrayToDataTable([
+        ['Year', 'Registered'],
+        <?php
+        $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+        $fetch_year = $dbh->prepare('SELECT registration_year, COUNT(*) AS number_of_user FROM user GROUP BY registration_year ASC');
+        $fetch_year->execute();
+        while ($fetched_year = $fetch_year->fetch()) {
+          echo "['" . $fetched_year['registration_year'] . "'," . $fetched_year['number_of_user'] . "],";
+        }
+        ?>
+      ]);
+
+      var options = {
+        title: 'Total Registeration Per Year',
+        hAxis: {
+          title: 'Year',
+          titleTextStyle: {
+            color: '#333'
           }
-          ?>
-        ]);
+        },
+        vAxis: {
+          minValue: 0
+        }
+      };
 
-        var options = {
-          title: 'Total Registeration Per Year',
-          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0}
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    
+      var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
   </script>
 
 
