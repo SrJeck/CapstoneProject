@@ -1,8 +1,8 @@
 <!-- Search and Pagination -->
 <?php
 session_start();
-if (isset($_SESSION['user_id'])) {
-  $id = $_SESSION['user_id'];
+if (isset($_SESSION['admin_id'])) {
+  $id = $_SESSION['admin_id'];
 }
 require_once("perpage.php");
 require_once("dbcontroller.php");
@@ -60,7 +60,6 @@ if (!empty($result)) {
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <title>Display</title>
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -78,6 +77,11 @@ if (!empty($result)) {
 <body>
   <!-- NAVBAR -->
   <?php
+  if (isset($_SESSION['admin_id'])) {
+    $id = $_SESSION['admin_id'];
+  }
+  
+
   $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
   $id = $_GET['id'];
   $stat = $dbh->prepare('select * from research where id=?');
@@ -87,11 +91,15 @@ if (!empty($result)) {
   ?>
 
 
+  <!-- Modal -->
+  
+  <!-- Button trigger modal -->
 
   <?php
 
   echo "
     <div class='row'>
+      
         <br><br><h1 style='margin-left: 50px;max-width: 1100px'>" . $row['title'] . "</h1><p style='margin-left: 50px;'>" . "<strong>Authors:  </strong>" . $row['author'] . "</p><p style='margin-left: 50px;'>" . "<strong>Published Online: </strong>" . $row['publication_day'] . ' ' . $row['publication_month'] . ' ' . $row['publication_year'] . "</p>
         
         </div>";
@@ -111,11 +119,13 @@ if (!empty($result)) {
         <a href="#details">
           <p>Details</p>
         </a>
+        <a href="admin.php">
+          <p>Return to Admin</p>
+        </a>
       </div>
     </div>
     <div id="center">
       <div class="center-content">
-
 
       </div>
     </div>
