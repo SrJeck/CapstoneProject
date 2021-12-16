@@ -249,8 +249,8 @@ session_start();
     $test = "<table class='formview'>
 ";
     if (!empty($_POST["search"])) {
-      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('unposted') AND title LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('unposted') AND author LIKE '%" . $_POST["search"] . "%')";
-      $query2 = "SELECT *FROM research  WHERE (upload_status IN ('unposted') AND topic LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('unposted') AND title LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('unposted') AND author LIKE '%" . $_POST["search"] . "%')";
+      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('posted') AND topic LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('posted') AND title LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('posted') AND author LIKE '%" . $_POST["search"] . "%')";
+      $query2 = "SELECT *FROM research  WHERE (upload_status IN ('posted') AND topic LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('posted') AND title LIKE '%" . $_POST["search"] . "%') OR (upload_status IN ('posted') AND author LIKE '%" . $_POST["search"] . "%')";
 
       $_SESSION['search_session1'] = $query;
       $_SESSION['search_session2'] = $query2;
@@ -261,26 +261,26 @@ session_start();
       unset($_SESSION['search_session2']);
     }
     if (!empty($_POST["topic"])) {
-      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%" . $_POST["topic"] . "%')";
-      $query2 = "SELECT * FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%" . $_POST["topic"] . "%')";
+      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('posted') AND topic LIKE '%" . $_POST["topic"] . "%')";
+      $query2 = "SELECT * FROM research WHERE (upload_status IN ('posted') AND topic LIKE '%" . $_POST["topic"] . "%')";
       $_SESSION['search_session1'] = $query;
       $_SESSION['search_session2'] = $query2;
     }
     if (isset($_POST["Education"])) {
-      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Education%')";
-      $query2 = "SELECT * FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Education%')";
+      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('posted') AND topic LIKE '%Education%')";
+      $query2 = "SELECT * FROM research WHERE (upload_status IN ('posted') AND topic LIKE '%Education%')";
       $_SESSION['search_session1'] = $query;
       $_SESSION['search_session2'] = $query2;
     }
     if (isset($_POST["Technology"])) {
-      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Technology%')";
-      $query2 = "SELECT * FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Technology%')";
+      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('posted') AND topic LIKE '%Technology%')";
+      $query2 = "SELECT * FROM research WHERE (upload_status IN ('posted') AND topic LIKE '%Technology%')";
       $_SESSION['search_session1'] = $query;
       $_SESSION['search_session2'] = $query2;
     }
     if (isset($_POST["Business"])) {
-      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Business%')";
-      $query2 = "SELECT * FROM research WHERE (upload_status IN ('unposted') AND topic LIKE '%Business%')";
+      $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('posted') AND topic LIKE '%Business%')";
+      $query2 = "SELECT * FROM research WHERE (upload_status IN ('posted') AND topic LIKE '%Business%')";
       $_SESSION['search_session1'] = $query;
       $_SESSION['search_session2'] = $query2;
     }
