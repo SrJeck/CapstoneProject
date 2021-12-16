@@ -4,10 +4,12 @@ include 'database.php';
 if (count($_POST) > 0) {
 	if ($_POST['type'] == 1) {
 		$firstName = $_POST['firstName'];
+		$middleName = $_POST['middleName'];
+		$lastName = $_POST['lastName'];
 		$email_address = $_POST['email_address'];
 		$contactNumber = $_POST['contactNumber'];
 		$homeAddress = $_POST['homeAddress'];
-		$sql = "INSERT INTO `user`( `firstName`, `email_address`,`contactNumber`,`homeAddress`) 
+		$sql = "INSERT INTO `user`( `firstName`,`middleName`, `lastName`, `email_address`,`contactNumber`,`homeAddress`) 
 		VALUES ('$firstName','$email_address','$contactNumber','$homeAddress')";
 		if (mysqli_query($conn, $sql)) {
 			echo json_encode(array("statusCode" => 200));
@@ -21,10 +23,12 @@ if (count($_POST) > 0) {
 	if ($_POST['type'] == 2) {
 		$user_id = $_POST['user_id'];
 		$firstName = $_POST['firstName'];
+		$middleName = $_POST['middleName'];
+		$lastName = $_POST['lastName'];
 		$email_address = $_POST['email_address'];
 		$contactNumber = $_POST['contactNumber'];
 		$homeAddress = $_POST['homeAddress'];
-		$sql = "UPDATE `user` SET `firstName`='$firstName',`email_address`='$email_address',`contactNumber`='$contactNumber',`homeAddress`='$homeAddress' WHERE user_id=$user_id";
+		$sql = "UPDATE `user` SET `firstName`='$firstName',`middleName`='$middleName',`lastName`='$lastName',`email_address`='$email_address',`contactNumber`='$contactNumber',`homeAddress`='$homeAddress' WHERE user_id=$user_id";
 		if (mysqli_query($conn, $sql)) {
 			echo json_encode(array("statusCode" => 200));
 		} else {

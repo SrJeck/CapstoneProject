@@ -83,6 +83,8 @@ include 'backend/database.php';
             </th>
             <th>ID</th>
             <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
             <th>Email</th>
             <th>Contact Number</th>
             <th>Home Address</th>
@@ -105,12 +107,14 @@ include 'backend/database.php';
               </td>
               <td><?php echo $i; ?></td>
               <td><?php echo $row["firstName"]; ?></td>
+              <td><?php echo $row["middleName"]; ?></td>
+              <td><?php echo $row["lastName"]; ?></td>
               <td><?php echo $row["email_address"]; ?></td>
               <td><?php echo $row["contactNumber"]; ?></td>
               <td><?php echo $row["homeAddress"]; ?></td>
               <td>
                 <a href="#editEmployeeModal" class="edit" data-toggle="modal">
-                  <i class="material-icons update" data-toggle="tooltip" data-id="<?php echo $row["user_id"]; ?>" data-name="<?php echo $row["firstName"]; ?>" data-email="<?php echo $row["email_address"]; ?>" data-phone="<?php echo $row["contactNumber"]; ?>" data-city="<?php echo $row["homeAddress"]; ?>" title="Edit">&#xE254;</i>
+                  <i class="material-icons update" data-toggle="tooltip" data-id="<?php echo $row["user_id"]; ?>" data-name="<?php echo $row["firstName"]; ?>" data-middle-name="<?php echo $row["middleName"]; ?>" data-last-name="<?php echo $row["lastName"]; ?>" data-email="<?php echo $row["email_address"]; ?>" data-phone="<?php echo $row["contactNumber"]; ?>" data-city="<?php echo $row["homeAddress"]; ?>" title="Edit">&#xE254;</i>
                 </a>
                 <a href="#deleteEmployeeModal" class="delete" data-id="<?php echo $row["user_id"]; ?>" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
               </td>
@@ -137,6 +141,10 @@ include 'backend/database.php';
             <div class="form-group">
               <label>First Name</label>
               <input type="text" id="name" name="firstName" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>Middle Name</label>
+              <input type="text" id="middleName" name="middleName" class="form-control" required>
             </div>
             <div class="form-group">
               <label>Email Address</label>
@@ -174,6 +182,14 @@ include 'backend/database.php';
             <div class="form-group">
               <label>First Name</label>
               <input type="text" id="name_u" name="firstName" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>Middle Name</label>
+              <input type="text" id="middle_Name" name="middleName" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" id="last_Name" name="lastName" class="form-control" required>
             </div>
             <div class="form-group">
               <label>Email Address</label>

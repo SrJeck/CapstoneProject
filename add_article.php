@@ -40,11 +40,11 @@ if (isset($_SESSION['user_id'])) {
   <br>
   <form id="add_article_form" action="plagscan_process.php" method="post" enctype="multipart/form-data">
     <span class="row">
-    <span class="col-25">
+      <span class="col-25">
         <label>Abstract:</label>
       </span>
       <span class="col-75">
-        <textarea type="text" name="abstract" id="abstract" rows="7" cols="50" required></textarea>
+        <textarea type="text" name="abstract" placeholder="Enter your abstract here" id="abstract" rows="7" cols="50" required></textarea>
         <!-- <button class='scanbutton' onclick='plagScan()' id='sub-btn'>Scan For Plagiarism</button><br> -->
       </span>
       <span class="col-25">
@@ -57,7 +57,7 @@ if (isset($_SESSION['user_id'])) {
         <label>Authors:</label>
       </span>
       <span class="col-75">
-        <input type="text" name="author" id="author" placeholder="Ex. Pineda, Dizon, Ramos, Reyes" required>
+        <input type="text" name="author" id="author" placeholder="Ex. Pineda M., Dizon J., Ramos L., Reyes J." required>
       </span>
     </span>
     <div class="inline">
@@ -120,12 +120,12 @@ if (isset($_SESSION['user_id'])) {
       <span class="col-75">
         <input type="text" id="research_type" name="research_type" value="Thesis" readonly>
       </span>
-      
+
       <span class="col-25">
         <label>Keywords:</label>
       </span>
       <span class="col-75">
-        <input type="text" id="keywords" name="keywords">
+        <input type="text" placeholder="Ex. Thesis, Quo, Research" id="keywords" name="keywords">
       </span>
       <span class="col-25">
         <label>Publisher:</label>
@@ -414,3 +414,27 @@ if (isset($_SESSION['user_id'])) {
 </script>
 
 </html>
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+onClick="register();"
+<script>
+  function register() {
+
+    var abstract = document.getElementById("abstract").value;
+    var title = document.getElementById("title").value;
+    var author = document.getElementById("author").value;
+
+
+
+    if (abstract === "" || title === "") {
+      // swal("Please fill the required form!", "error");
+      swal({
+        text: "Please fill the required form!",
+        icon: "error",
+      });
+
+      return false;
+    }
+
+  }
+</script> -->

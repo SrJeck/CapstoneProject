@@ -301,4 +301,5 @@ background-size: 20px;
   left: 500px;
   bottom: 630px;
   font-size: 20px;
+  z-index: 1;
 }

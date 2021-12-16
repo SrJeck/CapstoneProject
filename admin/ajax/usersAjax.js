@@ -10,7 +10,7 @@ $(document).on('click', '#btn-add', function (e) {
 			if (dataResult.statusCode == 200) {
 				$('#addEmployeeModal').modal('hide');
 				alert('Data added successfully !');
-				location.reload();
+				window.setTimeout(function () { location.reload() }, 1500)
 			}
 			else if (dataResult.statusCode == 201) {
 				alert(dataResult);
@@ -21,11 +21,15 @@ $(document).on('click', '#btn-add', function (e) {
 $(document).on('click', '.update', function (e) {
 	var id = $(this).attr("data-id");
 	var name = $(this).attr("data-name");
+	var middle_Name = $(this).attr("data-middle-name");
+	var last_Name = $(this).attr("data-last-name");
 	var email = $(this).attr("data-email");
 	var phone = $(this).attr("data-phone");
 	var city = $(this).attr("data-city");
 	$('#id_u').val(id);
 	$('#name_u').val(name);
+	$('#middle_Name').val(middle_Name);
+	$('#last_Name').val(last_Name);
 	$('#email_u').val(email);
 	$('#phone_u').val(phone);
 	$('#city_u').val(city);
