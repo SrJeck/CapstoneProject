@@ -1,0 +1,122 @@
+  
+
+    /*Login Form*/
+    form{
+      margin-top: 50px;
+      margin-left: 35%
+    }
+    input[type=text], select {
+      width: 40%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    input[type=submit] {
+      width: 15%;
+      background-color: #04AA6D;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+    .save {
+      width: 12%;
+      background-color: #157572;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      margin-left: 85px;
+    }
+    .cancel {
+      width: 12%;
+      background-color: #157572;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      margin-left: 0px;
+    }
+
+
+   
+    /* Name */
+
+    .name{
+     
+      top: 10px;
+      right: 320px;
+      margin-bottom: 20px;
+        }
+    .fname{
+      right: 78px;
+      line-height: 35px;
+      font-size: 22px;
+    }
+    .mname{
+      right: 70px;
+      line-height: 35px;
+      font-size: 22px;
+    }
+    .lname{
+      right: 60px;
+      line-height: 35px;
+      font-size: 22px;
+    }
+    /* Email Row */
+    .emailrow{
+     
+      top: 40px;
+      right: 64.1%;
+    }
+    .email{
+      right: 40px;
+      line-height: 35px;
+      font-size: 22px;
+    }
+    /* Second Line */
+
+    .pnumber{
+    
+      left: 229px;
+      bottom: 227px;
+      line-height: 35px;
+      font-size: 22px;
+    }
+
+    .address{
+    
+      left: 109px;
+      bottom: 200px;
+      line-height: 35px;
+      font-size: 22px;
+    }
+    .sex{
+    
+      right: 58px;
+      line-height: 35px;
+      font-size: 22px;
+
+    }
+    /* Display Row */
+    .displayRow{
+    
+        bottom: 20px;
+    }
+    

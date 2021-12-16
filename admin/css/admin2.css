@@ -1,0 +1,109 @@
+  
+
+    /* Table */
+
+    .table, .td, .th {  
+      text-align: center;
+      border: 1px solid black;
+
+    }
+    
+    .table {
+      border-collapse: collapse;
+      width: 95%;
+      position: relative;
+      left: 1%;
+      background-color: white;
+      cursor: pointer;
+    }
+    
+    .th, .td {
+      padding: 15px;
+    }
+    .table .tr:nth-child(even){background-color: #f2f2f2;}
+
+    .table .tr:hover {background-color: #ddd;}
+    
+    .table .th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background-color: #435d7d;
+      color: white;
+    }
+    /* table2 */
+    .table2, .td2, .th2 {  
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    
+    .table2 {
+      border-collapse: collapse;
+      width: 48%;
+      position: relative;
+      left: 51%;
+      bottom: 32%;
+      background-color: white;
+    }
+    
+    .th2, .td2 {
+      padding: 15px;
+    }
+    .table2 .tr2:nth-child(even){background-color: #f2f2f2;}
+
+    .table2 .tr2:hover {background-color: #ddd;}
+    
+    .table2 .th2 {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background-color: #c2a87c;
+      color: white;
+    }
+    
+    .review{
+      background-color: #435d7d;
+      border: none;
+      color: white;
+      padding: 5px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 7px;
+      border: 1px solid rgb(129, 126, 126);
+    }
+    .review:hover{
+      background-color: #55769E;
+    }
+    .accept{
+      background-color: #435d7d;
+      border: none;
+      color: white;
+      padding: 5px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 7px;
+      border: 1px solid rgb(129, 126, 126);
+    }
+    .accept:hover{
+      background-color: #55769E;
+    }
+    .reject{
+      background-color: #435d7d;
+      border: none;
+      color: white;
+      padding: 5px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 7px;
+      border: 1px solid rgb(129, 126, 126);
+    }
+    .reject:hover{
+      background-color: #55769E;
+    }

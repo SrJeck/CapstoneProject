@@ -43,15 +43,15 @@ if (isset($_SESSION['admin_id'])) {
         <a href="editprofile.php?user_id=<?php echo $id; ?>"><i class="fa fa-pencil"> <b>Edit Profile </b> &#xf105;</i></a>
         <a href="security.php?user_id=<?php echo $id; ?>"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
         <?php
-            $stat = $dbh->prepare('select * from admin where admin_id=?');
-            $stat->bindParam(1, $id);
-            $stat->execute();
-            $row = $stat->fetch();
-            if ($row["access"] == "Super Admin") {
-               echo '<a href="registration.php"><i class="fas fa-user" style="bold:none;"> Create Admin Account</i></a>';
-            }
+        $stat = $dbh->prepare('select * from admin where admin_id=?');
+        $stat->bindParam(1, $id);
+        $stat->execute();
+        $row = $stat->fetch();
+        if ($row["access"] == "Super Admin") {
+            echo '<a href="registration.php"><i class="fas fa-user" style="bold:none;"> Create Admin Account</i></a>';
+        }
         ?>
-        
+
 
     </div>
     <img class="profilepencil" src="images/profilepencil.png">
@@ -74,9 +74,9 @@ if (isset($_SESSION['admin_id'])) {
                 <tr class="displayRow">
                     <td>
                         <div class="name">
-                            <p class="fname"><?php echo $row['firstName']; ?></p>
-                            <p class="mname"><?php echo $row['middleName']; ?></p>
-                            <p class="lname"><?php echo $row['lastName']; ?></p>
+                            <p class="fname"><?php echo $row['firstName']; ?></p><br>
+                            <p class="mname"><?php echo $row['middleName']; ?></p><br>
+                            <p class="lname"><?php echo $row['lastName']; ?></p><br>
                         </div>
                         <div class="emailrow">
                             <p class="email"><?php echo $row['email']; ?></p>
@@ -93,31 +93,7 @@ if (isset($_SESSION['admin_id'])) {
         <div class="vl"></div>
 
     </div>
-    <table class="table">
-        <tr class="tr">
-            <th class="th">ID</th>
-            <th class="th">Title</th>
-            <th class="th">Published By</th>
-            <th class="th">Year</th>
-            <th class="th" colspan="3">action</th>
-        </tr>
-        <?php
-        $research = $dbh->prepare('select * from research where upload_status="unposted"');
-        $research->execute();
-        while ($row = $research->fetch()) {
-            echo '<tr class="tr">
-            <td class="td">'.$row['id'].'</td>
-            <td class="td">'.$row['title'].'</td>
-            <td class="td">'.$row['author'].'</td>
-            <td class="td">'.$row['publication_year'].'</td>
-            <td class="td"><button><a href="review.php?id=' . $row['id'] . '">review</a></button></td>
-            <td class="td"><button><a href="reject_research.php?id=' . $row['id'] . '">accept</a></button></td>
-            <td class="td"><button><a href="reject_research.php?id=' . $row['id'] . '">reject</a></button></td>
-        </tr>';
-        }
-        
-        ?>
-    </table>
+
     <table class="table2">
         <tr class="tr2">
             <th class="th2">Admin Name</th>
@@ -130,13 +106,13 @@ if (isset($_SESSION['admin_id'])) {
         while ($row = $admins->fetch()) {
             if ($row['admin_id'] != $_SESSION['admin_id']) {
                 echo '<tr class="tr">
-            <td class="th">'.$row['firstName'].'</td>
-            <td class="th">'.$row['email'].'</td>
-            <td class="th">'.$row['access'].'</td>
+            <td class="th">' . $row['firstName'] . '</td>
+            <td class="th">' . $row['email'] . '</td>
+            <td class="th">' . $row['access'] . '</td>
         </tr>';
             }
         }
-        
+
         ?>
     </table>
     <!-- ChatBot -->

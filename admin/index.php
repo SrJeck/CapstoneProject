@@ -23,14 +23,6 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
-  <div class="navbar">
-    <a href="index.php"><img style="height: 25px;" src="images/Logo.png"></a>
-    <a style="margin-top: 5px;" href="users.php">USERS</a>
-    <a style="margin-top: 5px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 5px;" href="analytics.php">ANALYTICS</a>
-    <a style="float: right;" href="index.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-  </div>
 
 
   <!-- <div class="side">

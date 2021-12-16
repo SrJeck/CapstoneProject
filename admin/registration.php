@@ -23,19 +23,10 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
-  <div class="navbar">
-    <a href="index.php"><img style="height: 25px;" src="images/Logo.png"></a>
-    <a style="margin-top: 5px;" href="index.php">HOME</a>
-    <a style="margin-top: 5px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 5px;" href="analytics.php">ANALYTICS</a>
-    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
-  </div>
 
 
 
-  <br><br><br><br><br><br><br>
+  <br><br><br><br>
 
   <div class="content-register">
     <form action="registration_insert.php" method="post" enctype="multipart/form-data">

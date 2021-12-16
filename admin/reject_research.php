@@ -9,5 +9,4 @@ $id = $_GET['id'];
   $stat = $dbh->prepare("delete from research WHERE id=?");
       $stat->bindParam(1, $id);
       $stat->execute();
-      header("Location: admin.php");
-?>
+      header("Location: test.php");
