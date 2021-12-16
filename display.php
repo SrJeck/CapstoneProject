@@ -77,19 +77,26 @@ if (!empty($result)) {
 <body>
   <!-- NAVBAR -->
   <?php
+  session_start();
+  if (isset($_SESSION['user_id'])) {
+    $id = $_SESSION['user_id'];
+  }
   if (isset($_SESSION['user_id'])) {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="index.php">HOME</a>
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    <a     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
     <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
-  </div>';
+
+    </div>';
   } else {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="index.php">HOME</a>
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
@@ -97,6 +104,7 @@ if (!empty($result)) {
     <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>';
   }
+
   $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
   $id = $_GET['id'];
   $stat = $dbh->prepare('select * from research where id=?');
@@ -178,7 +186,8 @@ if (!empty($result)) {
     <div id="center">
       <div class="center-content">
         <form class="example" name="frmSearch" method="post" action="research.php" style="margin:auto;max-width:300px">
-          <input type="text" name="search[title]" placeholder="Search ThesisQuo" value="<?php echo $title; ?>" name="search2">
+          <input type="text" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
+                                                                                  }  ?>" name="search2">
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
 
