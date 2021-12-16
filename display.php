@@ -142,24 +142,19 @@ if (!empty($result)) {
   <button type="button" class="view btn-primary" data-toggle="modal" data-target="#exampleModal">
     <span class="fa fa-quote-right"> Cite</span>
   </button>
-  <a href="#" class="view btn-lg">
-    <span class="fa fa-print" onclick="window.print()"> Print</span>
-  </a>
+
   <?php
   if ($row['permission'] == "Download Only") {
 
-    echo "<a class='view btn-lg' target='_blank' href='download.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> Download PDF </span></a>" ;
+    echo "<a class='view btn-lg' target='_blank' href='download.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> Download PDF </span></a>";
+  } else if ($row['permission'] == "View Only") {
 
-  }else if ($row['permission'] == "View Only") {
+    echo "<a class='view btn-lg' target='_blank' href='view.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> View PDF </span></a>";
+  } else if ($row['permission'] == "View and Download") {
 
-    echo "<a class='view btn-lg' target='_blank' href='view.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> View PDF </span></a>" ;
-
-  }else if ($row['permission'] == "View and Download") {
-       
-    echo "<a class='view btn-lg' target='_blank' href='download.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> Download PDF </span></a>" ;
-    echo "<a class='view btn-lg' target='_blank' href='view.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> View PDF </span></a>" ;
-
-  } 
+    echo "<a class='view btn-lg' target='_blank' href='download.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> Download PDF </span></a>";
+    echo "<a class='view btn-lg' target='_blank' href='view.php?id=" . $row['id'] . "'><span class='fa fa-file-pdf-o'> View PDF </span></a>";
+  }
   ?>
   <?php
 
