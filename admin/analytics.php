@@ -178,7 +178,7 @@ $db_handle = new DBController();
   </div>
   <div class="flex-container">
     <div id="chart_div" style="width: 45%; height: 420px;"></div>
-    <div id="columnchart_material" style="width: 45%; height: 420px; float:right"></div>
+    <div id="columnchart_material" style="width: 45%; height: 420px; float:right; font-size:12px;"></div>
   </div>
   <script type="text/javascript">
     google.charts.load('current', {
@@ -296,7 +296,7 @@ $db_handle = new DBController();
 
     function drawBarChart() {
       var data = google.visualization.arrayToDataTable([
-        ['Year', 'Uploads'],
+        ['Year', 'Upload Per Year'],
 
         <?php
         $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
