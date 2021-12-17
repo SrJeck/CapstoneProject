@@ -81,7 +81,6 @@ if (!empty($result)) {
   <script type="text/javascript" src="js/jquery.convform.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
 
-  <script type="text/javascript" src="script.js"></script>
 
 </head>
 
@@ -224,27 +223,43 @@ if (!empty($result)) {
         <form action="" method="GET" class="hidden">
 
           <select data-conv-question="Hello! How can I help you" name="category">
-            <option value="WebDevelopment">Website Development ?</option>
-            <option value="ThesisQuoForum">Thesis Quo Forum</option>
+            <option value="1">How to Upload Study?</option>
+            <option value="2">What study would you recommend for me to read?</option>
+            <option value="3">What study topic can i develop?</option>
           </select>
-
+          <!-- What study topic can i develop? -->
           <div data-conv-fork="category">
-            <div data-conv-case="WebDevelopment">
-              <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
+
+            <div data-conv-case="3" data-conv-fork="first-question2">
+              <select data-conv-question="What do you want to develop?" name="category">
+                <option value="1">Uniqie Study</option>
+                <option value="2">More Resources Available</option>
+              </select>
             </div>
-            <div data-conv-case="ThesisQuoForum" data-conv-fork="first-question2">
-              <input type="text" name="companyName" data-conv-question="Please, enter your institution name">
+            <div data-conv-case="1" data-conv-fork="first-question2">
+              <select data-conv-question="Select the option" name="category">
+                <option value="1">Show overall Lowest number of uploaded topic</option>
+              </select>
+            </div>
+
+            <div data-conv-case="2" data-conv-fork="first-question2">
+              <select data-conv-question="Select the option" name="category">
+                <option value="1">Show overall Highest number of uploaded topic</option>
+              </select>
+            </div>
+
+            <div data-conv-fork="first-question3">
+              <select data-conv-question="Do you have any specific question for me?" name="category">
+                <option value="Yess">Yes</option>
+                <option value="Noo">No</option>
+              </select>
+            </div>
+            <div data-conv-case="Yess" data-conv-fork="first-question3">
+              <input type="text" name="name" data-conv-question="Send your Question to this email ThesisQuo@gmail.com">
             </div>
           </div>
-
-          <input type="text" name="name" data-conv-question="Please, Enter your name">
-
-          <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">
-
-          <input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">
-
-          <select data-conv-question="Please Confirm">
-            <option value="Yes">Confirm</option>
+          <select data-conv-case="Noo" data-conv-question="Thank you for talking me">
+            <option value="Yes">Reset</option>
           </select>
 
         </form>
