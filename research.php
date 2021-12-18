@@ -204,7 +204,7 @@ session_start();
             <option value="Politics">Politics</option>
             <option value="Psychology">Psychology</option>
             <option value="Business">Business</option>
-            <option value="Marketing and Advertising">Marketing and Advertising</option>
+            <option value="Marketing">Marketing</option>
             <option value="Mechanical">Mechanical</option>
             <option value="Ethics">Ethics</option>
             <option value="Others">Others</option>
@@ -267,6 +267,12 @@ session_start();
     if (!empty($_POST["topic"])) {
       $query = "SELECT COUNT(*) AS counted FROM research WHERE (upload_status IN ('posted') AND topic LIKE '%" . $_POST["topic"] . "%')";
       $query2 = "SELECT * FROM research WHERE (upload_status IN ('posted') AND topic LIKE '%" . $_POST["topic"] . "%')";
+      $_SESSION['search_session1'] = $query;
+      $_SESSION['search_session2'] = $query2;
+    }
+    if (isset($_POST["uploader"])) {
+      $query = "select COUNT(*) AS counted FROM research WHERE (upload_status IN ('posted') and user_id like '%".$_POST["uploader"]."%')";
+      $query2 = "select * FROM research WHERE (upload_status IN ('posted') AND user_id LIKE '%".$_POST["uploader"]."%')";
       $_SESSION['search_session1'] = $query;
       $_SESSION['search_session2'] = $query2;
     }
@@ -338,6 +344,10 @@ session_start();
       $fetching2->execute();
       $num++;
       while ($fetched2 = $fetching2->fetch()) {
+        $fetch_uploader = $dbh->prepare("select * from user where user_id=?");
+        $fetch_uploader->bindParam(1,$fetched2['user_id']);
+        $fetch_uploader->execute();
+        $fetched_uploader = $fetch_uploader->fetch();
         if ($num > 1) {
           $test .= "<tr class='displayRow page$num' style='display:none'>
                     <td> <br>
@@ -346,10 +356,22 @@ session_start();
                         <p style='margin-left: 90px; margin-top: -90px;'>" . $fetched2['topic'] . "</p>
                         <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
                         <p style='margin-left: 90px; '>
-                            <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+                        <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+                        <form action='' method='POST'>
+                        <button type='submit' name='uploader' value='".$fetched_uploader['user_id']."'>". $fetched_uploader['firstName'] ." ".$fetched_uploader['lastName']."</button>
+                        </form>
                             <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
                             <hr style='border: 1px solid black;'width='1200px;'>
                     </a>
+                </td>
+                <td>
+                <a href='view.php?id=" . $fetched2['id'] . "'><button>Mata</button></a>
+                </td>
+                <td>
+                <a href=''><button>Abstract</button></a>
+                </td>
+                <td>
+                <a href='display.php?id=" . $fetched2['id'] . "'><button>Full Article</button></a>
                 </td>
                     
     </tr> ";
@@ -363,9 +385,21 @@ session_start();
                     <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
                     <p style='margin-left: 90px; '>
                         <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+                        <form action='' method='POST'>
+                        <button type='submit' name='uploader' value='".$fetched_uploader['user_id']."'>". $fetched_uploader['firstName'] ." ".$fetched_uploader['lastName']."</button>
+                        </form>
                         <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
                         <hr style='border: 1px solid black;' width='1200px;'>
                 </a>
+            </td>
+            <td>
+            <a href='view.php?id=" . $fetched2['id'] . "'><button>Mata</button></a>
+            </td>
+            <td>
+            <a href=''><button>Abstract</button></a>
+            </td>
+            <td>
+            <a href='display.php?id=" . $fetched2['id'] . "'><button>Full Article</button></a>
             </td>
     </tr>";
         } elseif ($num % 3 == 0) {
@@ -377,9 +411,21 @@ session_start();
                     <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
                     <p style='margin-left: 90px; '>
                         <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+                        <form action='' method='POST'>
+                        <button type='submit' name='uploader' value='".$fetched_uploader['user_id']."'>". $fetched_uploader['firstName'] ." ".$fetched_uploader['lastName']."</button>
+                        </form>
                         <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
                         <hr style='border: 1px solid black;' width='1200px;'>
                 </a>
+            </td>
+            <td>
+            <a href='view.php?id=" . $fetched2['id'] . "'><button>Mata</button></a>
+            </td>
+            <td>
+            <a href=''><button>Abstract</button></a>
+            </td>
+            <td>
+            <a href='display.php?id=" . $fetched2['id'] . "'><button>Full Article</button></a>
             </td>
     </tr></table>";
         }
