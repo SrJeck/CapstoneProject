@@ -368,7 +368,7 @@ session_start();
                 <a href='view.php?id=" . $fetched2['id'] . "'><button>Mata</button></a>
                 </td>
                 <td>
-                <a href=''><button>Abstract</button></a>
+                <a href='abstract.php?id=" . $fetched2['id'] . "'><button>Abstract</button></a>
                 </td>
                 <td>
                 <a href='display.php?id=" . $fetched2['id'] . "'><button>Full Article</button></a>
@@ -396,7 +396,7 @@ session_start();
             <a href='view.php?id=" . $fetched2['id'] . "'><button>Mata</button></a>
             </td>
             <td>
-            <a href=''><button>Abstract</button></a>
+            <a href='abstract.php?id=" . $fetched2['id'] . "'><button>Abstract</button></a>
             </td>
             <td>
             <a href='display.php?id=" . $fetched2['id'] . "'><button>Full Article</button></a>
@@ -422,7 +422,7 @@ session_start();
             <a href='view.php?id=" . $fetched2['id'] . "'><button>Mata</button></a>
             </td>
             <td>
-            <a href=''><button>Abstract</button></a>
+            <a href='abstract.php?id=" . $fetched2['id'] . "'><button>Abstract</button></a>
             </td>
             <td>
             <a href='display.php?id=" . $fetched2['id'] . "'><button>Full Article</button></a>
