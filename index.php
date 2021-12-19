@@ -257,7 +257,7 @@ if (!empty($result)) {
               </select>
             </div>
             <div data-conv-case="Yess" data-conv-fork="first-question3">
-              <input type="text" name="name" data-conv-question="Send your Question to this email ThesisQuo@gmail.com">
+              <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
             </div>
           </div>
           <select data-conv-case="Noo" data-conv-question="Thank you for talking me">
