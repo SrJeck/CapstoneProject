@@ -92,6 +92,7 @@ if (!empty($result)) {
     <a style="margin-top: 6px;" href="index.php">HOME</a>
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
@@ -104,6 +105,7 @@ if (!empty($result)) {
     <a style="margin-top: 6px;" href="index.php">HOME</a>
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
     <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>

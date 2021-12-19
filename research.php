@@ -92,6 +92,7 @@ session_start();
     <a style="margin-top: 6px;" href="index.php">HOME</a>
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
@@ -104,6 +105,7 @@ session_start();
     <a style="margin-top: 6px;" href="index.php">HOME</a>
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
     <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
@@ -352,7 +354,7 @@ session_start();
         $fetch_uploader->execute();
         $fetched_uploader = $fetch_uploader->fetch();
 
-        $abstract = $dbh->prepare('select abstract from research where id=?');
+        $abstract = $dbh->prepare('select * from research where id=?');
         $abstract->bindParam(1, $fetched2['id']);
         $abstract->execute();
         $display_abstract = $abstract->fetch();
@@ -376,24 +378,12 @@ session_start();
 
               <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
               <hr style='border: 1px solid black;' width='1200px;'>
-      </a>
+              </a>
   </td>       
     </tr>  
-    <!-- The Modal -->
-
-    <div id='myModal' class='modal'>
   
-      <!-- Modal content -->
-      <div class='modal-content'>
-        <span class='close'>&times;</span>
-        <p>" . $display_abstract['abstract'] . "</p>
-      
-      </div>
-  
-    </div>    
    ";
         } else if ($num == 1) {
-
           $test .= "<tr  class='displayRow page$num'  style='display:block' > 
                     <td> <br>
                     <a class='displayResearch' target='_blank' href='display.php?id=" . $fetched2['id'] . "'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
@@ -403,7 +393,7 @@ session_start();
                     <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
                     </form>
                     <a class='view'  href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
-                    <a class='abstract'  ><i class='fa fa-book'></i><span id='myBtn'> Abstract<span></a>
+                    <a class='abstract'  ><i class='fa fa-book'></i><span id='myBtn'> Abstracts<span></a>
                     <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
                     </div>
                     <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
@@ -412,22 +402,11 @@ session_start();
                         
 
                         <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
-                        <hr style='border: 1px solid black;' width='1200px;'>
-                </a>
+                        <hr style='border: 1px solid black;' width='1200px;'>  
+                        </a>
             </td>
     </tr>
-    <!-- The Modal -->
-
-  <div id='myModal' class='modal'>
-
-    <!-- Modal content -->
-    <div class='modal-content'>
-      <span class='close'>&times;</span>
-      <p>" . $display_abstract['abstract'] . "</p>
-    
-    </div>
-
-  </div>    
+  
     ";
         } elseif ($num % 3 == 0) {
           $test .= "<tr  class='displayRow page$num' >
@@ -451,19 +430,7 @@ session_start();
               <hr style='border: 1px solid black;' width='1200px;'>
       </a>
   </td>
-    </tr>
-    <!-- The Modal -->
-
-  <div id='myModal' class='modal'>
-
-    <!-- Modal content -->
-    <div class='modal-content'>
-      <span class='close'>&times;</span>
-      <p>" . $display_abstract['abstract'] . "</p>
-    
-    </div>
-
-  </div>    
+    </tr> 
     </table>";
         }
       }
@@ -486,6 +453,18 @@ session_start();
       }
     }
     ?>
+    <!-- The Modal -->
+
+    <div id='myModal' class='modal'>
+
+      <!-- Modal content -->
+      <div class='modal-content'>
+        <span class='close'>&times;</span>
+        <p>test 1</p>
+
+      </div>
+
+    </div>
     <script>
       // Get the modal
       var modal = document.getElementById("myModal");
@@ -513,6 +492,7 @@ session_start();
         }
       }
     </script>
+
 </body>
 
 </html>
