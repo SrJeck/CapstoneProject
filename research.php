@@ -351,6 +351,11 @@ session_start();
         $fetch_uploader->bindParam(1, $fetched2['user_id']);
         $fetch_uploader->execute();
         $fetched_uploader = $fetch_uploader->fetch();
+
+        $abstract = $dbh->prepare('select abstract from research where id=?');
+        $abstract->bindParam(1, $fetched2['id']);
+        $abstract->execute();
+        $display_abstract = $abstract->fetch();
         if ($num > 1) {
           $test .= "<tr class='displayRow page$num' style='display:none'>
           <td> <br>
@@ -361,7 +366,7 @@ session_start();
           <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
           </form>
           <a class='view' href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
-          <a class='abstract' href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i> Abstract</a>
+          <a class='abstract' href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i> <span id='myBtn'> Abstract<span></a>
           <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
           </div>
           <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
@@ -372,9 +377,21 @@ session_start();
               <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
               <hr style='border: 1px solid black;' width='1200px;'>
       </a>
-  </td>
-                    
-    </tr> ";
+  </td>       
+    </tr>  
+    <!-- The Modal -->
+
+    <div id='myModal' class='modal'>
+  
+      <!-- Modal content -->
+      <div class='modal-content'>
+        <span class='close'>&times;</span>
+        <p>" . $display_abstract['abstract'] . "</p>
+      
+      </div>
+  
+    </div>    
+   ";
         } else if ($num == 1) {
 
           $test .= "<tr  class='displayRow page$num'  style='display:block' > 
@@ -386,7 +403,7 @@ session_start();
                     <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
                     </form>
                     <a class='view'  href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
-                    <a class='abstract'  ><i class='fa fa-book'></i><span id='myBtn'>Abstract<span></a>
+                    <a class='abstract'  ><i class='fa fa-book'></i><span id='myBtn'> Abstract<span></a>
                     <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
                     </div>
                     <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
@@ -399,7 +416,18 @@ session_start();
                 </a>
             </td>
     </tr>
+    <!-- The Modal -->
 
+  <div id='myModal' class='modal'>
+
+    <!-- Modal content -->
+    <div class='modal-content'>
+      <span class='close'>&times;</span>
+      <p>" . $display_abstract['abstract'] . "</p>
+    
+    </div>
+
+  </div>    
     ";
         } elseif ($num % 3 == 0) {
           $test .= "<tr  class='displayRow page$num' >
@@ -411,7 +439,7 @@ session_start();
           <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
           </form>
           <a class='view' href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
-          <a class='abstract' href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i> Abstract</a>
+          <a class='abstract' href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i> <span id='myBtn'> Abstract<span></a>
           <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
           </div>
           <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
@@ -423,7 +451,20 @@ session_start();
               <hr style='border: 1px solid black;' width='1200px;'>
       </a>
   </td>
-    </tr></table>";
+    </tr>
+    <!-- The Modal -->
+
+  <div id='myModal' class='modal'>
+
+    <!-- Modal content -->
+    <div class='modal-content'>
+      <span class='close'>&times;</span>
+      <p>" . $display_abstract['abstract'] . "</p>
+    
+    </div>
+
+  </div>    
+    </table>";
         }
       }
     }
@@ -452,18 +493,7 @@ session_start();
     $abstract->execute();
     $display_abstract = $abstract->fetch();
     echo "
-    <!-- The Modal -->
-
-    <div id='myModal' class='modal'>
-
-      <!-- Modal content -->
-      <div class='modal-content'>
-        <span class='close'>&times;</span>
-        <p>Some text in the Modal..  " . $display_abstract['abstract'] . "</p>
-      
-      </div>
-
-    </div>";
+   ";
     ?>
     <script>
       // Get the modal
