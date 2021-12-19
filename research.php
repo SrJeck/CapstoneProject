@@ -486,15 +486,6 @@ session_start();
       }
     }
     ?>
-    <?php
-
-    $abstract = $dbh->prepare('select abstract from research where id=?');
-    $abstract->bindParam(1, $fetched2['id']);
-    $abstract->execute();
-    $display_abstract = $abstract->fetch();
-    echo "
-   ";
-    ?>
     <script>
       // Get the modal
       var modal = document.getElementById("myModal");
