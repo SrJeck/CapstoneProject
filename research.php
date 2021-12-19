@@ -5,6 +5,7 @@ session_start();
 
 <head>
   <title>Search Research</title>
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
@@ -15,6 +16,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <!-- ChatBot -->
   <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
@@ -239,6 +241,7 @@ session_start();
 
 
 
+
     $query = "";
     $sort = " ORDER BY publication_year DESC";
     $yearTo = date("Y");
@@ -271,8 +274,8 @@ session_start();
       $_SESSION['search_session2'] = $query2;
     }
     if (isset($_POST["uploader"])) {
-      $query = "select COUNT(*) AS counted FROM research WHERE (upload_status IN ('posted') and user_id like '%".$_POST["uploader"]."%')";
-      $query2 = "select * FROM research WHERE (upload_status IN ('posted') AND user_id LIKE '%".$_POST["uploader"]."%')";
+      $query = "select COUNT(*) AS counted FROM research WHERE (upload_status IN ('posted') and user_id like '%" . $_POST["uploader"] . "%')";
+      $query2 = "select * FROM research WHERE (upload_status IN ('posted') AND user_id LIKE '%" . $_POST["uploader"] . "%')";
       $_SESSION['search_session1'] = $query;
       $_SESSION['search_session2'] = $query2;
     }
@@ -345,88 +348,81 @@ session_start();
       $num++;
       while ($fetched2 = $fetching2->fetch()) {
         $fetch_uploader = $dbh->prepare("select * from user where user_id=?");
-        $fetch_uploader->bindParam(1,$fetched2['user_id']);
+        $fetch_uploader->bindParam(1, $fetched2['user_id']);
         $fetch_uploader->execute();
         $fetched_uploader = $fetch_uploader->fetch();
         if ($num > 1) {
           $test .= "<tr class='displayRow page$num' style='display:none'>
-                    <td> <br>
-                    <a class='displayResearch' target='_blank' href='display.php?id=" . $fetched2['id'] . "'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
- 
-                        <p style='margin-left: 90px; margin-top: -90px;'>" . $fetched2['topic'] . "</p>
-                        <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
-                        <p style='margin-left: 90px; '>
-                        <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
-                        <form action='' method='POST'>
-                        <button type='submit' name='uploader' value='".$fetched_uploader['user_id']."'>". $fetched_uploader['firstName'] ." ".$fetched_uploader['lastName']."</button>
-                        </form>
-                            <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
-                            <hr style='border: 1px solid black;'width='1200px;'>
-                    </a>
-                </td>
-                <td>
-                <a href='view.php?id=" . $fetched2['id'] . "'><button>Mata</button></a>
-                </td>
-                <td>
-                <a href='abstract.php?id=" . $fetched2['id'] . "'><button>Abstract</button></a>
-                </td>
-                <td>
-                <a href='display.php?id=" . $fetched2['id'] . "'><button>Full Article</button></a>
-                </td>
+          <td> <br>
+          <a class='displayResearch' target='_blank' href='display.php?id=" . $fetched2['id'] . "'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
+          <div id='firstRow' >
+          <p class='rowtopic' >" . $fetched2['topic'] . "</p>
+          <form action='' method='POST'>
+          <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
+          </form>
+          <a class='view' href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
+          <a class='abstract' href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i> Abstract</a>
+          <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
+          </div>
+          <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
+          <p style='margin-left: 90px; '>
+              <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+              
+
+              <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
+              <hr style='border: 1px solid black;' width='1200px;'>
+      </a>
+  </td>
                     
     </tr> ";
         } else if ($num == 1) {
 
-          $test .= "<tr  class='displayRow page$num'  style='display:block'> 
+          $test .= "<tr  class='displayRow page$num'  style='display:block' > 
                     <td> <br>
                     <a class='displayResearch' target='_blank' href='display.php?id=" . $fetched2['id'] . "'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
-
-                    <p style='margin-left: 90px; margin-top: -90px;'>" . $fetched2['topic'] . "</p>
-                    <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
+                    <div id='firstRow' >
+                    <p class='rowtopic' >" . $fetched2['topic'] . "</p>
+                    <form action='' method='POST'>
+                    <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
+                    </form>
+                    <a class='view'  href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
+                    <a class='abstract'  ><i class='fa fa-book'></i><span id='myBtn'>Abstract<span></a>
+                    <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
+                    </div>
+                    <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
                     <p style='margin-left: 90px; '>
                         <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
-                        <form action='' method='POST'>
-                        <button type='submit' name='uploader' value='".$fetched_uploader['user_id']."'>". $fetched_uploader['firstName'] ." ".$fetched_uploader['lastName']."</button>
-                        </form>
+                        
+
                         <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
                         <hr style='border: 1px solid black;' width='1200px;'>
                 </a>
             </td>
-            <td>
-            <a href='view.php?id=" . $fetched2['id'] . "'><button>Mata</button></a>
-            </td>
-            <td>
-            <a href='abstract.php?id=" . $fetched2['id'] . "'><button>Abstract</button></a>
-            </td>
-            <td>
-            <a href='display.php?id=" . $fetched2['id'] . "'><button>Full Article</button></a>
-            </td>
-    </tr>";
+    </tr>
+
+    ";
         } elseif ($num % 3 == 0) {
           $test .= "<tr  class='displayRow page$num' >
-                    <td> <br>
-                    <a class='displayResearch' target='_blank' href='display.php?id=" . $fetched2['id'] . "'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
+          <td> <br>
+          <a class='displayResearch' target='_blank' href='display.php?id=" . $fetched2['id'] . "'><i style='font-size:80px' class='fa'>&#xf0f6;</i>
+          <div id='firstRow' >
+          <p class='rowtopic' >" . $fetched2['topic'] . "</p>
+          <form action='' method='POST'>
+          <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
+          </form>
+          <a class='view' href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
+          <a class='abstract' href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i> Abstract</a>
+          <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
+          </div>
+          <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
+          <p style='margin-left: 90px; '>
+              <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+              
 
-                    <p style='margin-left: 90px; margin-top: -90px;'>" . $fetched2['topic'] . "</p>
-                    <p style='margin-left: 90px; '>" . $fetched2['title'] . "</p>
-                    <p style='margin-left: 90px; '>
-                        <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
-                        <form action='' method='POST'>
-                        <button type='submit' name='uploader' value='".$fetched_uploader['user_id']."'>". $fetched_uploader['firstName'] ." ".$fetched_uploader['lastName']."</button>
-                        </form>
-                        <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
-                        <hr style='border: 1px solid black;' width='1200px;'>
-                </a>
-            </td>
-            <td>
-            <a href='view.php?id=" . $fetched2['id'] . "'><button>Mata</button></a>
-            </td>
-            <td>
-            <a href='abstract.php?id=" . $fetched2['id'] . "'><button>Abstract</button></a>
-            </td>
-            <td>
-            <a href='display.php?id=" . $fetched2['id'] . "'><button>Full Article</button></a>
-            </td>
+              <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
+              <hr style='border: 1px solid black;' width='1200px;'>
+      </a>
+  </td>
     </tr></table>";
         }
       }
@@ -449,9 +445,54 @@ session_start();
       }
     }
     ?>
+    <?php
+    $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+    $id = isset($_GET['id']) ? $_GET['id'] : "";
 
+    $abstract = $dbh->prepare('select abstract from research where id=?');
+    $abstract->bindParam(1, $id);
+    $abstract->execute();
+    $display_abstract = $abstract->fetch();
+    echo "
+    <!-- The Modal -->
+
+    <div id='myModal' class='modal'>
+
+      <!-- Modal content -->
+      <div class='modal-content'>
+        <span class='close'>&times;</span>
+        <p>Some text in the Modal..  " . $display_abstract['abstract'] . "</p>
+      
+      </div>
+
+    </div>";
+    ?>
     <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
 
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks the button, open the modal 
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
     </script>
 </body>
 

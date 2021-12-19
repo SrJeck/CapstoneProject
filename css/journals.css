@@ -252,8 +252,10 @@
     }
     .displayRow:hover{  
       background-color:#ebebeb;
-      color: white;
+      color: black;
+      cursor: pointer;
     }
+ 
     /* Count */
     .count1 {
       position: absolute;
@@ -283,9 +285,10 @@ background-size: 20px;
   display: inline-block;
   display: inline-block;
   position: relative;
-  left: 300px;
-  bottom: 90px;
+  left: 302px;
+  bottom: 67px;
   margin-left: 10px;
+  z-index: 1;
 }
 .a .b{
   color: #337ab7;
@@ -302,4 +305,115 @@ background-size: 20px;
   bottom: 630px;
   font-size: 20px;
   z-index: 1;
+}
+.namebtn{
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+}
+
+.fa-eye{
+color: black;
+}
+.fa-eye:hover{
+  cursor: pointer;
+  color: blue;
+}
+.namebtn:hover{
+  cursor: pointer;
+  color: blue;
+}
+#firstRow .namebtn{
+  float: right;
+  margin-right: 280px; margin-top: -90px;
+  font-size: 16px;
+} 
+#firstRow .view{
+  float: right;
+  background:none;
+  border:none;
+  margin:0;
+  padding:0;
+  cursor: pointer;
+  margin-right: 215px; margin-top: -90px;
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+
+} 
+#firstRow .view:hover{
+  cursor: pointer;
+  color: blue;
+}
+#firstRow .abstract{
+  float: right;
+  margin-right: 125px; margin-top: -90px;
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+
+} 
+#firstRow .abstract:hover{
+  cursor: pointer;
+  color: blue;
+}
+#firstRow .fullArticle{
+  float: right;
+  margin-right: 15px; margin-top: -90px;
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+
+} 
+#firstRow .fullArticle:hover{
+  cursor: pointer;
+  color: blue;
+}
+ #firstRow  .rowtopic{
+  float: left;
+  margin-left: 90px; margin-top: -90px;
+
+} 
+/* .displayResearch #firstRow .topic:hover{
+  background-color: red;
+} */
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
