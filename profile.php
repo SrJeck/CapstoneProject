@@ -129,6 +129,7 @@ if (isset($_SESSION['user_id'])) {
           <th class="th">Year</th>
           <th class="th">Status</th>
           <th class="th">Action</th>
+          <th class="th">Action</th>
           </tr>
       </thead>
 
@@ -148,15 +149,16 @@ if (isset($_SESSION['user_id'])) {
         <td class="td">' . $new_row["publication_year"] . '</td>
         <td class="td">' . $new_row["upload_status"] . '</td>
         <td class="td"><button class="editBtn"><a style="text-decoration:none;color:white;" href="edit_upload.php?id=' . $new_row['id'] . '">Edit Upload</a></button></td>
-      </tr></tbody>';
+        <td class="td"><button class="rqstBtn"><a style="text-decoration:none;color:white;" href="">Request Delete</a></button></td>
+        </tr></tbody>';
       }
 
-
+      // <a style="text-decoration:none;color:#FEC61F; font-size:18px;" href="edit_upload.php?id=' . $new_row['id'] . '"><i class="fa fa-pencil"></i></a>
+      // <a style="text-decoration:none;color:#F45549; font-size:18px;margin-left:5px;" href=""><i class="fa fa-trash-o"></i></a>
       ?>
 
     </table>
   </div>
-
   <!-- ChatBot -->
   <div class="chat_icon">
     <img style="height: 80px;" src="images/chatboticon.png">

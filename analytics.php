@@ -793,15 +793,7 @@ $db_handle = new DBController();
   </div>
   <h1 style="margin-left: 30px; ">Topics Overview</h1>
   <div class="main-part">
-    <div class="cpanel">
-      <div class="icon-part">
-        <i class="fa fa-users" aria-hidden="true"></i><br>
-        <small>Active Users</small>
-        <p><?php
-            echo $users;
-            ?></p>
-      </div>
-    </div>
+
     <div class="cpanel cpanel-green">
       <div class="icon-part">
         <i class="fa fa-book" aria-hidden="true"></i><br>

@@ -584,11 +584,11 @@
 }
 
 body {
-  background-color: #6a9ac4;
+  background-color: #c2a87c;
 }
 
 #contact {
-  background-color: #6a9ac4;
+  background-color: #c2a87c;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -596,7 +596,7 @@ body {
 
 .contact-box {
   width: clamp(100px, 90%, 1000px);
-  margin: 80px 50px;
+  margin: 180px 50px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -655,12 +655,20 @@ body {
 h2 {
   font-family: 'Arimo', sans-serif;
   color: #fff;
-  font-size: clamp(30px, 6vw, 60px);
+  font-size: clamp(20px, 6vw, 50px);
   letter-spacing: 2px;
   text-align: center;
   transform: scale(.95, 1);
 }
-
+h4 {
+  font-family: 'Arimo', sans-serif;
+  color: #fff;
+  font-size: clamp(18px, 6vw, 18px);
+  letter-spacing: 2px;
+  text-align: center;
+  transform: scale(.95, 1);
+  display:inline-block
+}
 .links {
   display: flex;
   flex-wrap: wrap;
@@ -734,7 +742,7 @@ textarea:valid+label {
 }
 
 .submit-btn {
-  background-color: #fd917e;
+  background-color: #c2a87c;
   filter: drop-shadow(2px 2px 3px #0003);
   color: #fff;
   font-family: "Poppins",sans-serif;

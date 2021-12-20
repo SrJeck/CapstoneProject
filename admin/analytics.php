@@ -39,7 +39,8 @@ $db_handle = new DBController();
 <body>
   <div class="sidebar">
     <div class="logo-details">
-      <img style="height: 40px;" src="images/Logo.png">
+      <img style="height: 40px; margin-left: 10px;" src="images/TQ.png">
+      <span class="logo_name"><img style="height: 40px; " src="images/Logo.png"></span>
     </div>
     <ul class="nav-links">
       <li>
@@ -73,9 +74,9 @@ $db_handle = new DBController();
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="settings.php">
           <i class='bx bx-cog'></i>
-          <span class="links_name">Setting</span>
+          <span class="links_name">Settings</span>
         </a>
       </li>
       <li class="log_out">

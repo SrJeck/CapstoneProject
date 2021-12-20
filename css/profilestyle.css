@@ -301,8 +301,7 @@
       border-left: 2px solid black;
       height: 500px;
       position: absolute;
-      left: 50%;
-      margin-left: -3px;
+      left: 42%;
       top: 180;
     }
 
@@ -315,9 +314,9 @@
     
     .table {
       border-collapse: collapse;
-      width: 48%;
+      width: 55%;
       position: relative;
-      left: 51%;
+      left: 44%;
       bottom: 30%;
       background-color: white;
       overflow: auto;
@@ -355,5 +354,21 @@
       border: 1px solid rgb(129, 126, 126);
     }
     .editBtn:hover{
+      background-color: #caaf80;
+    }
+    .rqstBtn{
+      background-color: #c2a87c;
+      border: none;
+      color: white;
+      padding: 5px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 7px;
+      border: 1px solid rgb(129, 126, 126);
+    }
+    .rqstBtn:hover{
       background-color: #caaf80;
     }

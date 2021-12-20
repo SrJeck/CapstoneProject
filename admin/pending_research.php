@@ -42,7 +42,8 @@ include 'backend/database.php';
 <body>
     <div class="sidebar">
         <div class="logo-details">
-            <img style="height: 40px;" src="images/Logo.png">
+            <img style="height: 40px; margin-left: 10px;" src="images/TQ.png">
+            <span class="logo_name"><img style="height: 40px; " src="images/Logo.png"></span>
         </div>
         <ul class="nav-links">
             <li>
@@ -76,9 +77,9 @@ include 'backend/database.php';
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="settings.php">
                     <i class='bx bx-cog'></i>
-                    <span class="links_name">Setting</span>
+                    <span class="links_name">Settings</span>
                 </a>
             </li>
             <li class="log_out">
@@ -106,7 +107,11 @@ include 'backend/database.php';
                             <th class="th">Title</th>
                             <th class="th">Published By</th>
                             <th class="th">Year</th>
-                            <th class="th" colspan="3">action</th>
+                            <th class="th">Review</th>
+                            <th class="th">Action</th>
+                            <th class="th">Reason</th>
+
+
                         </tr>
                         <?php
                         $research = $dbh->prepare('select * from research where upload_status="unposted"');
@@ -117,18 +122,28 @@ include 'backend/database.php';
             <td class="td">' . $row['title'] . '</td>
             <td class="td">' . $row['author'] . '</td>
             <td class="td">' . $row['publication_year'] . '</td>
-            <td class="td"><button class="review"><a style="text-decoration:none;color:white;" href="review.php?id=' . $row['id'] . '">review</a></button></td>
-            <td class="td"><button class="accept"><a style="text-decoration:none;color:white;" href="reject_research.php?id=' . $row['id'] . '">accept</a></button></td>
-            <td class="td"><button class="reject"><a style="text-decoration:none;color:white;" href="reject_research.php?id=' . $row['id'] . '">reject</a></button></td>
+            <td class="td"><button class="review"><a style="text-decoration:none;color:white;" href="review.php?id=' . $row['id'] . '">Review</a></button></td>
+            <td class="td" >
+            <select name="" class="custom-select">
+            <option selected="selected" disabled hidden style="float: left;">Select</option>
+            <option value="Approve">Approve</option>
+            <option value="Reject">Reject</option>
+            </select>
+            </td>
+            <td class="td" >
+
+            <textarea  name="" id="" ></textarea>    
+             </td>
         </tr>';
                         }
 
                         ?>
                     </table>
-
                 </div>
             </div>
     </section>
+    <!-- <td class="td"><button class="accept"><a style="text-decoration:none;color:white;" href="reject_research.php?id=' . $row['id'] . '">accept</a></button></td>
+            <td class="td"><button class="reject"><a style="text-decoration:none;color:white;" href="reject_research.php?id=' . $row['id'] . '">reject</a></button></td> -->
 
     <script>
         let sidebar = document.querySelector(".sidebar");

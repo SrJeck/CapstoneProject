@@ -5,7 +5,7 @@ session_start();
 
 <head>
   <title>Search Research</title>
-    <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="script.js"></script>
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -388,7 +388,7 @@ session_start();
   <!-- Modal content -->
   <div class='modal-content'>
   <span class='close'  onclick='closeModal(" . $fetched2['id'] . ")'>&times;</span>
-      <p>
+      <br><p>
       " . $fetched2['abstract'] . "
       </p>
   </div>
@@ -411,6 +411,7 @@ session_start();
                     <a class='abstract' onclick='openModal(" . $fetched2['id'] . ")'><i class='fa fa-book'></i><span id='#div1'> Abstract<span></a>
                     <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
                     </div>
+                    <a target='_blank' href='display.php?id=" . $fetched2['id'] . "' style='text-decoration: none; color: black;'>
                     <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
                     <p style='margin-left: 90px; '>
                         <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
@@ -418,14 +419,14 @@ session_start();
 
                         <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
                         <hr style='border: 1px solid black;' width='1200px;'>  
-                        </a>
+                        </a></a>
             </td>
             <td  id='myModal" . $fetched2['id'] . "' class='modal' style='display:none'>
             <div>
             <!-- Modal content -->
             <div class='modal-content'>
             <span class='close'  onclick='closeModal(" . $fetched2['id'] . ")'>&times;</span>
-                <p>
+               <br> <p style='margin: 15px 15px;'>
                 " . $fetched2['abstract'] . "
                 </p>
             </div>
@@ -462,7 +463,7 @@ session_start();
   <!-- Modal content -->
   <div class='modal-content'>
   <span class='close'  onclick='closeModal(" . $fetched2['id'] . ")'>&times;</span>
-      <p>
+    <br>  <p>
       " . $fetched2['abstract'] . "
       </p>
   </div>

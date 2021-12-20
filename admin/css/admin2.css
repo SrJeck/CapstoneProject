@@ -107,3 +107,14 @@
     .reject:hover{
       background-color: #55769E;
     }
+    select{
+      background-color: #435d7d;
+      border: none;
+      color: white;
+      padding: 5px 12px;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 7px;
+      border: 1px solid rgb(129, 126, 126);
+    }

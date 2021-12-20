@@ -61,18 +61,21 @@ if (isset($_SESSION['user_id'])) {
     <section id="contact">
       <div class="contact-box">
         <div class="contact-links">
-          <h2>CONTACT</h2>
-
+          <h2>CONTACT US</h2><br><br><br><br><br>
+          <i style="color:white; margin-left:25px" class="fa fa-envelope"></i>
+          <h4><em><u><a style="cursor: pointer; text-decoration:none; color:white;" target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=thesisquo.helpdesk@gmail.com">thesisquo.helpdesk@gmail.com</a></u></em>
+          </h4>
         </div>
+
         <div class="contact-form-wrapper">
           <form>
-            <div class="form-item">
+            <!-- <div class="form-item">
               <input type="text" name="sender" required>
               <label>Name:</label>
-            </div>
+            </div> -->
             <div class="form-item">
               <input type="text" name="email" required>
-              <label>Email:</label>
+              <label>From Email:</label>
             </div>
             <div class="form-item">
               <textarea class="" name="message" required></textarea>
