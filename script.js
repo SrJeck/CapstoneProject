@@ -1,5 +1,11 @@
 //SIDEBAR OPEN AND CLICK FUNCTION
-
+function openModal(params) {
+	document.getElementById("myModal"+params).style.display = "block";
+}
+function closeModal(params) {
+	document.getElementById("myModal"+params).style.display = "none";
+	//alert(params)
+}
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
   }

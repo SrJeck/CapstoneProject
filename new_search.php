@@ -340,6 +340,21 @@ session_start();
                             <hr style='border: 1px solid black;'width='1200px;'>
                     </a>
                 </td>
+                <td>
+                <button onclick='openModal(" . $fetched2['id'] . ")'>try abstract</button>
+                </td>
+                <td  id='myModal" . $fetched2['id'] . "' class='modal' style='display:none'>
+                <div>
+                <!-- Modal content -->
+                <div class='modal-content'>
+                <span class='close'  onclick='closeModal(" . $fetched2['id'] . ")'>&times;</span>
+                    <p>
+                    " . $fetched2['abstract'] . "
+                    </p>
+                </div>
+    
+            </div>
+                </td>
                     
     </tr> ";
                 } else if ($num == 1) {
@@ -356,6 +371,21 @@ session_start();
                         <hr style='border: 1px solid black;' width='1200px;'>
                 </a>
             </td>
+            <td>
+            <button onclick='openModal(" . $fetched2['id'] . ")'>try abstract</button>
+            </td>
+            <td  id='myModal" . $fetched2['id'] . "' class='modal' style='display:none'>
+            <div>
+            <!-- Modal content -->
+            <div class='modal-content'>
+            <span class='close'  onclick='closeModal(" . $fetched2['id'] . ")'>&times;</span>
+                <p>
+                " . $fetched2['abstract'] . "
+                </p>
+            </div>
+
+        </div>
+            </td>
     </tr>";
                 } elseif ($num % 3 == 0) {
                     $test .= "<tr  class='displayRow page$num' >
@@ -369,6 +399,21 @@ session_start();
                         <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
                         <hr style='border: 1px solid black;' width='1200px;'>
                 </a>
+            </td>
+            <td>
+            <button onclick='openModal(" . $fetched2['id'] . ")'>try abstract</button>
+            </td>
+            <td  id='myModal" . $fetched2['id'] . "' class='modal' style='display:none'>
+            <div>
+            <!-- Modal content -->
+            <div class='modal-content'>
+                <span class='close'  onclick='closeModal(" . $fetched2['id'] . ")'>&times;</span>
+                <p>
+                " . $fetched2['abstract'] . "
+                </p>
+            </div>
+
+        </div>
             </td>
     </tr></table>";
                 }
