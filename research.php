@@ -16,8 +16,15 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <!-- ChatBot -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#div1").click(function() {
+        $("#div1").load("abstract.php");
+      });
+    });
+  </script>
+  <!-- ChatBot abstract.php?id=" . $fetched2['id'] . "'-->
   <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/jquery.convform.js"></script>
@@ -393,7 +400,7 @@ session_start();
                     <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
                     </form>
                     <a class='view'  href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
-                    <a class='abstract'  ><i class='fa fa-book'></i><span id='myBtn'> Abstracts<span></a>
+                    <a class='abstract'  href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i><span id='#div1'> Abstract<span></a>
                     <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
                     </div>
                     <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
@@ -418,7 +425,7 @@ session_start();
           <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
           </form>
           <a class='view' href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
-          <a class='abstract' href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i> <span id='myBtn'> Abstract<span></a>
+          <a class='abstract' href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i> <span> Abstract<span></a>
           <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
           </div>
           <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
@@ -453,18 +460,7 @@ session_start();
       }
     }
     ?>
-    <!-- The Modal -->
 
-    <div id='myModal' class='modal'>
-
-      <!-- Modal content -->
-      <div class='modal-content'>
-        <span class='close'>&times;</span>
-        <p>test 1</p>
-
-      </div>
-
-    </div>
     <script>
       // Get the modal
       var modal = document.getElementById("myModal");
