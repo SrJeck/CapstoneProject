@@ -5,6 +5,7 @@ session_start();
 
 <head>
   <title>Search Research</title>
+    <script type="text/javascript" src="script.js"></script>
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -18,11 +19,6 @@ session_start();
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $("#div1").click(function() {
-        $("#div1").load("abstract.php");
-      });
-    });
   </script>
   <!-- ChatBot abstract.php?id=" . $fetched2['id'] . "'-->
   <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
@@ -375,7 +371,7 @@ session_start();
           <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
           </form>
           <a class='view' href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
-          <a class='abstract' href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i> <span id='myBtn'> Abstract<span></a>
+          <a class='abstract' onclick='openModal(" . $fetched2['id'] . ")'><i class='fa fa-book'></i> <span id='myBtn'> Abstract<span></a>
           <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
           </div>
           <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
@@ -387,6 +383,18 @@ session_start();
               <hr style='border: 1px solid black;' width='1200px;'>
               </a>
   </td>       
+  <td  id='myModal" . $fetched2['id'] . "' class='modal' style='display:none'>
+  <div>
+  <!-- Modal content -->
+  <div class='modal-content'>
+  <span class='close'  onclick='closeModal(" . $fetched2['id'] . ")'>&times;</span>
+      <p>
+      " . $fetched2['abstract'] . "
+      </p>
+  </div>
+
+</div>
+  </td>
     </tr>  
   
    ";
@@ -400,7 +408,7 @@ session_start();
                     <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
                     </form>
                     <a class='view'  href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
-                    <a class='abstract'  href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i><span id='#div1'> Abstract<span></a>
+                    <a class='abstract' onclick='openModal(" . $fetched2['id'] . ")'><i class='fa fa-book'></i><span id='#div1'> Abstract<span></a>
                     <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
                     </div>
                     <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
@@ -411,6 +419,18 @@ session_start();
                         <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
                         <hr style='border: 1px solid black;' width='1200px;'>  
                         </a>
+            </td>
+            <td  id='myModal" . $fetched2['id'] . "' class='modal' style='display:none'>
+            <div>
+            <!-- Modal content -->
+            <div class='modal-content'>
+            <span class='close'  onclick='closeModal(" . $fetched2['id'] . ")'>&times;</span>
+                <p>
+                " . $fetched2['abstract'] . "
+                </p>
+            </div>
+
+        </div>
             </td>
     </tr>
   
@@ -425,7 +445,7 @@ session_start();
           <button class='namebtn' type='submit' name='uploader' value='" . $fetched_uploader['user_id'] . "'> <i class='fas fa-user-alt'></i> " . $fetched_uploader['firstName'] . " " . $fetched_uploader['lastName'] . "</button>
           </form>
           <a class='view' href='view.php?id=" . $fetched2['id'] . "'><i class='fa fa-eye'></i> View</a>
-          <a class='abstract' href='abstract.php?id=" . $fetched2['id'] . "'><i class='fa fa-book'></i> <span> Abstract<span></a>
+          <a class='abstract' onclick='openModal(" . $fetched2['id'] . ")'><i class='fa fa-book'></i> <span> Abstract<span></a>
           <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
           </div>
           <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
@@ -436,6 +456,18 @@ session_start();
               <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
               <hr style='border: 1px solid black;' width='1200px;'>
       </a>
+  </td>
+  <td  id='myModal" . $fetched2['id'] . "' class='modal' style='display:none'>
+  <div>
+  <!-- Modal content -->
+  <div class='modal-content'>
+  <span class='close'  onclick='closeModal(" . $fetched2['id'] . ")'>&times;</span>
+      <p>
+      " . $fetched2['abstract'] . "
+      </p>
+  </div>
+
+</div>
   </td>
     </tr> 
     </table>";
@@ -461,33 +493,6 @@ session_start();
     }
     ?>
 
-    <script>
-      // Get the modal
-      var modal = document.getElementById("myModal");
-
-      // Get the button that opens the modal
-      var btn = document.getElementById("myBtn");
-
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
-
-      // When the user clicks the button, open the modal 
-      btn.onclick = function() {
-        modal.style.display = "block";
-      }
-
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function() {
-        modal.style.display = "none";
-      }
-
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      }
-    </script>
 
 </body>
 
