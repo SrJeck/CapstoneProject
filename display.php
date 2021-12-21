@@ -107,6 +107,20 @@ if (!empty($result)) {
 
   $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
   $id = $_GET['id'];
+
+
+  $view_count = $dbh->prepare('select visit_count from research where id=?');
+  $view_count->bindParam(1, $id);
+  $view_count->execute();
+  $viewed_count = $view_count->fetch();
+  
+  $increment = (int)$viewed_count['visit_count'] + 1;
+  $update_count = $dbh->prepare('update research set visit_count=? where id=?');
+  $update_count->bindParam(1,$increment , PDO::PARAM_INT);
+  $update_count->bindParam(2, $id);
+  $update_count->execute();
+
+
   $stat = $dbh->prepare('select * from research where id=?');
   $stat->bindParam(1, $id);
   $stat->execute();
