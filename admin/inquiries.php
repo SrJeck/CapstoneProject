@@ -36,7 +36,6 @@ include 'backend/database.php';
     <script src="ajax/Ajax.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 
@@ -66,13 +65,13 @@ include 'backend/database.php';
                 </a>
             </li>
             <li>
-                <a href="#" class="active">
+                <a href="pending_research.php">
                     <i class='far fa-file-alt'></i>
                     <span class="links_name">Pending Research</span>
                 </a>
             </li>
             <li>
-                <a href="inquiries.php">
+                <a href="profile.php" class="active">
                     <i class='fa fa-envelope'></i>
                     <span class="links_name">Inquiries </span>
                 </a>
@@ -101,7 +100,7 @@ include 'backend/database.php';
         <nav>
             <div class="sidebar-button">
                 <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Pending Research</span>
+                <span class="dashboard">Inquiries</span>
             </div>
         </nav>
 
@@ -110,38 +109,19 @@ include 'backend/database.php';
                 <div class="recent-sales box">
                     <table class="table">
                         <tr class="tr">
-                            <th class="th">ID</th>
-                            <th class="th">Title</th>
-                            <th class="th">Published By</th>
-                            <th class="th">Year</th>
-                            <th class="th" colspan="4">Action</th>
-
-
+                            <th class="th">Email</th>
+                            <th class="th">Subject</th>
+                            <th class="th">Message</th>
                         </tr>
                         <?php
-                        $research = $dbh->prepare('select * from research where upload_status="unposted"');
+                        $research = $dbh->prepare('select * from inquiry');
                         $research->execute();
                         while ($row = $research->fetch()) {
                             echo '<tr class="tr">
-            <td class="td">' . $row['id'] . '</td>
-            <td class="td">' . $row['title'] . '</td>
-            <td class="td">' . $row['author'] . '</td>
-            <td class="td">' . $row['publication_year'] . '</td>
-            <td class="td"><button class="review"><a style="text-decoration:none;color:white;" href="review.php?id=' . $row['id'] . '">Review</a></button></td>
-            <td class="td" >
-            <select name="" class="custom-select">
-            <option selected="selected" disabled hidden style="float: left;">Select</option>
-            <option value="Approve">Approve</option>
-            <option value="Reject">Reject</option>
-            </select>
-            </td>
-            <td class="td">
-                <textarea  name="" id="" placeholder="Reason of Reject"></textarea>    
-             </td>
-             <td class="td">
-                <button class="send"><a style="text-decoration:none;color:white;" href=""><i style="font-size: 12px;" class="material-icons">send</i></a></button>
-             </td>
-               </tr>';
+                                    <td class="td">' . $row['email'] . '</td>
+                                    <td class="td">' . $row['subject'] . '</td>
+                                    <td class="td">' . $row['question'] . '</td>
+                                </tr>';
                         }
 
                         ?>

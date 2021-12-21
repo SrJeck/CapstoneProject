@@ -4,7 +4,7 @@
 
     .table, .td, .th {  
       text-align: center;
-      border: 1px solid black;
+      
 
     }
     
@@ -15,6 +15,7 @@
       left: 1%;
       background-color: white;
       cursor: pointer;
+      border: 3px solid #55769E;
     }
     
     .th, .td {
@@ -73,6 +74,22 @@
       border: 1px solid rgb(129, 126, 126);
     }
     .review:hover{
+      background-color: #55769E;
+    }
+    .send{
+      background-color: #435d7d;
+      border: none;
+      color: white;
+      padding: 5px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 7px;
+      border: 1px solid rgb(129, 126, 126);
+    }
+    .send:hover{
       background-color: #55769E;
     }
     .accept{

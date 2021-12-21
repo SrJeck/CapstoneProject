@@ -27,7 +27,7 @@ $permission = $_POST['permission'];
 $upload_status = 'Unposted';
 $admin_id = 0;
 $data = file_get_contents($_FILES['myfile']['tmp_name']);
-$stmt = $dbh->prepare("insert into research values('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'')");
+$stmt = $dbh->prepare("insert into research values('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'','','','')");
 $stmt->bindParam(1, $title);
 $stmt->bindParam(2, $author);
 $stmt->bindParam(3, $publication_month);

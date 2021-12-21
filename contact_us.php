@@ -78,6 +78,10 @@ if (isset($_SESSION['user_id'])) {
               <label>From Email:</label>
             </div>
             <div class="form-item">
+              <input type="text" name="subject" required>
+              <label>Subject:</label>
+            </div>
+            <div class="form-item">
               <textarea class="" name="message" required></textarea>
               <label>Message:</label>
             </div>

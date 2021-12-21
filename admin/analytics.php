@@ -69,6 +69,12 @@ $db_handle = new DBController();
       </li>
       <li>
         <a href="profile.php">
+          <i class='fa fa-envelope'></i>
+          <span class="links_name">Inquiries </span>
+        </a>
+      </li>
+      <li>
+        <a href="profile.php">
           <i class='far fa-id-card'></i>
           <span class="links_name">Profile</span>
         </a>

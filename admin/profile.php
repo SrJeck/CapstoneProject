@@ -71,6 +71,12 @@ include 'backend/database.php';
                 </a>
             </li>
             <li>
+                <a href="inquiries.php">
+                    <i class='fa fa-envelope'></i>
+                    <span class="links_name">Inquiries </span>
+                </a>
+            </li>
+            <li>
                 <a href="#" class="active">
                     <i class='far fa-id-card'></i>
                     <span class="links_name">Profile</span>

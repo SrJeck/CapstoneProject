@@ -132,7 +132,6 @@ if (isset($_SESSION['user_id'])) {
           <th class="th">Download PDF Count</th>
           <th class="th">Visit Page Count</th>
           <th class="th">Action</th>
-          <th class="th">Action</th>
           </tr>
       </thead>
 
@@ -155,7 +154,6 @@ if (isset($_SESSION['user_id'])) {
         <td class="td">' . $new_row["download_count"] . '</td>
         <td class="td">' . $new_row["visit_count"] . '</td>
         <td class="td"><button class="editBtn"><a style="text-decoration:none;color:white;" href="edit_upload.php?id=' . $new_row['id'] . '">Edit Upload</a></button></td>
-        <td class="td"><button class="rqstBtn"><a style="text-decoration:none;color:white;" href="">Request Delete</a></button></td>
         </tr></tbody>';
       }
 

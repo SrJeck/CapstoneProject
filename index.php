@@ -223,12 +223,68 @@ if (!empty($result)) {
     <div class="chat_box">
       <div class="my-conv-form-wrapper">
         <form action="" method="GET" class="hidden">
-
           <select data-conv-question="Hello! How can I help you" name="category">
             <option value="1">How to Upload Study?</option>
             <option value="2">What study would you recommend for me to read?</option>
             <option value="3">What study topic can i develop?</option>
           </select>
+          <!-- How to Upload Study? -->
+          <div data-conv-fork="category">
+            <div data-conv-case="1" data-conv-fork="first-question2">
+              <input type="text" name="name" data-conv-question="You must have an account before you upload your papers, if you are already a member, you may follow these steps:
+                <br><br>
+                1. Click the add (+) button on the navigation bar to upload your papers
+                <br>
+                2. Fill out the fields required by the admin to upload paper.
+                <br>
+                3. Read and Accept the Privacy Policy & Terms and Condition before submitting the paper.
+                <br>
+                4. Wait for the Plagiarism result if accepted or not.
+                <br>
+                5. If the paper passed the Plagiarism test, the paper will be upload. if not, the User must revise and re-upload the paper.
+                <br><br><br>
+                <button class='reset'><a style='text-decoration: none;' onClick=' window.location.reload()'>Reset</a></button>
+
+              ">
+            </div>
+          </div>
+          <!-- What study would you recommend for me to read? -->
+          <div data-conv-fork="category">
+
+            <div data-conv-case="2" data-conv-fork="first-question2">
+              <select data-conv-question="What field of study you want to know more?" name="category">
+                <option value="1">Education</option>
+                <option value="1">Technology</option>
+                <option value="1">Business</option>
+              </select>
+            </div>
+            <div data-conv-case="1" data-conv-fork="first-question2">
+              <select data-conv-question="I Recommend these studies:
+              <br><br>
+              1. Highest upload in 12 months
+              <br>
+              2. Highest upload in Total
+              <br>
+              3. Recent Uploaded Study
+              <br><br>
+              Or you may check the thesis repository to find more studies that you might use.
+              " name="category">
+                <option value="1">Do you want another question suggestion from other topics?</option>
+                <option value="1">Do you have any specific question for me?</option>
+              </select>
+            </div>
+
+
+            <div data-conv-fork="first-question3">
+              <select style="display:none;background-color:#DEDEDE;" data-conv-question="<span style='display:none;background-color:red; color:yellow;'>Do you have any specific question for me?</span>" name="category">
+                <option value="Yess">Yes</option>
+                <option value="Noo">No</option>
+              </select>
+            </div>
+            <div data-conv-case="Yess" data-conv-fork="first-question3">
+              <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
+            </div>
+          </div>
           <!-- What study topic can i develop? -->
           <div data-conv-fork="category">
 

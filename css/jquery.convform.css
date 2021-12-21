@@ -86,7 +86,6 @@ form.convFormDynamic {
     padding: 0 !important;
     position: relative;
     box-shadow: 0 0 5px 5px rgba(222, 222, 222, 0.4);
-    
 }
 
 form.convFormDynamic textarea.userInputDynamic {
@@ -102,6 +101,10 @@ form.convFormDynamic textarea.userInputDynamic {
     display: block;
     max-width: 88%;
     margin-right: 2.5%;
+    pointer-events: none;
+    background-color: rgba(222, 222, 222, 0.4);
+    caret-color: transparent;
+
 }
 
 
@@ -118,6 +121,8 @@ form.convFormDynamic input.userInputDynamic {
     display: block;
     max-width: 88%;
     margin-right: 2.5%;
+    pointer-events: none;
+
 }
 div.conv-form-wrapper:after {
     content: '';
@@ -313,6 +318,8 @@ form.convFormDynamic button.submit {
     margin-top: 4px;
     background: #fff;
     outline: none !important;
+    pointer-events: none;
+    display: none;
 }
 
 form.convFormDynamic button.submit:hover {
@@ -398,4 +405,18 @@ span.clear {
         box-shadow: 0 -2em;
         height: 5em;
     }
+}
+.reset{
+    float: right;
+    border-radius: 10px;
+    border: white;
+    margin: 0;
+    padding: 5px 5px;
+    background: #06B79A;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+
 }

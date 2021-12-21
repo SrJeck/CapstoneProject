@@ -134,7 +134,15 @@ if (isset($_SESSION['user_id'])) {
         <label>Research Type:</label>
       </span>
       <span class="col-75">
-        <input type="text" id="research_type" name="research_type" value="Thesis" readonly>
+        <select name="research_type" id="research_type" required>
+          <option value="" selected disabled hidden>Select topic type</option>
+          <option value="Capstone Project">Capstone Project</option>
+          <option value="Undergraduate Thesis">Undergraduate Thesis</option>
+          <option value="Master’s Thesis">Master’s Thesis</option>
+          <option value="Dissertation">Dissertation</option>
+          <option value="Practice Based">Practice Based</option>
+        </select>
+
       </span>
 
       <span class="col-25">
