@@ -33,7 +33,7 @@ include 'backend/database.php';
     <link rel="stylesheet" href="css/admin2.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="ajax/Ajax.js"></script>
+    <script src="ajax/ajax.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -114,7 +114,7 @@ include 'backend/database.php';
                             <th class="th">Title</th>
                             <th class="th">Published By</th>
                             <th class="th">Year</th>
-                            <th class="th" colspan="4">Action</th>
+                            <th class="th" colspan="5">Action</th>
 
 
                         </tr>
@@ -129,17 +129,19 @@ include 'backend/database.php';
             <td class="td">' . $row['publication_year'] . '</td>
             <td class="td"><button class="review"><a style="text-decoration:none;color:white;" href="review.php?id=' . $row['id'] . '">Review</a></button></td>
             <td class="td" >
-            <select name="" class="custom-select">
+            <select name="select" id="select' . $row['id'] . '" class="custom-select" onchange="selectAction(' . $row['id'] . ')">
             <option selected="selected" disabled hidden style="float: left;">Select</option>
             <option value="Approve">Approve</option>
             <option value="Reject">Reject</option>
-            </select>
+            </select> 
             </td>
-            <td class="td">
-                <textarea  name="" id="" placeholder="Reason of Reject"></textarea>    
+            <td class="td" id="1strow' . $row['id'] . '" style="display:none">
+            <textarea  name="reason" id="reason' . $row['id'] . '" placeholder="Reason of Reject"></textarea> 
+            <input name="user" id="user' . $row['id'] . '" value="'. $row['user_id'] .'" style="display:none">
+            <input name="thesis" id="thesis' . $row['id'] . '" value="'. $row['id'] .'" style="display:none">   
              </td>
-             <td class="td">
-                <button class="send"><a style="text-decoration:none;color:white;" href=""><i style="font-size: 12px;" class="material-icons">send</i></a></button>
+             <td class="td" >
+                <button class="send" type="submit" onclick="submitForm(' . $row['id'] . ')"><a style="text-decoration:none;color:white;" href=""><i style="font-size: 12px;" class="material-icons">send</i></a></button>
              </td>
                </tr>';
                         }

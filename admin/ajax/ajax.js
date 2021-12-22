@@ -124,3 +124,35 @@ $(document).ready(function () {
 		}
 	});
 });
+
+function selectAction(params) {
+	var e = document.getElementById("select"+params);
+	var strUser = e.value;
+   if (strUser == "Reject") {
+	   document.getElementById("1strow"+params).style.display = "block";
+   }else{
+	   document.getElementById("1strow"+params).style.display = "none";
+   }
+}
+function submitForm(params) {	
+	var a = document.getElementById("select"+params);
+	var select = a.value;	
+	var b = document.getElementById("reason"+params);
+	var reason = b.value;
+	var c = document.getElementById("thesis"+params);
+	var thesis = c.value;
+	var d = document.getElementById("user"+params);
+	var user = d.value;
+	xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = () =>{
+        if(xhr.readyState == 4 && xhr.status == 200){
+            //d.getElementsByClassName("chatBox")[0].innerHTML = xhr.responseText;
+        }
+    }
+    xhr.open("POST","action_research.php",true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.send("thesis="+thesis+"&user="+user+"&reason="+reason+"&select="+select);
+	
+	
+}

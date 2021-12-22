@@ -108,20 +108,63 @@ include 'backend/database.php';
             <div class="sales-boxes">
                 <div class="recent-sales box">
                     <table class="table">
+                        <caption>Unreplied Inquiries</caption>
                         <tr class="tr">
                             <th class="th">Email</th>
                             <th class="th">Subject</th>
                             <th class="th">Message</th>
+                            <th class="th">Reply</th>
+                            <th class="th">Action</th>
                         </tr>
                         <?php
                         $research = $dbh->prepare('select * from inquiry');
                         $research->execute();
                         while ($row = $research->fetch()) {
-                            echo '<tr class="tr">
+                            if (empty($row['reply'])) {
+                                echo '<tr class="tr">
                                     <td class="td">' . $row['email'] . '</td>
                                     <td class="td">' . $row['subject'] . '</td>
                                     <td class="td">' . $row['question'] . '</td>
+                                    <td class="td">
+                                    <form id="reply-form" action="inquiry_reply.php" method="POST">
+                                    <textarea  name="reply" id="reply" placeholder="Reply"></textarea> 
+                                    <input name="inquiry_id" value="'. $row['inquiry_id'] .'" style="display:none">   
+                                    </form></td>
+                                    <td class="td"><button class="send" type="submit" form="reply-form"><a style="text-decoration:none;color:white;" href=""><i style="font-size: 12px;" class="material-icons">send</i></a></button></td>
                                 </tr>';
+                            }
+                        }
+
+                        ?>
+                    </table>
+                    <table class="table">
+                        <caption>Replied Inquiries</caption>
+                        <tr class="tr">
+                            <th class="th">Email</th>
+                            <th class="th">Subject</th>
+                            <th class="th">Message</th>
+                            <th class="th">Reply</th>
+                            <th class="th" colspan="3" style="display:none">Action</th>
+                        </tr>
+                        <?php
+                        $research = $dbh->prepare('select * from inquiry');
+                        $research->execute();
+                        while ($row = $research->fetch()) {
+                            if (!empty($row['reply'])) {
+                                echo '<tr class="tr">
+                                    <td class="td">' . $row['email'] . '</td>
+                                    <td class="td">' . $row['subject'] . '</td>
+                                    <td class="td">' . $row['question'] . '</td>
+                                    <td class="td">' . $row['reply'] . '</td>
+                                    <td class="td" style="display:none"><button onclick="openEdit">Edit Reply</button></td>
+                                    <td class="td" style="display:none">
+                                    <form id="edit-reply-form" action="inquiry_reply.php" method="POST">
+                                    <textarea  name="reply" id="reply" placeholder="Reply"></textarea> 
+                                    <input name="user" value="'. $row['inquiry_id'] .'" style="display:none">   
+                                    </form></td>
+                                    <td class="td" style="display:none"><button class="send" type="submit" form="edit-reply-form"><a style="text-decoration:none;color:white;" href=""><i style="font-size: 12px;" class="material-icons">send</i></a></button></td>
+                                </tr>';
+                            }
                         }
 
                         ?>
