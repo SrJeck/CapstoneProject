@@ -87,14 +87,14 @@ if (!empty($result)) {
     <!-- NAVBAR -->
     <?php
     $notif = "";
-    $dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
+    $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
 
     $unseen_count = $dbh->prepare('select COUNT(*) as unseen_count from notification where seen_status="unseen" and user_id=?');
     $unseen_count->bindParam(1, $id);
     $unseen_count->execute();
     $unseened_count = $unseen_count->fetch();
 
-   $notification = $dbh->prepare('select * from notification where user_id=?');
+    $notification = $dbh->prepare('select * from notification where user_id=?');
     $notification->bindParam(1, $id);
     $notification->execute();
     while ($notifications = $notification->fetch()) {
@@ -102,12 +102,12 @@ if (!empty($result)) {
         <hr class="section">
         <div class="sec test">
             <a href="#">
-            <div class="txt">'.$notifications['status'].'</div>
-            <div class="txt">'.$notifications['reason'].'</div>
+            <div class="txt">' . $notifications['status'] . '</div>
+            <div class="txt">' . $notifications['reason'] . '</div>
             </a>
         </div>';
     }
-    
+
 
 
     if (isset($_SESSION['user_id'])) {
@@ -125,7 +125,7 @@ if (!empty($result)) {
         <a href="#">
             <div class="notBtn" href="#">
                 <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
-                <div class="number">'.$unseened_count['unseen_count'].'</div>
+                <div class="number">' . $unseened_count['unseen_count'] . '</div>
                 <i style="font-size:24px" class="fa">&#xf0f3;</i>
 
                 <div class="box">
@@ -133,7 +133,7 @@ if (!empty($result)) {
      
                         <div class="cont">
                             <!-- Fold this div and try deleting evrything inbetween -->
-                            '.$notif.'
+                            ' . $notif . '
                         </div>
                     </div>
                 </div>
