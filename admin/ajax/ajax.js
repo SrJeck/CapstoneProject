@@ -147,12 +147,11 @@ function submitForm(params) {
 
     xhr.onreadystatechange = () =>{
         if(xhr.readyState == 4 && xhr.status == 200){
-            //d.getElementsByClassName("chatBox")[0].innerHTML = xhr.responseText;
+            alert("success");
         }
     }
     xhr.open("POST","action_research.php",true);
     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xhr.send("thesis="+thesis+"&user="+user+"&reason="+reason+"&select="+select);
-	
 	
 }
