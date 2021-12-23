@@ -86,6 +86,30 @@ if (!empty($result)) {
 <body>
     <!-- NAVBAR -->
     <?php
+    $notif = "";
+    $dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
+
+    $unseen_count = $dbh->prepare('select COUNT(*) as unseen_count from notification where seen_status="unseen" and user_id=?');
+    $unseen_count->bindParam(1, $id);
+    $unseen_count->execute();
+    $unseened_count = $unseen_count->fetch();
+
+   $notification = $dbh->prepare('select * from notification where user_id=?');
+    $notification->bindParam(1, $id);
+    $notification->execute();
+    while ($notifications = $notification->fetch()) {
+        $notif .= '
+        <hr class="section">
+        <div class="sec test">
+            <a href="#">
+            <div class="txt">'.$notifications['status'].'</div>
+            <div class="txt">'.$notifications['reason'].'</div>
+            </a>
+        </div>';
+    }
+    
+
+
     if (isset($_SESSION['user_id'])) {
         echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
@@ -101,7 +125,7 @@ if (!empty($result)) {
         <a href="#">
             <div class="notBtn" href="#">
                 <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
-                <div class="number">2</div>
+                <div class="number">'.$unseened_count['unseen_count'].'</div>
                 <i style="font-size:24px" class="fa">&#xf0f3;</i>
 
                 <div class="box">
@@ -109,65 +133,7 @@ if (!empty($result)) {
      
                         <div class="cont">
                             <!-- Fold this div and try deleting evrything inbetween -->
-                            <div class="sec test">
-                                <a href="#">
-                                    <div class="profCont">
-                                        <img class="profile" src="https://c1.staticflickr.com/5/4007/4626436851_5629a97f30_b.jpg">
-                                    </div>
-                                    <div class="txt">James liked your post: "Pure css notification box"</div>
-                                    <div class="txt sub">11/7 - 2:30 pm</div>
-                                </a>
-                            </div>
-                            <hr class="section">
-                            <div class="sec test">
-                                <a href="#">
-                                    <div class="profCont">
-                                        <img class="profile" src="https://obamawhitehouse.archives.gov/sites/obamawhitehouse.archives.gov/files/styles/person_medium_photo/public/person-photo/amanda_lucidon22.jpg?itok=JFPi8OFJ">
-                                    </div>
-                                    <div class="txt">Annita liked your post: "Pure css notification box"</div>
-                                    <div class="txt sub">11/7 - 2:13 pm</div>
-                                </a>
-                            </div>
-                            <hr class="section">
-                            <div class="sec">
-                            <a href="#">
-                                <div class="profCont">
-                                    <img class="profile" src="https://c1.staticflickr.com/4/3725/10214643804_75c0b6eeab_b.jpg">
-                                </div>
-                                <div class="txt">Madison liked your post: "Pure css notification box"</div>
-                                <div class="txt sub">11/6 - 4:04 pm</div>
-                            </a>
-                           </div>
-                           <hr class="section">
-                            <div class="sec">
-                                <a href="#">
-                                    <div class="profCont">
-                                        <img class="profile" src="https://c1.staticflickr.com/4/3725/10214643804_75c0b6eeab_b.jpg">
-                                    </div>
-                                    <div class="txt">Madison liked your post: "Pure css notification box"</div>
-                                    <div class="txt sub">11/6 - 4:04 pm</div>
-                                </a>
-                            </div>
-                            <hr class="section">
-                            <div class="sec">
-                                <a href="#">
-                                    <div class="profCont">
-                                        <img class="profile" src="https://upload.wikimedia.org/wikipedia/commons/5/52/NG_headshot_white_shirt_square_Jan18.jpg">
-                                    </div>
-                                    <div class="txt">Ted liked your post: "Pure css notification box"</div>
-                                    <div class="txt sub">11/6 - 10:37 am</div>
-                                </a>
-                            </div>
-                            <hr class="section">
-                            <div class="sec">
-                                <a href="#">
-                                    <div class="profCont">
-                                        <img class="profile" src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Pat-headshot-square.jpg">
-                                    </div>
-                                    <div class="txt">Tommas liked your post: "Pure css notification box"</div>
-                                    <div class="txt sub">11/5 - 7:30 pm</div>
-                                </a>
-                            </div>
+                            '.$notif.'
                         </div>
                     </div>
                 </div>

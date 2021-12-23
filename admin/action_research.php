@@ -15,6 +15,17 @@ if (!empty($_POST['select'])) {
       $approved->bindParam(2, $status);
       $approved->bindParam(3, $thesis_id);
       $approved->execute();
+      
+      $reason = "Congratulations";
+      $seen_stat = "unseen";
+      $accepted = $dbh->prepare("insert into notification values(?,?,?,?,?,?)");
+      $accepted->bindParam(1, $user_id);
+      $accepted->bindParam(2, $admin_id);
+      $accepted->bindParam(3, $thesis_id);
+      $accepted->bindParam(4, $select);
+      $accepted->bindParam(5, $reason);
+      $accepted->bindParam(6, $seen_stat);
+      $accepted->execute();
       header("Location: pending_research.php");
   }else{
     if (!empty($_POST['reason'])) {
