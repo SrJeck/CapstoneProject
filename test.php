@@ -1,49 +1,356 @@
-<!doctype html>
-<html lang="en">
+<!-- START DATE 8/28/2021 -->
+<!-- UPDATE DATE 11/16/2021 -->
+
+
+<!-- Search and Pagination -->
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $id = $_SESSION['user_id'];
+}
+require_once("perpage.php");
+require_once("dbcontroller.php");
+$db_handle = new DBController();
+
+$title = "";
+$author = "";
+$topic = "";
+$publication_day = "";
+$publication_day = "";
+$publication_year = "";
+
+$queryCondition = "";
+if (!empty($_POST["search"])) {
+    foreach ($_POST["search"] as $k => $v) {
+        if (!empty($v)) {
+
+            $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
+            if (in_array($k, $queryCases)) {
+                if (!empty($queryCondition)) {
+                    $queryCondition .= " OR ";
+                } else {
+                    $queryCondition .= " WHERE ";
+                }
+            }
+            switch ($k) {
+                case "title":
+                    $title = $v;
+                    $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
+                    break;
+            }
+        }
+    }
+}
+$orderby = " ORDER BY id desc";
+$sql = "SELECT * from research " . $queryCondition;
+$href = 'journals.php';
+
+$perPage = 3;
+$page = 1;
+if (isset($_POST['page'])) {
+    $page = $_POST['page'];
+}
+$start = ($page - 1) * $perPage;
+if ($start < 0) $start = 0;
+
+$query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
+$result = $db_handle->runQuery($query);
+
+if (!empty($result)) {
+    $result["perpage"] = showperpage($sql, $perPage, $href);
+}
+?>
+
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="https://codingbirdsonline.com/wp-content/uploads/2019/12/cropped-coding-birds-favicon-2-1-192x192.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
-    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <title>Send Email Example</title>
+    <title>Home</title>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ChatBot -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.convform.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="card card-signin my-5">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Send Email</h5>
-                        <form action="contact_us.php" method="post" class="form-signin">
-                            <div class="form-label-group">
-                                <label for="inputEmail">From <span style="color: #FF0000">*</span></label>
-                                <input type="text" name="fromEmail" id="fromEmail" class="form-control" required autofocus>
-                            </div> <br />
-                            <div class="form-label-group">
-                                <label for="inputEmail">To <span style="color: #FF0000">*</span></label>
-                                <input type="text" name="toEmail" id="toEmail" class="form-control" placeholder="Email address" required autofocus>
-                            </div> <br />
-                            <label for="inputPassword">Subject <span style="color: #FF0000">*</span></label>
-                            <div class="form-label-group">
-                                <input type="text" id="subject" name="subject" class="form-control" placeholder="Subject" required>
-                            </div><br />
-                            <label for="inputPassword">Message <span style="color: #FF0000">*</span></label>
-                            <div class="form-label-group">
-                                <textarea id="message" name="message" class="form-control" placeholder="Message" required></textarea>
-                            </div> <br />
-                            <button type="submit" name="sendMailBtn" class="btn btn-lg btn-primary btn-block text-uppercase">Send Email</button>
-                        </form>
+    <!-- NAVBAR -->
+    <?php
+    if (isset($_SESSION['user_id'])) {
+        echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+    <a style="float: right;" href="add_article.php"><i style="font-size:24px" class="fa">&#xf0f3;</i></a>
+    <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+
+    </div>';
+    } else {
+        echo '<div class="navbar">
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
+    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+    </div>';
+    }
+    ?>
+
+    <!-- MOBILE SIDEBAR -->
+    <!-- <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="index.php">HOME</a>
+    <a href="research.php">RESEARCH</a>
+    <a href="analytics.php">ANALYTICS</a>
+  </div>
+  <span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span> -->
+
+    <!-- BANNER IMAGE -->
+    <br>
+    <div id="index">
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+                <img src="images/Ban1.png" style="width:100%; height: 430px; ">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Ban2.png" style="width:100%; height: 430px; ">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Ban3.png" style="width:100%; height: 430px;">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Ban1.png" style="width:100%; height: 430px; ">
+            </div>
+
+
+            <div class="mySlides fade">
+                <img src="images/Ban2.png" style="width:100%; height: 430px; ">
+            </div>
+
+        </div>
+        <br>
+
+
+        <div style="text-align:center">
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+        </div>
+        <script>
+            var slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) {
+                    slideIndex = 1
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+                setTimeout(showSlides, 3000); // Change image every 3 seconds
+            }
+        </script>
+
+        <!-- SEARCH BAR CONTAINER -->
+        <form name="frmSearch" method="post" action="research.php">
+            <div class="container">
+                <div class="row height d-flex justify-content-center align-items-center">
+                    <div>
+                        <div class="form">
+                            <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
+                                                                                                                                                        }  ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </form>
+
+        <!-- INTRODUCTION -->
+        <h2 class="new">Whats's New?</h2>
+        <p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam maximus sagittis sapien eget porttitor.
+            Curabitur nec lorem luctus, ultrices libero et, fringilla dui. Nam porttitor sapien eget sollicitudin tincidunt.
+            Etiam tortor risus, lobortis vitae turpis a, imperdiet congue libero. Etiam et nulla sed magna viverra pretium id at nisi.
+            Phasellus sit amet dolor elementum, varius mauris in, commodo mauris. In eu nunc justo.
+        </p>
+        <!-- 3 IMAGES -->
+        <div class="images">
+            <form action="research.php" method="POST">
+                <img class="book" src="images/book.JPG">
+                <button class="btn" type="submit" name="Education">Education</button>
+                <img class="chip" src="images/chip.JPG">
+                <button class="btn2" type="submit" name="Technology">Technology</button>
+                <img class="business" src="images/business.JPG">
+                <button class="btn3" type="submit" name="Business">Business</button>
+            </form>
         </div>
-    </div>
+
+        <!-- ChatBot -->
+        <div class="chat_icon">
+            <img style="height: 80px;" src="images/chatboticon.png">
+        </div>
+
+        <div class="chat_box">
+            <div class="my-conv-form-wrapper">
+                <form action="" method="GET" class="hidden">
+                    <select data-conv-question="Hello! How can I help you" name="category">
+                        <option value="1">How to Upload Study?</option>
+                        <option value="2">What study would you recommend for me to read?</option>
+                        <option value="3">What study topic can i develop?</option>
+                    </select>
+                    <!-- How to Upload Study? -->
+                    <div data-conv-fork="category">
+                        <div data-conv-case="1" data-conv-fork="first-question2">
+                            <input type="text" name="name" data-conv-question="You must have an account before you upload your papers, if you are already a member, you may follow these steps:
+                <br><br>
+                1. Click the add (+) button on the navigation bar to upload your papers
+                <br>
+                2. Fill out the fields required by the admin to upload paper.
+                <br>
+                3. Read and Accept the Privacy Policy & Terms and Condition before submitting the paper.
+                <br>
+                4. Wait for the Plagiarism result if accepted or not.
+                <br>
+                5. If the paper passed the Plagiarism test, the paper will be upload. if not, the User must revise and re-upload the paper.
+                <br><br><br>
+                <button class='reset'><a style='text-decoration: none;' onClick=' window.location.reload()'>Reset</a></button>
+
+              ">
+                        </div>
+                    </div>
+                    <!-- What study would you recommend for me to read? -->
+                    <div data-conv-fork="category">
+
+                        <div data-conv-case="2" data-conv-fork="first-question2">
+                            <select data-conv-question="What field of study you want to know more?" name="category">
+                                <option value="1">Education</option>
+                                <option value="1">Technology</option>
+                                <option value="1">Business</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="1" data-conv-fork="first-question2">
+                            <select data-conv-question="I Recommend these studies:
+              <br><br>
+              1. Highest upload in 12 months
+              <br>
+              2. Highest upload in Total
+              <br>
+              3. Recent Uploaded Study
+              <br><br>
+              Or you may check the thesis repository to find more studies that you might use.
+              " name="category">
+                                <option value="1">Do you want another question suggestion from other topics?</option>
+                                <option value="1">Do you have any specific question for me?</option>
+                            </select>
+                        </div>
+
+
+                        <div data-conv-fork="first-question3">
+                            <select style="display:none;background-color:#DEDEDE;" data-conv-question="<span style='display:none;background-color:red; color:yellow;'>Do you have any specific question for me?</span>" name="category">
+                                <option value="Yess">Yes</option>
+                                <option value="Noo">No</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="Yess" data-conv-fork="first-question3">
+                            <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
+                        </div>
+                    </div>
+                    <!-- What study topic can i develop? -->
+                    <div data-conv-fork="category">
+
+                        <div data-conv-case="3" data-conv-fork="first-question2">
+                            <select data-conv-question="What do you want to develop?" name="category">
+                                <option value="1">Uniqie Study</option>
+                                <option value="2">More Resources Available</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="1" data-conv-fork="first-question2">
+                            <select data-conv-question="Select the option" name="category">
+                                <option value="1">Show overall Lowest number of uploaded topic</option>
+                            </select>
+                        </div>
+
+                        <div data-conv-case="2" data-conv-fork="first-question2">
+                            <select data-conv-question="Select the option" name="category">
+                                <option value="1">Show overall Highest number of uploaded topic</option>
+                            </select>
+                        </div>
+
+                        <div data-conv-fork="first-question3">
+                            <select data-conv-question="Do you have any specific question for me?" name="category">
+                                <option value="Yess">Yes</option>
+                                <option value="Noo">No</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="Yess" data-conv-fork="first-question3">
+                            <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
+                        </div>
+                    </div>
+                    <select data-conv-case="Noo" data-conv-question="Thank you for talking me">
+                        <option value="Yes">Reset</option>
+                    </select>
+
+                </form>
+            </div>
+        </div>
+        <!-- ChatBot end -->
+
 </body>
+<!-- Below is the script for voice recognition and conversion to text-->
+<script>
+    function record() {
+        var recognition = new webkitSpeechRecognition();
+        recognition.lang = "en-GB";
+
+        recognition.onresult = function(event) {
+            // console.log(event);
+            document.getElementById('speechToText').value = event.results[0][0].transcript;
+        }
+        recognition.start();
+    }
+</script>
+<!-- Below is the script for mobile side navigation-->
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
 
 </html>
