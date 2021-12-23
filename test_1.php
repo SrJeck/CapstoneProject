@@ -103,7 +103,7 @@ if (!empty($result)) {
         <div class="sec test">
             <a href="#">
             <div class="txt">'.$notifications['status'].'</div>
-            <div class="txt">'.$notifications['reason'].'</div>
+            <div class="txt sub">'.$notifications['reason'].'</div>
             </a>
         </div>';
     }
