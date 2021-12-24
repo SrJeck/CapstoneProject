@@ -147,7 +147,8 @@ function submitForm(params) {
 
     xhr.onreadystatechange = () =>{
         if(xhr.readyState == 4 && xhr.status == 200){
-            alert("success");
+            //alert("success");
+			window.location.href = "pending_research.php";
         }
     }
     xhr.open("POST","action_research.php",true);
