@@ -99,16 +99,17 @@ if (!empty($result)) {
     $notification->execute();
     while ($notifications = $notification->fetch()) {
         $notif .= '
-        <hr class="section">
-        <div class="sec test">
-            <a href="#">
-            <div class="txt">' . $notifications['status'] . '</div>
-            <div class="txt">' . $notifications['reason'] . '</div>
-            </a>
-        </div>';
+          <!-- Fold this div and try deleting evrything inbetween -->
+            <div class="sec test">
+                <div class="profCont">
+                    <img class="profile"  src="images/chatboticon.png">
+                </div>
+                <div class="txt">' . $notifications['status'] . '</div>
+                <div class="txt">' . $notifications['reason'] . '</div>
+                <hr class="section">
+            </div><br>
+';
     }
-
-
 
     if (isset($_SESSION['user_id'])) {
         echo '<div class="navbar">
@@ -130,11 +131,12 @@ if (!empty($result)) {
 
                 <div class="box">
                     <div class="display">
-     
                         <div class="cont">
                             <!-- Fold this div and try deleting evrything inbetween -->
-                            ' . $notif . '
-                        </div>
+                            <div class="sec test">
+                                    <div class="txt"> ' . $notif . '</div>
+                            </div>
+                      </div> 
                     </div>
                 </div>
             </div>
