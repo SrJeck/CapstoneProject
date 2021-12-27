@@ -94,22 +94,8 @@ if (!empty($result)) {
     $unseen_count->execute();
     $unseened_count = $unseen_count->fetch();
 
-    $notification = $dbh->prepare('select * from notification where user_id=?');
-    $notification->bindParam(1, $id);
-    $notification->execute();
-    while ($notifications = $notification->fetch()) {
-        $notif .= '
-          <!-- Fold this div and try deleting evrything inbetween -->
-            <div class="sec test">
-                <div class="profCont">
-                    <img class="profile"  src="images/chatboticon.png">
-                </div>
-                <div class="txt">' . $notifications['status'] . '</div>
-                <div class="txt">' . $notifications['reason'] . '</div>
-                <hr class="section">
-            </div><br>
-';
-    }
+    
+    
 
     if (isset($_SESSION['user_id'])) {
         echo '<div class="navbar">
@@ -124,17 +110,17 @@ if (!empty($result)) {
     <div class="icons">
     <div class="notification">
         <a href="#">
-            <div class="notBtn" href="#">
+            <div class="notBtn" href="#" onclick="seeNotif()">
                 <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
                 <div class="number" onclick="myFunction()">' . $unseened_count['unseen_count'] . '</div>
                 <i onclick="myFunction()" style="font-size:24px" class="fa">&#xf0f3;</i>
 
-                <div class="box" id="box">
+                <div class="box" id="box" style="display:none">
                     <div class="display">
                         <div class="cont">
                             <!-- Fold this div and try deleting evrything inbetween -->
                             <div class="sec test">
-                                    <div class="txt"> ' . $notif . '</div>
+                                    <div class="txt"></div>
                             </div>
                       </div> 
                     </div>
