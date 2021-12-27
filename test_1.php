@@ -126,10 +126,10 @@ if (!empty($result)) {
         <a href="#">
             <div class="notBtn" href="#">
                 <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
-                <div class="number">' . $unseened_count['unseen_count'] . '</div>
-                <i style="font-size:24px" class="fa">&#xf0f3;</i>
+                <div class="number" onclick="myFunction()">' . $unseened_count['unseen_count'] . '</div>
+                <i onclick="myFunction()" style="font-size:24px" class="fa">&#xf0f3;</i>
 
-                <div class="box">
+                <div class="box" id="box">
                     <div class="display">
                         <div class="cont">
                             <!-- Fold this div and try deleting evrything inbetween -->
@@ -143,6 +143,7 @@ if (!empty($result)) {
         </a>
     </div>
 </div>
+
     </div>';
     } else {
         echo '<div class="navbar">
@@ -156,3 +157,12 @@ if (!empty($result)) {
     </div>';
     }
     ?>
+    <script>
+        function myFunction() {
+            var xDiv = document.getElementById('box');
+            if (xDiv.style.height == '')
+                xDiv.style.height = '60vh'
+            else
+                xDiv.style.height = ''
+        }
+    </script>
