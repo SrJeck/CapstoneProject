@@ -438,3 +438,227 @@ table.formview{
         .cpanel-others .card-content-part {
             background-color: #345085;
         }
+ 
+        .descriptive {
+          background-color: white;
+          width: 685px;
+          padding: 20px;
+          margin: 20px;
+          display: inline-block;
+          border: 2px solid black;
+          border-radius: 10px;
+          margin-left: 42px;
+          font-size: 20px;
+        }
+    
+        .predictive {
+          background-color: white;
+          width: 685px;
+          padding: 20px;
+          margin: 20px;
+          display: inline-block;
+          border: 2px solid black;
+          border-radius: 10px;
+          font-size: 20px;
+    
+        }
+    
+        .prescriptive {
+          background-color: white;
+          width: auto;
+          padding: 20px;
+          margin: 20px;
+          display: inline-block;
+          border: 2px solid black;
+          border-radius: 10px;
+          font-size: 20px;
+          margin-right: 40px;
+          margin-left: 50px;
+        }       
+          .box::-webkit-scrollbar-track
+          {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: white;
+            border-radius: 5px
+          }
+
+          .box::-webkit-scrollbar
+          {
+            width: 10px;
+            background-color: white;
+            border-radius: 5px
+          }
+
+          .box::-webkit-scrollbar-thumb
+          {
+            background-color: black;
+            border: 2px solid black;
+            border-radius: 5px
+          }
+
+          .icons{
+            display: inline;
+            float: right;
+          }
+
+          .notification{
+            position: relative;
+            display: inline-block;
+            z-index: 999;
+          }
+
+          .number{
+            height: 16px;
+            width:  14px;
+            background-color: #d63031;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            position: absolute;
+            top: 10px;
+            left: 28px;
+            padding: 3px;
+            border-style: solid;
+            border-width: 2px;
+          }
+
+          .number:empty {
+            display: none;
+          }
+
+          .notBtn{
+            transition: 0.5s;
+            cursor: pointer
+          }
+
+          .fa{
+            font-size: 25pt;
+            color: white;
+            float: right;
+            margin-top: 0px;
+          }
+
+          .box{
+            width: 400px;
+            height: 0px;
+            border-radius: 10px;
+            transition: 0.5s;
+            position: absolute;
+            overflow-y: scroll;
+            padding: 0px;
+            left: -300px;
+            margin-top: 50px;
+            background-color: white;
+            -webkit-box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.2);
+            -moz-box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.1);
+            box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.1);
+            cursor: context-menu;
+            z-index: 2;
+          }
+
+
+          /* 
+          .notBtn:hover > .box{
+            height: 60vh
+          } */
+
+          .content{
+            padding: 20px;
+            color: black;
+            vertical-align: middle;
+            text-align: left;
+          }
+
+          .gry{
+            background-color: #F4F4F4;
+          }
+
+          .top{
+            color: black;
+            padding: 10px
+          }
+
+          .display{
+            position: relative;
+            color: black;
+          }
+
+          .cont{
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #F4F4F4;
+          }
+
+          .cont:empty{
+            display: none;
+          }
+
+          .stick{
+            text-align: center;  
+            display: block;
+            font-size: 50pt;
+            padding-top: 70px;
+            padding-left: 80px
+          }
+
+          .stick:hover{
+            color: black;
+          }
+
+          .cent{
+            text-align: center;
+            display: block;
+          }
+
+          .sec{
+            padding: 5px;
+            background-color: white;
+            transition: 0.5s;
+            position: relative;
+            right: 20px;
+
+          }
+
+          .profCont{
+            padding-left: 15px;
+
+          }
+
+          .profile{
+            -webkit-clip-path: circle(50% at 50% 50%);
+            clip-path: circle(50% at 50% 50%);
+            width: 90px;
+            float: left;
+          }
+
+          .txt{
+            font-size: 1.25rem;
+            padding: 8px 10px 0px 115px;
+            color: black;
+            width: 250px;
+            text-align: left;
+          }
+          .sec:hover{
+          color: white;
+          }
+          .sub{
+            font-size: 1rem;
+            color: grey;
+          }
+
+          .section{
+            border: 5px solid #751518;
+            width: 370px;
+            margin-bottom: -10px;
+            margin-left: 20px;
+          }
+          .row{
+            background-color: #000000;
+          }
+
+
+          .mySlides{
+            z-index: 4;
+          }

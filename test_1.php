@@ -1,8 +1,3 @@
-<!-- START DATE 8/28/2021 -->
-<!-- UPDATE DATE 11/16/2021 -->
-
-
-<!-- Search and Pagination -->
 <?php
 session_start();
 if (isset($_SESSION['user_id'])) {
@@ -12,53 +7,53 @@ require_once("perpage.php");
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 
-$title = "";
-$author = "";
-$topic = "";
-$publication_day = "";
-$publication_day = "";
-$publication_year = "";
+// $title = "";
+// $author = "";
+// $topic = "";
+// $publication_day = "";
+// $publication_day = "";
+// $publication_year = "";
 
-$queryCondition = "";
-if (!empty($_POST["search"])) {
-    foreach ($_POST["search"] as $k => $v) {
-        if (!empty($v)) {
+// $queryCondition = "";
+// if (!empty($_POST["search"])) {
+//     foreach ($_POST["search"] as $k => $v) {
+//         if (!empty($v)) {
 
-            $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
-            if (in_array($k, $queryCases)) {
-                if (!empty($queryCondition)) {
-                    $queryCondition .= " OR ";
-                } else {
-                    $queryCondition .= " WHERE ";
-                }
-            }
-            switch ($k) {
-                case "title":
-                    $title = $v;
-                    $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
-                    break;
-            }
-        }
-    }
-}
-$orderby = " ORDER BY id desc";
-$sql = "SELECT * from research " . $queryCondition;
-$href = 'journals.php';
+//             $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
+//             if (in_array($k, $queryCases)) {
+//                 if (!empty($queryCondition)) {
+//                     $queryCondition .= " OR ";
+//                 } else {
+//                     $queryCondition .= " WHERE ";
+//                 }
+//             }
+//             switch ($k) {
+//                 case "title":
+//                     $title = $v;
+//                     $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
+//                     break;
+//             }
+//         }
+//     }
+// }
+// $orderby = " ORDER BY id desc";
+// $sql = "SELECT * from research " . $queryCondition;
+// $href = 'journals.php';
 
-$perPage = 3;
-$page = 1;
-if (isset($_POST['page'])) {
-    $page = $_POST['page'];
-}
-$start = ($page - 1) * $perPage;
-if ($start < 0) $start = 0;
+// $perPage = 3;
+// $page = 1;
+// if (isset($_POST['page'])) {
+//     $page = $_POST['page'];
+// }
+// $start = ($page - 1) * $perPage;
+// if ($start < 0) $start = 0;
 
-$query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
-$result = $db_handle->runQuery($query);
+// $query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
+// $result = $db_handle->runQuery($query);
 
-if (!empty($result)) {
-    $result["perpage"] = showperpage($sql, $perPage, $href);
-}
+// if (!empty($result)) {
+//     $result["perpage"] = showperpage($sql, $perPage, $href);
+// }
 ?>
 <html>
 
@@ -94,8 +89,8 @@ if (!empty($result)) {
     $unseen_count->execute();
     $unseened_count = $unseen_count->fetch();
 
-    
-    
+
+
 
     if (isset($_SESSION['user_id'])) {
         echo '<div class="navbar">

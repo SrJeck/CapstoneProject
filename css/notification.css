@@ -263,10 +263,10 @@
 
 
 
-h1{
+/* h1{
  float: left;
   padding: 10px 30px
-}
+} */
 
 
 
@@ -391,7 +391,7 @@ h1{
   background-color: white;
   transition: 0.5s;
   position: relative;
-  right: 70px;
+  right: 20px;
 
 }
 

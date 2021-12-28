@@ -18,7 +18,6 @@ $db_handle = new DBController();
 
 <head>
   <title>Analytics</title>
-  <script type="text/javascript" src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
@@ -27,12 +26,11 @@ $db_handle = new DBController();
   <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/analytics.css">
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/analytics.css">
+  <script type="text/javascript" src="js/script.js"></script>
 
   <!-- ChatBot -->
   <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
@@ -40,75 +38,79 @@ $db_handle = new DBController();
   <script type="text/javascript" src="js/jquery.convform.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
 
-  <style>
-    .descriptive {
-      background-color: white;
-      width: 685px;
-      padding: 20px;
-      margin: 20px;
-      display: inline-block;
-      border: 2px solid black;
-      border-radius: 10px;
-      margin-left: 42px;
-      font-size: 20px;
-    }
-
-    .predictive {
-      background-color: white;
-      width: 685px;
-      padding: 20px;
-      margin: 20px;
-      display: inline-block;
-      border: 2px solid black;
-      border-radius: 10px;
-      font-size: 20px;
-
-    }
-
-    .prescriptive {
-      background-color: white;
-      width: auto;
-      padding: 20px;
-      margin: 20px;
-      display: inline-block;
-      border: 2px solid black;
-      border-radius: 10px;
-      font-size: 20px;
-      margin-right: 40px;
-      margin-left: 50px;
-    }
-  </style>
 </head>
 
 <body>
   <!-- NAVBAR -->
+
   <?php
+  $notif = "";
+  $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+
+  $unseen_count = $dbh->prepare('select COUNT(*) as unseen_count from notification where seen_status="unseen" and user_id=?');
+  $unseen_count->bindParam(1, $id);
+  $unseen_count->execute();
+  $unseened_count = $unseen_count->fetch();
+
+
+
+
   if (isset($_SESSION['user_id'])) {
     echo '<div class="navbar">
-  <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-  <a style="margin-top: 6px;" href="index.php">HOME</a>
-  <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
-  <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-  <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
-  <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-  <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-  <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
-  <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+    <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+    <div class="icons">
+    <div class="notification">
+        <a href="#">
+            <div class="notBtn" href="#" onclick="seeNotif()">
+                <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
+                <div class="number" onclick="myFunction()">' . $unseened_count['unseen_count'] . '</div>
+                <i onclick="myFunction()" style="font-size:24px" class="fa">&#xf0f3;</i>
 
-  </div>';
+                <div class="box" id="box" style="display:none">
+                    <div class="display">
+                        <div class="cont">
+                            <!-- Fold this div and try deleting evrything inbetween -->
+                            <div class="sec test">
+                                    <div class="txt"></div>
+                            </div>
+                      </div> 
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+    </div>';
   } else {
     echo '<div class="navbar">
-  <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-  <a style="margin-top: 6px;" href="index.php">HOME</a>
-  <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
-  <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-  <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
-  <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
-  <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-  <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
-  </div>';
+    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+    <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
+    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+    </div>';
   }
+
   ?>
+  <script>
+    function myFunction() {
+      var xDiv = document.getElementById('box');
+      if (xDiv.style.height == '')
+        xDiv.style.height = '60vh'
+      else
+        xDiv.style.height = ''
+    }
+  </script>
   <?php
 
   $topic_list = array("technology", "education", "research", "analysis", "database", "agriculture", "health", "politics", "business", "marketing", "mechanical", "ethics", "others");
@@ -1016,5 +1018,6 @@ $db_handle = new DBController();
 
   }
 </script>
+
 
 </html>
