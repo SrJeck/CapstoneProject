@@ -68,7 +68,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
         <div class="contact-form-wrapper">
-          <form action="upload_inquiry.php" method="POST" >
+          <form action="upload_inquiry.php" method="POST">
             <!-- <div class="form-item">
               <input type="text" name="sender" required>
               <label>Name:</label>

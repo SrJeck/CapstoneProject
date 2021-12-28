@@ -26,6 +26,17 @@ if (isset($_SESSION['user_id'])) {
 <body>
   <!-- NAVBAR -->
   <?php
+  $notif = "";
+  $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+
+  $unseen_count = $dbh->prepare('select COUNT(*) as unseen_count from notification where seen_status="unseen" and user_id=?');
+  $unseen_count->bindParam(1, $id);
+  $unseen_count->execute();
+  $unseened_count = $unseen_count->fetch();
+
+
+
+
   if (isset($_SESSION['user_id'])) {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
@@ -37,6 +48,28 @@ if (isset($_SESSION['user_id'])) {
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
     <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+    <div class="icons">
+    <div class="notification">
+        <a href="#">
+            <div class="notBtn" href="#" onclick="seeNotif()">
+                <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
+                <div class="number" onclick="myFunction()">' . $unseened_count['unseen_count'] . '</div>
+                <i onclick="myFunction()" style="font-size:24px" class="fa">&#xf0f3;</i>
+
+                <div class="box" id="box" style="display:none">
+                    <div class="display">
+                        <div class="cont">
+                            <!-- Fold this div and try deleting evrything inbetween -->
+                            <div class="sec test">
+                                    <div class="txt"></div>
+                            </div>
+                      </div> 
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 
     </div>';
   } else {
@@ -52,6 +85,15 @@ if (isset($_SESSION['user_id'])) {
     </div>';
   }
   ?>
+  <script>
+    function myFunction() {
+      var xDiv = document.getElementById('box');
+      if (xDiv.style.height == '')
+        xDiv.style.height = '60vh'
+      else
+        xDiv.style.height = ''
+    }
+  </script>
   <!-- Form -->
   <br>
   <form id="add_article_form" action="plagscan_process.php" method="post" enctype="multipart/form-data">
