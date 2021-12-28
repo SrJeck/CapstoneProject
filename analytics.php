@@ -3,46 +3,86 @@ session_start();
 if (isset($_SESSION['user_id'])) {
   $id = $_SESSION['user_id'];
 }
-
-$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-
 require_once("perpage.php");
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 
+// $title = "";
+// $author = "";
+// $topic = "";
+// $publication_day = "";
+// $publication_day = "";
+// $publication_year = "";
 
+// $queryCondition = "";
+// if (!empty($_POST["search"])) {
+//     foreach ($_POST["search"] as $k => $v) {
+//         if (!empty($v)) {
+
+//             $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
+//             if (in_array($k, $queryCases)) {
+//                 if (!empty($queryCondition)) {
+//                     $queryCondition .= " OR ";
+//                 } else {
+//                     $queryCondition .= " WHERE ";
+//                 }
+//             }
+//             switch ($k) {
+//                 case "title":
+//                     $title = $v;
+//                     $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
+//                     break;
+//             }
+//         }
+//     }
+// }
+// $orderby = " ORDER BY id desc";
+// $sql = "SELECT * from research " . $queryCondition;
+// $href = 'journals.php';
+
+// $perPage = 3;
+// $page = 1;
+// if (isset($_POST['page'])) {
+//     $page = $_POST['page'];
+// }
+// $start = ($page - 1) * $perPage;
+// if ($start < 0) $start = 0;
+
+// $query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
+// $result = $db_handle->runQuery($query);
+
+// if (!empty($result)) {
+//     $result["perpage"] = showperpage($sql, $perPage, $href);
+// }
 ?>
-<!-- START DATE 8/28/2021 -->
-<!-- UPDATE DATE 10/05/2021 -->
 <html>
 
 <head>
   <title>Analytics</title>
+  <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/analytics.css">
-  <script type="text/javascript" src="js/script.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,600" rel="stylesheet" type="text/css">
 
   <!-- ChatBot -->
   <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/jquery.convform.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
+  <link rel="stylesheet" href="css/test.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
 <body>
   <!-- NAVBAR -->
-
   <?php
   $notif = "";
   $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
@@ -71,7 +111,7 @@ $db_handle = new DBController();
             <div class="notBtn" href="#" onclick="seeNotif()">
                 <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
                 <div class="number" onclick="myFunction()">' . $unseened_count['unseen_count'] . '</div>
-                <i onclick="myFunction()" style="font-size:24px" class="fa">&#xf0f3;</i>
+                <i onclick="myFunction()" style="font-size:24px" class="fa fatest">&#xf0f3;</i>
 
                 <div class="box" id="box" style="display:none">
                     <div class="display">
@@ -100,13 +140,12 @@ $db_handle = new DBController();
     <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>';
   }
-
   ?>
   <script>
     function myFunction() {
       var xDiv = document.getElementById('box');
       if (xDiv.style.height == '')
-        xDiv.style.height = '60vh'
+        xDiv.style.height = '60vh';
       else
         xDiv.style.height = ''
     }
@@ -1018,6 +1057,5 @@ $db_handle = new DBController();
 
   }
 </script>
-
 
 </html>
