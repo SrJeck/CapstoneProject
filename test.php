@@ -1,3 +1,4 @@
+<!-- Search and Pagination -->
 <?php
 session_start();
 if (isset($_SESSION['user_id'])) {
@@ -7,54 +8,55 @@ require_once("perpage.php");
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 
-// $title = "";
-// $author = "";
-// $topic = "";
-// $publication_day = "";
-// $publication_day = "";
-// $publication_year = "";
+$title = "";
+$author = "";
+$topic = "";
+$publication_day = "";
+$publication_day = "";
+$publication_year = "";
 
-// $queryCondition = "";
-// if (!empty($_POST["search"])) {
-//     foreach ($_POST["search"] as $k => $v) {
-//         if (!empty($v)) {
+$queryCondition = "";
+if (!empty($_POST["search"])) {
+    foreach ($_POST["search"] as $k => $v) {
+        if (!empty($v)) {
 
-//             $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
-//             if (in_array($k, $queryCases)) {
-//                 if (!empty($queryCondition)) {
-//                     $queryCondition .= " OR ";
-//                 } else {
-//                     $queryCondition .= " WHERE ";
-//                 }
-//             }
-//             switch ($k) {
-//                 case "title":
-//                     $title = $v;
-//                     $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
-//                     break;
-//             }
-//         }
-//     }
-// }
-// $orderby = " ORDER BY id desc";
-// $sql = "SELECT * from research " . $queryCondition;
-// $href = 'journals.php';
+            $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
+            if (in_array($k, $queryCases)) {
+                if (!empty($queryCondition)) {
+                    $queryCondition .= " OR ";
+                } else {
+                    $queryCondition .= " WHERE ";
+                }
+            }
+            switch ($k) {
+                case "title":
+                    $title = $v;
+                    $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
+                    break;
+            }
+        }
+    }
+}
+$orderby = " ORDER BY id desc";
+$sql = "SELECT * from research " . $queryCondition;
+$href = 'journals.php';
 
-// $perPage = 3;
-// $page = 1;
-// if (isset($_POST['page'])) {
-//     $page = $_POST['page'];
-// }
-// $start = ($page - 1) * $perPage;
-// if ($start < 0) $start = 0;
+$perPage = 3;
+$page = 1;
+if (isset($_POST['page'])) {
+    $page = $_POST['page'];
+}
+$start = ($page - 1) * $perPage;
+if ($start < 0) $start = 0;
 
-// $query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
-// $result = $db_handle->runQuery($query);
+$query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
+$result = $db_handle->runQuery($query);
 
-// if (!empty($result)) {
-//     $result["perpage"] = showperpage($sql, $perPage, $href);
-// }
+if (!empty($result)) {
+    $result["perpage"] = showperpage($sql, $perPage, $href);
+}
 ?>
+
 <html>
 
 <head>
@@ -110,7 +112,7 @@ $db_handle = new DBController();
                 <div class="number" onclick="myFunction()">' . $unseened_count['unseen_count'] . '</div>
                 <i onclick="myFunction()" style="font-size:24px" class="fa">&#xf0f3;</i>
 
-                <div class="box" id="box" style="display:none">
+                <div class="box stack-top" id="box" style="display:none">
                     <div class="display">
                         <div class="cont">
                             <!-- Fold this div and try deleting evrything inbetween -->
@@ -147,38 +149,211 @@ $db_handle = new DBController();
                 xDiv.style.height = ''
         }
     </script>
-    <section id="contact">
-        <div class="contact-box">
-            <div class="contact-links">
-                <h2>CONTACT US</h2><br><br><br><br><br>
-                <i style="color:white; margin-left:25px" class="fa fa-envelope"></i>
-                <h4><em><u><a style="cursor: pointer; text-decoration:none; color:white;" target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=thesisquo.helpdesk@gmail.com">thesisquo.helpdesk@gmail.com</a></u></em>
-                </h4>
+
+    <!-- BANNER IMAGE -->
+    <br>
+    <div id="index">
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+                <img src="images/Ban1.png" style="width:100%; height: 430px; ">
             </div>
 
-            <div class="contact-form-wrapper">
-                <form action="upload_inquiry.php" method="POST">
-                    <!-- <div class="form-item">
-              <input type="text" name="sender" required>
-              <label>Name:</label>
-            </div> -->
-                    <div class="form-item">
-                        <input type="text" name="email" required>
-                        <label>From Email:</label>
+            <div class="mySlides fade">
+                <img src="images/Ban2.png" style="width:100%; height: 430px; ">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Ban3.png" style="width:100%; height: 430px;">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Ban1.png" style="width:100%; height: 430px; ">
+            </div>
+
+
+            <div class="mySlides fade">
+                <img src="images/Ban2.png" style="width:100%; height: 430px; ">
+            </div>
+
+        </div>
+        <br>
+
+
+        <div style="text-align:center">
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+        </div>
+        <script>
+            var slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) {
+                    slideIndex = 1
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+                setTimeout(showSlides, 3000); // Change image every 3 seconds
+            }
+        </script>
+
+        <!-- SEARCH BAR CONTAINER -->
+        <form name="frmSearch" method="post" action="research.php">
+            <div class="container">
+                <div class="row height d-flex justify-content-center align-items-center">
+                    <div>
+                        <div class="form">
+                            <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
+                                                                                                                                                        }  ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+                        </div>
                     </div>
-                    <div class="form-item">
-                        <input type="text" name="subject" required>
-                        <label>Subject:</label>
+                </div>
+            </div>
+        </form>
+
+        <!-- INTRODUCTION -->
+        <h2 class="new">Whats's New?</h2>
+        <p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam maximus sagittis sapien eget porttitor.
+            Curabitur nec lorem luctus, ultrices libero et, fringilla dui. Nam porttitor sapien eget sollicitudin tincidunt.
+            Etiam tortor risus, lobortis vitae turpis a, imperdiet congue libero. Etiam et nulla sed magna viverra pretium id at nisi.
+            Phasellus sit amet dolor elementum, varius mauris in, commodo mauris. In eu nunc justo.
+        </p>
+        <!-- 3 IMAGES -->
+        <div class="images">
+            <form action="research.php" method="POST">
+                <img class="book" src="images/book.JPG">
+                <button class="btn" type="submit" name="Education">Education</button>
+                <img class="chip" src="images/chip.JPG">
+                <button class="btn2" type="submit" name="Technology">Technology</button>
+                <img class="business" src="images/business.JPG">
+                <button class="btn3" type="submit" name="Business">Business</button>
+            </form>
+        </div>
+
+        <!-- ChatBot -->
+        <div class="chat_icon">
+            <img style="height: 80px;" src="images/chatboticon.png">
+        </div>
+
+        <div class="chat_box">
+            <div class="my-conv-form-wrapper">
+                <form action="" method="GET" class="hidden">
+                    <select data-conv-question="Hello! How can I help you" name="category">
+                        <option value="1">How to Upload Study?</option>
+                        <option value="2">What study would you recommend for me to read?</option>
+                        <option value="3">What study topic can i develop?</option>
+                    </select>
+                    <!-- How to Upload Study? -->
+                    <div data-conv-fork="category">
+                        <div data-conv-case="1" data-conv-fork="first-question2">
+                            <input type="text" name="name" data-conv-question="You must have an account before you upload your papers, if you are already a member, you may follow these steps:
+                <br><br>
+                1. Click the add (+) button on the navigation bar to upload your papers
+                <br>
+                2. Fill out the fields required by the admin to upload paper.
+                <br>
+                3. Read and Accept the Privacy Policy & Terms and Condition before submitting the paper.
+                <br>
+                4. Wait for the Plagiarism result if accepted or not.
+                <br>
+                5. If the paper passed the Plagiarism test, the paper will be upload. if not, the User must revise and re-upload the paper.
+                <br><br><br>
+                <button class='reset'><a style='text-decoration: none;' onClick=' window.location.reload()'>Reset</a></button>
+
+              ">
+                        </div>
                     </div>
-                    <div class="form-item">
-                        <textarea class="" name="message" required></textarea>
-                        <label>Message:</label>
+                    <!-- What study would you recommend for me to read? -->
+                    <div data-conv-fork="category">
+
+                        <div data-conv-case="2" data-conv-fork="first-question2">
+                            <select data-conv-question="What field of study you want to know more?" name="category">
+                                <option value="1">Education</option>
+                                <option value="1">Technology</option>
+                                <option value="1">Business</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="1" data-conv-fork="first-question2">
+                            <select data-conv-question="I Recommend these studies:
+              <br><br>
+              1. Highest upload in 12 months
+              <br>
+              2. Highest upload in Total
+              <br>
+              3. Recent Uploaded Study
+              <br><br>
+              Or you may check the thesis repository to find more studies that you might use.
+              " name="category">
+                                <option value="1">Do you want another question suggestion from other topics?</option>
+                                <option value="1">Do you have any specific question for me?</option>
+                            </select>
+                        </div>
+
+
+                        <div data-conv-fork="first-question3">
+                            <select style="display:none;background-color:#DEDEDE;" data-conv-question="<span style='display:none;background-color:red; color:yellow;'>Do you have any specific question for me?</span>" name="category">
+                                <option value="Yess">Yes</option>
+                                <option value="Noo">No</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="Yess" data-conv-fork="first-question3">
+                            <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
+                        </div>
                     </div>
-                    <button class="submit-btn" name='send'>Send</button>
+                    <!-- What study topic can i develop? -->
+                    <div data-conv-fork="category">
+
+                        <div data-conv-case="3" data-conv-fork="first-question2">
+                            <select data-conv-question="What do you want to develop?" name="category">
+                                <option value="1">Uniqie Study</option>
+                                <option value="2">More Resources Available</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="1" data-conv-fork="first-question2">
+                            <select data-conv-question="Select the option" name="category">
+                                <option value="1">Show overall Lowest number of uploaded topic</option>
+                            </select>
+                        </div>
+
+                        <div data-conv-case="2" data-conv-fork="first-question2">
+                            <select data-conv-question="Select the option" name="category">
+                                <option value="1">Show overall Highest number of uploaded topic</option>
+                            </select>
+                        </div>
+
+                        <div data-conv-fork="first-question3">
+                            <select data-conv-question="Do you have any specific question for me?" name="category">
+                                <option value="Yess">Yes</option>
+                                <option value="Noo">No</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="Yess" data-conv-fork="first-question3">
+                            <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
+                        </div>
+                    </div>
+                    <select data-conv-case="Noo" data-conv-question="Thank you for talking me">
+                        <option value="Yes">Reset</option>
+                    </select>
+
                 </form>
             </div>
         </div>
-    </section>
+        <!-- ChatBot end -->
+
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->
 <script>
@@ -193,3 +368,16 @@ $db_handle = new DBController();
         recognition.start();
     }
 </script>
+<!-- Below is the script for mobile side navigation-->
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+
+</html>
