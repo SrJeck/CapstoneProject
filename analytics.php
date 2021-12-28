@@ -76,7 +76,7 @@ $db_handle = new DBController();
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/jquery.convform.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
-  <link rel="stylesheet" href="css/test.css">
+  <link rel="stylesheet" href="css/analytics.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
