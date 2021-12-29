@@ -321,6 +321,7 @@
       background-color: white;
       overflow: auto;
       height: 400px;
+      z-index: -1;
     }
     .table thead th {
       position: sticky;

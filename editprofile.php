@@ -19,6 +19,8 @@ if (isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/login.css">
+  <link rel="stylesheet" type="text/css" href="css/notification.css">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- ChatBot -->
   <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
@@ -30,10 +32,18 @@ if (isset($_SESSION['user_id'])) {
 <body>
   <!-- NAVBAR -->
   <?php
+
+  $notif = "";
+  $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+
+  $unseen_count = $dbh->prepare('select COUNT(*) as unseen_count from notification where seen_status="unseen" and user_id=?');
+  $unseen_count->bindParam(1, $id);
+  $unseen_count->execute();
+  $unseened_count = $unseen_count->fetch();
+
   if (isset($_SESSION['user_id'])) {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="index.php">HOME</a>
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
@@ -41,12 +51,29 @@ if (isset($_SESSION['user_id'])) {
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
     <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+    <a style="float: right;">
+    <div class="notBtn" href="#" onclick="seeNotif()">
+            <div class="number" > ' . $unseened_count['unseen_count'] . ' </div>
+            <i style="font-size:24px;height: 25px;" id="showdialog" class="fa fatest">&#xf0f3;</i>
+        <div class="box" id="dialog" id="box" style="display:none">
+                <div class="display">
+                <div class="cont">
+                    <!-- Fold this div and try deleting evrything inbetween -->
+                    <div class="sec test">
+                            <div class="txt"></div>
+                    </div>
+            </div> 
+            </div>
+        </div>
+    </div>
+    </a>
 
-    </div>';
+</div>
+
+    ';
   } else {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="index.php">HOME</a>
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
@@ -56,6 +83,14 @@ if (isset($_SESSION['user_id'])) {
     </div>';
   }
   ?>
+  <script>
+    $("#showdialog").click(function() {
+      $(".box").show();
+    });
+    $(".box .close").click(function() {
+      $(this).parent().hide()
+    })
+  </script>
 
   <div class="side">
     <a href="editprofile.php"><i class="fa fa-pencil"> <b>Edit Profile </b> &#xf105;</i></a>

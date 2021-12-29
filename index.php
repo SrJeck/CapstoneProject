@@ -109,8 +109,8 @@ if (!empty($result)) {
     <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
     <a style="float: right;">
     <div class="notBtn" href="#" onclick="seeNotif()">
-            <div class="number" id="showdialog"> ' . $unseened_count['unseen_count'] . ' </div>
-            <i style="font-size:24px;height: 25px;" class="fa fatest">&#xf0f3;</i>
+            <div class="number" > ' . $unseened_count['unseen_count'] . ' </div>
+            <i style="font-size:24px;height: 25px;" id="showdialog" class="fa fatest">&#xf0f3;</i>
         <div class="box" id="dialog" id="box" style="display:none">
                 <div class="display">
                 <div class="cont">
@@ -233,11 +233,9 @@ if (!empty($result)) {
     </form>
 
     <!-- INTRODUCTION -->
-    <h2 class="new">Whats's New?</h2>
-    <p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam maximus sagittis sapien eget porttitor.
-      Curabitur nec lorem luctus, ultrices libero et, fringilla dui. Nam porttitor sapien eget sollicitudin tincidunt.
-      Etiam tortor risus, lobortis vitae turpis a, imperdiet congue libero. Etiam et nulla sed magna viverra pretium id at nisi.
-      Phasellus sit amet dolor elementum, varius mauris in, commodo mauris. In eu nunc justo.
+    <h2 class="new">Read, Study and Develop With ThesisQuo!</h2>
+    <p class="intro">Browse thesis studies that may help you in creating your own research, study and develop your research with ThesisQuo and share it to the community.
+
     </p>
     <!-- 3 IMAGES -->
     <div class="images">

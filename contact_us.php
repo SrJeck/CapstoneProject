@@ -74,11 +74,11 @@ $db_handle = new DBController();
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
     <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
     <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
-    <a style="float: right;">
+    <a style="float: right;" >
     <div class="notBtn" href="#" onclick="seeNotif()">
-            <div class="number" id="showdialog"> ' . $unseened_count['unseen_count'] . ' </div>
+            <div class="number" > ' . $unseened_count['unseen_count'] . ' </div>
             <i style="font-size:24px;height: 25px;" class="fa fatest">&#xf0f3;</i>
-        <div class="box" id="dialog" id="box" style="display:none">
+        <div class="box" id="dialog" id="showdialog" id="box" style="display:none">
                 <div class="display">
                 <div class="cont">
                     <!-- Fold this div and try deleting evrything inbetween -->

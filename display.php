@@ -56,8 +56,8 @@ if (!empty($result)) {
   $result["perpage"] = showperpage($sql, $perPage, $href);
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 
 <head>
   <script type="text/javascript" src="js/script.js"></script>
@@ -69,40 +69,70 @@ if (!empty($result)) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/display.css">
+  <link rel="stylesheet" type="text/css" href="css/notification.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <style>
+    .number {
+      height: 26px;
+      width: 24px;
+    }
+  </style>
 </head>
 
 <body>
   <!-- NAVBAR -->
   <?php
-  session_start();
-  if (isset($_SESSION['user_id'])) {
-    $id = $_SESSION['user_id'];
-  }
+  $notif = "";
+  $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+
+  $unseen_count = $dbh->prepare('select COUNT(*) as unseen_count from notification where seen_status="unseen" and user_id=?');
+  $unseen_count->bindParam(1, $id);
+  $unseen_count->execute();
+  $unseened_count = $unseen_count->fetch();
+
   if (isset($_SESSION['user_id'])) {
     echo '<div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="index.php">HOME</a>
-    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
-    <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+  <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+  <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+  <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+  <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
+  <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+  <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+  <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+  <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+  <a style="float: right;" >
+  <div class="notBtn" href="#" onclick="seeNotif()">
+          <div class="number" > <span class="numero">' . $unseened_count['unseen_count'] . '</span> </div>
+          <i style="font-size:24px;height: 25px;"  class="fa fatest">&#xf0f3;</i>
+      <div class="box" id="dialog" id="showdialog"  id="box" style="display:none">
+              <div class="display">
+              <div class="cont">
+                  <!-- Fold this div and try deleting evrything inbetween -->
+                  <div class="sec test">
+                          <div class="txt"></div>
+                  </div>
+          </div> 
+          </div>
+      </div>
+  </div>
+  </a>
 
-    </div>';
+</div>
+
+  ';
   } else {
     echo '<div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="index.php">HOME</a>
-    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
-    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
-    </div>';
+  <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+  <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+  <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+  <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
+  <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
+  <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+  <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
+  </div>';
   }
 
   $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
@@ -113,10 +143,10 @@ if (!empty($result)) {
   $view_count->bindParam(1, $id);
   $view_count->execute();
   $viewed_count = $view_count->fetch();
-  
+
   $increment = (int)$viewed_count['visit_count'] + 1;
   $update_count = $dbh->prepare('update research set visit_count=? where id=?');
-  $update_count->bindParam(1,$increment , PDO::PARAM_INT);
+  $update_count->bindParam(1, $increment, PDO::PARAM_INT);
   $update_count->bindParam(2, $id);
   $update_count->execute();
 
@@ -126,7 +156,14 @@ if (!empty($result)) {
   $stat->execute();
   $row = $stat->fetch();
   ?>
-
+  <script>
+    $("#showdialog").click(function() {
+      $(".box").show();
+    });
+    $(".box .close").click(function() {
+      $(this).parent().hide()
+    })
+  </script>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -176,7 +213,7 @@ if (!empty($result)) {
 
   echo "
     <div class='row'>
-        <br><br><h1 style='margin-left: 50px;max-width: 1100px'>" . $row['title'] . "</h1><p style='margin-left: 50px;'>" . "<strong>Authors:  </strong>" . $row['author'] . "</p><p style='margin-left: 50px;'>" . "<strong>Published Online: </strong>" . $row['publication_day'] . ' ' . $row['publication_month'] . ' ' . $row['publication_year'] . "</p>
+        <br><br><h1 style='margin-left: 50px;max-width: 1100px'>" . $row['title'] . "</h1><p style='margin-left: 50px;'>" . "<strong>Authors:  </strong>" . $row['author'] . "</p><p style='margin-left: 50px;'>" . "<strong>Published Online: </strong>" . $row['publication_day'] . ' ' . $row['publication_month'] . ' ' . $row['publication_year'] . "<p style='margin-left: 50px;'>" . "<strong>Keywords:  </strong>" . $row['keywords'] . "</p>
         
         </div>";
   ?>
