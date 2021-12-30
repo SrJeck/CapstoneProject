@@ -24,7 +24,7 @@ if (!empty($_POST['select'])) {
       $notif =$notifs->fetch();
       if (empty($notif)) {
         $reason = "Congratulations";
-        $accepted = $dbh->prepare("insert into notification values('',?,?,?,?,?,?)");
+        $accepted = $dbh->prepare("insert into notification values('',?,?,?,?,?,?,?)");
         $accepted->bindParam(1, $user_id);
         $accepted->bindParam(2, $admin_id);
         $accepted->bindParam(3, $thesis_id);
@@ -44,7 +44,7 @@ if (!empty($_POST['select'])) {
       if (empty($notif)) {
         if (!empty($_POST['reason'])) {
           $reason = $_POST['reason'];
-          $rejected = $dbh->prepare("insert into notification values('',?,?,?,?,?,?)");
+          $rejected = $dbh->prepare("insert into notification values('',?,?,?,?,?,?,?)");
           $rejected->bindParam(1, $user_id);
           $rejected->bindParam(2, $admin_id);
           $rejected->bindParam(3, $thesis_id);
@@ -57,11 +57,13 @@ if (!empty($_POST['select'])) {
         $notif_id = $notif['notification_id'];
         if (!empty($_POST['reason'])) {
           $reason = $_POST['reason'];
-          $rejected = $dbh->prepare("update notification set admin_id=?,reason=?,seen_status=? where notification_id=?");
+          $curr_date = date("Y-n-d");
+          $rejected = $dbh->prepare("update notification set admin_id=?,reason=?,seen_status=?,notification_date=? where notification_id=?");
           $rejected->bindParam(1, $admin_id);
           $rejected->bindParam(2, $reason);
           $rejected->bindParam(3, $seen_stat);
-          $rejected->bindParam(4, $notif_id);
+          $rejected->bindParam(4, $curr_date);
+          $rejected->bindParam(5, $notif_id);
           $rejected->execute();
         }
       }

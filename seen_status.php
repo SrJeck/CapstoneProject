@@ -27,6 +27,7 @@ $notification = $dbh->prepare('select * from notification where user_id=? ORDER 
                 <div class="txt">' . $notifications['status'] . '</div>
                 <div class="txt">' . $thesis_title['title'] . '</div>
                 <div class="txt">' . $notifications['reason'] . '</div>
+                <div class="txt">' . $notifications['notification_date'] . '</div>
                 <hr class="section">
             </div><br>
 ';
