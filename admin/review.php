@@ -119,7 +119,7 @@ if (!empty($result)) {
         <a href="#details">
           <p>Details</p>
         </a>
-        <a href="admin.php">
+        <a href="pending_research.php">
           <p>Return to Admin</p>
         </a>
       </div>

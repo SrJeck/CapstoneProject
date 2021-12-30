@@ -12,6 +12,7 @@ if (isset($_SESSION['user_id'])) {
 <head>
   <title>Profile</title>
   <script type="text/javascript" src="js/script.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/notification.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
@@ -20,7 +21,6 @@ if (isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/profilestyle.css">
-  <link rel="stylesheet" type="text/css" href="css/notification.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- ChatBot -->
   <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
@@ -83,14 +83,14 @@ if (isset($_SESSION['user_id'])) {
   </div>';
   }
   ?>
-  <script>
+  <!-- <script>
     $("#showdialog").click(function() {
       $(".box").show();
     });
     $(".box .close").click(function() {
       $(this).parent().hide()
     })
-  </script>
+  </script> -->
 
 
 

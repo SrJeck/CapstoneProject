@@ -139,14 +139,14 @@ if (!empty($result)) {
   </div>';
   }
   ?>
-  <script>
+  <!-- <script>
     $("#showdialog").click(function() {
       $(".box").show();
     });
     $(".box .close").click(function() {
       $(this).parent().hide()
     })
-  </script>
+  </script> -->
 
   <!-- BANNER IMAGE -->
   <br>

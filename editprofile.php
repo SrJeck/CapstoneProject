@@ -93,8 +93,8 @@ if (isset($_SESSION['user_id'])) {
   </script>
 
   <div class="side">
-    <a href="editprofile.php"><i class="fa fa-pencil"> <b>Edit Profile </b> &#xf105;</i></a>
-    <a href="security.php"><i class='fas fa-user-shield' style="bold:none;"> Password</i></a>
+    <a href="profile.php"><i class="fa fa-pencil"> <b>Profile </b> &#xf105;</i></a>
+    <a href="security.php"><i class='fas fa-user-shield'> Password</i></a>
     <!-- <a href="add_article.php"><i class='fa fa-plus'><b> Add Article</b></i></a> -->
 
   </div>

@@ -90,8 +90,3 @@ function seeNotif() {
   }
 
 }
-window.onclick = function (event) {
-  if (event.target.id != "box") {
-    $("#box").hide();
-  }
-}

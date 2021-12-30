@@ -4,5 +4,5 @@ if (!isset($_SESSION['admin_id'])) {
     header("Location: index.php");
 } else {
 
-    header("Location: admin.php");
+    header("Location: profile.php");
 }

@@ -75,3 +75,29 @@ function myChangeFunction(input1) {
 	var input2 = document.getElementById('myInput2');
 	input2.value = input1.value;
 }
+
+function seeNotif() {
+	if (document.getElementsByClassName("box")[0].style.display == "none" && document.getElementsByClassName("number")[0].innerHTML != 0) {
+  
+	  seen = "seen";
+	  xhr = new XMLHttpRequest();
+  
+	  xhr.onreadystatechange = () => {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+		  document.getElementsByClassName("box")[0].innerHTML = xhr.responseText;
+		  document.getElementsByClassName("box")[0].style.display = "block";
+		}
+	  }
+	  xhr.open("POST", "seen_status.php", true);
+	  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	  xhr.send("seen=" + seen);
+	} else if (document.getElementsByClassName("box")[0].style.display == "none" && document.getElementsByClassName("number")[0].innerHTML == 0) {
+	  document.getElementsByClassName("box")[0].style.display = "block";
+	  document.getElementsByClassName("box")[0].innerHTML = "";
+	} else if (document.getElementsByClassName("box")[0].style.display == "block") {
+	  document.getElementsByClassName("box")[0].style.display = "none";
+	  document.getElementsByClassName("number")[0].innerHTML = "0";
+	  document.getElementsByClassName("box")[0].innerHTML = "";
+	}
+  
+  }
