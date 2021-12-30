@@ -66,7 +66,7 @@ function register() {
 
 }
 function seeNotif() {
-  if (document.getElementsByClassName("box")[0].style.display == "none" && document.getElementsByClassName("number")[0].innerHTML != 0) {
+  if (document.getElementsByClassName("box")[0].style.display == "none") {
 
     seen = "seen";
     xhr = new XMLHttpRequest();
@@ -80,9 +80,7 @@ function seeNotif() {
     xhr.open("POST", "seen_status.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send("seen=" + seen);
-  } else if (document.getElementsByClassName("box")[0].style.display == "none" && document.getElementsByClassName("number")[0].innerHTML == 0) {
-    document.getElementsByClassName("box")[0].style.display = "block";
-  } else if (document.getElementsByClassName("box")[0].style.display == "block") {
+  }else if (document.getElementsByClassName("box")[0].style.display == "block") {
     document.getElementsByClassName("box")[0].style.display = "none";
     document.getElementsByClassName("number")[0].innerHTML = "0";
   }
