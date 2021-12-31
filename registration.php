@@ -31,7 +31,6 @@
     <a style="margin-top: 5px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 5px;" href="analytics.php">ANALYTICS</a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
 
 
@@ -122,20 +121,25 @@
           </div>
           <div class="input-group">
             <h4>Degree Level</h4>
-            <select name="degree_level" id="degree">
-              <option value="" selected disabled hidden>Select degree level</option>
-              <option value="Professional Certificates">Professional Certificates</option>
-              <option value="Undergraduate Degrees">Undergraduate Degrees</option>
-              <option value="Transfer Degrees">Transfer Degrees</option>
-              <option value="Associate Degrees">Associate Degrees</option>
-              <option value="Bachelor Degrees">Bachelor Degrees</option>
-              <option value="Graduate Degrees">Graduate Degrees</option>
-              <option value="Master Degrees">Master Degrees</option>
-              <option value="Doctoral Degrees">Doctoral Degrees</option>
-              <option value="Professional Degrees">Professional Degrees</option>
-              <option value="Others">Others</option>
-            </select>
+            <div class="input-area">
 
+              <select name="degree_level" id="degree">
+                <option value="" selected disabled hidden>Select degree level</option>
+                <option value="Professional Certificates">Professional Certificates</option>
+                <option value="Undergraduate Degrees">Undergraduate Degrees</option>
+                <option value="Transfer Degrees">Transfer Degrees</option>
+                <option value="Associate Degrees">Associate Degrees</option>
+                <option value="Bachelor Degrees">Bachelor Degrees</option>
+                <option value="Graduate Degrees">Graduate Degrees</option>
+                <option value="Master Degrees">Master Degrees</option>
+                <option value="Doctoral Degrees">Doctoral Degrees</option>
+                <option value="Professional Degrees">Professional Degrees</option>
+                <option value="Others">Others</option>
+              </select>
+              <div class="input-icon">
+                <i class='fas fa-graduation-cap'></i>
+              </div>
+            </div>
 
           </div>
           <div class="input-group">
@@ -161,11 +165,6 @@
           </div>
 
 
-
-          <div class="input-group">
-            <input type="checkbox" class="btn-check">
-            <label>Remember me</label>
-          </div>
 
           <button name="submit">Submit</button>
         </div>

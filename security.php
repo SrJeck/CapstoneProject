@@ -46,10 +46,24 @@ if (isset($_SESSION['user_id'])) {
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
+    <div class="tooltip">
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <span class="tooltiptext">Logout</span>
+    </div>
+    <div class="tooltip">
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <span class="tooltiptext">Profile</span>
+    </div>
+    <div class="tooltip">
     <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+    <span class="tooltiptext">Bookmark</span>
+    </div>
+    <div class="tooltip">
     <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+    <span class="tooltiptext">Add Article</span>
+    </div>
+    <div class="tooltip">
+    <span class="tooltiptext">Notification</span>
     <a style="float: right;">
     <div class="notBtn" href="#" onclick="seeNotif()">
             <div class="number" > ' . $unseened_count['unseen_count'] . ' </div>
@@ -66,8 +80,9 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </div>
     </a>
-
+    </div>
 </div>
+
 
     ';
   } else {
@@ -92,10 +107,9 @@ if (isset($_SESSION['user_id'])) {
   </script>
 
   <div class="side">
-    <a href="profile.php"><i class='fas fa-user-shield' style="bold:none;"> Profile &#xf105;</i></a>
-    <a href="editprofile.php"><i class="fa fa-pencil"> Edit Profile </i></a>
-    <!-- <a href="add_article.php"><i class='fa fa-plus'> Add Article</i></a> -->
-
+    <a href="profile.php"><i class="fas fa-user-alt"> <b>Profile </b> </i></a>
+    <a href="editprofile.php#"><i class=" fa fa-pencil"> <b>Edit Profile </b></i></a>
+    <a href="#"><i class='fas fa-user-shield'> Password &#xf105;</i></a>
   </div>
 
   <div class="content">

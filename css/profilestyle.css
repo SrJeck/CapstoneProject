@@ -167,6 +167,8 @@ body{
   position: absolute;
   top: 110%;
   left: 50%;
+  padding-bottom: 20px;
+
   transform: translate(-50%,-50%);
   width: 1050px;
   height: auto;

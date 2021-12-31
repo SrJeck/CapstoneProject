@@ -11,7 +11,7 @@ $db_handle = new DBController();
 <html>
 
 <head>
-  <title>Home</title>
+  <title>Contact Us</title>
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

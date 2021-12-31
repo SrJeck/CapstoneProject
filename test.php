@@ -215,11 +215,13 @@ require_once("dbcontroller.php");
                     ?>
 
                 </table>
+
             </div>
         </div>
     </div>
-    <div class="margin-top: 50px;"></div>
+
 </body>
+
 <!-- Below is the script for voice recognition and conversion to text-->
 <script>
     function record() {

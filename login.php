@@ -31,7 +31,6 @@
     <a style="margin-top: 5px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 5px;" href="analytics.php">ANALYTICS</a>
     <a style="float: right;" href="login.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
   </div>
 
 
@@ -78,10 +77,7 @@
               </div>
             </div>
           </div>
-          <div class="input-group">
-            <input type="checkbox" class="btn-check">
-            <label>Remember me</label>
-          </div>
+
 
           <button name="submit">Submit</button>
         </div>

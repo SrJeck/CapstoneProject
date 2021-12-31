@@ -82,7 +82,11 @@ if (!empty($result)) {
   <script type="text/javascript" src="js/jquery.convform.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
 
-
+  <style>
+    .number {
+      left: 55%;
+    }
+  </style>
 </head>
 
 <body>
@@ -103,10 +107,24 @@ if (!empty($result)) {
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
+    <div class="tooltip">
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <span class="tooltiptext">Logout</span>
+    </div>
+    <div class="tooltip">
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <span class="tooltiptext">Profile</span>
+    </div>
+    <div class="tooltip">
     <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+    <span class="tooltiptext">Bookmark</span>
+    </div>
+    <div class="tooltip">
     <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+    <span class="tooltiptext">Add Article</span>
+    </div>
+    <div class="tooltip">
+    <span class="tooltiptext">Notification</span>
     <a style="float: right;">
     <div class="notBtn" href="#" onclick="seeNotif()">
             <div class="number" > ' . $unseened_count['unseen_count'] . ' </div>
@@ -123,7 +141,7 @@ if (!empty($result)) {
         </div>
     </div>
     </a>
-
+    </div>
 </div>
 
     ';
@@ -132,10 +150,8 @@ if (!empty($result)) {
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
     <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <a class="boomark" style="float: right;" href="bookmark.php"><img style="height: 23px;" src="images/bookmark.png"></a>
     </div>';
   }
   ?>

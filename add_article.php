@@ -43,27 +43,42 @@ if (isset($_SESSION['user_id'])) {
   <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
   <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
   <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
-  <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-  <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-  <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
-  <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
-  <a style="float: right;">
-  <div class="notBtn" href="#" onclick="seeNotif()">
-          <div class="number" > ' . $unseened_count['unseen_count'] . ' </div>
-          <i style="font-size:24px;height: 25px;" id="showdialog" class="fa fatest">&#xf0f3;</i>
-      <div class="box" id="dialog" id="box" style="display:none">
-              <div class="display">
-              <div class="cont">
-                  <!-- Fold this div and try deleting evrything inbetween -->
-                  <div class="sec test">
-                          <div class="txt"></div>
-                  </div>
-          </div> 
+  <div class="tooltip">
+    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <span class="tooltiptext">Logout</span>
+    </div>
+    <div class="tooltip">
+    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <span class="tooltiptext">Profile</span>
+    </div>
+    <div class="tooltip">
+    <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+    <span class="tooltiptext">Bookmark</span>
+    </div>
+    <div class="tooltip">
+    <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+    <span class="tooltiptext">Add Article</span>
+    </div>
+    <div class="tooltip">
+      <a style="float: right;">
+      <span class="tooltiptext">Notification</span>
+
+      <div class="notBtn" href="#" onclick="seeNotif()">
+              <div class="number" > ' . $unseened_count['unseen_count'] . ' </div>
+              <i style="font-size:24px;height: 25px;" id="showdialog" class="fa fatest">&#xf0f3;</i>
+          <div class="box" id="dialog" id="box" style="display:none">
+                  <div class="display">
+                  <div class="cont">
+                      <!-- Fold this div and try deleting evrything inbetween -->
+                      <div class="sec test">
+                              <div class="txt"></div>
+                      </div>
+              </div> 
+              </div>
           </div>
       </div>
+    </a>
   </div>
-  </a>
-
 </div>
 
   ';

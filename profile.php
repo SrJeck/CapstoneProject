@@ -11,7 +11,7 @@ require_once("dbcontroller.php");
 <html>
 
 <head>
-  <title>Home</title>
+  <title>Profile</title>
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -59,16 +59,29 @@ require_once("dbcontroller.php");
     <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
     <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
     <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
+    <div class="tooltip">
     <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+    <span class="tooltiptext">Logout</span>
+    </div>
+    <div class="tooltip">
     <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+    <span class="tooltiptext">Profile</span>
+    </div>
+    <div class="tooltip">
     <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+    <span class="tooltiptext">Bookmark</span>
+    </div>
+    <div class="tooltip">
     <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+    <span class="tooltiptext">Add Article</span>
+    </div>
+    <div class="tooltip">
+    <span class="tooltiptext">Notification</span>
     <a style="float: right;">
     <div class="notBtn" href="#" onclick="seeNotif()">
             <div class="number" > ' . $unseened_count['unseen_count'] . ' </div>
             <i style="font-size:24px;height: 25px;" id="showdialog" class="fa fatest">&#xf0f3;</i>
-        <div style="position:relative; z-index;">
-        <div class="box" id="dialog"  style="display:none">
+        <div class="box" id="dialog" id="box" style="display:none">
                 <div class="display">
                 <div class="cont">
                     <!-- Fold this div and try deleting evrything inbetween -->
@@ -78,11 +91,11 @@ require_once("dbcontroller.php");
             </div> 
             </div>
         </div>
-        </div>
     </div>
     </a>
-
+    </div>
 </div>
+
 
     ';
   } else {
@@ -98,7 +111,8 @@ require_once("dbcontroller.php");
   }
   ?>
   <div class="side">
-    <a href="editprofile.php"><i class="fas" aria-hidden="true"> &#xf303; <b>Edit Profile </b> &#xf105;</i></a>
+    <a href="#"><i class="fas fa-user-alt"> <b>Profile </b> &#xf105; </i></a>
+    <a href="editprofile.php"><i class="fas" aria-hidden="true"> &#xf303; <b>Edit Profile </b></i></a>
     <a href="security.php"><i class='fas' aria-hidden="true">&#xf505; Password</i></a>
     <!-- <a href="add_article.php"><i class='fa fa-plus'><b> Add Article</b></i></a> -->
   </div>

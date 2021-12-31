@@ -103,56 +103,96 @@ include 'backend/database.php';
                 <span class="dashboard">Profile</span>
             </div>
         </nav>
-
+        <?php
+        $stat = $dbh->prepare('select * from admin where admin_id=?');
+        $stat->bindParam(1, $id);
+        $stat->execute();
+        $row = $stat->fetch();
+        if ($row["access"] == "Super Admin") {
+            echo '<a href="registration.php"><i class="fas fa-user" style="bold:none;"> Create Admin Account</i></a>';
+        }
+        ?>
         <div class="home-content">
             <div class="sales-boxes">
                 <div class="recent-sales box">
-                    <?php
-                    $stat = $dbh->prepare('select * from admin where admin_id=?');
-                    $stat->bindParam(1, $id);
-                    $stat->execute();
-                    $row = $stat->fetch();
-                    if ($row["access"] == "Super Admin") {
-                        echo '<a href="registration.php"><i class="fas fa-user" style="bold:none;"> Create Admin Account</i></a>';
-                    }
-                    ?>
-                    <table>
-
-
-                        <!-- populate table from mysql database -->
-                        <?php
-
-                        $stat = $dbh->prepare('select * from admin where admin_id=?');
-                        $stat->bindParam(1, $id);
-                        $stat->execute();
-                        $row = $stat->fetch();
-                        ?>
-                        <img class="profilepencil" src="images/profilepencil.png">
-
-                        <tr class="displayRow">
-                            <td>
-                                <div class="name">
-                                    <p class="fname"><?php echo $row['firstName']; ?></p>
-                                    <p class="mname"><?php echo $row['middleName']; ?></p>
-                                    <p class="lname"><?php echo $row['lastName']; ?></p>
+                    <div class="wrapper">
+                        <div class="left">
+                            <img class="profilepencil" src="images/profilepencil.png">
+                            <h2 style="margin-top: 30px;"><?php echo $row['firstName']; ?> <?php echo $row['middleName']; ?> <?php echo $row['lastName']; ?></h2>
+                            <p>Admin</p>
+                        </div>
+                        <div class="right">
+                            <div class="info">
+                                <h3>Information</h3>
+                                <div class="info_data">
+                                    <div class="data">
+                                        <h4>Email</h4>
+                                        <p><?php echo $row['email']; ?></p>
+                                    </div>
+                                    <div class="data">
+                                        <h4>Phone</h4>
+                                        <p><?php echo $row['phoneNumber']; ?></p>
+                                    </div>
                                 </div>
-                                <div class="emailrow">
-                                    <p class="email"><?php echo $row['email']; ?></p>
-                                </div>
-                                <div class="displayrow2">
-                                    <p class="pnumber"><?php echo $row['phoneNumber']; ?></p>
-                                    <p class="address"><?php echo $row['address']; ?></p>
-                                </div>
+                            </div>
+                            <div class="info">
+                                <div class="info_data">
+                                    <div class="data">
+                                        <h4>Address</h4>
+                                        <p><?php echo $row['address']; ?></p>
+                                    </div>
 
-                            </td>
-                        </tr>
-                    </table>
-                    </form>
+                                    <div class="data">
+                                        <h4>Birthday</h4>
+                                        <p><?php echo $row['birthday']; ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <div class="info_data">
+                                    <div class="data">
+                                        <h4>Sex</h4>
+                                        <p><?php echo $row['sex']; ?></p>
+                                    </div>
+                                </div>
+                            </div>
 
+
+                        </div>
+                    </div>
 
                 </div>
+            </div>
+        </div>
+        <div class="wrapper2">
+            <div class="info">
+                <div class="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="th">Admin Name</th>
+                                <th class="th">Email</th>
+                                <th class="th">Access</th>
+                            </tr>
+                        </thead>
 
+                        <?php
+                        $admins = $dbh->prepare('select * from admin');
+                        $admins->execute();
+                        while ($row = $admins->fetch()) {
+                            if ($row['admin_id'] != $_SESSION['admin_id']) {
+                                echo '<tr class="tr">
+                                <td class="td">' . $row['firstName'] . '</td>
+                                <td class="td">' . $row['email'] . '</td>
+                                <td class="td">' . $row['access'] . '</td>
+                            </tr>';
+                            }
+                        }
 
+                        ?>
+
+                    </table>
+                </div>
             </div>
         </div>
     </section>
