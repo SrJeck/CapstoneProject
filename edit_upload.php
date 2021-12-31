@@ -191,6 +191,12 @@ if (isset($_SESSION['user_id'])) {
       </span>
     </span>
     </span>
+    <div class="file-upload">
+      <input class="file-upload__input" type="file" name="myfile" accept="application/pdf" id="myFile" multiple>
+      <button class="file-upload__button" type="button">Choose File(s)</button>
+      <span class="file-upload__label"></span>
+      <script type="text/javascript" src="js/custom.js"></script>
+    </div>
 
     <button class="submit" type="submit" name="submit" id="sendNewSms">Update</button>
   </form>

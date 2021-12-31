@@ -189,7 +189,7 @@ require_once("dbcontroller.php");
       <div class="table">
         <table>
           <thead>
-            <t>
+            <tr>
               <th class="th">Title</th>
               <th class="th">Topic</th>
               <th class="th">Author</th>
@@ -220,6 +220,213 @@ require_once("dbcontroller.php");
         <td class="td">' . $new_row["view_count"] . '</td>
         <td class="td">' . $new_row["download_count"] . '</td>
         <td class="td">' . $new_row["visit_count"] . '</td>
+        <td class="td"><button class="editBtn"><a style="text-decoration:none;color:white;" href="edit_upload.php?id=' . $new_row['id'] . '">Edit Upload</a></button></td>
+        </tr></tbody>';
+          }
+
+          // <a style="text-decoration:none;color:#FEC61F; font-size:18px;" href="edit_upload.php?id=' . $new_row['id'] . '"><i class="fa fa-pencil"></i></a>
+          // <a style="text-decoration:none;color:#F45549; font-size:18px;margin-left:5px;" href=""><i class="fa fa-trash-o"></i></a>
+          ?>
+
+        </table>
+      </div>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th class="th">Title</th>
+              <th class="th">Topic</th>
+              <th class="th">Author</th>
+              <th class="th">Year</th>
+              <th class="th">Status</th>
+              <th class="th">View PDF Count</th>
+              <th class="th">Download PDF Count</th>
+              <th class="th">Visit Page Count</th>
+              <th class="th">Action</th>
+              </tr>
+          </thead>
+
+          <?php
+
+
+          $view_count_array = array();
+          $view_id_array = array();
+          $final_view_id_array = array();
+          $new_stat = $dbh->prepare('select * from research where user_id=? order by id DESC');
+          $new_stat->bindParam(1, $id);
+          $new_stat->execute();
+          $new_row = $new_stat->fetch();
+         echo '<tbody><tr >
+         <td class="td">' . $new_row["title"] . '</td>
+         <td class="td">' . $new_row["topic"] . '</td>
+         <td class="td">' . $new_row["author"] . '</td>
+         <td class="td">' . $new_row["publication_year"] . '</td>
+         <td class="td">' . $new_row["upload_status"] . '</td>
+         <td class="td">' . $new_row["view_count"] . '</td>
+         <td class="td">' . $new_row["download_count"] . '</td>
+         <td class="td">' . $new_row["visit_count"] . '</td>
+         <td class="td"><button class="editBtn"><a style="text-decoration:none;color:white;" href="edit_upload.php?id=' . $new_row['id'] . '">Edit Upload</a></button></td>
+         </tr></tbody>';
+          
+
+          // <a style="text-decoration:none;color:#FEC61F; font-size:18px;" href="edit_upload.php?id=' . $new_row['id'] . '"><i class="fa fa-pencil"></i></a>
+          // <a style="text-decoration:none;color:#F45549; font-size:18px;margin-left:5px;" href=""><i class="fa fa-trash-o"></i></a>
+          ?>
+
+        </table>
+      </div>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th class="th">Title</th>
+              <th class="th">Topic</th>
+              <th class="th">Author</th>
+              <th class="th">Year</th>
+              <th class="th">Status</th>
+              <th class="th">Visit Page Count</th>
+              <th class="th">Action</th>
+              </tr>
+          </thead>
+
+          <?php
+
+
+          $view_count_array = array();
+          $view_id_array = array();
+          $final_view_id_array = array();
+          $new_stat = $dbh->prepare('select * from research where user_id=? order by visit_count DESC');
+          $new_stat->bindParam(1, $id);
+          $new_stat->execute();
+          while ($new_row = $new_stat->fetch()) {
+            array_push($view_id_array,$new_row["id"]);
+            array_push($view_count_array,$new_row["visit_count"]);
+          }
+          for ($i=0; $i < count($view_count_array); $i++) { 
+            if ($view_count_array[0] == $view_count_array[$i]) {
+                array_push($final_view_id_array,$view_id_array[$i]);
+            }
+          }
+          for ($i=0; $i < count($final_view_id_array); $i++) { 
+            $new_stat = $dbh->prepare('select * from research where id=?');
+            $new_stat->bindParam(1, $final_view_id_array[$i]);
+            $new_stat->execute();
+            $new_row = $new_stat->fetch();
+            echo '<tbody><tr >
+        <td class="td">' . $new_row["title"] . '</td>
+        <td class="td">' . $new_row["topic"] . '</td>
+        <td class="td">' . $new_row["author"] . '</td>
+        <td class="td">' . $new_row["publication_year"] . '</td>
+        <td class="td">' . $new_row["upload_status"] . '</td>
+        <td class="td">' . $new_row["visit_count"] . '</td>
+        <td class="td"><button class="editBtn"><a style="text-decoration:none;color:white;" href="edit_upload.php?id=' . $new_row['id'] . '">Edit Upload</a></button></td>
+        </tr></tbody>';
+          }
+
+          // <a style="text-decoration:none;color:#FEC61F; font-size:18px;" href="edit_upload.php?id=' . $new_row['id'] . '"><i class="fa fa-pencil"></i></a>
+          // <a style="text-decoration:none;color:#F45549; font-size:18px;margin-left:5px;" href=""><i class="fa fa-trash-o"></i></a>
+          ?>
+
+        </table>
+      </div>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th class="th">Title</th>
+              <th class="th">Topic</th>
+              <th class="th">Author</th>
+              <th class="th">Year</th>
+              <th class="th">Status</th>
+              <th class="th">View PDF Count</th>
+              <th class="th">Action</th>
+              </tr>
+          </thead>
+
+          <?php
+
+
+          $view_count_array = array();
+          $view_id_array = array();
+          $final_view_id_array = array();
+          $new_stat = $dbh->prepare('select * from research where user_id=? order by view_count DESC');
+          $new_stat->bindParam(1, $id);
+          $new_stat->execute();
+          while ($new_row = $new_stat->fetch()) {
+            array_push($view_id_array,$new_row["id"]);
+            array_push($view_count_array,$new_row["view_count"]);
+          }
+          for ($i=0; $i < count($view_count_array); $i++) { 
+            if ($view_count_array[0] == $view_count_array[$i]) {
+                array_push($final_view_id_array,$view_id_array[$i]);
+            }
+          }
+          for ($i=0; $i < count($final_view_id_array); $i++) { 
+            $new_stat = $dbh->prepare('select * from research where id=?');
+            $new_stat->bindParam(1, $final_view_id_array[$i]);
+            $new_stat->execute();
+            $new_row = $new_stat->fetch();
+            echo '<tbody><tr >
+        <td class="td">' . $new_row["title"] . '</td>
+        <td class="td">' . $new_row["topic"] . '</td>
+        <td class="td">' . $new_row["author"] . '</td>
+        <td class="td">' . $new_row["publication_year"] . '</td>
+        <td class="td">' . $new_row["upload_status"] . '</td>
+        <td class="td">' . $new_row["view_count"] . '</td>
+        <td class="td"><button class="editBtn"><a style="text-decoration:none;color:white;" href="edit_upload.php?id=' . $new_row['id'] . '">Edit Upload</a></button></td>
+        </tr></tbody>';
+          }
+
+          // <a style="text-decoration:none;color:#FEC61F; font-size:18px;" href="edit_upload.php?id=' . $new_row['id'] . '"><i class="fa fa-pencil"></i></a>
+          // <a style="text-decoration:none;color:#F45549; font-size:18px;margin-left:5px;" href=""><i class="fa fa-trash-o"></i></a>
+          ?>
+
+        </table>
+      </div>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th class="th">Title</th>
+              <th class="th">Topic</th>
+              <th class="th">Author</th>
+              <th class="th">Year</th>
+              <th class="th">Status</th>
+              <th class="th">Download PDF Count</th>
+              <th class="th">Action</th>
+              </tr>
+          </thead>
+
+          <?php
+
+
+          $view_count_array = array();
+          $view_id_array = array();
+          $final_view_id_array = array();
+          $new_stat = $dbh->prepare('select * from research where user_id=? order by download_count DESC');
+          $new_stat->bindParam(1, $id);
+          $new_stat->execute();
+          while ($new_row = $new_stat->fetch()) {
+            array_push($view_id_array,$new_row["id"]);
+            array_push($view_count_array,$new_row["download_count"]);
+          }
+          for ($i=0; $i < count($view_count_array); $i++) { 
+            if ($view_count_array[0] == $view_count_array[$i]) {
+                array_push($final_view_id_array,$view_id_array[$i]);
+            }
+          }
+          for ($i=0; $i < count($final_view_id_array); $i++) { 
+            $new_stat = $dbh->prepare('select * from research where id=?');
+            $new_stat->bindParam(1, $final_view_id_array[$i]);
+            $new_stat->execute();
+            $new_row = $new_stat->fetch();
+            echo '<tbody><tr >
+        <td class="td">' . $new_row["title"] . '</td>
+        <td class="td">' . $new_row["topic"] . '</td>
+        <td class="td">' . $new_row["author"] . '</td>
+        <td class="td">' . $new_row["publication_year"] . '</td>
+        <td class="td">' . $new_row["upload_status"] . '</td>
+        <td class="td">' . $new_row["download_count"] . '</td>
         <td class="td"><button class="editBtn"><a style="text-decoration:none;color:white;" href="edit_upload.php?id=' . $new_row['id'] . '">Edit Upload</a></button></td>
         </tr></tbody>';
           }
