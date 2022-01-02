@@ -108,7 +108,7 @@ $db_handle = new DBController();
     </div>';
   }
   ?>
-  <script>
+  <!-- <script>
     function myFunction() {
       var xDiv = document.getElementById('box');
       if (xDiv.style.height == '')
@@ -116,7 +116,7 @@ $db_handle = new DBController();
       else
         xDiv.style.height = ''
     }
-  </script>
+  </script> -->
   <?php
 
   $topic_list = array("technology", "education", "research", "analysis", "database", "agriculture", "health", "politics", "business", "marketing", "mechanical", "ethics", "others");
@@ -221,7 +221,7 @@ $db_handle = new DBController();
   while ($row = mysqli_fetch_assoc($query_result)) {
     $others =  $row['count'];
   }
-  $sql = "SELECT * from journal";
+  $sql = "SELECT * from research";
   $result = mysqli_query($conn, $sql);
 
   ?>
