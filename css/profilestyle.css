@@ -65,9 +65,9 @@ body{
 .wrapper{
   position: absolute;
   top: 50%;
-  left: 55%;
+  left: 59.5%;
   transform: translate(-50%,-50%);
-  width: 1050px;
+  width: 1195px;
   height: auto;
   display: flex;
   box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
