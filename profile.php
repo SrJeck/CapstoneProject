@@ -172,21 +172,124 @@ require_once("dbcontroller.php");
         <h3>Projects</h3>
         <div class="projects_data">
           <div class="data">
-            <h4>Recent</h4>
-            <p>Lorem ipsum dolor sit amet.</p>
+            <h4>Most Visited</h4>
+            <p> <?php
+
+
+                $view_count_array = array();
+                $view_id_array = array();
+                $final_view_id_array = array();
+                $new_stat = $dbh->prepare('select * from research where user_id=? order by visit_count DESC LIMIT 1');
+                $new_stat->bindParam(1, $id);
+                $new_stat->execute();
+                while ($new_row = $new_stat->fetch()) {
+                  array_push($view_id_array, $new_row["id"]);
+                  array_push($view_count_array, $new_row["visit_count"]);
+                }
+                for ($i = 0; $i < count($view_count_array); $i++) {
+                  if ($view_count_array[0] == $view_count_array[$i]) {
+                    array_push($final_view_id_array, $view_id_array[$i]);
+                  }
+                }
+                for ($i = 0; $i < count($final_view_id_array); $i++) {
+                  $new_stat = $dbh->prepare('select * from research where id=?');
+                  $new_stat->bindParam(1, $final_view_id_array[$i]);
+                  $new_stat->execute();
+                  $new_row = $new_stat->fetch();
+                  echo '
+      <p>' . $new_row["title"] . '</p>';
+                }
+                ?></p>
           </div>
           <div class="data">
             <h4>Most Viewed</h4>
-            <p>dolor sit amet.</p>
+            <p><?php
+
+
+                $view_count_array = array();
+                $view_id_array = array();
+                $final_view_id_array = array();
+                $new_stat = $dbh->prepare('select * from research where user_id=? order by view_count DESC LIMIT 1');
+                $new_stat->bindParam(1, $id);
+                $new_stat->execute();
+                while ($new_row = $new_stat->fetch()) {
+                  array_push($view_id_array, $new_row["id"]);
+                  array_push($view_count_array, $new_row["view_count"]);
+                }
+                for ($i = 0; $i < count($view_count_array); $i++) {
+                  if ($view_count_array[0] == $view_count_array[$i]) {
+                    array_push($final_view_id_array, $view_id_array[$i]);
+                  }
+                }
+                for ($i = 0; $i < count($final_view_id_array); $i++) {
+                  $new_stat = $dbh->prepare('select * from research where id=?');
+                  $new_stat->bindParam(1, $final_view_id_array[$i]);
+                  $new_stat->execute();
+                  $new_row = $new_stat->fetch();
+                  echo '
+      <p>' . $new_row["title"] . '</p>';
+                }
+                ?></p>
           </div>
         </div>
       </div>
+      <div class="projects">
+        <div class="projects_data">
+          <div class="data">
+            <h4>MOST RECENT UPLOAD</h4>
+            <p> <?php
+                $view_count_array = array();
+                $view_id_array = array();
+                $final_view_id_array = array();
+                $new_stat = $dbh->prepare('select * from research where user_id=? order by id DESC LIMIT 1');
+                $new_stat->bindParam(1, $id);
+                $new_stat->execute();
+                $new_row = $new_stat->fetch();
+                echo '
+<p>' . $new_row["title"]  . '</p>';
 
+                ?></p>
+          </div>
+          <div class="data">
+            <h4>MOST DOWNLOADED UPLOAD</h4>
+            <p><?php
+
+
+                $view_count_array = array();
+                $view_id_array = array();
+                $final_view_id_array = array();
+                $new_stat = $dbh->prepare('select * from research where user_id=? order by download_count DESC LIMIT 1');
+                $new_stat->bindParam(1, $id);
+                $new_stat->execute();
+                while ($new_row = $new_stat->fetch()) {
+                  array_push($view_id_array, $new_row["id"]);
+                  array_push($view_count_array, $new_row["download_count"]);
+                }
+                for ($i = 0; $i < count($view_count_array); $i++) {
+                  if ($view_count_array[0] == $view_count_array[$i]) {
+                    array_push($final_view_id_array, $view_id_array[$i]);
+                  }
+                }
+                for ($i = 0; $i < count($final_view_id_array); $i++) {
+                  $new_stat = $dbh->prepare('select * from research where id=?');
+                  $new_stat->bindParam(1, $final_view_id_array[$i]);
+                  $new_stat->execute();
+                  $new_row = $new_stat->fetch();
+                  echo '
+      <p>' . $new_row["title"]  . '</p>
+      ';
+                }
+                ?>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="wrapper2">
     <div class="info">
-      <div>
+      <div class="table">
+
         <table>
           <thead>
             <tr>
@@ -199,7 +302,7 @@ require_once("dbcontroller.php");
               <th class="th">Download PDF Count</th>
               <th class="th">Visit Page Count</th>
               <th class="th">Action</th>
-              </tr>
+            </tr>
           </thead>
 
           <?php
@@ -227,116 +330,11 @@ require_once("dbcontroller.php");
 
         </table>
       </div>
-      <div>
-<br>
-        <p>MOST RECENT UPLOAD</p>
-    <?php
-
-
-$view_count_array = array();
-$view_id_array = array();
-$final_view_id_array = array();
-$new_stat = $dbh->prepare('select * from research where user_id=? order by id DESC');
-$new_stat->bindParam(1, $id);
-$new_stat->execute();
-$new_row = $new_stat->fetch();
-echo '
-<p>' . $new_row["title"] . ' ' . $new_row["topic"] . ' ' . $new_row["upload_status"] . ' ' . '</p>';
-
-?>
-<br>
-<p>MOST VISITED UPLOAD</p>
-          <?php
-
-
-          $view_count_array = array();
-          $view_id_array = array();
-          $final_view_id_array = array();
-          $new_stat = $dbh->prepare('select * from research where user_id=? order by visit_count DESC');
-          $new_stat->bindParam(1, $id);
-          $new_stat->execute();
-          while ($new_row = $new_stat->fetch()) {
-            array_push($view_id_array,$new_row["id"]);
-            array_push($view_count_array,$new_row["visit_count"]);
-          }
-          for ($i=0; $i < count($view_count_array); $i++) { 
-            if ($view_count_array[0] == $view_count_array[$i]) {
-                array_push($final_view_id_array,$view_id_array[$i]);
-            }
-          }
-          for ($i=0; $i < count($final_view_id_array); $i++) { 
-            $new_stat = $dbh->prepare('select * from research where id=?');
-            $new_stat->bindParam(1, $final_view_id_array[$i]);
-            $new_stat->execute();
-            $new_row = $new_stat->fetch();
-            echo '
-        <p>' . $new_row["title"] . ' ' . $new_row["topic"] . ' ' . $new_row["upload_status"] .'</p>';
-          }
-          ?>
-          
-<br>
-        <p>MOST VIEWED UPLOAD</p>
-          <?php
-
-
-          $view_count_array = array();
-          $view_id_array = array();
-          $final_view_id_array = array();
-          $new_stat = $dbh->prepare('select * from research where user_id=? order by view_count DESC');
-          $new_stat->bindParam(1, $id);
-          $new_stat->execute();
-          while ($new_row = $new_stat->fetch()) {
-            array_push($view_id_array,$new_row["id"]);
-            array_push($view_count_array,$new_row["view_count"]);
-          }
-          for ($i=0; $i < count($view_count_array); $i++) { 
-            if ($view_count_array[0] == $view_count_array[$i]) {
-                array_push($final_view_id_array,$view_id_array[$i]);
-            }
-          }
-          for ($i=0; $i < count($final_view_id_array); $i++) { 
-            $new_stat = $dbh->prepare('select * from research where id=?');
-            $new_stat->bindParam(1, $final_view_id_array[$i]);
-            $new_stat->execute();
-            $new_row = $new_stat->fetch();
-            echo '
-        <p>' . $new_row["title"] . ' ' . $new_row["topic"] . ' ' . $new_row["upload_status"] . '</p>';
-          }
-          ?>
-<br>
-<p>MOST DOWNLOADED UPLOAD</p>
-          <?php
-
-
-          $view_count_array = array();
-          $view_id_array = array();
-          $final_view_id_array = array();
-          $new_stat = $dbh->prepare('select * from research where user_id=? order by download_count DESC');
-          $new_stat->bindParam(1, $id);
-          $new_stat->execute();
-          while ($new_row = $new_stat->fetch()) {
-            array_push($view_id_array,$new_row["id"]);
-            array_push($view_count_array,$new_row["download_count"]);
-          }
-          for ($i=0; $i < count($view_count_array); $i++) { 
-            if ($view_count_array[0] == $view_count_array[$i]) {
-                array_push($final_view_id_array,$view_id_array[$i]);
-            }
-          }
-          for ($i=0; $i < count($final_view_id_array); $i++) { 
-            $new_stat = $dbh->prepare('select * from research where id=?');
-            $new_stat->bindParam(1, $final_view_id_array[$i]);
-            $new_stat->execute();
-            $new_row = $new_stat->fetch();
-            echo '
-        <p>' . $new_row["title"] . ' ' . $new_row["topic"] . ' ' . $new_row["upload_status"] .'</p>
-        ';
-          }
-          ?>
     </div>
-    </div>
-
   </div>
+
+
+
   <div class="margin-top: 50px;"></div>
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->
