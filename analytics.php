@@ -347,8 +347,8 @@ $db_handle = new DBController();
     }
   </script>
 
-  <div class="descriptive">Descriptive
-    <br><br>
+  <div class="descriptive">
+    <p style="font-weight: bold;">Descriptive</p>
     <?php
 
     $topic_string = "";
@@ -446,10 +446,10 @@ $db_handle = new DBController();
       $des_topic4 = "is";
     }
     echo "The " . rtrim($desc_output_key, ", ") . " have the highest number of uploaded " . $des_topic2 . " with " . $desc_output_count . " number of uploads while the " . rtrim($asc_output_key, ", ") . " have the lowest number of uploaded " . $des_topic1 . " with " . $asc_output_count . " number of uploads.";
+
     ?>
-  </div>
-  <div class="predictive">Predictive
-    <br><br>
+    <br>
+    <p style="font-weight: bold;">Predictive</p>
     <?php
 
     $topic_string = "";
@@ -762,6 +762,9 @@ $db_handle = new DBController();
 
     ?>
   </div>
+  <!-- <div class="predictive">Predictive
+
+  </div> -->
   <br><br>
 
   <!-- ChatBot -->
@@ -929,7 +932,8 @@ $db_handle = new DBController();
       </div>
     </div>
   </div>
-  <div class="prescriptive">Prescriptive
+  <div class="prescriptive">
+    <p style="font-weight: bold;"> Prescriptive</p>
     <br><br>
 
     <?php

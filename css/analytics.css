@@ -740,19 +740,20 @@ table.formview{
         }
         .descriptive {
           background-color: white;
-          width: 685px;
+          width: auto;
           padding: 20px;
           margin: 20px;
           display: inline-block;
           border: 2px solid black;
           border-radius: 10px;
-          margin-left: 42px;
           font-size: 20px;
+          margin-right: 50px;
+          margin-left: 50px;
         }
     
         .predictive {
           background-color: white;
-          width: 685px;
+          width: auto;
           padding: 20px;
           margin: 20px;
           display: inline-block;
