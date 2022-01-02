@@ -1,6 +1,7 @@
 <?php
+
 session_start();
-$dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
+$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
 
 if (isset($_POST['submit'])) {
 
@@ -34,7 +35,7 @@ if (isset($_POST['submit'])) {
     $stat->bindParam(11, $id);
     $stat->execute();
     header("Location: profile.php");
-  }else{
+  } else {
     $stat = $dbh->prepare("update research set title=?,author=?,institution=?,degree_level=?,topic=?,research_type=?,abstract=?,keywords=?,publisher=?,permission=?,file_type=?,file_upload=?,file_name=? where id=?");
     $stat->bindParam(1, $title);
     $stat->bindParam(2, $author);
@@ -53,6 +54,4 @@ if (isset($_POST['submit'])) {
     $stat->execute();
     header("Location: profile.php");
   }
-
 }
-?>
