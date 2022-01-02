@@ -78,7 +78,9 @@ if (!empty($result)) {
     .number {
       height: 26px;
       width: 24px;
-    }
+      left: 85%;
+  </style>
+  }
   </style>
 </head>
 
