@@ -113,6 +113,7 @@ include 'backend/database.php';
                             <th class="th">ID</th>
                             <th class="th">Title</th>
                             <th class="th">Published By</th>
+                            <th class="th">Topic</th>
                             <th class="th">Year</th>
                             <th class="th" colspan="5">Action</th>
 
@@ -126,6 +127,7 @@ include 'backend/database.php';
             <td class="td">' . $row['id'] . '</td>
             <td class="td">' . $row['title'] . '</td>
             <td class="td">' . $row['author'] . '</td>
+            <td class="td">' . $row['topic'] . '</td>
             <td class="td">' . $row['publication_year'] . '</td>
             <td class="td"><button class="review"><a style="text-decoration:none;color:white;" href="review.php?id=' . $row['id'] . '">Review</a></button></td>
             <td class="td" >
