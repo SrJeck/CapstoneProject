@@ -115,6 +115,7 @@ include 'backend/database.php';
                             <th class="th">Published By</th>
                             <th class="th">Topic</th>
                             <th class="th">Year</th>
+                            <th class="th">Plagiarize Percent</th>
                             <th class="th" colspan="5">Action</th>
 
 
@@ -129,6 +130,7 @@ include 'backend/database.php';
             <td class="td">' . $row['author'] . '</td>
             <td class="td">' . $row['topic'] . '</td>
             <td class="td">' . $row['publication_year'] . '</td>
+            <td class="td">' . $row['plagiarism_percent'] . '</td>
             <td class="td"><button class="review"><a style="text-decoration:none;color:white;" href="review.php?id=' . $row['id'] . '">Review</a></button></td>
             <td class="td" >
             <select name="select" id="select' . $row['id'] . '" class="custom-select" onchange="selectAction(' . $row['id'] . ')">
@@ -139,8 +141,8 @@ include 'backend/database.php';
             </td>
             <td class="td" id="1strow' . $row['id'] . '" style="display:none">
             <textarea  name="reason" id="reason' . $row['id'] . '" placeholder="Reason of Reject"></textarea> 
-            <input name="user" id="user' . $row['id'] . '" value="'. $row['user_id'] .'" style="display:none">
-            <input name="thesis" id="thesis' . $row['id'] . '" value="'. $row['id'] .'" style="display:none">   
+            <input name="user" id="user' . $row['id'] . '" value="' . $row['user_id'] . '" style="display:none">
+            <input name="thesis" id="thesis' . $row['id'] . '" value="' . $row['id'] . '" style="display:none">   
              </td>
              <td class="td" >
                 <button class="send" type="submit" onclick="submitForm(' . $row['id'] . ')"><a style="text-decoration:none;color:white;" href=""><i style="font-size: 12px;" class="material-icons">send</i></a></button>

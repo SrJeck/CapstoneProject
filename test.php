@@ -1,47 +1,90 @@
+<!-- START DATE 8/28/2021 -->
+<!-- UPDATE DATE 11/16/2021 -->
+
+
+<!-- Search and Pagination -->
 <?php
 session_start();
 if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
 }
-$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-$id = $_GET["id"];
-$stat = $dbh->prepare('select * from research where id=?');
-$stat->bindParam(1, $id);
-$stat->execute();
-$row = $stat->fetch();
+require_once("perpage.php");
+require_once("dbcontroller.php");
+$db_handle = new DBController();
+
+$title = "";
+$author = "";
+$topic = "";
+$publication_day = "";
+$publication_day = "";
+$publication_year = "";
+
+$queryCondition = "";
+if (!empty($_POST["search"])) {
+    foreach ($_POST["search"] as $k => $v) {
+        if (!empty($v)) {
+
+            $queryCases = array("title", "author", "topic", "publication_day", "publication_day", "publication_year");
+            if (in_array($k, $queryCases)) {
+                if (!empty($queryCondition)) {
+                    $queryCondition .= " OR ";
+                } else {
+                    $queryCondition .= " WHERE ";
+                }
+            }
+            switch ($k) {
+                case "title":
+                    $title = $v;
+                    $queryCondition .= "title LIKE '%" . $v . "%'"  . "OR author LIKE'%" . $v . "%'"  . "OR topic LIKE'%" . $v . "%'";
+                    break;
+            }
+        }
+    }
+}
+$orderby = " ORDER BY id desc";
+$sql = "SELECT * from research " . $queryCondition;
+$href = 'journals.php';
+
+$perPage = 3;
+$page = 1;
+if (isset($_POST['page'])) {
+    $page = $_POST['page'];
+}
+$start = ($page - 1) * $perPage;
+if ($start < 0) $start = 0;
+
+$query =  $sql . $orderby .  " limit " . $start . "," . $perPage;
+$result = $db_handle->runQuery($query);
+
+if (!empty($result)) {
+    $result["perpage"] = showperpage($sql, $perPage, $href);
+}
 ?>
-<!-- START DATE 8/28/2021 -->
-<!-- UPDATE DATE 11/16/2021 -->
 
 <html>
 
 <head>
-    <title>Edit Upload</title>
-    <script type="text/javascript" src="script.js"></script>
+    <title>Home</title>
+    <script type="text/javascript" src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/addarticle.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/notification.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- ChatBot -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.convform.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+
     <style>
         .number {
-            height: 26px;
-            width: 24px;
-        }
-
-        #dialog {
-
-            top: 65px;
-        }
-
-        .txt {
-            width: 370px;
+            left: 55%;
         }
     </style>
 </head>
@@ -112,105 +155,250 @@ $row = $stat->fetch();
     </div>';
     }
     ?>
+    <!-- <script>
+    $("#showdialog").click(function() {
+      $(".box").show();
+    });
+    $(".box .close").click(function() {
+      $(this).parent().hide()
+    })
+  </script> -->
+
+    <!-- MOBILE SIDEBAR -->
+    <!-- <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="index.php">HOME</a>
+    <a href="research.php">RESEARCH</a>
+    <a href="analytics.php">ANALYTICS</a>
+  </div>
+  <span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span> -->
+
+    <!-- BANNER IMAGE -->
+    <br>
+    <div id="index">
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+                <img src="images/Ban1.png" style="width:100%; height: 430px; ">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Ban2.png" style="width:100%; height: 430px; ">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Ban3.png" style="width:100%; height: 430px;">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/Ban1.png" style="width:100%; height: 430px; ">
+            </div>
 
 
-    <!-- Form -->
-    <div class="container">
-        <form id="add_article_form" action="update_upload.php" method="post" enctype="multipart/form-data">
-            <input id="thesis_id" name="thesis_id" value="<?php echo $id ?>" style="display:none">
+            <div class="mySlides fade">
+                <img src="images/Ban2.png" style="width:100%; height: 430px; ">
+            </div>
 
-            <h3>Add Article</h3><br>
-            <fieldset>
-                <label>Abstract:</label>
-                <textarea type="text" name="abstract" id="abstract" rows="7" cols="50" required><?php echo $row['abstract'] ?></textarea>
-            </fieldset>
-            <fieldset>
-                <label>Title:</label>
-                <input type="text" name="title" id="title" value="<?php echo $row['title'] ?>" required>
-            </fieldset>
-            <fieldset>
-                <label>Authors:</label>
-                <input type="text" name="author" id="author" value="<?php echo $row['author'] ?>" required>
-            </fieldset>
+        </div>
+        <br>
 
-            <fieldset>
-                <label>Institution:</label>
-                <input type="text" name="institution" id="institution" value="<?php echo $row['institution'] ?>" required>
-            </fieldset>
-            <fieldset>
-                <label>Degree Level:</label>
-                <select name="degree_level" id="degree_level" required>
-                    <option value="<?php echo $row['degree_level'] ?>" selected disabled hidden><?php echo $row['degree_level'] ?> </option>
-                    <option value="Professional Certificates">Professional Certificates</option>
-                    <option value="Undergraduate Degrees">Undergraduate Degrees</option>
-                    <option value="Transfer Degrees">Transfer Degrees</option>
-                    <option value="Associate Degrees">Associate Degrees</option>
-                    <option value="Bachelor Degrees">Bachelor Degrees</option>
-                    <option value="Graduate Degrees">Graduate Degrees</option>
-                    <option value="Master Degrees">Master Degrees</option>
-                    <option value="Doctoral Degrees">Doctoral Degrees</option>
-                    <option value="Professional Degrees">Professional Degrees</option>
-                    <option value="Others">Others</option>
-                </select>
-            </fieldset>
-            <fieldset>
-                <label>Topic:</label>
-                <select name="topic" id="topic" required>
-                    <option value="<?php echo $row['topic'] ?>" selected disabled hidden><?php echo $row['topic'] ?></option>
-                    <option value="Education">Education</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Research">Research</option>
-                    <option value="Analysis">Analysis</option>
-                    <option value="Database">Database</option>
-                    <option value="Agriculture">Agriculture</option>
-                    <option value="Health">Health</option>
-                    <option value="Politics">Politics</option>
-                    <option value="Psychology">Psychology</option>
-                    <option value="Business">Business</option>
-                    <option value="Marketing and Advertising">Marketing and Advertising</option>
-                    <option value="Mechanical">Mechanical</option>
-                    <option value="Ethics">Ethics</option>
-                    <option value="Others">Others</option>
-                </select>
-            </fieldset>
-            <fieldset>
-                <label>Research Type:</label>
-                <select name="research_type" id="research_type" required>
-                    <option value="<?php echo $row['research_type'] ?>" selected disabled hidden><?php echo $row['research_type'] ?></option>
-                    <option value="Capstone Project">Capstone Project</option>
-                    <option value="Undergraduate Thesis">Undergraduate Thesis</option>
-                    <option value="Master’s Thesis">Master’s Thesis</option>
-                    <option value="Dissertation">Dissertation</option>
-                    <option value="Practice Based">Practice Based</option>
-                </select>
-            </fieldset>
-            <fieldset>
-                <label>Keywords:</label>
-                <input type="text" value="<?php echo $row['keywords'] ?>" id="keywords" name="keywords">
-            </fieldset>
-            <fieldset>
-                <label>Publisher:</label>
-                <input type="text" name="publisher" id="publisher" value="<?php echo $row['publisher'] ?>" required>
-            </fieldset>
-            <fieldset>
-                <label>Permission Type:</label>
-                <br>
-                <input type="radio" id="view_only" name="permission" value="View Only">
-                <label>View Only</label>
-                <input style="margin-left: 20px;" type="radio" id="download_only" name="permission" value="Download Only">
-                <label>Download Only</label>
-                <input style="margin-left: 20px;" type="radio" id="view_download" name="permission" value="View and Download">
-                <label>View and Download</label><br>
-            </fieldset>
 
-            <fieldset>
-                <button class="submit" type="submit" name="submit" id="sendNewSms">Update</button>
-            </fieldset>
+        <div style="text-align:center">
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+            <span style="display: none;" class="dot"></span>
+        </div>
+        <script>
+            var slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) {
+                    slideIndex = 1
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+                setTimeout(showSlides, 3000); // Change image every 3 seconds
+            }
+        </script>
+
+        <!-- SEARCH BAR CONTAINER -->
+        <form name="frmSearch" method="post" action="research.php">
+            <div class="container">
+                <div class="row height d-flex justify-content-center align-items-center">
+                    <div>
+                        <div class="form">
+                            <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
+                                                                                                                                                        }  ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
 
+        <!-- INTRODUCTION -->
+        <h2 class="new">Read, Study and Develop With ThesisQuo!</h2>
+        <p class="intro">Browse thesis studies that may help you in creating your own research, study and develop your research with ThesisQuo and share it to the community.
 
-    </div>
+        </p>
+        <!-- 3 IMAGES -->
+        <div class="images">
+            <form action="research.php" method="POST">
+                <img class="book" src="images/book.JPG">
+                <button class="btn" type="submit" name="Education">Education</button>
+                <img class="chip" src="images/chip.JPG">
+                <button class="btn2" type="submit" name="Technology">Technology</button>
+                <img class="business" src="images/business.JPG">
+                <button class="btn3" type="submit" name="Business">Business</button>
+            </form>
+        </div>
+
+        <!-- ChatBot -->
+        <div class="chat_icon">
+            <img style="height: 80px;" src="images/chatboticon.png">
+        </div>
+
+        <div class="chat_box">
+            <div class="my-conv-form-wrapper">
+                <form action="" method="GET" class="hidden">
+                    <select data-conv-question="Hello! How can I help you" name="category">
+                        <option value="1">How to Upload Study?</option>
+                        <option value="2">What study would you recommend for me to read?</option>
+                        <option value="3">What study topic can i develop?</option>
+                    </select>
+                    <!-- How to Upload Study? -->
+                    <div data-conv-fork="category">
+                        <div data-conv-case="1" data-conv-fork="first-question2">
+                            <input type="text" name="name" data-conv-question="You must have an account before you upload your papers, if you are already a member, you may follow these steps:
+                <br><br>
+                1. Click the add (+) button on the navigation bar to upload your papers
+                <br>
+                2. Fill out the fields required by the admin to upload paper.
+                <br>
+                3. Read and Accept the Privacy Policy & Terms and Condition before submitting the paper.
+                <br>
+                4. Wait for the Plagiarism result if accepted or not.
+                <br>
+                5. If the paper passed the Plagiarism test, the paper will be upload. if not, the User must revise and re-upload the paper.
+                <br><br><br>
+                <button class='reset'><a style='text-decoration: none;' onClick=' window.location.reload()'>Reset</a></button>
+
+              ">
+                        </div>
+                    </div>
+                    <!-- What study would you recommend for me to read? -->
+                    <div data-conv-fork="category">
+
+                        <div data-conv-case="2" data-conv-fork="first-question2">
+                            <select data-conv-question="What field of study you want to know more?" name="category">
+                                <option value="1">Education</option>
+                                <option value="1">Technology</option>
+                                <option value="1">Business</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="1" data-conv-fork="first-question2">
+                            <select data-conv-question="I Recommend these studies:
+              <br><br>
+              1. Highest upload in 12 months
+              <br>
+              2. Highest upload in Total
+              <br>
+              3. Recent Uploaded Study
+              <br><br>
+              Or you may check the thesis repository to find more studies that you might use.
+              " name="category">
+                                <option value="1">Do you want another question suggestion from other topics?</option>
+                                <option value="1">Do you have any specific question for me?</option>
+                            </select>
+                        </div>
+
+
+                        <div data-conv-fork="first-question3">
+                            <select style="display:none;background-color:#DEDEDE;" data-conv-question="<span style='display:none;background-color:red; color:yellow;'>Do you have any specific question for me?</span>" name="category">
+                                <option value="Yess">Yes</option>
+                                <option value="Noo">No</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="Yess" data-conv-fork="first-question3">
+                            <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
+                        </div>
+                    </div>
+                    <!-- What study topic can i develop? -->
+                    <div data-conv-fork="category">
+
+                        <div data-conv-case="3" data-conv-fork="first-question2">
+                            <select data-conv-question="What do you want to develop?" name="category">
+                                <option value="1">Uniqie Study</option>
+                                <option value="2">More Resources Available</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="1" data-conv-fork="first-question2">
+                            <select data-conv-question="Select the option" name="category">
+                                <option value="1">Show overall Lowest number of uploaded topic</option>
+                            </select>
+                        </div>
+
+                        <div data-conv-case="2" data-conv-fork="first-question2">
+                            <select data-conv-question="Select the option" name="category">
+                                <option value="1">Show overall Highest number of uploaded topic</option>
+                            </select>
+                        </div>
+
+                        <div data-conv-fork="first-question3">
+                            <select data-conv-question="Do you have any specific question for me?" name="category">
+                                <option value="Yess">Yes</option>
+                                <option value="Noo">No</option>
+                            </select>
+                        </div>
+                        <div data-conv-case="Yess" data-conv-fork="first-question3">
+                            <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
+                        </div>
+                    </div>
+                    <select data-conv-case="Noo" data-conv-question="Thank you for talking me">
+                        <option value="Yes">Reset</option>
+                    </select>
+
+                </form>
+            </div>
+        </div>
+        <!-- ChatBot end -->
+
 </body>
+<!-- Below is the script for voice recognition and conversion to text-->
+<script>
+    function record() {
+        var recognition = new webkitSpeechRecognition();
+        recognition.lang = "en-GB";
 
+        recognition.onresult = function(event) {
+            // console.log(event);
+            document.getElementById('speechToText').value = event.results[0][0].transcript;
+        }
+        recognition.start();
+    }
+</script>
+<!-- Below is the script for mobile side navigation-->
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
 
 </html>

@@ -273,24 +273,26 @@ if (!empty($result)) {
     <div class="chat_box">
       <div class="my-conv-form-wrapper">
         <br><br>
-      <button class="questions" style="display:block" onclick="questionType(1)">How to Upload Study?</button>
-<button class="questions"  style="display:block" onclick="questionType(2)">What study would you recommend for me to read?</button>
-<button class="questions"  style="display:block" onclick="questionType(3)">What study topic can i develop?</button>
-<div class="answer1" style="display:none">You must have an account before you upload your papers, if you are already a member, you may follow these steps:
-    <br><br>
-    1. Click the add (+) button on the navigation bar to upload your papers
-    <br>
-    2. Fill out the fields required by the admin to upload paper.
-    <br>
-    3. Read and Accept the Privacy Policy & Terms and Condition before submitting the paper.
-    <br>
-    4. Wait for the Plagiarism result if accepted or not.
-    <br>
-    5. If the paper passed the Plagiarism test, the paper will be upload. if not, the User must revise and re-upload the paper.
-    <br><br><br>
-</div>
-<button class="answer1" style="display:none" onclick="reset()">Ok</button>
-<select class="answer2" style="display:none" name="topic" id="topic" required>
+        <div class="div-questions">
+          <button class="questions" style="display:block" onclick="questionType(1)">How to Upload Study?</button>
+          <button class="questions" style="display:block" onclick="questionType(2)">What study would you recommend for me to read?</button>
+          <button class="questions" style="display:block" onclick="questionType(3)">What study topic can i develop?</button>
+        </div>
+        <div class="answer1" id="answer1" style="display:none">You must have an account before you upload your papers, if you are already a member, you may follow these steps:
+          <br><br>
+          1. Click the add (+) button on the navigation bar to upload your papers
+          <br>
+          2. Fill out the fields required by the admin to upload paper.
+          <br>
+          3. Read and Accept the Privacy Policy & Terms and Condition before submitting the paper.
+          <br>
+          4. Wait for the Plagiarism result if accepted or not.
+          <br>
+          5. If the paper passed the Plagiarism test, the paper will be upload. if not, the User must revise and re-upload the paper.
+          <br><br><br>
+        </div>
+        <button class="answer1" id="reset" style="display:none" onclick="reset()">Reset</button>
+        <select class="answer2 custom-select" style="display:none" name="topic" id="topic" required>
           <option value="" selected disabled hidden>Select topic type</option>
           <option value="Education">Education</option>
           <option value="Technology">Technology</option>
@@ -307,25 +309,28 @@ if (!empty($result)) {
           <option value="Ethics">Ethics</option>
           <option value="Others">Others</option>
         </select>
-<button class="answer2" style="display:none" onclick="selectedTopic()">select</button>
-<div class="analyticsResult" style="display:none">I Recommend these studies:
-</div>
-<button class="analyticsResult" style="display:none" onclick="analyticsQuestionType(1)">Do you want another question suggestion from other topics?</button>
-<button class="analyticsResult" style="display:none" onclick="analyticsQuestionType(2)">Do you have any specific question for me?</button>
-<button class="analyticsAnswer1" style="display:none" onclick="analyticsAnswerType('yes')">Yes</button>
-<button class="analyticsAnswer1" style="display:none" onclick="analyticsAnswerType('no')">No</button>
-<div class="analyticsAnswer2"  style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
-<button class="analyticsAnswer2"  style="display:none" onclick="reset()">Ok</button>
-<div class="answer3"   style="display:none">What do you want to develop?</div>
-<button class="answer3" style="display:none" onclick="developmentType(1)">Uniqie Study</button>
-<button class="answer3" style="display:none" onclick="developmentType(2)">More Resources Available</button>
-<div class="development1" style="display:none">Show overall Lowest number of uploaded topic</div>
-<div class="development2" style="display:none">Show overall Highest number of uploaded topic</div>
-<div class="development"  style="display:none">Do you have any specific question for me?</div>
-<button class="development" style="display:none" onclick="developmentAnswerType('yes')">Yes</button>
-<button class="development" style="display:none"  onclick="developmentAnswerType('no')">No</button>
-<div class="developmentQuestions" style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
-<button class="developmentQuestions"  style="display:none" onclick="reset()">Ok</button>
+
+        <button class="answer2 select" style="display:none" onclick="selectedTopic()">Select</button>
+        <div class="analyticsResult" style="display:none">I Recommend these studies:
+        </div>
+        <div class="questionbutton">
+          <button class="analyticsResult" id="analyticsResultbutton" style="display:none" onclick="analyticsQuestionType(1)">Do you want another question suggestion from other topics?</button>
+          <button class="analyticsResult" id="analyticsResultbutton2" style="display:none" onclick="analyticsQuestionType(2)">Do you have any specific question for me?</button>
+        </div>
+        <button class="analyticsAnswer1" id="yes" style="display:none" onclick="analyticsAnswerType('yes')">Yes</button>
+        <button class="analyticsAnswer1" id="no" style="display:none" onclick="analyticsAnswerType('no')">No</button>
+        <div class="analyticsAnswer2" style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
+        <button class="analyticsAnswer2" id="reset" style="display:none" onclick="reset()">Reset</button>
+        <div class="answer3" id="answer3" style="display:none">What do you want to develop?</div>
+        <button class="answer3" id="opt" style="display:none" onclick="developmentType(1)">Uniqie Study</button>
+        <button class="answer3" id="opt" style="display:none" onclick="developmentType(2)">More Resources Available</button>
+        <div class="development1" style="display:none">Show overall Lowest number of uploaded topic</div>
+        <div class="development2" style="display:none">Show overall Highest number of uploaded topic</div>
+        <div class="development" id="specific" style="display:none">Do you have any specific question for me?</div>
+        <button class="development" style="display:none" onclick="developmentAnswerType('yes')">Yes</button>
+        <button class="development" style="display:none" onclick="developmentAnswerType('no')">No</button>
+        <div class="developmentQuestions" id="question2" style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
+        <button class="developmentQuestions" id="developmentQuestions" style="display:none" onclick="reset()">Ok</button>
       </div>
     </div>
     <!-- ChatBot end -->

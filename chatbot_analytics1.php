@@ -140,16 +140,16 @@ if (count($final_topic_array2) > 1) {
 
 
 for ($i = 0; $i < count($topic_array3); $i++) {
-    $output3 .= "Title: " . $title_array3[$i] . "<br>Topic: " . $topic_array3[$i] . "";
+    $output3 .= "<strong>Title: </strong>" . $title_array3[$i] . "<br><strong>Topic: </strong>" . $topic_array3[$i] . "<br><br>";
 }
 
 
 
-echo "The " . $topic . " is " . $topic_position1_str . " in the Highest Upload in 12 months<br><br>";
-echo "The " . $topic . " is " . $topic_position2_str . " in the Highest upload in Total<br><br>";
-echo "The " . $topic . " is " . $topic_position3_str . " in the Recent Uploaded Study<br><br>";
+echo "The <strong>" . $topic . "</strong> is " . $topic_position1_str . " in the Highest Upload in 12 months<br><br>";
+echo "The <strong>" . $topic . "</strong> is " . $topic_position2_str . " in the Highest upload in Total<br><br>";
+echo "The <strong>" . $topic . "</strong> is " . $topic_position3_str . " in the Recent Uploaded Study<br><br>";
 
 
-echo "Highest upload in 12 months<br><br>" . rtrim($output1, ", ") . "<br><br>";
-echo "Highest upload in Total<br><br>" . rtrim($output2, ", ") . "<br><br>";
-echo "Recent Uploaded Study<br><br>" . rtrim($output3, "<br><br>");
+echo "The highest upload in 12 months is <strong>" . rtrim($output1, ", ") . "</strong><br><br>";
+echo "The highest upload in Total is <strong>" . rtrim($output2, ", ") . "</strong><br><br>";
+echo "The Recent Uploaded Study is: <br><br>" . rtrim($output3, "<br><br>");

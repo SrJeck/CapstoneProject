@@ -85,7 +85,7 @@ include 'backend/database.php';
       </li>
 
       <li>
-        <a href="settings">
+        <a href="settings.php">
           <i class='bx bx-cog'></i>
           <span class="links_name">Settings</span>
         </a>
