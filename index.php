@@ -272,105 +272,60 @@ if (!empty($result)) {
 
     <div class="chat_box">
       <div class="my-conv-form-wrapper">
-        <form action="" method="GET" class="hidden">
-          <select data-conv-question="Hello! How can I help you" name="category">
-            <option value="1">How to Upload Study?</option>
-            <option value="2">What study would you recommend for me to read?</option>
-            <option value="3">What study topic can i develop?</option>
-          </select>
-          <!-- How to Upload Study? -->
-          <div data-conv-fork="category">
-            <div data-conv-case="1" data-conv-fork="first-question2">
-              <input type="text" name="name" data-conv-question="You must have an account before you upload your papers, if you are already a member, you may follow these steps:
-                <br><br>
-                1. Click the add (+) button on the navigation bar to upload your papers
-                <br>
-                2. Fill out the fields required by the admin to upload paper.
-                <br>
-                3. Read and Accept the Privacy Policy & Terms and Condition before submitting the paper.
-                <br>
-                4. Wait for the Plagiarism result if accepted or not.
-                <br>
-                5. If the paper passed the Plagiarism test, the paper will be upload. if not, the User must revise and re-upload the paper.
-                <br><br><br>
-                <button class='reset'><a style='text-decoration: none;' onClick=' window.location.reload()'>Reset</a></button>
-
-              ">
-            </div>
-          </div>
-          <!-- What study would you recommend for me to read? -->
-          <div data-conv-fork="category">
-
-            <div data-conv-case="2" data-conv-fork="first-question2">
-              <select data-conv-question="What field of study you want to know more?" name="category">
-                <option value="1">Education</option>
-                <option value="1">Technology</option>
-                <option value="1">Business</option>
-              </select>
-            </div>
-            <div data-conv-case="1" data-conv-fork="first-question2">
-              <select data-conv-question="I Recommend these studies:
-              <br><br>
-              1. Highest upload in 12 months
-              <br>
-              2. Highest upload in Total
-              <br>
-              3. Recent Uploaded Study
-              <br><br>
-              Or you may check the thesis repository to find more studies that you might use.
-              " name="category">
-                <option value="1">Do you want another question suggestion from other topics?</option>
-                <option value="1">Do you have any specific question for me?</option>
-              </select>
-            </div>
-
-
-            <div data-conv-fork="first-question3">
-              <select style="display:none;background-color:#DEDEDE;" data-conv-question="<span style='display:none;background-color:red; color:yellow;'>Do you have any specific question for me?</span>" name="category">
-                <option value="Yess">Yes</option>
-                <option value="Noo">No</option>
-              </select>
-            </div>
-            <div data-conv-case="Yess" data-conv-fork="first-question3">
-              <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
-            </div>
-          </div>
-          <!-- What study topic can i develop? -->
-          <div data-conv-fork="category">
-
-            <div data-conv-case="3" data-conv-fork="first-question2">
-              <select data-conv-question="What do you want to develop?" name="category">
-                <option value="1">Uniqie Study</option>
-                <option value="2">More Resources Available</option>
-              </select>
-            </div>
-            <div data-conv-case="1" data-conv-fork="first-question2">
-              <select data-conv-question="Select the option" name="category">
-                <option value="1">Show overall Lowest number of uploaded topic</option>
-              </select>
-            </div>
-
-            <div data-conv-case="2" data-conv-fork="first-question2">
-              <select data-conv-question="Select the option" name="category">
-                <option value="1">Show overall Highest number of uploaded topic</option>
-              </select>
-            </div>
-
-            <div data-conv-fork="first-question3">
-              <select data-conv-question="Do you have any specific question for me?" name="category">
-                <option value="Yess">Yes</option>
-                <option value="Noo">No</option>
-              </select>
-            </div>
-            <div data-conv-case="Yess" data-conv-fork="first-question3">
-              <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
-            </div>
-          </div>
-          <select data-conv-case="Noo" data-conv-question="Thank you for talking me">
-            <option value="Yes">Reset</option>
-          </select>
-
-        </form>
+        <br>
+      <button class="questions" style="display:block" onclick="questionType(1)">How to Upload Study?</button>
+<button class="questions"  style="display:block" onclick="questionType(2)">What study would you recommend for me to read?</button>
+<button class="questions"  style="display:block" onclick="questionType(3)">What study topic can i develop?</button>
+<div class="answer1" style="display:none">You must have an account before you upload your papers, if you are already a member, you may follow these steps:
+    <br><br>
+    1. Click the add (+) button on the navigation bar to upload your papers
+    <br>
+    2. Fill out the fields required by the admin to upload paper.
+    <br>
+    3. Read and Accept the Privacy Policy & Terms and Condition before submitting the paper.
+    <br>
+    4. Wait for the Plagiarism result if accepted or not.
+    <br>
+    5. If the paper passed the Plagiarism test, the paper will be upload. if not, the User must revise and re-upload the paper.
+    <br><br><br>
+</div>
+<button class="answer1" style="display:none" onclick="reset()">Ok</button>
+<select class="answer2" style="display:none" name="topic" id="topic" required>
+          <option value="" selected disabled hidden>Select topic type</option>
+          <option value="Education">Education</option>
+          <option value="Technology">Technology</option>
+          <option value="Research">Research</option>
+          <option value="Analysis">Analysis</option>
+          <option value="Database">Database</option>
+          <option value="Agriculture">Agriculture</option>
+          <option value="Health">Health</option>
+          <option value="Politics">Politics</option>
+          <option value="Psychology">Psychology</option>
+          <option value="Business">Business</option>
+          <option value="Marketing and Advertising">Marketing and Advertising</option>
+          <option value="Mechanical">Mechanical</option>
+          <option value="Ethics">Ethics</option>
+          <option value="Others">Others</option>
+        </select>
+<button class="answer2" style="display:none" onclick="selectedTopic()">select</button>
+<div class="analyticsResult" style="display:none">I Recommend these studies:
+</div>
+<button class="analyticsResult" style="display:none" onclick="analyticsQuestionType(1)">Do you want another question suggestion from other topics?</button>
+<button class="analyticsResult" style="display:none" onclick="analyticsQuestionType(2)">Do you have any specific question for me?</button>
+<button class="analyticsAnswer1" style="display:none" onclick="analyticsAnswerType('yes')">Yes</button>
+<button class="analyticsAnswer1" style="display:none" onclick="analyticsAnswerType('no')">No</button>
+<div class="analyticsAnswer2"  style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
+<button class="analyticsAnswer2"  style="display:none" onclick="reset()">Ok</button>
+<div class="answer3"   style="display:none">What do you want to develop?</div>
+<button class="answer3" style="display:none" onclick="developmentType(1)">Uniqie Study</button>
+<button class="answer3" style="display:none" onclick="developmentType(2)">More Resources Available</button>
+<div class="development1" style="display:none">Show overall Lowest number of uploaded topic</div>
+<div class="development2" style="display:none">Show overall Highest number of uploaded topic</div>
+<div class="development"  style="display:none">Do you have any specific question for me?</div>
+<button class="development" style="display:none" onclick="developmentAnswerType('yes')">Yes</button>
+<button class="development" style="display:none"  onclick="developmentAnswerType('no')">No</button>
+<div class="developmentQuestions" style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
+<button class="developmentQuestions"  style="display:none" onclick="reset()">Ok</button>
       </div>
     </div>
     <!-- ChatBot end -->

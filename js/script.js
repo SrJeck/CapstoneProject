@@ -86,3 +86,225 @@ function seeNotif() {
   }
 
 }
+function questionType(params) {
+  if (params == 1) {
+    var items = document.getElementsByClassName("answer"+params);
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "block";
+		}
+    var items = document.getElementsByClassName("questions");
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "none";
+		}
+  }else if (params == 2) {
+    
+    var items = document.getElementsByClassName("answer"+params);
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "block";
+		}
+    // var items = document.getElementsByClassName("answer"+params);
+		// for (var i=0; i < items.length; i++) {
+		// 	items[i].style.display = "block";
+		// }
+    var items = document.getElementsByClassName("questions");
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "none";
+		}
+    
+  
+  }else if (params == 3) {
+    
+    var items = document.getElementsByClassName("answer"+params);
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "block";
+		}
+    var items = document.getElementsByClassName("questions");
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "none";
+		}
+  }
+}
+function reset() {
+  var items = document.getElementsByClassName("questions");
+  for (var i=0; i < items.length; i++) {
+    items[i].style.display = "block";
+  }
+  var items = document.getElementsByClassName("answer1");
+  for (var i=0; i < items.length; i++) {
+    items[i].style.display = "none";
+  }
+  var items = document.getElementsByClassName("answer2");
+  for (var i=0; i < items.length; i++) {
+    items[i].style.display = "none";
+  }
+  var items = document.getElementsByClassName("answer3");
+  for (var i=0; i < items.length; i++) {
+    items[i].style.display = "none";
+  }
+  var items = document.getElementsByClassName("analyticsAnswer2");
+  for (var i=0; i < items.length; i++) {
+    items[i].style.display = "none";
+  }
+  var items = document.getElementsByClassName("developmentQuestions");
+  for (var i=0; i < items.length; i++) {
+    items[i].style.display = "none";
+  }
+  
+  document.getElementById("topic").options[0].selected = true;
+}
+
+function analytics(topic) {
+  xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      document.getElementsByClassName("analyticsResult")[0].innerHTML = xhr.responseText+"Or you may check the thesis repository to find more studies that you might use.";
+      document.getElementsByClassName("analyticsResult")[0].style.display = "block";
+    }
+  }
+  xhr.open("POST", "chatbot_analytics1.php", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send("topic=" + topic);
+}
+
+function developmentType(order) {
+  var order_type = "";
+  if (order == 1) {
+    order_type = " ASC";
+  }else{
+    order_type = " DESC";
+  }
+  
+  xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      document.getElementsByClassName("development"+order)[0].innerHTML = xhr.responseText;
+    }
+  }
+  xhr.open("POST", "chatbot_analytics2.php", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send("order=" + order_type);
+  if (order == 1) {
+    document.getElementsByClassName("development1")[0].style.display = "block";
+    var items = document.getElementsByClassName("development");
+    for (var i=0; i < items.length; i++) {
+      items[i].style.display = "block";
+    }
+    document.getElementsByClassName("development2")[0].style.display = "none";
+  }else{
+    document.getElementsByClassName("development1")[0].style.display = "none";
+    var items = document.getElementsByClassName("development");
+    for (var i=0; i < items.length; i++) {
+      items[i].style.display = "block";
+    }
+    document.getElementsByClassName("development2")[0].style.display = "block";
+  }
+}
+
+function analyticsQuestionType(params) {
+  if (params == 1) {
+    var items = document.getElementsByClassName("analyticsAnswer1");
+    for (var i=0; i < items.length; i++) {
+      items[i].style.display = "block";
+    }
+    var items = document.getElementsByClassName("analyticsResult");
+    for (var i=0; i < items.length; i++) {
+      items[i].style.display = "none";
+    }
+  }else{
+    var items = document.getElementsByClassName("analyticsAnswer2");
+    for (var i=0; i < items.length; i++) {
+      items[i].style.display = "block";
+    }
+    var items = document.getElementsByClassName("analyticsResult");
+    for (var i=0; i < items.length; i++) {
+      items[i].style.display = "none";
+    }
+  }
+}
+
+function developmentAnswerType(answer) {
+  if (answer == "yes") {
+    var items = document.getElementsByClassName("developmentQuestions");
+    for (var i=0; i < items.length; i++) {
+      items[i].style.display = "block";
+    }
+    var items1 = document.getElementsByClassName("development1");
+    for (var i=0; i < items1.length; i++) {
+      items1[i].style.display = "none";
+    }
+    var items2 = document.getElementsByClassName("development2");
+    for (var i=0; i < items2.length; i++) {
+      items2[i].style.display = "none";
+    }
+    var items3 = document.getElementsByClassName("development");
+    for (var i=0; i < items3.length; i++) {
+      items3[i].style.display = "none";
+    }
+    var items3 = document.getElementsByClassName("answer3");
+    for (var i=0; i < items3.length; i++) {
+      items3[i].style.display = "none";
+    }
+  }else{
+    var items1 = document.getElementsByClassName("development1");
+    for (var i=0; i < items1.length; i++) {
+      items1[i].style.display = "none";
+    }
+    var items2 = document.getElementsByClassName("development2");
+    for (var i=0; i < items2.length; i++) {
+      items2[i].style.display = "none";
+    }
+    var items3 = document.getElementsByClassName("development");
+    for (var i=0; i < items3.length; i++) {
+      items3[i].style.display = "none";
+    }
+    reset();
+  }
+}
+
+function analyticsAnswerType(answer) {
+  if (answer == "yes") {
+    document.getElementById("topic").options[0].selected = true;
+    var items = document.getElementsByClassName("answer2");
+    for (var i=0; i < items.length; i++) {
+      items[i].style.display = "block";
+    }
+    var items1 = document.getElementsByClassName("analyticsAnswer1");
+    for (var i=0; i < items1.length; i++) {
+      items1[i].style.display = "none";
+    }
+  }else{
+    var items1 = document.getElementsByClassName("analyticsAnswer1");
+    for (var i=0; i < items1.length; i++) {
+      items1[i].style.display = "none";
+    }
+    reset();
+  }
+}
+
+function selectedTopic() {
+  var topic = document.getElementById("topic").value;
+  if (topic != "") {
+    xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      document.getElementsByClassName("analyticsResult")[0].innerHTML = xhr.responseText+"<br><br>Or you may check the thesis repository to find more studies that you might use.";
+      //document.getElementsByClassName("analyticsResult")[0].style.display = "block";
+    var items = document.getElementsByClassName("analyticsResult");
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "block";
+		}
+    var items = document.getElementsByClassName("answer2");
+		for (var i=0; i < items.length; i++) {
+			items[i].style.display = "none";
+		}
+    }
+  }
+  xhr.open("POST", "chatbot_analytics1.php", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send("topic="+topic);
+  }
+  
+}
