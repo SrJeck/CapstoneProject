@@ -6,6 +6,31 @@ if (isset($_SESSION['user_id'])) {
 }
 $output_string = "";
 
+$plagPercent = 0.0;
+$unPercent = 0.0;
+$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+$name = $_FILES['myfile']['name'];
+$type = $_FILES['myfile']['type'];
+$title = $_POST['title'];
+$author = $_POST['author'];
+$publication_month = $_POST['publication_month'];
+$publication_day = $_POST['publication_day'];
+$publication_year = $_POST['publication_year'];
+$institution = $_POST['institution'];
+$degree_level = $_POST['degree_level'];
+$topic = $_POST['topic'];
+$research_type = $_POST['research_type'];
+$abstract = $_POST['abstract'];
+// $abstract = $_POST['fullText'];
+$keywords = $_POST['keywords'];
+$publisher = $_POST['publisher'];
+$permission = $_POST['permission'];
+$upload_status = 'Unposted';
+$admin_id = 0;
+$data = file_get_contents($_FILES['myfile']['tmp_name']);
+
+
+
 ?>
 <html>
 
@@ -407,28 +432,6 @@ $output_string = "";
 
 
 <?php
-
-
-$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-$name = $_FILES['myfile']['name'];
-$type = $_FILES['myfile']['type'];
-$title = $_POST['title'];
-$author = $_POST['author'];
-$publication_month = $_POST['publication_month'];
-$publication_day = $_POST['publication_day'];
-$publication_year = $_POST['publication_year'];
-$institution = $_POST['institution'];
-$degree_level = $_POST['degree_level'];
-$topic = $_POST['topic'];
-$research_type = $_POST['research_type'];
-$abstract = $_POST['abstract'];
-// $abstract = $_POST['fullText'];
-$keywords = $_POST['keywords'];
-$publisher = $_POST['publisher'];
-$permission = $_POST['permission'];
-$upload_status = 'Unposted';
-$admin_id = 0;
-$data = file_get_contents($_FILES['myfile']['tmp_name']);
 $stmt = $dbh->prepare("insert into research values('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'','','','')");
 $stmt->bindParam(1, $title);
 $stmt->bindParam(2, $author);
@@ -451,6 +454,4 @@ $stmt->bindParam(18, $plagPercent);
 $stmt->bindParam(19, $unPercent);
 $stmt->bindParam(20, $id);
 $stmt->execute();
-
-
 ?>

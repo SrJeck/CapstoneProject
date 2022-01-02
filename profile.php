@@ -298,6 +298,8 @@ require_once("dbcontroller.php");
               <th class="th">Author</th>
               <th class="th">Year</th>
               <th class="th">Status</th>
+              <th class="th">Unique Percent</th>
+              <th class="th">Plagiarize Percent</th>
               <th class="th">View PDF Count</th>
               <th class="th">Download PDF Count</th>
               <th class="th">Visit Page Count</th>
@@ -320,6 +322,8 @@ require_once("dbcontroller.php");
         <td class="td">' . $new_row["author"] . '</td>
         <td class="td">' . $new_row["publication_year"] . '</td>
         <td class="td">' . $new_row["upload_status"] . '</td>
+        <td class="td">' . $new_row["unique_percent"] . '</td>
+        <td class="td">' . $new_row["plagiarism_percent"] . '</td>
         <td class="td">' . $new_row["view_count"] . '</td>
         <td class="td">' . $new_row["download_count"] . '</td>
         <td class="td">' . $new_row["visit_count"] . '</td>
