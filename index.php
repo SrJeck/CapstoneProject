@@ -272,7 +272,7 @@ if (!empty($result)) {
 
     <div class="chat_box">
       <div class="my-conv-form-wrapper">
-        <br>
+        <br><br>
       <button class="questions" style="display:block" onclick="questionType(1)">How to Upload Study?</button>
 <button class="questions"  style="display:block" onclick="questionType(2)">What study would you recommend for me to read?</button>
 <button class="questions"  style="display:block" onclick="questionType(3)">What study topic can i develop?</button>

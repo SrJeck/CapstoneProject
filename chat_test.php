@@ -52,9 +52,6 @@
           <option value="Others">Others</option>
         </select>
 <button class="answer2" style="display:none" onclick="selectedTopic()">select</button>
-<!-- <button class="answer2"  style="display:none" onclick="analytics('Education')">Education</button>
-<button class="answer2"  style="display:none" onclick="analytics('Technology')">Technology</button>
-<button class="answer2"  style="display:none" onclick="analytics('Business')">Business</button> -->
 <div class="analyticsResult" style="display:none">I Recommend these studies:
 </div>
 <button class="analyticsResult" style="display:none" onclick="analyticsQuestionType(1)">Do you want another question suggestion from other topics?</button>
