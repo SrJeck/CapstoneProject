@@ -178,7 +178,7 @@ if (!empty($result)) {
           </button>
         </div>
         <div class="modal-body">
-          <table style="width:100%">
+          <table>
             <tr>
               <td><strong>APA</strong> </td>
               <td><?php echo  $row['author']  ?>.<span> (</span><?php echo  $row['publication_year']  ?><span>). </span><span><?php echo  $row['title']  ?>.</span> <?php echo  $row['publisher']  ?></td>
@@ -251,7 +251,7 @@ if (!empty($result)) {
     <div id="right">
       <div class="right-content">
         <div class="right-content-header"></div>
-        <div id="full-text"><?php echo "<iframe ' type='application/pdf' src='data:" . $row['file_type'] . ";base64," . base64_encode($row['file_upload']) . "' height='150%' width='100%'></iframe>" ?></div>
+        <!-- <div id="full-text"><?php echo "<iframe ' type='application/pdf' src='data:" . $row['file_type'] . ";base64," . base64_encode($row['file_upload']) . "' height='150%' width='100%'></iframe>" ?></div> -->
         <div id="abstract"><?php echo "<h3 style='font-family: Arial, Helvetica, sans-serif;'>Abstract</h3><p style='font-size: 1.1em;'>" . $row['abstract'] . "</p><h3>Keywords</h3><p style='font-size: 1.1em;'>" . $row['keywords'] . "</p><li>" ?>
         </div>
         <h3>Details</h3>

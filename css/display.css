@@ -355,10 +355,10 @@
 
 
 
-    /*Pagiantion*/  
+    /*Pagination*/  
     table {
       font-family: arial, sans-serif;
-      width: 50%;
+      width: 100%;
     }
     
     td, th {
@@ -680,7 +680,6 @@ form.example::after {
   padding: 5px;
   color: #fff;
   background: #ccc;
-  border-bottom: 1px solid #000;
   height: auto;
   background-color: white;
 
