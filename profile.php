@@ -236,7 +236,7 @@ require_once("dbcontroller.php");
       <div class="projects">
         <div class="projects_data">
           <div class="data">
-            <h4>MOST RECENT UPLOAD</h4>
+            <h4>Most Recent Upload</h4>
             <p> <?php
                 $view_count_array = array();
                 $view_id_array = array();
@@ -251,7 +251,7 @@ require_once("dbcontroller.php");
                 ?></p>
           </div>
           <div class="data">
-            <h4>MOST DOWNLOADED UPLOAD</h4>
+            <h4>Most Downloaded Upload</h4>
             <p><?php
 
 
