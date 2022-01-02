@@ -202,8 +202,14 @@ $row = $stat->fetch();
         <input style="margin-left: 20px;" type="radio" id="view_download" name="permission" value="View and Download">
         <label>View and Download</label><br>
       </fieldset>
-
+      <div class="file-upload">
+        <input class="file-upload__input" type="file" name="myfile" accept="application/pdf" id="myFile" multiple>
+        <button class="file-upload__button" type="button">Choose File(s)</button>
+        <span class="file-upload__label"></span>
+        <script type="text/javascript" src="js/custom.js"></script>
+      </div>
       <fieldset>
+        <br>
         <button style="background-color: rgb(21, 117, 114)" class="submit" type="submit" name="submit" id="sendNewSms">Update</button>
       </fieldset>
     </form>
@@ -211,12 +217,7 @@ $row = $stat->fetch();
     </span>
     </span>
     </span>
-    <div class="file-upload">
-      <input class="file-upload__input" type="file" name="myfile" accept="application/pdf" id="myFile" multiple>
-      <button class="file-upload__button" type="button">Choose File(s)</button>
-      <span class="file-upload__label"></span>
-      <script type="text/javascript" src="js/custom.js"></script>
-    </div>
+
 
   </div>
 </body>
