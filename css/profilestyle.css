@@ -65,7 +65,7 @@ body{
 .wrapper{
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 55%;
   transform: translate(-50%,-50%);
   width: 1050px;
   height: auto;
@@ -166,7 +166,7 @@ body{
 .wrapper2{
   position: absolute;
   top: 120%;
-  left: 50%;
+  left: 55%;
   padding-bottom: 20px;
   transform: translate(-50%,-50%);
   width: 1050px;
