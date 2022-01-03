@@ -10,7 +10,7 @@ $approved->bindParam(2, $user_id);
 $approved->execute();
 $notif = "";
 
-$notification = $dbh->prepare('select * from notification where user_id=? ORDER BY notification_date DESC');
+$notification = $dbh->prepare('select * from notification where user_id=? ORDER BY notification_id DESC');
     $notification->bindParam(1, $user_id);
     $notification->execute();
     while ($notifications = $notification->fetch()) {

@@ -18,21 +18,22 @@ if (!empty($_POST['select'])) {
       $approved->bindParam(3, $thesis_id);
       $approved->execute();
       
-      $notifs = $dbh->prepare("select * from notifications where thesis_id=? and status='Approve'");
+      $notifs = $dbh->prepare("select * from notification where thesis_id=? and status='Approve'");
       $notifs->bindParam(1, $thesis_id);
       $notifs->execute();
       $notif =$notifs->fetch();
       if (empty($notif)) {
+        $curr_date = date("Y-n-d");
         $reason = "Congratulations";
-        $accepted = $dbh->prepare("insert into notification values('',?,?,?,?,?,?,'')");
+        $accepted = $dbh->prepare("insert into notification values('',?,?,?,?,?,?,?)");
         $accepted->bindParam(1, $user_id);
         $accepted->bindParam(2, $admin_id);
         $accepted->bindParam(3, $thesis_id);
         $accepted->bindParam(4, $select);
         $accepted->bindParam(5, $reason);
         $accepted->bindParam(6, $seen_stat);
+        $accepted->bindParam(7, $curr_date);
         $accepted->execute();
-        header("Location: pending_research.php");
       }
       header("Location: pending_research.php");
     
@@ -44,13 +45,15 @@ if (!empty($_POST['select'])) {
       if (empty($notif)) {
         if (!empty($_POST['reason'])) {
           $reason = $_POST['reason'];
-          $rejected = $dbh->prepare("insert into notification values('',?,?,?,?,?,?,'')");
+          $curr_date = date("Y-n-d");
+          $rejected = $dbh->prepare("insert into notification values('',?,?,?,?,?,?,?)");
           $rejected->bindParam(1, $user_id);
           $rejected->bindParam(2, $admin_id);
           $rejected->bindParam(3, $thesis_id);
           $rejected->bindParam(4, $select);
           $rejected->bindParam(5, $reason);
           $rejected->bindParam(6, $seen_stat);
+          $rejected->bindParam(7, $curr_date);
           $rejected->execute();
         }
       }else{
