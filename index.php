@@ -100,19 +100,19 @@ if (!empty($result)) {
   $unseen_count->bindParam(1, $id);
   $unseen_count->execute();
   $unseened_count = $unseen_count->fetch();
-  $total_count =$total_count + $unseened_count['unseen_count'];
+  $total_count = $total_count + $unseened_count['unseen_count'];
   $unseen_count2 = $dbh->prepare('select * from inquiry where user_id=? and seen_status="unseen"');
   $unseen_count2->bindParam(1, $id);
   $unseen_count2->execute();
   while ($unseened_count2 = $unseen_count2->fetch()) {
-    if (!empty($unseened_count2['reply']) ) {
-        $total_count =$total_count + 1;
+    if (!empty($unseened_count2['reply'])) {
+      $total_count = $total_count + 1;
     }
   }
-  
-    
-  
- 
+
+
+
+
 
   if (isset($_SESSION['user_id'])) {
     echo '<div class="navbar">
@@ -236,8 +236,13 @@ if (!empty($result)) {
         <div class="row height d-flex justify-content-center align-items-center">
           <div>
             <div class="form">
-              <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
-                                                                                                                                        }  ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+              <div class="input-icons">
+
+                <i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i>
+                <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
+                                                                                                                                          }  ?>"> <button class="button" name="go">Search</button>
+              </div>
+
             </div>
           </div>
         </div>
@@ -249,15 +254,22 @@ if (!empty($result)) {
     <p class="intro">Browse thesis studies that may help you in creating your own research, study and develop your research with ThesisQuo and share it to the community. ThesisQuo provides Local studies from different institutions in the Philippines to help every researchers developing their study.
 
     </p>
+
     <!-- 3 IMAGES -->
     <div class="images">
       <form action="research.php" method="POST">
-        <img class="book" src="images/book.JPG">
-        <button class="btn" type="submit" name="Education">Education</button>
-        <img class="chip" src="images/chip.JPG">
-        <button class="btn2" type="submit" name="Technology">Technology</button>
-        <img class="business" src="images/business.JPG">
-        <button class="btn3" type="submit" name="Business">Business</button>
+        <div class="column">
+          <img class="book" src="images/book.JPG">
+          <button class="btn" type="submit" name="Education">Education</button>
+        </div>
+        <div class="column">
+          <img class="chip" src="images/chip.JPG">
+          <button class="btn2" type="submit" name="Technology">Technology</button>
+        </div>
+        <div class="column">
+          <img class="business" src="images/business.JPG">
+          <button class="btn3" type="submit" name="Business">Business</button>
+        </div>
       </form>
     </div>
 

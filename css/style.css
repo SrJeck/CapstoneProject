@@ -63,22 +63,32 @@
         text-align: center;
     }
     /* MIC ICON*/
-    .form span {
-        position: absolute;
-        right: 520px;
-        top: 14px;
-        padding: 5px;
-        border-left: 1px solid #d1d5db
+
+    .input-icons i {
+      position: absolute;
+      margin-left: 650px;
+      margin-top: 18px;
+      font-size: 18px;
+    }
+
+    .input-icons {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .icon {
+      padding: 10px;
+      min-width: 40px;
+
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      text-align: left;
     }
     /* SEARCH FORM*/
-    .left-pan {
-        padding-left: 7px
-    }
-    
-    .left-pan i {
-        padding-left: 10px
-    }
-    
+
     .form-input {
         height: 55px;
         text-indent: 33px;
@@ -134,7 +144,7 @@
      .chip{
       width: 284px;
       height: 204px;
-      margin-left: 40px;
+      margin-left: 520px;
       border-radius: 6px;
       box-shadow: 12px 12px #BAB8BA;
       border: 2px solid black;
@@ -142,63 +152,82 @@
     .business{
       width: 284px;
       height: 204px;
-      margin-left: 40px;
+      margin-left: 740px;
       border-radius: 6px;
       box-shadow: 12px 12px #BAB8BA;
       border: 2px solid black;
     }
     /* BUTTON INSIDE THE 3 IMAGES */
+    .images{
+      position: relative;
+      max-width: 400px;
+       box-sizing: border-box;
+    }
+
+    .column {
+      float: left;
+      width: 33.33%;
+      padding: 5px;
+       box-sizing: border-box;
+    }
+    
+    /* Clearfix (clear floats) */
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    /* Clearfix (clear floats) */
+    .images::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
     .images .btn {
       position: absolute;
-      top: 100%;
-      left: 29%;
+      top: 70%;
+      left: 117%;
       transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
-      background-color: #751518;
+      background-color: #751518;;
       color: white;
       font-size: 16px;
-      border: none;
+      padding: 12px 24px;
+      border: 2px solid white;
       cursor: pointer;
       border-radius: 10px;
       text-align: center;
-      border: 2px solid white;
-      height: 37px;
-      width: 136px;
     }
     .images .btn2 {
       position: absolute;
-      top: 100%;
-      left: 50%;
+      top: 70%;
+      left: 202%;
       transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
-      background-color: #751518;
+      background-color: #751518;;
       color: white;
-      height: 37px;
-      width: 136px;
       font-size: 16px;
-      border: none;
+      padding: 12px 24px;
+      border: 2px solid white;
       cursor: pointer;
       border-radius: 10px;
       text-align: center;
-      border: 2px solid white;
-
+      
     }
     .images .btn3 {
       position: absolute;
-      top: 100%;
-      left: 71%;
+      top: 70%;
+      left: 290%;
       transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
-      background-color: #751518;
+      background-color: #751518;;
       color: white;
       font-size: 16px;
-      height: 37px;
-      width: 136px;
-      border: none;
+      padding: 12px 24px;
+      border: 2px solid white;
       cursor: pointer;
       border-radius: 10px;
       text-align: center;
-      border: 2px solid white;
     }
     /*SIDEBAR*/
 
@@ -898,13 +927,13 @@
         text-align: center;
     }
     /* MIC ICON*/
-    .form span {
+    /* .form span {
         position: absolute;
         right: 500px;
         top: 14px;
         padding: 5px;
         border-left: 1px solid #d1d5db
-    }
+    } */
     /* SEARCH FORM*/
 
     
