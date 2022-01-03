@@ -24,7 +24,7 @@ if (!empty($_POST['select'])) {
       $notif =$notifs->fetch();
       if (empty($notif)) {
         $reason = "Congratulations";
-        $accepted = $dbh->prepare("insert into notification values('',?,?,?,?,?,?,,'')");
+        $accepted = $dbh->prepare("insert into notification values('',?,?,?,?,?,?,'')");
         $accepted->bindParam(1, $user_id);
         $accepted->bindParam(2, $admin_id);
         $accepted->bindParam(3, $thesis_id);
