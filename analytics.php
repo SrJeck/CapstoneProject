@@ -627,7 +627,7 @@ $db_handle = new DBController();
     $desc_counter_output5 = array();
     for ($i = 0; $i < count($desc_topic_array_key2); $i++) {
       for ($j = 0; $j < count($desc_string_output2); $j++) {
-        if (str_contains($desc_string_output2[$j], $desc_topic_array_key2[$i])) {
+        if (strpos($desc_string_output2[$j],$desc_topic_array_key2[$i]) > -1) {
           $desc_counter++;
         } else {
           $desc_counter = 0;

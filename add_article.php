@@ -144,7 +144,6 @@ if (isset($_SESSION['user_id'])) {
           <option value="Master Degrees">Master Degrees</option>
           <option value="Doctoral Degrees">Doctoral Degrees</option>
           <option value="Professional Degrees">Professional Degrees</option>
-          <option value="Others">Others</option>
         </select>
       </fieldset>
       <fieldset>
