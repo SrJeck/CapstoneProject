@@ -32,23 +32,23 @@ if (isset($_SESSION['user_id'])) {
   <!-- NAVBAR -->
   <?php
 
-  
-$notif = "";
-$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-$total_count = 0;
-$unseen_count = $dbh->prepare('select COUNT(*) as unseen_count from notification where seen_status="unseen" and user_id=?');
-$unseen_count->bindParam(1, $id);
-$unseen_count->execute();
-$unseened_count = $unseen_count->fetch();
-$total_count =$total_count + $unseened_count['unseen_count'];
-$unseen_count2 = $dbh->prepare('select * from inquiry where user_id=? and seen_status="unseen"');
-$unseen_count2->bindParam(1, $id);
-$unseen_count2->execute();
-while ($unseened_count2 = $unseen_count2->fetch()) {
-  if (!empty($unseened_count2['reply']) ) {
-      $total_count =$total_count + 1;
+
+  $notif = "";
+  $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+  $total_count = 0;
+  $unseen_count = $dbh->prepare('select COUNT(*) as unseen_count from notification where seen_status="unseen" and user_id=?');
+  $unseen_count->bindParam(1, $id);
+  $unseen_count->execute();
+  $unseened_count = $unseen_count->fetch();
+  $total_count = $total_count + $unseened_count['unseen_count'];
+  $unseen_count2 = $dbh->prepare('select * from inquiry where user_id=? and seen_status="unseen"');
+  $unseen_count2->bindParam(1, $id);
+  $unseen_count2->execute();
+  while ($unseened_count2 = $unseen_count2->fetch()) {
+    if (!empty($unseened_count2['reply'])) {
+      $total_count = $total_count + 1;
+    }
   }
-}
 
   if (isset($_SESSION['user_id'])) {
     echo '<div class="navbar">
@@ -180,7 +180,75 @@ while ($unseened_count2 = $unseen_count2->fetch()) {
     </form>
   </div>
 
+  <!-- ChatBot -->
+  <div class="chat_icon">
+    <img style="height: 80px;" src="images/chatboticon.png">
+  </div>
 
+  <div class="chat_box">
+    <div class="my-conv-form-wrapper">
+      <br><br>
+      <div class="div-questions">
+        <button class="questions" style="display:block" onclick="questionType(1)">How to Upload Study?</button>
+        <button class="questions" style="display:block" onclick="questionType(2)">What study would you recommend for me to read?</button>
+        <button class="questions" style="display:block" onclick="questionType(3)">What study topic can i develop?</button>
+      </div>
+      <div class="answer1" id="answer1" style="display:none">You must have an account before you upload your papers, if you are already a member, you may follow these steps:
+        <br><br>
+        1. Click the add (+) button on the navigation bar to upload your papers
+        <br>
+        2. Fill out the fields required by the admin to upload paper.
+        <br>
+        3. Read and Accept the Privacy Policy & Terms and Condition before submitting the paper.
+        <br>
+        4. Wait for the Plagiarism result if accepted or not.
+        <br>
+        5. If the paper passed the Plagiarism test, the paper will be upload. if not, the User must revise and re-upload the paper.
+        <br><br><br>
+      </div>
+      <button class="answer1" id="reset" style="display:none" onclick="reset()">Reset</button>
+      <select class="answer2 custom-select" style="display:none" name="topic" id="topic" required>
+        <option value="" selected disabled hidden>Select topic type</option>
+        <option value="Education">Education</option>
+        <option value="Technology">Technology</option>
+        <option value="Research">Research</option>
+        <option value="Analysis">Analysis</option>
+        <option value="Database">Database</option>
+        <option value="Agriculture">Agriculture</option>
+        <option value="Health">Health</option>
+        <option value="Politics">Politics</option>
+        <option value="Psychology">Psychology</option>
+        <option value="Business">Business</option>
+        <option value="Marketing and Advertising">Marketing and Advertising</option>
+        <option value="Mechanical">Mechanical</option>
+        <option value="Ethics">Ethics</option>
+        <option value="Others">Others</option>
+      </select>
+
+      <button class="answer2 select" style="display:none" onclick="selectedTopic()">Select</button>
+      <div class="analyticsResult" style="display:none">I Recommend these studies:
+      </div>
+      <div class="questionbutton">
+        <button class="analyticsResult" id="analyticsResultbutton" style="display:none" onclick="analyticsQuestionType(1)">Do you want another question suggestion from other topics?</button>
+        <button class="analyticsResult" id="analyticsResultbutton2" style="display:none" onclick="analyticsQuestionType(2)">Do you have any specific question for me?</button>
+      </div>
+      <button class="analyticsAnswer1" id="yes" style="display:none" onclick="analyticsAnswerType('yes')">Yes</button>
+      <button class="analyticsAnswer1" id="no" style="display:none" onclick="analyticsAnswerType('no')">No</button>
+      <div class="analyticsAnswer2" style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
+      <button class="analyticsAnswer2" id="reset" style="display:none" onclick="reset()">Reset</button>
+      <div class="answer3" id="answer3" style="display:none">What do you want to develop?</div>
+      <button class="answer3" id="opt" style="display:none" onclick="developmentType(1)">Uniqie Study</button>
+      <button class="answer3" id="opt" style="display:none" onclick="developmentType(2)">More Resources Available</button>
+      <div class="development1" style="display:none">Show overall Lowest number of uploaded topic</div>
+      <div class="development2" style="display:none">Show overall Highest number of uploaded topic</div>
+      <div class="development" id="specific" style="display:none">Do you have any specific question for me?</div>
+      <button class="development" style="display:none" onclick="developmentAnswerType('yes')">Yes</button>
+      <button class="development" style="display:none" onclick="developmentAnswerType('no')">No</button>
+      <div class="developmentQuestions" id="question2" style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
+      <button class="developmentQuestions" id="developmentQuestions" style="display:none" onclick="reset()">Ok</button>
+    </div>
+  </div>
+  <!-- ChatBot end -->
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->
 <script>
