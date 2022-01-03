@@ -155,23 +155,6 @@ if (!empty($result)) {
     </div>';
   }
   ?>
-  <!-- <script>
-    $("#showdialog").click(function() {
-      $(".box").show();
-    });
-    $(".box .close").click(function() {
-      $(this).parent().hide()
-    })
-  </script> -->
-
-  <!-- MOBILE SIDEBAR -->
-  <!-- <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="index.php">HOME</a>
-    <a href="research.php">RESEARCH</a>
-    <a href="analytics.php">ANALYTICS</a>
-  </div>
-  <span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span> -->
 
   <!-- BANNER IMAGE -->
   <br>
@@ -250,7 +233,7 @@ if (!empty($result)) {
 
     <!-- INTRODUCTION -->
     <h2 class="new">Read, Study and Develop With ThesisQuo!</h2>
-    <p class="intro">Browse thesis studies that may help you in creating your own research, study and develop your research with ThesisQuo and share it to the community.
+    <p class="intro">Browse thesis studies that may help you in creating your own research, study and develop your research with ThesisQuo and share it to the community. ThesisQuo provides Local studies from different institutions in the Philippines to help every researchers developing their study.
 
     </p>
     <!-- 3 IMAGES -->

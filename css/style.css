@@ -118,6 +118,8 @@
       text-indent: 50px; 
       max-width: 800px;
       margin-left: 400px;
+      font-size: 21px;
+      text-align: justify;
      }
     /* 3 IMAGES BOTTOM */
      .book{
@@ -272,19 +274,19 @@
     #answer3{
       margin: 15px;
       background-color: white;
-      border-radius: 5px;
-      padding: 5px;
+      padding: 10px;
+      border-top-right-radius: 25px;
       max-width: 65%;
       word-wrap: break-word;
     }
     #specific{
       margin: 15px;
-      background-color: #06c5a6;
-      color: white;
+      background-color: white;
+      color: black;
       border-radius: 5px;
       padding: 5px;
       cursor: auto;
-
+      font-weight: unset;
     }
     .development1{
       margin: 15px;
@@ -316,6 +318,10 @@
       font-weight: bold;
       cursor: pointer;
       float: right; 
+    }
+    .development:hover{
+      background-color: #0bd8b6;
+      border: 1px solid white;
     }
     #opt{
       padding: 7px 12px;
@@ -375,33 +381,32 @@
       word-wrap: break-word;
     }
     #analyticsResultbutton{
-      background: #06B79A;
-      border:white;
-      border-radius: 10px;
-      outline: none;
-      padding: 0.5em 0.8em;
-      color: #ffffff;
-      font-size: 1em;
-      font-family: "Quicksand", sans-serif;
-      font-weight: bold;
-      cursor: pointer;
       float: right;
-      text-align: left;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 10px;
+      border: 1px solid white;
+      background-color: #06B79A;
+      color: white;
     }
     #analyticsResultbutton2{
-      background: #06B79A;
-      border:white;
-      border-radius: 10px;
-      outline: none;
-      padding: 0.5em 0.8em;
-      color: #ffffff;
-      font-size: 1em;
-      font-family: "Quicksand", sans-serif;
-      font-weight: bold;
-      cursor: pointer;
       float: right;
-      text-align: left;
-      margin-bottom: 5px;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 10px;
+      border: 1px solid white;
+      background-color: #06B79A;
+      color: white;
+    }
+    #analyticsResultbutton:hover{
+
+      background-color: #0bd8b6;
+      border: 1px solid white;
+
+    }
+    #analyticsResultbutton2:hover{
+      background-color: #0bd8b6;
+      border: 1px solid white;
     }
     #answer1{
       margin: 15px;
@@ -426,6 +431,10 @@
     cursor: pointer;
     float: right;
     }
+    #reset:hover{
+      background-color: #0bd8b6;
+      border: 1px solid white;
+    }
     #yes{
       -webkit-appearance: none;
       background: #06B79A;
@@ -440,6 +449,14 @@
       font-weight: bold;
       cursor: pointer;
       float: right;
+      }
+      #yes:hover{
+        background-color: #0bd8b6;
+        border: 1px solid white;
+      }
+      #no:hover{
+        background-color: #0bd8b6;
+        border: 1px solid white;
       }
       #no{
         -webkit-appearance: none;
@@ -456,6 +473,7 @@
         cursor: pointer;
         float: right;
         }
+
         #developmentQuestions{
           -webkit-appearance: none;
           background: #06B79A;
@@ -471,6 +489,10 @@
           cursor: pointer;
           float: right;
         }
+        #developmentQuestions:hover{
+      background-color: #0bd8b6;
+      border: 1px solid white;
+        }
     .select{
       -webkit-appearance: none;
       background: #06B79A;
@@ -485,6 +507,10 @@
       font-weight: bold;
       cursor: pointer;
       float: right;
+      }
+      .select:hover{
+        background-color: #0bd8b6;
+        border: 1px solid white;
       }
     .div-questions{
       word-wrap: normal;
