@@ -8,11 +8,13 @@ if (isset($_POST['send'])) {
         $email = $_POST['email'];
         $subject = $_POST['subject'];
         $message = $_POST['message'];
-        $stmt = $dbh->prepare("insert into inquiry values('',?,'',?,?,?,'')");
+        $seen_status = 'unseen';
+        $stmt = $dbh->prepare("insert into inquiry values('',?,'',?,?,?,'',?,'')");
         $stmt->bindParam(1,$user_id);
         $stmt->bindParam(2,$subject);
         $stmt->bindParam(3,$message);
         $stmt->bindParam(4,$email);
+        $stmt->bindParam(5,$seen_status);
         $stmt->execute();
         header("Location: contact_us.php");
     }

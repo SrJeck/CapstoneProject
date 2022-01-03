@@ -32,13 +32,23 @@ if (isset($_SESSION['user_id'])) {
   <!-- NAVBAR -->
   <?php
 
-  $notif = "";
-  $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-
-  $unseen_count = $dbh->prepare('select COUNT(*) as unseen_count from notification where seen_status="unseen" and user_id=?');
-  $unseen_count->bindParam(1, $id);
-  $unseen_count->execute();
-  $unseened_count = $unseen_count->fetch();
+  
+$notif = "";
+$dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+$total_count = 0;
+$unseen_count = $dbh->prepare('select COUNT(*) as unseen_count from notification where seen_status="unseen" and user_id=?');
+$unseen_count->bindParam(1, $id);
+$unseen_count->execute();
+$unseened_count = $unseen_count->fetch();
+$total_count =$total_count + $unseened_count['unseen_count'];
+$unseen_count2 = $dbh->prepare('select * from inquiry where user_id=? and seen_status="unseen"');
+$unseen_count2->bindParam(1, $id);
+$unseen_count2->execute();
+while ($unseened_count2 = $unseen_count2->fetch()) {
+  if (!empty($unseened_count2['reply']) ) {
+      $total_count =$total_count + 1;
+  }
+}
 
   if (isset($_SESSION['user_id'])) {
     echo '<div class="navbar">
@@ -66,7 +76,7 @@ if (isset($_SESSION['user_id'])) {
     <span class="tooltiptext">Notification</span>
     <a style="float: right;">
     <div class="notBtn" href="#" onclick="seeNotif()">
-            <div class="number" > ' . $unseened_count['unseen_count'] . ' </div>
+            <div class="number" > ' . $total_count . ' </div>
             <i style="font-size:24px;height: 25px;" id="showdialog" class="fa fatest">&#xf0f3;</i>
         <div class="box" id="dialog" id="box" style="display:none">
                 <div class="display">
