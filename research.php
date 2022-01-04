@@ -98,7 +98,7 @@ $db_handle = new DBController();
 <body>
   <!-- NAVBAR -->
   <?php
-  
+
   $notif = "";
   $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
   $total_count = 0;
@@ -106,13 +106,13 @@ $db_handle = new DBController();
   $unseen_count->bindParam(1, $id);
   $unseen_count->execute();
   $unseened_count = $unseen_count->fetch();
-  $total_count =$total_count + $unseened_count['unseen_count'];
+  $total_count = $total_count + $unseened_count['unseen_count'];
   $unseen_count2 = $dbh->prepare('select * from inquiry where user_id=? and seen_status="unseen"');
   $unseen_count2->bindParam(1, $id);
   $unseen_count2->execute();
   while ($unseened_count2 = $unseen_count2->fetch()) {
-    if (!empty($unseened_count2['reply']) ) {
-        $total_count =$total_count + 1;
+    if (!empty($unseened_count2['reply'])) {
+      $total_count = $total_count + 1;
     }
   }
 
@@ -230,15 +230,19 @@ $db_handle = new DBController();
         setTimeout(showSlides, 3000); // Change image every 3 seconds
       }
     </script>
-
-    <form name="frmSearch" method="post">
+    <!-- SEARCH BAR CONTAINER -->
+    <form name="frmSearch" method="post" action="research.php">
       <div class="container">
         <div class="row height d-flex justify-content-center align-items-center">
           <div>
             <div class="form">
-              <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
-                                                                                                                                          echo $_POST["search"];
-                                                                                                                                        }  ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+              <div class="input-icons">
+
+                <i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i>
+                <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
+                                                                                                                                          }  ?>"> <button class="button" name="go">Search</button>
+              </div>
+
             </div>
           </div>
         </div>

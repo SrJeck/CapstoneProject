@@ -65,12 +65,29 @@
         text-align: center;
     }
     /* MIC ICON*/
-    .form span {
-        position: absolute;
-        right: 520px;
-        top: 14px;
-        padding: 5px;
-        border-left: 1px solid #d1d5db
+  
+    .input-icons i {
+      position: absolute;
+      margin-left: 650px;
+      margin-top: 18px;
+      font-size: 18px;
+    }
+
+    .input-icons {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .icon {
+      padding: 10px;
+      min-width: 40px;
+
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      text-align: left;
     }
     /* SEARCH FORM*/
     .left-pan {
@@ -197,8 +214,6 @@
     /*Pagination*/  
     table {
       font-family: arial, sans-serif;
-      width: 50%;
-      
     }
     
     td, th {
@@ -211,7 +226,7 @@
       background-color: white;
       box-shadow: 6px 6px 8px 0 #f2eff2;
       padding:20px;
-      width: 80%;
+      width: auto;
       margin-left: 280px;
       margin-top: -679px;
       height: 618px;
@@ -329,6 +344,7 @@ color: black;
   float: right;
   margin-right: 280px; margin-top: -90px;
   font-size: 16px;
+
 } 
 #firstRow .view{
   float: right;
@@ -376,10 +392,6 @@ color: black;
   margin-left: 90px; margin-top: -90px;
 
 } 
-/* .displayResearch #firstRow .topic:hover{
-  background-color: red;
-} */
-
 .modal {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
