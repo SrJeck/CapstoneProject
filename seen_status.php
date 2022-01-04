@@ -49,7 +49,7 @@ $notification = $dbh->prepare('select * from notification where user_id=? ORDER 
                             <div class="profCont">
                                 <img class="profile"  src="images/chatboticon.png">
                             </div>
-                            <div class="txt">Reply</div>
+                            <div class="txt">Inquiry Response</div>
                             <div class="txt">' . $inquirys2['subject'] . '</div>
                             <div class="txt">' . $inquirys2['reply'] . '</div>
                             <div class="txt">' . $inquirys2['reply_date'] . '</div>
