@@ -228,8 +228,8 @@
       padding:20px;
       width: auto;
       margin-left: 280px;
-      margin-top: -679px;
-      height: 618px;
+      margin-top: -780px;
+      height: 720px;
     }
     .pagination{
       margin-left: 120px;
@@ -301,7 +301,7 @@ background-size: 20px;
   display: inline-block;
   position: relative;
   left: 302px;
-  bottom: 67px;
+  bottom: 80px;
   margin-left: 10px;
   z-index: 1;
 }
@@ -432,11 +432,27 @@ color: black;
   cursor: pointer;
 }
 .hrline{
-  width: 1200px;
+  width: 1180px;
 }
-
+.authorline{
+  margin-left: 90px;
+}
+.authorline2{
+  margin-left: 90px;
+}
 @media (max-width: 1500px) {
   .hrline{
-    width: 1000px;
+    width: 1050px;
+  }
+  .authorline{
+    position: relative;
+    right: 71px;
+  }
+  .authorline2{
+    position: relative;
+    right: 31px;
+  }
+  .a{
+    bottom: 70px;
   }
 }

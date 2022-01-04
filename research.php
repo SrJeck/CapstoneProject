@@ -49,6 +49,7 @@ $db_handle = new DBController();
       font-size: 30px;
       text-align: left;
       width: 40%;
+      height: 700px;
     }
 
 
@@ -434,8 +435,8 @@ $db_handle = new DBController();
           <a class='fullArticle' href='display.php?id=" . $fetched2['id'] . "'><i class='fas fa-book-open'></i> Full Article</a>
           </div>
           <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
-          <p style='margin-left: 90px; '>
-              <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+          <p style='margin-left: 90px;>
+              <p class='authorline'>" . $fetched2['author'] . "</p>
               
 
               <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
@@ -473,7 +474,7 @@ $db_handle = new DBController();
                     <a target='_blank' href='display.php?id=" . $fetched2['id'] . "' style='text-decoration: none; color: black;'>
                     <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
                     <p style='margin-left: 90px; '>
-                        <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+                        <p class='authorline2'>" . $fetched2['author'] . "</p>
                         
 
                         <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
@@ -510,7 +511,7 @@ $db_handle = new DBController();
           </div>
           <p style='margin-left: 90px; margin-top: -5%; '>" . $fetched2['title'] . "</p>
           <p style='margin-left: 90px; '>
-              <p style='margin-left: 90px; '>" . $fetched2['author'] . "</p>
+              <p class='authorline'>" . $fetched2['author'] . "</p>
               
 
               <p style='margin-left: 90px; '>" . $fetched2['publication_day'] . ' ' . $fetched2['publication_month'] . ' ' . $fetched2['publication_year'] . "</p>
