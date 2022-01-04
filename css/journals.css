@@ -431,3 +431,12 @@ color: black;
   text-decoration: none;
   cursor: pointer;
 }
+.hrline{
+  width: 1200px;
+}
+
+@media (max-width: 1500px) {
+  .hrline{
+    width: 1000px;
+  }
+}
