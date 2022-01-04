@@ -162,7 +162,7 @@ if (isset($_SESSION['user_id'])) {
       </fieldset>
       <fieldset>
         <label>Topic:</label>
-        <select name="topic" id="topic" required>
+        <select name="topic" required>
           <option value="" selected disabled hidden>Select topic type</option>
           <option value="Education">Education</option>
           <option value="Technology">Technology</option>
@@ -515,8 +515,8 @@ if (isset($_SESSION['user_id'])) {
         <button class="analyticsResult" id="analyticsResultbutton" style="display:none" onclick="analyticsQuestionType(1)">Do you want another question suggestion from other topics?</button>
         <button class="analyticsResult" id="analyticsResultbutton2" style="display:none" onclick="analyticsQuestionType(2)">Do you have any specific question for me?</button>
       </div>
-      <button class="analyticsAnswer1" id="yes" style="display:none" onclick="analyticsAnswerType('yes')">Yes</button>
       <button class="analyticsAnswer1" id="no" style="display:none" onclick="analyticsAnswerType('no')">No</button>
+      <button class="analyticsAnswer1" id="yes" style="display:none" onclick="analyticsAnswerType('yes')">Yes</button>
       <div class="analyticsAnswer2" style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
       <button class="analyticsAnswer2" id="reset" style="display:none" onclick="reset()">Reset</button>
       <div class="answer3" id="answer3" style="display:none">What do you want to develop?</div>
@@ -525,8 +525,8 @@ if (isset($_SESSION['user_id'])) {
       <div class="development1" style="display:none">Show overall Lowest number of uploaded topic</div>
       <div class="development2" style="display:none">Show overall Highest number of uploaded topic</div>
       <div class="development" id="specific" style="display:none">Do you have any specific question for me?</div>
-      <button class="development" style="display:none" onclick="developmentAnswerType('yes')">Yes</button>
       <button class="development" style="display:none" onclick="developmentAnswerType('no')">No</button>
+      <button class="development" style="display:none" onclick="developmentAnswerType('yes')">Yes</button>
       <div class="developmentQuestions" id="question2" style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
       <button class="developmentQuestions" id="developmentQuestions" style="display:none" onclick="reset()">Ok</button>
     </div>
