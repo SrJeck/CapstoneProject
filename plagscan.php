@@ -1,6 +1,6 @@
 <?php
 
-        
+
 
 session_start();
 if (isset($_SESSION['user_id'])) {
@@ -56,13 +56,14 @@ $output_string = "";
                     <button class='scanbutton' onclick='myFunc()' id='sub-btn' type="submit">Scan For Plagiarism</button><br>
                     <button class='CheckNew' type='reset' onclick='checkNew()'><i class='fas fa-sync-alt'></i> Check New </button>
                     <textarea name="fullText" id='fullText' class="text1" placeholder="Enter Abstract to Run Check" required><?php //$data = $_POST['fullText'] ?? null;
-                                                                                                                                //echo "$data"; ?></textarea><br>
+                                                                                                                                //echo "$data"; 
+                                                                                                                                ?></textarea><br>
 
                     <?php
                     if ($_POST['fullText'] ?? null) {
-                        $output_string =  $output_string . "<script>document.getElementById('fullText').disabled = true;"."document.getElementById('sub-btn').disabled = true;</script>";
+                        $output_string =  $output_string . "<script>document.getElementById('fullText').disabled = true;" . "document.getElementById('sub-btn').disabled = true;</script>";
                     } else {
-                        $output_string = $output_string . "<script>document.getElementById('fullText').enabled = 'true';"."document.getElementById('sub-btn').enabled = 'true';</script>";
+                        $output_string = $output_string . "<script>document.getElementById('fullText').enabled = 'true';" . "document.getElementById('sub-btn').enabled = 'true';</script>";
                     }
                     ?>
                 </div>
@@ -93,7 +94,7 @@ $output_string = "";
             }
             $line = array_filter($line);
             if (count($line) > 0 && $not_printed) {
-                
+
                 $output_string = $output_string . "<div class = 'results' id='result'><h4>Results</h4>";
                 $not_printed = false;
             }
@@ -150,7 +151,7 @@ $output_string = "";
                 $sentence = $s1;
                 $query = urlencode($sentence);
                 $url = 'https://www.google.com/search?q=' . $query;
-                 //echo $url;
+                //echo $url;
                 $result = file_get_html($url);
                 $found = false;
                 foreach ($result->find('#main div .ZINbbc.xpd.O9g5cc.uUPGi') as $entry) {
@@ -278,7 +279,7 @@ $output_string = "";
                         if (strpos($text, $sentence) != false) {
                             $plagCount++;
                             $plagUrls[$urlstring]++;
-                            
+
                             $output_string = $output_string . "<div class = 'sent'>
                                         <div class = 'plag'>plagiarised</div>$sentence - <strong>$urlstring</strong>
                                     </div><br>";
@@ -308,7 +309,7 @@ $output_string = "";
             foreach ($plagUrls as $key => $value) {
                 $x = ($value / $plagCount) * 100;
                 $output_string = $output_string .  "<div class = 'sent'>
-                $key - <strong style='color:rgb(245, 59, 59)'> ".number_format((float)$x, 2, '.', ''). "% </strong> </div><br>";
+                $key - <strong style='color:rgb(245, 59, 59)'> " . number_format((float)$x, 2, '.', '') . "% </strong> </div><br>";
             }
             $output_string = $output_string .  " </div>";
         } else {
@@ -324,16 +325,16 @@ $output_string = "";
             $output_string = $output_string .  "<div class = 'overview' ><h4>Results:</h4>
             <div class='circle' style='display: flex;'>
             <div class = 'box1'>
-            <div class='plagiarized'>".
-            number_format((float)$plagPercent, 2, '.', '') . "%
+            <div class='plagiarized'>" .
+                number_format((float)$plagPercent, 2, '.', '') . "%
             </div>
             <div style='font-weight:bold; margin-top: -50px'>
             plagiarised
             </div>
             </div>
             <div class = 'box2'>
-            <div class='unique'><strong>".
-            number_format((float)$unPercent, 2, '.', '') . "%
+            <div class='unique'><strong>" .
+                number_format((float)$unPercent, 2, '.', '') . "%
             </strong></div>
             <div style='font-weight:bold; margin-top: -50px; margin-left: 10px;'>
             unique
@@ -347,13 +348,12 @@ $output_string = "";
         <?php
         // printing the Download button and Check New button
         if ($_POST['fullText'] ?? null) {
-            $output_string = $output_string ."
+            $output_string = $output_string . "
                 <div class = 'boxes' >
                 <form  id='myForm2' action='' method='POST'>
                       <button class = 'downR' onclick='window.print()'>  <i class='fas fa-download'></i>   Download Report </button>
                       <button class='submit' type='submit' name='proceed'> Submit </button><br><br><br></form>
                       </div>";
-        
         }
 
         echo $output_string;
