@@ -266,15 +266,15 @@ if (!empty($result)) {
     <div class="images">
       <form action="research.php" method="POST">
         <div class="column">
-          <img class="book" src="images/book.JPG">
+          <img class="book" src="images/book.jpg">
           <button class="btn" type="submit" name="Education">Education</button>
         </div>
         <div class="column">
-          <img class="chip" src="images/chip.JPG">
+          <img class="chip" src="images/chip.jpg">
           <button class="btn2" type="submit" name="Technology">Technology</button>
         </div>
         <div class="column">
-          <img class="business" src="images/business.JPG">
+          <img class="business" src="images/business.jpg">
           <button class="btn3" type="submit" name="Business">Business</button>
         </div>
       </form>
@@ -282,7 +282,7 @@ if (!empty($result)) {
 
     <!-- ChatBot -->
     <div class="chat_icon">
-      <img style="height: 80px;" src="images/chatboticon.png">
+      <img style="height: 80px;" src="images/chatboticon.PNG">
     </div>
 
     <div class="chat_box">
