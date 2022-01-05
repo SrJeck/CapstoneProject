@@ -17,12 +17,15 @@
             $password = $_POST['password'];
             $status = "offline";
 
+            $name = $_FILES['myImage']['name'];
+            $type = $_FILES['myImage']['type'];
+            $data = file_get_contents($_FILES['myImage']['tmp_name']);
             $stat = $dbh->prepare('select * from user where email=?');
             $stat->bindParam(1, $email);
             $stat->execute();
             $row = $stat->fetch();
             if (empty($row)) {
-                $stmt = $dbh->prepare("insert into user values('',?,?,?,?,?,?,?,?,?,?,?)");
+                $stmt = $dbh->prepare("insert into user values('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,'')");
                 $stmt->bindParam(1,$fName);
                 $stmt->bindParam(2,$mName);
                 $stmt->bindParam(3,$lName);
@@ -34,6 +37,9 @@
                 $stmt->bindParam(9,$password);
                 $stmt->bindParam(10,$degree);
                 $stmt->bindParam(11,$status);
+                $stmt->bindParam(12,$name);
+                $stmt->bindParam(13,$type);
+                $stmt->bindParam(14,$data);
                 $stmt->execute();
                 header("Location: login.php");
                 echo "success";  

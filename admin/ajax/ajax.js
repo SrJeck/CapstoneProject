@@ -156,3 +156,23 @@ function submitForm(params) {
     xhr.send("thesis="+thesis+"&user="+user+"&reason="+reason+"&select="+select);
 	
 }
+function setBanner(id) {
+	xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = () =>{
+        if(xhr.readyState == 4 && xhr.status == 200){
+            //alert("success");
+			window.location.href = "settings.php";
+        }
+    }
+    xhr.open("POST","set_banner.php",true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.send("banner="+id);
+}
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };

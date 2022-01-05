@@ -173,12 +173,19 @@ if (!empty($result)) {
   <br>
   <div id="index">
     <div class="slideshow-container">
-
-      <div class="mySlides fade">
-        <img src="images/Ban1.png" style="width:100%; height: 430px; ">
+    <div class="mySlides fade">
+      <?php
+          $dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
+          $stat = $dbh->prepare('select * from banner where select_status="selected"');
+          $stat->execute();
+          $row = $stat->fetch();
+          echo "<img style='width:100%; height: 430px;'  src='data:".$row['banner_type'].";base64,".base64_encode($row['banner_image'])."' >";
+      ?>
+      
+        <!-- <img src="images/Ban1.png" style="width:100%; height: 430px; "> -->
       </div>
 
-      <div class="mySlides fade">
+      <!-- <div class="mySlides fade">
         <img src="images/Ban2.png" style="width:100%; height: 430px; ">
       </div>
 
@@ -188,12 +195,12 @@ if (!empty($result)) {
 
       <div class="mySlides fade">
         <img src="images/Ban1.png" style="width:100%; height: 430px; ">
-      </div>
+      </div> 
 
 
       <div class="mySlides fade">
         <img src="images/Ban2.png" style="width:100%; height: 430px; ">
-      </div>
+      </div>-->
 
     </div>
     <br>

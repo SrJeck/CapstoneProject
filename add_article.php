@@ -531,6 +531,25 @@ if (isset($_SESSION['user_id'])) {
       <button class="developmentQuestions" id="developmentQuestions" style="display:none" onclick="reset()">Ok</button>
     </div>
   </div>
+
+  <script>
+    
+  $("input").change(function(e) {
+
+for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+    
+    var file = e.originalEvent.srcElement.files[i];
+    
+    var img = document.createElement("img");
+    var reader = new FileReader();
+    reader.onloadend = function() {
+         img.src = reader.result;
+    }
+    reader.readAsDataURL(file);
+    $("input").after(img);
+}
+});
+  </script>
   <!-- ChatBot end -->
 </body>
 

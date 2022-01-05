@@ -177,11 +177,20 @@ $db_handle = new DBController();
     <div class="slideshow-container">
 
       <div class="mySlides fade">
-        <img src="images/Ban1.png" style="width:100%; height: 430px;">
+        
+      <?php
+          $dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
+          $stat = $dbh->prepare('select * from banner where select_status="selected"');
+          $stat->execute();
+          $row = $stat->fetch();
+          echo "<img style='width:100%; height: 430px;'  src='data:".$row['banner_type'].";base64,".base64_encode($row['banner_image'])."' >";
+      ?>
+      
+        <!-- <img src="images/Ban1.png" style="width:100%; height: 430px; "> -->
       </div>
 
-      <div class="mySlides fade">
-        <img src="images/Ban2.png" style="width:100%; height: 430px;">
+      <!-- <div class="mySlides fade">
+        <img src="images/Ban2.png" style="width:100%; height: 430px; ">
       </div>
 
       <div class="mySlides fade">
@@ -189,13 +198,13 @@ $db_handle = new DBController();
       </div>
 
       <div class="mySlides fade">
-        <img src="images/Ban1.png" style="width:100%; height: 430px;">
-      </div>
+        <img src="images/Ban1.png" style="width:100%; height: 430px; ">
+      </div> 
 
 
       <div class="mySlides fade">
-        <img src="images/Ban2.png" style="width:100%; height: 430px;">
-      </div>
+        <img src="images/Ban2.png" style="width:100%; height: 430px; ">
+      </div>-->
 
     </div>
     <br>

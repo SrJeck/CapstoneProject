@@ -137,7 +137,10 @@ require_once("dbcontroller.php");
   ?>
   <div class="wrapper">
     <div class="left">
-      <img class="profilepencil" src="images/profilepencil.png">
+      <?php
+      echo "<img  class='profilepencil' type='image/png' src='data:".$row['image_type'].";base64,".base64_encode($row['image_upload'])."'>";
+      ?>
+      <!-- <img class="profilepencil" src="images/profilepencil.png"> -->
       <h2 style="margin-top: 30px;"><?php echo $row['firstName']; ?> <?php echo $row['middleName']; ?> <?php echo $row['lastName']; ?></h2>
     </div>
     <div class="right">

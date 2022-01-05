@@ -110,26 +110,41 @@ include 'backend/database.php';
                     <h2>Change Image Banner</h2><br>
 
                     <!-- Upload  -->
-                    <form id="file-upload-form" class="uploader">
-                        <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
-
-                        <label for="file-upload" id="file-drag">
-                            <img id="file-image" src="#" alt="Preview" class="hidden">
-                            <div id="start">
-                                <i class="fa fa-download" aria-hidden="true"></i>
-                                <div>Select a file or drag here</div>
-                                <div id="notimage" class="hidden">Please select an image</div>
-                                <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
-                            </div>
-                            <div id="response" class="hidden">
-                                <div id="messages"></div>
-                                <progress class="progress" id="file-progress" value="0">
-                                    <span>0</span>%
-                                </progress>
-                            </div>
-                        </label>
+                    <form action="upload_banner.php"  method="post" enctype="multipart/form-data">
+                    <input name="myfile" type="file" accept="image/png" onchange="loadFile(event)">
+                    <img id="output" width='30%' height='20%'/><br>
+                    <button type="submit">Upload Image</button>
                     </form>
                 </div>
+            </div>
+            <div>
+                <table>
+                <thead>
+                    <tr>
+                    <th class="th">Image</th>
+                    <th class="th">Action</th>
+                    <th class="th">Status</th>
+                    </tr>
+                </thead>
+                <?php
+                $dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
+                $stat = $dbh->prepare('select * from banner order by banner_id DESC');
+                $stat->execute();
+                while ($row = $stat->fetch()) {
+                echo "<tr>
+                <td text-align='center'>
+                <img src='data:".$row['banner_type'].";base64,".base64_encode($row['banner_image'])."' width='30%' height='20%'>
+                </td>
+                <td>
+                <button class='send'  onclick='setBanner(" . $row['banner_id'] . ")'>Set as Banner</button>
+                </td>
+                <td>
+                " . $row['select_status'] . "
+                </td>
+                </tr>";
+                }
+                ?>
+                </table>
             </div>
         </div>
     </section>
@@ -275,6 +290,7 @@ include 'backend/database.php';
             }
         }
         ekUpload();
+        
     </script>
     <script>
         let sidebar = document.querySelector(".sidebar");

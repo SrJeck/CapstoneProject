@@ -9,7 +9,9 @@
 .table-wrapper{
   border: 3px solid #435D7D;
 }
-
+td {
+  text-align: center;
+}
 
 .sidebar{
   position: fixed;

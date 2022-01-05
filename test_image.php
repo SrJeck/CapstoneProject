@@ -248,6 +248,13 @@
 
   }
   
+      // imgInp.onchange = evt => {
+      //       const [file] = imgInp.files
+      //       if (file) {
+      //           blah.style.display = "block";
+      //           blah.src = URL.createObjectURL(file)
+      //       }
+      //     }
       var loadFile = function(event) {
     var output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);
