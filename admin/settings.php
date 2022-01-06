@@ -82,6 +82,12 @@ include 'backend/database.php';
                 </a>
             </li>
             <li>
+                <a href="registration.php">
+                    <i class='bx bx-user-plus'></i>
+                    <span class="links_name">Admin Registration</span>
+                </a>
+            </li>
+            <li>
                 <a href="#" class="active">
                     <i class='bx bx-cog'></i>
                     <span class="links_name">Settings</span>
@@ -110,30 +116,30 @@ include 'backend/database.php';
                     <h2>Change Image Banner</h2><br>
 
                     <!-- Upload  -->
-                    <form action="upload_banner.php"  method="post" enctype="multipart/form-data">
-                    <input name="myfile" type="file" accept="image/png" onchange="loadFile(event)">
-                    <img id="output" width='30%' height='20%'/><br>
-                    <button type="submit">Upload Image</button>
+                    <form action="upload_banner.php" method="post" enctype="multipart/form-data">
+                        <input name="myfile" type="file" accept="image/png" onchange="loadFile(event)">
+                        <img id="output" width='30%' height='20%' /><br>
+                        <button type="submit">Upload Image</button>
                     </form>
                 </div>
             </div>
             <div>
                 <table>
-                <thead>
-                    <tr>
-                    <th class="th">Image</th>
-                    <th class="th">Action</th>
-                    <th class="th">Status</th>
-                    </tr>
-                </thead>
-                <?php
-                $dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
-                $stat = $dbh->prepare('select * from banner order by banner_id DESC');
-                $stat->execute();
-                while ($row = $stat->fetch()) {
-                echo "<tr>
+                    <thead>
+                        <tr>
+                            <th class="th">Image</th>
+                            <th class="th">Action</th>
+                            <th class="th">Status</th>
+                        </tr>
+                    </thead>
+                    <?php
+                    $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+                    $stat = $dbh->prepare('select * from banner order by banner_id DESC');
+                    $stat->execute();
+                    while ($row = $stat->fetch()) {
+                        echo "<tr>
                 <td text-align='center'>
-                <img src='data:".$row['banner_type'].";base64,".base64_encode($row['banner_image'])."' width='30%' height='20%'>
+                <img src='data:" . $row['banner_type'] . ";base64," . base64_encode($row['banner_image']) . "' width='30%' height='20%'>
                 </td>
                 <td>
                 <button class='send'  onclick='setBanner(" . $row['banner_id'] . ")'>Set as Banner</button>
@@ -142,8 +148,8 @@ include 'backend/database.php';
                 " . $row['select_status'] . "
                 </td>
                 </tr>";
-                }
-                ?>
+                    }
+                    ?>
                 </table>
             </div>
         </div>
@@ -290,7 +296,6 @@ include 'backend/database.php';
             }
         }
         ekUpload();
-        
     </script>
     <script>
         let sidebar = document.querySelector(".sidebar");

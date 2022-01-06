@@ -80,6 +80,12 @@ $db_handle = new DBController();
         </a>
       </li>
       <li>
+        <a href="registration.php">
+          <i class='bx bx-user-plus'></i>
+          <span class="links_name">Admin Registration</span>
+        </a>
+      </li>
+      <li>
         <a href="settings.php">
           <i class='bx bx-cog'></i>
           <span class="links_name">Settings</span>

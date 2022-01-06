@@ -83,6 +83,12 @@ include 'backend/database.php';
                 </a>
             </li>
             <li>
+                <a href="registration.php">
+                    <i class='bx bx-user-plus'></i>
+                    <span class="links_name">Admin Registration</span>
+                </a>
+            </li>
+            <li>
                 <a href="settings.php">
                     <i class='bx bx-cog'></i>
                     <span class="links_name">Settings</span>
@@ -128,7 +134,7 @@ include 'backend/database.php';
                                     <td class="td">
                                     <form id="reply-form" action="inquiry_reply.php" method="POST">
                                     <textarea  name="reply" id="reply" placeholder="Reply"></textarea> 
-                                    <input name="inquiry_id" value="'. $row['inquiry_id'] .'" style="display:none">   
+                                    <input name="inquiry_id" value="' . $row['inquiry_id'] . '" style="display:none">   
                                     </form></td>
                                     <td class="td"><button class="send" type="submit" form="reply-form"><a style="text-decoration:none;color:white;" href=""><i style="font-size: 12px;" class="material-icons">send</i></a></button></td>
                                 </tr>';
@@ -160,7 +166,7 @@ include 'backend/database.php';
                                     <td class="td" style="display:none">
                                     <form id="edit-reply-form" action="inquiry_reply.php" method="POST">
                                     <textarea  name="reply" id="reply" placeholder="Reply"></textarea> 
-                                    <input name="user" value="'. $row['inquiry_id'] .'" style="display:none">   
+                                    <input name="user" value="' . $row['inquiry_id'] . '" style="display:none">   
                                     </form></td>
                                     <td class="td" style="display:none"><button class="send" type="submit" form="edit-reply-form"><a style="text-decoration:none;color:white;" href=""><i style="font-size: 12px;" class="material-icons">send</i></a></button></td>
                                 </tr>';
