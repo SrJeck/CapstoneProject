@@ -60,7 +60,6 @@ if (!empty($result)) {
     $result["perpage"] = showperpage($sql, $perPage, $href);
 }
 ?>
-
 <html>
 
 <head>
@@ -89,292 +88,226 @@ if (!empty($result)) {
     </style>
 </head>
 
+
 <body>
     <!-- NAVBAR -->
     <?php
 
     $notif = "";
     $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
-
+    $total_count = 0;
     $unseen_count = $dbh->prepare('select COUNT(*) as unseen_count from notification where seen_status="unseen" and user_id=?');
     $unseen_count->bindParam(1, $id);
     $unseen_count->execute();
     $unseened_count = $unseen_count->fetch();
+    $total_count = $total_count + $unseened_count['unseen_count'];
+    $unseen_count2 = $dbh->prepare('select * from inquiry where user_id=? and seen_status="unseen"');
+    $unseen_count2->bindParam(1, $id);
+    $unseen_count2->execute();
+    while ($unseened_count2 = $unseen_count2->fetch()) {
+        if (!empty($unseened_count2['reply'])) {
+            $total_count = $total_count + 1;
+        }
+    }
+
+
+
+
 
     if (isset($_SESSION['user_id'])) {
         echo '<div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
-    <div class="tooltip">
-    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-    <span class="tooltiptext">Logout</span>
-    </div>
-    <div class="tooltip">
-    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <span class="tooltiptext">Profile</span>
-    </div>
-    <div class="tooltip">
-    <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
-    <span class="tooltiptext">Bookmark</span>
-    </div>
-    <div class="tooltip">
-    <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
-    <span class="tooltiptext">Add Article</span>
-    </div>
-    <div class="tooltip">
-    <span class="tooltiptext">Notification</span>
-    <a style="float: right;">
-    <div class="notBtn" href="#" onclick="seeNotif()">
-            <div class="number" > ' . $unseened_count['unseen_count'] . ' </div>
-            <i style="font-size:24px;height: 25px;" id="showdialog" class="fa fatest">&#xf0f3;</i>
-        <div class="box" id="dialog" id="box" style="display:none">
-                <div class="display">
-                <div class="cont">
-                    <!-- Fold this div and try deleting evrything inbetween -->
-                    <div class="sec test">
-                            <div class="txt"></div>
-                    </div>
-            </div> 
-            </div>
-        </div>
-    </div>
-    </a>
-    </div>
+  <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+  <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+  <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+  <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
+  <div class="tooltip">
+  <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+  <span class="tooltiptext">Logout</span>
+  </div>
+  <div class="tooltip">
+  <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+  <span class="tooltiptext">Profile</span>
+  </div>
+  <div class="tooltip">
+  <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+  <span class="tooltiptext">Bookmark</span>
+  </div>
+  <div class="tooltip">
+  <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+  <span class="tooltiptext">Add Article</span>
+  </div>
+  <div class="tooltip">
+  <span class="tooltiptext">Notification</span>
+  <a style="float: right;">
+  <div class="notBtn" href="#" onclick="seeNotif()">
+          <div class="number" > ' . $total_count . ' </div>
+          <i style="font-size:24px;height: 25px;" id="showdialog" class="fa fatest">&#xf0f3;</i>
+      <div class="box" id="dialog" id="box" style="display:none">
+              <div class="display">
+              <div class="cont">
+                  <!-- Fold this div and try deleting evrything inbetween -->
+                  <div class="sec test">
+                          <div class="txt"></div>
+                  </div>
+          </div> 
+          </div>
+      </div>
+  </div>
+  </a>
+  </div>
 </div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.php">Home</a>
+        <a href="research.php">Research</a>
+        <a href="analytics.php">Analytics</a>
+        <a href="contact_us.php">Contact Us</a>
+        <br><br><br><br><br><br><br><br><br>
+        <a href="add_article.php">Add Article</a>
+        <a href="bookmark.php">Bookmark</a>
+        <a href="logOrProf.php">Profile</a>
+        <a href="logout.php">Logout</a>
+    </div>
+<span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span>
 
-    ';
+  ';
     } else {
         echo '<div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
-    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    </div>';
+  <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+  <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+  <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+  <a class="ol-login-link" href="logOrProf.php"><span class="icons_base_sprite icon-open-layer-login"><strong style="margin-left:30px">Log in through your library</strong> <span>to access more features.</span></span></a>
+  <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+  </div>';
     }
     ?>
-    <!-- <script>
-    $("#showdialog").click(function() {
-      $(".box").show();
-    });
-    $(".box .close").click(function() {
-      $(this).parent().hide()
-    })
-  </script> -->
-
-    <!-- MOBILE SIDEBAR -->
-    <!-- <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="index.php">HOME</a>
-    <a href="research.php">RESEARCH</a>
-    <a href="analytics.php">ANALYTICS</a>
-  </div>
-  <span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span> -->
 
     <!-- BANNER IMAGE -->
-    <br>
     <div id="index">
         <div class="slideshow-container">
-
             <div class="mySlides fade">
-                <img src="images/Ban1.png" style="width:100%; height: 430px; ">
+                <?php
+                $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+                $stat = $dbh->prepare('select * from banner where select_status="selected"');
+                $stat->execute();
+                $row = $stat->fetch();
+                echo "<img class='banner'  src='data:" . $row['banner_type'] . ";base64," . base64_encode($row['banner_image']) . "' >";
+                ?>
             </div>
-
-            <div class="mySlides fade">
-                <img src="images/Ban2.png" style="width:100%; height: 430px; ">
-            </div>
-
-            <div class="mySlides fade">
-                <img src="images/Ban3.png" style="width:100%; height: 430px;">
-            </div>
-
-            <div class="mySlides fade">
-                <img src="images/Ban1.png" style="width:100%; height: 430px; ">
-            </div>
-
-
-            <div class="mySlides fade">
-                <img src="images/Ban2.png" style="width:100%; height: 430px; ">
-            </div>
-
         </div>
-        <br>
-
-
-        <div style="text-align:center">
-            <span style="display: none;" class="dot"></span>
-            <span style="display: none;" class="dot"></span>
-            <span style="display: none;" class="dot"></span>
-            <span style="display: none;" class="dot"></span>
-            <span style="display: none;" class="dot"></span>
-        </div>
-        <script>
-            var slideIndex = 0;
-            showSlides();
-
-            function showSlides() {
-                var i;
-                var slides = document.getElementsByClassName("mySlides");
-                var dots = document.getElementsByClassName("dot");
-                for (i = 0; i < slides.length; i++) {
-                    slides[i].style.display = "none";
-                }
-                slideIndex++;
-                if (slideIndex > slides.length) {
-                    slideIndex = 1
-                }
-                for (i = 0; i < dots.length; i++) {
-                    dots[i].className = dots[i].className.replace(" active", "");
-                }
-                slides[slideIndex - 1].style.display = "block";
-                dots[slideIndex - 1].className += " active";
-                setTimeout(showSlides, 3000); // Change image every 3 seconds
-            }
-        </script>
-
         <!-- SEARCH BAR CONTAINER -->
         <form name="frmSearch" method="post" action="research.php">
             <div class="container">
                 <div class="row height d-flex justify-content-center align-items-center">
                     <div>
                         <div class="form">
-                            <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
-                                                                                                                                                        }  ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+                            <div class="input-icons">
+
+                                <i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i>
+                                <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
+                                                                                                                                                            }  ?>"> <button class="button" name="go">Search</button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-
         <!-- INTRODUCTION -->
         <h2 class="new">Read, Study and Develop With ThesisQuo!</h2>
-        <p class="intro">Browse thesis studies that may help you in creating your own research, study and develop your research with ThesisQuo and share it to the community.
+        <p class="intro">Browse thesis studies that may help you in creating your own research, study and develop your research with ThesisQuo and share it to the community. ThesisQuo provides Local studies from different institutions in the Philippines to help every researchers developing their study.
 
         </p>
         <!-- 3 IMAGES -->
         <div class="images">
             <form action="research.php" method="POST">
-                <img class="book" src="images/book.JPG">
-                <button class="btn" type="submit" name="Education">Education</button>
-                <img class="chip" src="images/chip.JPG">
-                <button class="btn2" type="submit" name="Technology">Technology</button>
-                <img class="business" src="images/business.JPG">
-                <button class="btn3" type="submit" name="Business">Business</button>
+                <div class="column">
+                    <img class="book" src="images/book.jpg">
+                    <button class="btn" type="submit" name="Education">Education</button>
+                </div>
+                <div class="column">
+                    <img class="chip" src="images/chip.jpg">
+                    <button class="btn2" type="submit" name="Technology">Technology</button>
+                </div>
+                <div class="column">
+                    <img class="business" src="images/business.jpg">
+                    <button class="btn3" type="submit" name="Business">Business</button>
+                </div>
             </form>
         </div>
 
+
         <!-- ChatBot -->
         <div class="chat_icon">
-            <img style="height: 80px;" src="images/chatboticon.png">
+            <img style="height: 80px;" src="images/chatboticon.PNG">
         </div>
 
         <div class="chat_box">
             <div class="my-conv-form-wrapper">
-                <form action="" method="GET" class="hidden">
-                    <select data-conv-question="Hello! How can I help you" name="category">
-                        <option value="1">How to Upload Study?</option>
-                        <option value="2">What study would you recommend for me to read?</option>
-                        <option value="3">What study topic can i develop?</option>
-                    </select>
-                    <!-- How to Upload Study? -->
-                    <div data-conv-fork="category">
-                        <div data-conv-case="1" data-conv-fork="first-question2">
-                            <input type="text" name="name" data-conv-question="You must have an account before you upload your papers, if you are already a member, you may follow these steps:
                 <br><br>
-                1. Click the add (+) button on the navigation bar to upload your papers
-                <br>
-                2. Fill out the fields required by the admin to upload paper.
-                <br>
-                3. Read and Accept the Privacy Policy & Terms and Condition before submitting the paper.
-                <br>
-                4. Wait for the Plagiarism result if accepted or not.
-                <br>
-                5. If the paper passed the Plagiarism test, the paper will be upload. if not, the User must revise and re-upload the paper.
-                <br><br><br>
-                <button class='reset'><a style='text-decoration: none;' onClick=' window.location.reload()'>Reset</a></button>
+                <div class="div-questions">
+                    <button class="questions" style="display:block" onclick="questionType(1)">How to Upload Study?</button>
+                    <button class="questions" style="display:block" onclick="questionType(2)">
+                        <p class="question123"> What study would you recommend for me to read?</p>
+                    </button>
+                    <button class="questions" style="display:block" onclick="questionType(3)">What study topic can i develop?</button>
+                </div>
+                <div class="answer1" id="answer1" style="display:none">You must have an account before you upload your papers, if you are already a member, you may follow these steps:
+                    <br><br>
+                    1. Click the add (+) button on the navigation bar to upload your papers
+                    <br>
+                    2. Fill out the fields required by the admin to upload paper.
+                    <br>
+                    3. Read and Accept the Privacy Policy & Terms and Condition before submitting the paper.
+                    <br>
+                    4. Wait for the Plagiarism result if accepted or not.
+                    <br>
+                    5. If the paper passed the Plagiarism test, the paper will be upload. if not, the User must revise and re-upload the paper.
+                    <br><br><br>
+                </div>
+                <button class="answer1" id="reset" style="display:none" onclick="reset()">Reset</button>
+                <select class="answer2 custom-select" style="display:none" name="topic" id="topic" required>
+                    <option value="" selected disabled hidden>Select topic type</option>
+                    <option value="Education">Education</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Research">Research</option>
+                    <option value="Analysis">Analysis</option>
+                    <option value="Database">Database</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Health">Health</option>
+                    <option value="Politics">Politics</option>
+                    <option value="Psychology">Psychology</option>
+                    <option value="Business">Business</option>
+                    <option value="Marketing and Advertising">Marketing and Advertising</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Ethics">Ethics</option>
+                    <option value="Others">Others</option>
+                </select>
 
-              ">
-                        </div>
-                    </div>
-                    <!-- What study would you recommend for me to read? -->
-                    <div data-conv-fork="category">
-
-                        <div data-conv-case="2" data-conv-fork="first-question2">
-                            <select data-conv-question="What field of study you want to know more?" name="category">
-                                <option value="1">Education</option>
-                                <option value="1">Technology</option>
-                                <option value="1">Business</option>
-                            </select>
-                        </div>
-                        <div data-conv-case="1" data-conv-fork="first-question2">
-                            <select data-conv-question="I Recommend these studies:
-              <br><br>
-              1. Highest upload in 12 months
-              <br>
-              2. Highest upload in Total
-              <br>
-              3. Recent Uploaded Study
-              <br><br>
-              Or you may check the thesis repository to find more studies that you might use.
-              " name="category">
-                                <option value="1">Do you want another question suggestion from other topics?</option>
-                                <option value="1">Do you have any specific question for me?</option>
-                            </select>
-                        </div>
-
-
-                        <div data-conv-fork="first-question3">
-                            <select style="display:none;background-color:#DEDEDE;" data-conv-question="<span style='display:none;background-color:red; color:yellow;'>Do you have any specific question for me?</span>" name="category">
-                                <option value="Yess">Yes</option>
-                                <option value="Noo">No</option>
-                            </select>
-                        </div>
-                        <div data-conv-case="Yess" data-conv-fork="first-question3">
-                            <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
-                        </div>
-                    </div>
-                    <!-- What study topic can i develop? -->
-                    <div data-conv-fork="category">
-
-                        <div data-conv-case="3" data-conv-fork="first-question2">
-                            <select data-conv-question="What do you want to develop?" name="category">
-                                <option value="1">Uniqie Study</option>
-                                <option value="2">More Resources Available</option>
-                            </select>
-                        </div>
-                        <div data-conv-case="1" data-conv-fork="first-question2">
-                            <select data-conv-question="Select the option" name="category">
-                                <option value="1">Show overall Lowest number of uploaded topic</option>
-                            </select>
-                        </div>
-
-                        <div data-conv-case="2" data-conv-fork="first-question2">
-                            <select data-conv-question="Select the option" name="category">
-                                <option value="1">Show overall Highest number of uploaded topic</option>
-                            </select>
-                        </div>
-
-                        <div data-conv-fork="first-question3">
-                            <select data-conv-question="Do you have any specific question for me?" name="category">
-                                <option value="Yess">Yes</option>
-                                <option value="Noo">No</option>
-                            </select>
-                        </div>
-                        <div data-conv-case="Yess" data-conv-fork="first-question3">
-                            <input type="text" name="name" data-conv-question="Send your Question to this email thesisquo.helpdesk@gmail.com">
-                        </div>
-                    </div>
-                    <select data-conv-case="Noo" data-conv-question="Thank you for talking me">
-                        <option value="Yes">Reset</option>
-                    </select>
-
-                </form>
+                <button class="answer2 select" style="display:none" onclick="selectedTopic()">Select</button>
+                <div class="analyticsResult" style="display:none">I Recommend these studies:
+                </div>
+                <div class="questionbutton">
+                    <button class="analyticsResult" id="analyticsResultbutton" style="display:none" onclick="analyticsQuestionType(1)">Do you want another question suggestion from other topics?</button>
+                    <button class="analyticsResult" id="analyticsResultbutton2" style="display:none" onclick="analyticsQuestionType(2)">Do you have any specific question for me?</button>
+                </div>
+                <button class="analyticsAnswer1" id="no" style="display:none" onclick="analyticsAnswerType('no')">No</button>
+                <button class="analyticsAnswer1" id="yes" style="display:none" onclick="analyticsAnswerType('yes')">Yes</button>
+                <div class="analyticsAnswer2" style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
+                <button class="analyticsAnswer2" id="reset" style="display:none" onclick="reset()">Reset</button>
+                <div class="answer3" id="answer3" style="display:none">What do you want to develop?</div>
+                <button class="answer3" id="opt" style="display:none" onclick="developmentType(1)">Uniqie Study</button>
+                <button class="answer3" id="opt" style="display:none" onclick="developmentType(2)">More Resources Available</button>
+                <div class="development1" style="display:none">Show overall Lowest number of uploaded topic</div>
+                <div class="development2" style="display:none">Show overall Highest number of uploaded topic</div>
+                <div class="development" id="specific" style="display:none">Do you have any specific question for me?</div>
+                <button class="development" style="display:none" onclick="developmentAnswerType('no')">No</button>
+                <button class="development" style="display:none" onclick="developmentAnswerType('yes')">Yes</button>
+                <div class="developmentQuestions" id="question2" style="display:none">Send your Question to this email thesisquo.helpdesk@gmail.com</div>
+                <button class="developmentQuestions" id="developmentQuestions" style="display:none" onclick="reset()">Ok</button>
             </div>
         </div>
         <!-- ChatBot end -->
-
 </body>
 <!-- Below is the script for voice recognition and conversion to text-->
 <script>
@@ -387,10 +320,9 @@ if (!empty($result)) {
             document.getElementById('speechToText').value = event.results[0][0].transcript;
         }
         recognition.start();
+
     }
 </script>
-<!-- Below is the script for mobile side navigation-->
-
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";

@@ -53,12 +53,29 @@
         text-align: center;
     }
     /* MIC ICON*/
-    .form span {
+
+    .input-icons i {
       position: absolute;
-      right: 520px;
-      top: 14px;
-      padding: 5px;
-      border-left: 1px solid #d1d5db
+      margin-left: 650px;
+      margin-top: 18px;
+      font-size: 18px;
+    }
+
+    .input-icons {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .icon {
+      padding: 10px;
+      min-width: 40px;
+
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      text-align: left;
     }
     /* SEARCH FORM*/
     .left-pan {

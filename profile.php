@@ -124,7 +124,6 @@ require_once("dbcontroller.php");
     <a href="#"><i class="fas fa-user-alt"> <b>Profile </b> &#xf105; </i></a>
     <a href="editprofile.php"><i class="fas" aria-hidden="true"> &#xf303; <b>Edit Profile </b></i></a>
     <a href="security.php"><i class='fas' aria-hidden="true">&#xf505; Password</i></a>
-    <!-- <a href="add_article.php"><i class='fa fa-plus'><b> Add Article</b></i></a> -->
   </div>
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
@@ -138,7 +137,7 @@ require_once("dbcontroller.php");
   <div class="wrapper">
     <div class="left">
       <?php
-      echo "<img  class='profilepencil' type='image/png' src='data:".$row['image_type'].";base64,".base64_encode($row['image_upload'])."'>";
+      echo "<img  class='profilepencil' type='image/png' src='data:" . $row['image_type'] . ";base64," . base64_encode($row['image_upload']) . "'>";
       ?>
       <!-- <img class="profilepencil" src="images/profilepencil.png"> -->
       <h2 style="margin-top: 30px;"><?php echo $row['firstName']; ?> <?php echo $row['middleName']; ?> <?php echo $row['lastName']; ?></h2>

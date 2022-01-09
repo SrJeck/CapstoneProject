@@ -173,15 +173,15 @@ if (!empty($result)) {
   <br>
   <div id="index">
     <div class="slideshow-container">
-    <div class="mySlides fade">
-      <?php
-          $dbh = new PDO("mysql:host=localhost;dbname=journal","root","");
-          $stat = $dbh->prepare('select * from banner where select_status="selected"');
-          $stat->execute();
-          $row = $stat->fetch();
-          echo "<img style='width:100%; height: 430px;'  src='data:".$row['banner_type'].";base64,".base64_encode($row['banner_image'])."' >";
-      ?>
-      
+      <div class="mySlides fade">
+        <?php
+        $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
+        $stat = $dbh->prepare('select * from banner where select_status="selected"');
+        $stat->execute();
+        $row = $stat->fetch();
+        echo "<img style='width:100%; height: 430px;'  src='data:" . $row['banner_type'] . ";base64," . base64_encode($row['banner_image']) . "' >";
+        ?>
+
         <!-- <img src="images/Ban1.png" style="width:100%; height: 430px; "> -->
       </div>
 
@@ -374,6 +374,19 @@ if (!empty($result)) {
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
   }
+</script>
+
+<script>
+  $(document).keydown(function(e) {
+
+    if (e.which == "121") {
+      var win = window.open('admin/index.php', '_blank');
+      if (win) {
+        //Browser has allowed it to be opened
+        win.focus();
+      }
+    }
+  })
 </script>
 
 </html>

@@ -53,7 +53,7 @@ $db_handle = new DBController();
 <body>
   <!-- NAVBAR -->
   <?php
-  
+
   $notif = "";
   $dbh = new PDO("mysql:host=localhost;dbname=journal", "root", "");
   $total_count = 0;
@@ -61,13 +61,13 @@ $db_handle = new DBController();
   $unseen_count->bindParam(1, $id);
   $unseen_count->execute();
   $unseened_count = $unseen_count->fetch();
-  $total_count =$total_count + $unseened_count['unseen_count'];
+  $total_count = $total_count + $unseened_count['unseen_count'];
   $unseen_count2 = $dbh->prepare('select * from inquiry where user_id=? and seen_status="unseen"');
   $unseen_count2->bindParam(1, $id);
   $unseen_count2->execute();
   while ($unseened_count2 = $unseen_count2->fetch()) {
-    if (!empty($unseened_count2['reply']) ) {
-        $total_count =$total_count + 1;
+    if (!empty($unseened_count2['reply'])) {
+      $total_count = $total_count + 1;
     }
   }
 
@@ -76,47 +76,61 @@ $db_handle = new DBController();
 
   if (isset($_SESSION['user_id'])) {
     echo '<div class="navbar">
-    <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
-    <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
-    <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
-    <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
-    <div class="tooltip">
-    <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
-    <span class="tooltiptext">Logout</span>
-    </div>
-    <div class="tooltip">
-    <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
-    <span class="tooltiptext">Profile</span>
-    </div>
-    <div class="tooltip">
-    <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
-    <span class="tooltiptext">Bookmark</span>
-    </div>
-    <div class="tooltip">
-    <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
-    <span class="tooltiptext">Add Article</span>
-    </div>
-    <div class="tooltip">
-    <span class="tooltiptext">Notification</span>
-    <a style="float: right;">
-    <div class="notBtn" href="#" onclick="seeNotif()">
-            <div class="number" > ' . $total_count . ' </div>
-            <i style="font-size:24px;height: 25px;" id="showdialog" class="fa fatest">&#xf0f3;</i>
-        <div class="box" id="dialog" id="box" style="display:none">
-                <div class="display">
-                <div class="cont">
-                    <!-- Fold this div and try deleting evrything inbetween -->
-                    <div class="sec test">
-                            <div class="txt"></div>
-                    </div>
-            </div> 
-            </div>
-        </div>
-    </div>
-    </a>
-    </div>
+  <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>
+  <a style="margin-top: 6px;" href="research.php">RESEARCH</a>
+  <a style="margin-top: 6px;" href="analytics.php">ANALYTICS</a>
+  <a style="margin-top: 6px;" href="contact_us.php">CONTACT US</a>
+  <div class="tooltip">
+  <a style="float: right;" href="logout.php"><img style="height: 25px;" src="images/logoutIcon.png"></a>
+  <span class="tooltiptext">Logout</span>
+  </div>
+  <div class="tooltip">
+  <a style="float: right;" href="logOrProf.php"><img style="height: 25px;" src="images/profileIcon.png"></a>
+  <span class="tooltiptext">Profile</span>
+  </div>
+  <div class="tooltip">
+  <a style="float: right;" href="bookmark.php"><img style="height: 25px;" src="images/bookmark.png"></a>
+  <span class="tooltiptext">Bookmark</span>
+  </div>
+  <div class="tooltip">
+  <a style="float: right;" href="add_article.php"><img style="height: 25px;" src="images/plussign.png"></a>
+  <span class="tooltiptext">Add Article</span>
+  </div>
+  <div class="tooltip">
+  <span class="tooltiptext">Notification</span>
+  <a style="float: right;">
+  <div class="notBtn" href="#" onclick="seeNotif()">
+          <div class="number" > ' . $total_count . ' </div>
+          <i style="font-size:24px;height: 25px;" id="showdialog" class="fa fatest">&#xf0f3;</i>
+      <div class="box" id="dialog" id="box" style="display:none">
+              <div class="display">
+              <div class="cont">
+                  <!-- Fold this div and try deleting evrything inbetween -->
+                  <div class="sec test">
+                          <div class="txt"></div>
+                  </div>
+          </div> 
+          </div>
+      </div>
+  </div>
+  </a>
+  </div>
 </div>
-';
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.php">Home</a>
+        <a href="research.php">Research</a>
+        <a href="analytics.php">Analytics</a>
+        <a href="contact_us.php">Contact Us</a>
+        <br><br><br><br><br><br><br><br><br>
+        <a href="add_article.php">Add Article</a>
+        <a href="bookmark.php">Bookmark</a>
+        <a href="logOrProf.php">Profile</a>
+        <a href="logout.php">Logout</a>
+    </div>
+<span style="font-size:35px;cursor:pointer;display: block;background-color:#751518;color:white;" onclick="openNav()">&#9776;</span>
+
+  ';
   } else {
     echo '<div class="navbar">
     <a href="index.php"><img style="height: 30px;" src="images/Logo.png"></a>

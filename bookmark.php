@@ -240,8 +240,13 @@ if (!empty($result)) {
         <div class="row height d-flex justify-content-center align-items-center">
           <div>
             <div class="form">
-              <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
-                                                                                                                                        }  ?>"> <span class="left-pan"><i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i></span> <button class="button" name="go">Search</button>
+              <div class="input-icons">
+
+                <i style="cursor: pointer;" onclick="record()" class="fa fa-microphone"></i>
+                <input type="text" id="speechToText" class="form-control form-input" name="search" placeholder="Search ThesisQuo" value="<?php if (isset($_POST["search"])) {
+                                                                                                                                          }  ?>"> <button class="button" name="go">Search</button>
+              </div>
+
             </div>
           </div>
         </div>

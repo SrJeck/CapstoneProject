@@ -277,11 +277,19 @@
   cursor: pointer;
   border-radius: 20px;
   font-size: 0.9rem;
+  width: 380px;
 }
 .questions:hover{
   background-color: #f1f1f1;
   color: #06c5a6;
   cursor: pointer;
+}
+.question123{
+  white-space: unset;
+  width: 0;
+  height: 0;
+  text-align: left;
+  margin-top: 0px;
 }
 .analyticsResult{
   margin: 15px;
@@ -457,3 +465,78 @@ float: right;
   border-radius: 5px;
   margin-left: 5px;
 }
+
+  /*
+  
+  ======================== 
+  MEDIA SCREEN/PHONE CSS
+  ========================
+
+  */
+
+/* Mobile SideBar*/
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+
+}
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media (max-width: 500px) {
+      /* Chatbot Media */
+      .chat_box{
+        width: 300px;
+      }
+      .question123{
+        white-space: normal;
+        width: 250px;
+        height: 20px;
+        text-align: center;
+        margin-top: 5px;
+      }
+      .questions{
+        width: 280px;
+      }
+      .div-questions{
+        top: 65%;
+      }
+      /* Contact Us */
+      #contact{
+        margin-top: 0px;
+      }
+      /* MENU NAVBAR */
+        .navbar {
+          display: none;
+          
+        }
+
+
+    }
+    
